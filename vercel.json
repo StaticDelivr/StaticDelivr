@@ -6,13 +6,9 @@
             "use": "@vercel/node"
         }
     ],
-    "routes": [
-        {
-            "src": "/(.*)",
-            "dest": "/server.js"
-        }
-    ],
     "rewrites": [
-    { "source": "/static/:path*", "destination": "/:path*" }
+    { "source": "/static/:path*", "destination": "/static/:path*" },
+    { "source": "/(.*)", "destination": "/server.js" }
+  ]
   ]
 }
