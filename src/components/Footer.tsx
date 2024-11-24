@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link'; // Import Link from next/link
 
 const Footer = () => (
   <footer className="bg-gray-900 text-gray-400 py-12 px-4">
@@ -15,9 +16,9 @@ const Footer = () => (
       <div>
         <h4 className="text-white font-medium mb-4">Resources</h4>
         <ul className="space-y-2 text-sm">
-          <li><a href="/documentation" className="hover:text-white">Documentation</a></li>
-          <li><a href="/network" className="hover:text-white">Network</a></li>
-          <li><a href="/stats" className="hover:text-white">Statistics</a></li>
+          <li><Link href="/documentation" className="hover:text-white">Documentation</Link></li>
+          <li><Link href="/network" className="hover:text-white">Network</Link></li>
+          <li><Link href="/stats" className="hover:text-white">Statistics</Link></li>
         </ul>
       </div>
 
@@ -25,9 +26,9 @@ const Footer = () => (
       <div>
         <h4 className="text-white font-medium mb-4">Company</h4>
         <ul className="space-y-2 text-sm">
-          <li><a href="/about" className="hover:text-white">About</a></li>
-          <li><a href="/sponsors" className="hover:text-white">Sponsors</a></li>
-          <li><a href="/contact" className="hover:text-white">Contact</a></li>
+          <li><Link href="/about" className="hover:text-white">About</Link></li>
+          <li><Link href="/sponsors" className="hover:text-white">Sponsors</Link></li>
+          <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
         </ul>
       </div>
 
@@ -36,7 +37,7 @@ const Footer = () => (
         <h4 className="text-white font-medium mb-4">Connect</h4>
         <ul className="space-y-2 text-sm">
           <li><a href="https://github.com/coozywana/StaticDelivr" className="hover:text-white">GitHub</a></li>
-          <li><a href="/blog" className="hover:text-white">Blog</a></li>
+          <li><Link href="/blog" className="hover:text-white">Blog</Link></li>
           <li><a href="mailto:contact@staticdelivr.com" className="hover:text-white">Email Us</a></li>
         </ul>
       </div>
