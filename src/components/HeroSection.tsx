@@ -16,7 +16,7 @@ const HeroSection = () => (
           </span>
         </h1>
         <p className="text-xl text-gray-600 mb-12 max-w-2xl mx-auto">
-          Accelerate your Open Source Projects with StaticDelivr's globally distributed network
+          Accelerate your Open Source Projects with StaticDelivr&apos;s globally distributed network
         </p>
         <div className="flex justify-center gap-12 mb-16">
           <div className="text-center">
