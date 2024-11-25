@@ -1,5 +1,6 @@
 import React from 'react';
 import { Github, Heart, Bug } from 'lucide-react';
+import GradientCard from '../components/GradientCard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -45,34 +46,38 @@ const ContributePage = () => {
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-16">More Ways to Support Us</h2>
             <div className="grid md:grid-cols-3 gap-8">
-              <SupportCard 
+              <GradientCard
                 icon={<Github className="w-6 h-6 text-white" />}
                 title="GitHub"
                 description="Check out our code on GitHub and contribute to our open source projects."
-                buttonText="Visit GitHub"
-                buttonLink="https://github.com/Coozywana/StaticDelivr"
                 gradient="from-gray-50 to-gray-100"
                 iconBg="bg-gray-800"
+                action={{
+                  text: "Visit GitHub",
+                  href: "https://github.com/Coozywana/StaticDelivr",
+                }}
               />
-              
-              <SupportCard 
+              <GradientCard
                 icon={<Heart className="w-6 h-6 text-white" />}
                 title="Support Us"
                 description="Become a sponsor or make a donation to support our work."
-                buttonText="Become a Sponsor"
-                buttonLink="https://staticdelivr.com/become-a-sponsor"
                 gradient="from-blue-50 to-blue-100"
                 iconBg="bg-blue-600"
+                action={{
+                  text: "Become a Sponsor",
+                  href: "https://staticdelivr.com/become-a-sponsor",
+                }}
               />
-              
-              <SupportCard 
+              <GradientCard
                 icon={<Bug className="w-6 h-6 text-white" />}
                 title="Submit a Bug Report"
                 description="Found a bug? Let us know by submitting a bug report."
-                buttonText="Report Bug"
-                buttonLink="https://github.com/coozywana/StaticDelivr/issues"
                 gradient="from-purple-50 to-purple-100"
                 iconBg="bg-purple-600"
+                action={{
+                  text: "Report Bug",
+                  href: "https://github.com/coozywana/StaticDelivr/issues",
+                }}
               />
             </div>
           </div>
@@ -82,39 +87,5 @@ const ContributePage = () => {
     </div>
   );
 };
-
-interface SupportCardProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  buttonText: string;
-  buttonLink: string;
-  gradient: string;
-  iconBg: string;
-}
-
-const SupportCard = ({ 
-  icon, 
-  title, 
-  description, 
-  buttonText, 
-  buttonLink,
-  gradient,
-  iconBg 
-}: SupportCardProps) => (
-  <div className={`p-8 rounded-xl bg-gradient-to-br ${gradient}`}>
-    <div className={`w-12 h-12 ${iconBg} rounded-lg flex items-center justify-center mb-4`}>
-      {icon}
-    </div>
-    <h3 className="text-xl font-semibold mb-3">{title}</h3>
-    <p className="text-gray-600 mb-6">{description}</p>
-    <a
-      href={buttonLink}
-      className="inline-flex items-center px-4 py-2 bg-white hover:bg-gray-50 text-gray-800 font-medium rounded-lg transition-colors border border-gray-200"
-    >
-      {buttonText}
-    </a>
-  </div>
-);
 
 export default ContributePage;

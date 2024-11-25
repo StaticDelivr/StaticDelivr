@@ -1,5 +1,6 @@
 import React from 'react';
 import { Code2, Users, Zap, Share2 } from 'lucide-react';
+import GradientCard from '../components/GradientCard';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
@@ -49,31 +50,28 @@ const AboutPage = () => {
           <div className="max-w-7xl mx-auto">
             <h2 className="text-3xl font-bold text-center mb-16">What We Are Focused On</h2>
             <div className="grid md:grid-cols-2 gap-8">
-              <FocusArea
+              <GradientCard
                 icon={<Code2 className="w-6 h-6 text-white" />}
                 title="Open-Source Development"
                 description="We believe in the power of open-source development and are committed to supporting the community with our platform."
                 gradient="from-blue-50 to-blue-100"
                 iconBg="bg-blue-600"
               />
-              
-              <FocusArea
+              <GradientCard
                 icon={<Zap className="w-6 h-6 text-white" />}
                 title="Developer Experience"
                 description="We strive to make the developer experience as seamless as possible by integrating with popular package managers and providing reliable and fast delivery of assets."
                 gradient="from-purple-50 to-purple-100"
                 iconBg="bg-purple-600"
               />
-              
-              <FocusArea
+              <GradientCard
                 icon={<Share2 className="w-6 h-6 text-white" />}
                 title="Collaboration and Sharing"
                 description="We are dedicated to providing a platform for developers to collaborate and share their projects with the world."
                 gradient="from-green-50 to-green-100"
                 iconBg="bg-green-600"
               />
-              
-              <FocusArea
+              <GradientCard
                 icon={<Users className="w-6 h-6 text-white" />}
                 title="Performance and Reliability"
                 description="We know how important it is to have fast and reliable delivery of your assets. That's why we're committed to delivering your assets quickly and securely."
@@ -88,23 +86,5 @@ const AboutPage = () => {
     </div>
   );
 };
-
-interface FocusAreaProps {
-  icon: React.ReactNode;
-  title: string;
-  description: string;
-  gradient: string;
-  iconBg: string;
-}
-
-const FocusArea = ({ icon, title, description, gradient, iconBg }: FocusAreaProps) => (
-  <div className={`p-8 rounded-xl bg-gradient-to-br ${gradient}`}>
-    <div className={`w-12 h-12 ${iconBg} rounded-lg flex items-center justify-center mb-4`}>
-      {icon}
-    </div>
-    <h3 className="text-xl font-semibold mb-3">{title}</h3>
-    <p className="text-gray-600">{description}</p>
-  </div>
-);
 
 export default AboutPage;
