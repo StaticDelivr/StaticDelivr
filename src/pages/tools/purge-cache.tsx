@@ -6,7 +6,7 @@ import { Alert, AlertDescription, AlertTitle } from '@/components/Alert';
 
 const PurgeCachePage = () => {
   const [url, setUrl] = useState('');
-  const [status, setStatus] = useState(null);
+  const [status, setStatus] = useState<null | 'success'>(null);
   const [isLoading, setIsLoading] = useState(false);
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
