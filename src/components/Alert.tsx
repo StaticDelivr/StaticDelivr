@@ -4,7 +4,7 @@ interface AlertProps {
   children: React.ReactNode;
   className?: string;
   variant?: 'default' | 'success' | 'error' | 'warning' | 'info';
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const Alert: React.FC<AlertProps> = ({
@@ -37,7 +37,7 @@ const Alert: React.FC<AlertProps> = ({
 interface AlertTitleProps {
   children: React.ReactNode;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const AlertTitle: React.FC<AlertTitleProps> = ({ children, className = '', ...props }) => {
@@ -51,7 +51,7 @@ const AlertTitle: React.FC<AlertTitleProps> = ({ children, className = '', ...pr
 interface AlertDescriptionProps {
   children: React.ReactNode;
   className?: string;
-  [key: string]: any;
+  [key: string]: unknown;
 }
 
 const AlertDescription: React.FC<AlertDescriptionProps> = ({ children, className = '', ...props }) => {
