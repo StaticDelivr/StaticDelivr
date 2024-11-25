@@ -18,7 +18,7 @@ const ContributePage = () => {
             <div className="prose prose-lg mx-auto">
               <p className="text-xl text-gray-600 mb-8">
                 We welcome contributions from developers around the world to help make StaticDelivr 
-                better for everyone. Whether you're interested in fixing a bug, adding a new feature, 
+                better for everyone. Whether you&apos;re interested in fixing a bug, adding a new feature, 
                 or just improving the documentation, we would love to have your help!
               </p>
               <p className="text-lg text-gray-600 mb-8">
