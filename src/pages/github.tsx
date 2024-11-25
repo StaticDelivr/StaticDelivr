@@ -147,7 +147,7 @@ const GitHubConverterPage = () => {
                   Paste the URL into the input field above
                 </li>
                 <li className="text-gray-600">
-                  Click "Convert URL" to get your StaticDelivr CDN URL
+                  Click &quot;Convert URL&quot; to get your StaticDelivr CDN URL
                 </li>
                 <li className="text-gray-600">
                   Use the generated URL in your project for faster content delivery
