@@ -1,0 +1,23 @@
+{
+    "BUNNY": {
+      "name": "Bunny",
+      "color": "#4285F4",
+      "dotColor": "bg-blue-500"
+    },
+    "CLOUDFLARE": {
+      "name": "Cloudflare", 
+      "color": "#F48120",
+      "dotColor": "bg-orange-500"
+    },
+    "FASTLY": {
+      "name": "Fastly",
+      "color": "#FF282D", 
+      "dotColor": "bg-red-500"
+    },
+    "GCORE": {
+      "name": "GCore",
+      "color": "#A855F7",
+      "dotColor": "bg-purple-500"
+    }
+  }
+  

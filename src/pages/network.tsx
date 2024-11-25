@@ -2,6 +2,7 @@ import React from 'react';
 import { Globe, Server, Zap, Info } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
+import NetworkMap from '@/components/NetworkMap';
 
 const NetworkPage = () => {
   return (
@@ -26,7 +27,7 @@ const NetworkPage = () => {
           <div className="max-w-7xl mx-auto">
             <div className="bg-white rounded-xl shadow-sm p-8 mb-12">
               <div className="h-96">
-            
+                <NetworkMap></NetworkMap>
               </div>
             </div>
 

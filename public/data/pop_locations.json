@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "city": "New York",
+    "country": "United States",
+    "provider": "BUNNY",
+    "coordinates": [-74.006, 40.7128]
+  },
+  {
+    "id": 2,
+    "city": "London",
+    "country": "United Kingdom",
+    "provider": "CLOUDFLARE",
+    "coordinates": [-0.1276, 51.5074]
+  },
+  {
+    "id": 3,
+    "city": "Singapore",
+    "country": "Singapore",
+    "provider": "FASTLY",
+    "coordinates": [103.8198, 1.3521]
+  }
+]
