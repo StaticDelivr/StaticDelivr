@@ -10,29 +10,32 @@ const GitHubConverterPage = () => {
   const [error, setError] = useState('');
   const [copied, setCopied] = useState(false);
 
-  const convertUrl = (inputUrl) => {
+  const convertUrl = (inputUrl: string): void => {
     // Regular expressions for GitHub URLs
     const githubRegex = /^https?:\/\/(?:www\.)?github\.com\/([^/]+)\/([^/]+)\/(?:blob|raw)\/([^/]+)\/(.+)$/;
     const rawGithubRegex = /^https?:\/\/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)$/;
-
+  
     // Test if the input URL matches either pattern
     const githubMatch = inputUrl.match(githubRegex);
     const rawGithubMatch = inputUrl.match(rawGithubRegex);
-
-    if (!githubMatch && !rawGithubMatch) {
+  
+    const match = githubMatch || rawGithubMatch;
+  
+    if (!match) {
       setError('Please enter a valid GitHub or Raw GitHub URL.');
       setConvertedUrl('');
       return;
     }
-
-    const match = githubMatch || rawGithubMatch;
+  
+    // Destructure values safely from the match
     const [, user, repo, branch, file] = match;
+  
     const cdn = 'https://cdn.staticdelivr.com';
     const staticDelivrUrl = `${cdn}/gh/${user}/${repo}/${branch}/${file}`;
     
     setConvertedUrl(staticDelivrUrl);
     setError('');
-  };
+  };  
 
   const handleSubmit = (e) => {
     e.preventDefault();
