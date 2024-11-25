@@ -65,7 +65,7 @@ const ContributePage = () => {
                 iconBg="bg-blue-600"
                 action={{
                   text: "Become a Sponsor",
-                  href: "https://staticdelivr.com/become-a-sponsor",
+                  href: "/become-a-sponsor",
                 }}
               />
               <GradientCard
