@@ -37,7 +37,7 @@ const GitHubConverterPage = () => {
     setError('');
   };  
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: { preventDefault: () => void; }) => {
     e.preventDefault();
     convertUrl(githubUrl.trim());
   };
