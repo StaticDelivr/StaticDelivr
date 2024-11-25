@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Github, ChevronDown } from 'lucide-react';
+import Link from 'next/link';
 
 interface NavLinkProps {
   children: React.ReactNode;
@@ -7,12 +8,12 @@ interface NavLinkProps {
 }
 
 const NavLink = ({ children, href = "#" }: NavLinkProps) => (
-  <a 
+  <Link 
     href={href}
     className="text-gray-600 hover:text-blue-600 transition-colors duration-200 px-4 py-2 text-sm font-medium"
   >
     {children}
-  </a>
+  </Link>
 );
 
 interface DropdownProps {
@@ -51,13 +52,13 @@ const Dropdown = ({ label, items, isOpen, onToggle }: DropdownProps) => {
                 </div>
               )}
               {section.links.map((item) => (
-                <a
+                <Link
                   key={item.href}
                   href={item.href}
                   className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50 hover:text-blue-600"
                 >
                   {item.label}
-                </a>
+                </Link>
               ))}
             </div>
           ))}
@@ -111,7 +112,9 @@ const Header = () => {
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
-            <img src="/api/placeholder/120/40" alt="StaticDelivr Logo" className="h-8" />
+            <Link href="/">
+              <img src="/api/placeholder/120/40" alt="StaticDelivr Logo" className="h-8" />
+            </Link>
           </div>
           <div className="hidden md:flex items-center space-x-1">
             <NavLink href="/about">About</NavLink>
