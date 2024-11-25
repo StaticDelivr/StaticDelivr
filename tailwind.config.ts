@@ -15,4 +15,10 @@ export default {
     },
   },
   plugins: [],
+  safelist: [
+    "bg-blue-500",
+    "bg-orange-500",
+    "bg-red-500",
+    "bg-purple-500",
+  ], // Add any additional colors here
 } satisfies Config;
