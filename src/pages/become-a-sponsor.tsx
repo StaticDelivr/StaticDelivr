@@ -66,12 +66,10 @@ const BecomeSponsorPage = () => {
             <h2 className="text-3xl font-bold mb-12">Ready to Support Us?</h2>
             <div className="grid md:grid-cols-2 gap-8 mb-12">
               <a
-                href="https://github.com/sponsors/StaticDelivr"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-center justify-center px-8 py-4 bg-gray-900 hover:bg-gray-800 text-white font-medium rounded-lg transition-colors"
+                aria-disabled="true"
+                className="flex items-center justify-center px-8 py-4 bg-gray-300 text-gray-500 font-medium rounded-lg transition-colors cursor-not-allowed"
               >
-                Sponsor on GitHub
+                Sponsor on GitHub (Coming Soon)
               </a>
               <a
                 href="https://opencollective.com/staticdelivr"
