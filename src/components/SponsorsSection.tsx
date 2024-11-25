@@ -1,5 +1,6 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
+import Link from 'next/link';
 
 const sponsors = [
   { name: "Company A", logo: "/api/placeholder/120/60" },
@@ -32,13 +33,13 @@ const SponsorsSection = () => (
         <p className="text-gray-600 mb-6">
           Support our mission to provide free and reliable CDN services for open-source projects.
         </p>
-        <a
+        <Link
           href="/become-a-sponsor"
           className="inline-flex items-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
         >
           <Heart className="w-5 h-5 mr-2" />
           Become a Sponsor
-        </a>
+        </Link>
       </div>
     </div>
   </section>

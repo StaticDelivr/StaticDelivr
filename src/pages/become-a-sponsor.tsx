@@ -3,6 +3,7 @@ import { Heart, Server, Gift, Code, Mail } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import GradientCard from '../components/GradientCard';
+import Link from 'next/link';
 
 const BecomeSponsorPage = () => {
   return (
@@ -107,13 +108,13 @@ const BecomeSponsorPage = () => {
                 As a sponsor, you&apos;ll receive recognition on our website, access to priority support,
                 and the satisfaction of supporting open-source software that benefits developers worldwide.
               </p>
-              <a
+              <Link
                 href="/sponsors"
                 className="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
               >
                 <Heart className="w-5 h-5 mr-2" />
                 View Our Current Sponsors
-              </a>
+              </Link>
             </div>
           </div>
         </section>
