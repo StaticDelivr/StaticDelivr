@@ -2,27 +2,57 @@ import React, { useEffect, useState } from 'react';
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 
-// Set mapbox token
-mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
+// Type definitions
+interface Coordinates {
+  lng: number;
+  lat: number;
+}
 
-const NetworkMap = () => {
-  const [map, setMap] = useState(null);
-  const [popLocations, setPopLocations] = useState([]);
-  const [providers, setProviders] = useState({});  // State for providers
+interface PopLocation {
+  city: string;
+  country: string;
+  coordinates: Coordinates;
+  provider: string;
+}
+
+interface Provider {
+  name: string;
+  dotColor: string;
+}
+
+interface Providers {
+  [key: string]: Provider;
+}
+
+// Set mapbox token
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+
+const NetworkMap: React.FC = () => {
+  const [map, setMap] = useState<mapboxgl.Map | null>(null);
+  const [popLocations, setPopLocations] = useState<PopLocation[]>([]);
+  const [providers, setProviders] = useState<Providers>({});
 
   useEffect(() => {
     // Fetching PoP data from the JSON file
     const fetchPoPData = async () => {
-      const response = await fetch('/data/pop_locations.json');
-      const data = await response.json();
-      setPopLocations(data);
+      try {
+        const response = await fetch('/data/pop_locations.json');
+        const data: PopLocation[] = await response.json();
+        setPopLocations(data);
+      } catch (error) {
+        console.error('Error fetching PoP locations:', error);
+      }
     };
 
     // Fetching provider data from external source
     const fetchProviderData = async () => {
-      const response = await fetch('/data/providers.json');  // Assuming this JSON is in the public folder
-      const data = await response.json();
-      setProviders(data);
+      try {
+        const response = await fetch('/data/providers.json');
+        const data: Providers = await response.json();
+        setProviders(data);
+      } catch (error) {
+        console.error('Error fetching providers:', error);
+      }
     };
 
     fetchPoPData();
@@ -68,7 +98,7 @@ const NetworkMap = () => {
       marker.className = `w-3 h-3 rounded-full ${provider.dotColor}`;
 
       new mapboxgl.Marker(marker)
-        .setLngLat(pop.coordinates)
+        .setLngLat([pop.coordinates.lng, pop.coordinates.lat])
         .setPopup(
           new mapboxgl.Popup({ offset: 25 })
             .setHTML(`
