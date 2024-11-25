@@ -104,7 +104,7 @@ const BecomeSponsorPage = () => {
             <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-12">
               <h2 className="text-3xl font-bold mb-6">Benefits of Sponsorship</h2>
               <p className="text-lg text-gray-600 mb-8">
-                As a sponsor, you'll receive recognition on our website, access to priority support,
+                As a sponsor, you&apos;ll receive recognition on our website, access to priority support,
                 and the satisfaction of supporting open-source software that benefits developers worldwide.
               </p>
               <a

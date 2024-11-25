@@ -3,6 +3,7 @@ import { Building2, Users, UserPlus, Heart, ExternalLink } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import GradientCard from '../components/GradientCard';
+import Link from 'next/link';
 
 const sponsors = [
   { name: "Company A", logo: "/api/placeholder/200/100", website: "https://companya.com" },
@@ -26,7 +27,7 @@ const SponsorsPage = () => {
               Our Sponsors
             </h1>
             <p className="text-xl text-gray-600 text-center mb-12">
-              We're incredibly grateful to our sponsors who make it possible for us to provide 
+              We&apos;re incredibly grateful to our sponsors who make it possible for us to provide 
               free CDN services to the open-source community.
             </p>
           </div>
@@ -85,7 +86,7 @@ const SponsorsPage = () => {
               <GradientCard
                 icon={<UserPlus className="w-6 h-6 text-white" />}
                 title="Recruitment Opportunities"
-                description="Showcase your company's commitment to open source and attract top talent in the industry. Connect with passionate developers who align with your values."
+                description="Showcase your company&apos;s commitment to open source and attract top talent in the industry. Connect with passionate developers who align with your values."
                 gradient="from-green-50 to-green-100"
                 iconBg="bg-green-600"
               />
@@ -108,13 +109,13 @@ const SponsorsPage = () => {
               <p className="text-lg text-gray-600 mb-8">
                 Join our community of sponsors and help shape the future of open-source software delivery.
               </p>
-              <a
+              <Link
                 href="/become-a-sponsor"
                 className="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
               >
                 <Heart className="w-5 h-5 mr-2" />
                 Become a Sponsor
-              </a>
+              </Link>
             </div>
           </div>
         </section>
