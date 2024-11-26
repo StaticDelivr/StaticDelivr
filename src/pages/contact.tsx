@@ -1,41 +1,25 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Mail, Send, MapPin, Phone } from 'lucide-react';
+import { useForm, ValidationError } from '@formspree/react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import GradientCard from '../components/GradientCard';
 
 const ContactPage: React.FC = () => {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    subject: '',
-    message: ''
-  });
+  const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORM || "");
 
-  const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    const { name, value } = e.target;
-    setFormData((prevState) => ({
-      ...prevState,
-      [name]: value
-    }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    // TODO: Implement actual form submission logic
-    console.log('Form submitted:', formData);
-    alert('Thank you for your message! We will get back to you soon.');
-
-    // Reset form after submission
-    setFormData({
-      name: '',
-      email: '',
-      subject: '',
-      message: ''
-    });
-  };
+  if (state.succeeded) {
+    return (
+      <div>
+        <Header />
+        <main className="pt-32 pb-20 px-4 text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Thank You!</h1>
+          <p className="text-lg text-gray-600">Your message has been successfully sent. We will get back to you shortly.</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
 
   return (
     <div>
@@ -104,30 +88,28 @@ const ContactPage: React.FC = () => {
                     Name
                   </label>
                   <input
-                    type="text"
                     id="name"
+                    type="text"
                     name="name"
-                    value={formData.name}
-                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="Your Name"
                   />
+                  <ValidationError prefix="Name" field="name" errors={state.errors} />
                 </div>
                 <div>
                   <label htmlFor="email" className="block text-gray-700 font-medium mb-2">
                     Email
                   </label>
                   <input
-                    type="email"
                     id="email"
+                    type="email"
                     name="email"
-                    value={formData.email}
-                    onChange={handleChange}
                     required
                     className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     placeholder="you@example.com"
                   />
+                  <ValidationError prefix="Email" field="email" errors={state.errors} />
                 </div>
               </div>
               <div className="mb-6">
@@ -135,15 +117,14 @@ const ContactPage: React.FC = () => {
                   Subject
                 </label>
                 <input
-                  type="text"
                   id="subject"
+                  type="text"
                   name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
                   required
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="What can we help you with?"
                 />
+                <ValidationError prefix="Subject" field="subject" errors={state.errors} />
               </div>
               <div className="mb-6">
                 <label htmlFor="message" className="block text-gray-700 font-medium mb-2">
@@ -152,17 +133,17 @@ const ContactPage: React.FC = () => {
                 <textarea
                   id="message"
                   name="message"
-                  value={formData.message}
-                  onChange={handleChange}
                   required
                   rows={6}
                   className="w-full px-4 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                   placeholder="Your message here..."
                 ></textarea>
+                <ValidationError prefix="Message" field="message" errors={state.errors} />
               </div>
               <div className="text-center">
                 <button
                   type="submit"
+                  disabled={state.submitting}
                   className="inline-flex items-center px-8 py-4 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
                 >
                   <Send className="w-5 h-5 mr-2" />

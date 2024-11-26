@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@formspree/react": "^2.5.1",
     "lucide-react": "^0.460.0",
     "mapbox-gl": "^3.8.0",
     "next": "15.0.3",
