@@ -8,7 +8,10 @@ import GradientCard from '../components/GradientCard';
 const ContactPage: React.FC = () => {
   const formKey = process.env.NEXT_PUBLIC_FORM;
 
-  // Check if the form key exists
+  // Use the form hook regardless of formKey presence
+  const [state, handleSubmit] = useForm(formKey || ''); // default to empty string if formKey is missing
+
+  // Check if the form key exists and handle accordingly
   if (!formKey) {
     return (
       <div>
@@ -21,8 +24,6 @@ const ContactPage: React.FC = () => {
       </div>
     );
   }
-
-  const [state, handleSubmit] = useForm(formKey);
 
   if (state.succeeded) {
     return (
