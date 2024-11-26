@@ -1,7 +1,7 @@
 import React from 'react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
-import { Rocket, Server } from 'lucide-react';
+import { Rocket, Globe } from 'lucide-react';
 
 const HeroSection = () => {
   const { ref: presenceRef, inView: presenceInView } = useInView({
@@ -47,7 +47,7 @@ const HeroSection = () => {
           <div className="flex justify-center gap-16 mb-16">
             <div className="text-center group" ref={presenceRef}>
               <div className="flex items-center justify-center mb-2">
-                <Server className="w-8 h-8 mr-2 text-blue-600 group-hover:scale-110 transition" />
+                <Globe className="w-8 h-8 mr-2 text-blue-600 group-hover:scale-110 transition" />
                 <div className="text-4xl font-bold text-gray-900">
                   <span className="text-blue-600">
                     {presenceInView ? (
