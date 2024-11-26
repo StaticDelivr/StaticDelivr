@@ -6,7 +6,23 @@ import Footer from '../components/Footer';
 import GradientCard from '../components/GradientCard';
 
 const ContactPage: React.FC = () => {
-  const [state, handleSubmit] = useForm(process.env.NEXT_PUBLIC_FORM || "");
+  const formKey = process.env.NEXT_PUBLIC_FORM;
+
+  // Check if the form key exists
+  if (!formKey) {
+    return (
+      <div>
+        <Header />
+        <main className="pt-32 pb-20 px-4 text-center">
+          <h1 className="text-4xl font-bold text-gray-900 mb-4">Form Configuration Error</h1>
+          <p className="text-lg text-gray-600">Please check your Formspree configuration. The form ID is missing or invalid.</p>
+        </main>
+        <Footer />
+      </div>
+    );
+  }
+
+  const [state, handleSubmit] = useForm(formKey);
 
   if (state.succeeded) {
     return (
