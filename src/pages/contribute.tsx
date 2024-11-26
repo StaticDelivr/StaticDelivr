@@ -11,7 +11,7 @@ const ContributePage = () => {
       <main>
         {/* Hero Section */}
         <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-r from-blue-50 to-purple-50 opacity-70"></div>
+          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50/30 to-white opacity-70 pointer-events-none"></div>
           <div className="max-w-4xl mx-auto relative">
             <h1 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-8">
               Contribute to StaticDelivr
