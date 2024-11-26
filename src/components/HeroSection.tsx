@@ -1,7 +1,7 @@
 import React from 'react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
-import { Rocket, Globe, Server } from 'lucide-react';
+import { Rocket, Server } from 'lucide-react';
 
 const HeroSection = () => {
   const { ref: presenceRef, inView: presenceInView } = useInView({
