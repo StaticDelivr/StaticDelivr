@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import { Mail, Send, Star, Check } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -23,6 +24,26 @@ const NewsletterPage = () => {
 
   return (
     <div>
+      <Head>
+        <title>Newsletter - StaticDelivr</title>
+        <meta name="description" content="Stay updated with the latest news, technical insights, and community highlights from StaticDelivr." />
+        <meta name="keywords" content="newsletter, StaticDelivr, open source, CDN, community updates" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:url" content="https://staticdelivr.com/newsletter" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Newsletter - StaticDelivr" />
+        <meta property="og:description" content="Stay updated with the latest news, technical insights, and community highlights from StaticDelivr." />
+        <meta property="og:image" content="" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/newsletter" />
+        <meta name="twitter:title" content="Newsletter - StaticDelivr" />
+        <meta name="twitter:description" content="Stay updated with the latest news, technical insights, and community highlights from StaticDelivr." />
+        <meta name="twitter:image" content="" />
+      </Head>
+
       <Header />
       <main>
         {/* Hero Section */}

@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Mail, Send, MapPin, Phone } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 import Header from '../components/Header';
@@ -40,6 +41,26 @@ const ContactPage: React.FC = () => {
 
   return (
     <div>
+      <Head>
+        <title>Contact - StaticDelivr</title>
+        <meta name="description" content="Get in touch with the StaticDelivr team. Reach out with your questions, suggestions, or feedback." />
+        <meta name="keywords" content="contact StaticDelivr, reach out, contact support, questions, feedback, suggestions, open-source support, StaticDelivr team, get in touch, customer support, StaticDelivr contact" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:url" content="https://staticdelivr.com/contact" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Contact - StaticDelivr" />
+        <meta property="og:description" content="Get in touch with the StaticDelivr team. Reach out with your questions, suggestions, or feedback." />
+        <meta property="og:image" content="" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/contact" />
+        <meta name="twitter:title" content="Contact - StaticDelivr" />
+        <meta name="twitter:description" content="Get in touch with the StaticDelivr team. Reach out with your questions, suggestions, or feedback." />
+        <meta name="twitter:image" content="" />
+      </Head>
+
       <Header />
       <main>
         {/* Hero Section */}

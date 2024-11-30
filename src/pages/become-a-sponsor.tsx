@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Heart, Server, Gift, Code, Mail } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -8,6 +9,26 @@ import Link from 'next/link';
 const BecomeSponsorPage = () => {
   return (
     <div>
+      <Head>
+        <title>Become a Sponsor - StaticDelivr</title>
+        <meta name="description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure expenses and support the development of new features for the open-source community." />
+        <meta name="keywords" content="become a sponsor, StaticDelivr sponsorship, support open-source, sponsor StaticDelivr, open-source infrastructure, contribute to open-source, StaticDelivr support, open-source community, infrastructure expenses, open-source projects sponsorship" />
+        <meta name="robots" content="index, follow" />
+        
+        <meta property="og:url" content="https://staticdelivr.com/become-sponsor" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Become a Sponsor - StaticDelivr" />
+        <meta property="og:description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure expenses and support the development of new features for the open-source community." />
+        <meta property="og:image" content="" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/become-sponsor" />
+        <meta name="twitter:title" content="Become a Sponsor - StaticDelivr" />
+        <meta name="twitter:description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure expenses and support the development of new features for the open-source community." />
+        <meta name="twitter:image" content="" />
+      </Head>
+
       <Header />
       <main>
         {/* Hero Section */}

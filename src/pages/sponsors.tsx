@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Building2, Users, UserPlus, Heart, ExternalLink } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -17,6 +18,26 @@ const sponsors = [
 const SponsorsPage = () => {
   return (
     <div>
+      <Head>
+        <title>Our Sponsors - StaticDelivr</title>
+        <meta name="description" content="Meet our amazing sponsors who support StaticDelivr and make free CDN services possible for the open-source community." />
+        <meta name="keywords" content="StaticDelivr sponsors, open-source support, CDN sponsorship, tech companies" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:url" content="https://staticdelivr.com/sponsors" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Our Sponsors - StaticDelivr" />
+        <meta property="og:description" content="Learn more about the sponsors backing StaticDelivr and their contributions to the open-source community." />
+        <meta property="og:image" content="" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/sponsors" />
+        <meta name="twitter:title" content="Our Sponsors - StaticDelivr" />
+        <meta name="twitter:description" content="Discover the incredible companies sponsoring StaticDelivr and supporting the open-source ecosystem." />
+        <meta name="twitter:image" content="" />
+      </Head>
+      
       <Header />
       <main>
         {/* Hero Section */}

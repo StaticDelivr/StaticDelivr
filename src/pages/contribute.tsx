@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Github, Heart, Bug } from 'lucide-react';
 import GradientCard from '../components/GradientCard';
 import Header from '../components/Header';
@@ -7,6 +8,26 @@ import Footer from '../components/Footer';
 const ContributePage = () => {
   return (
     <div>
+      <Head>
+        <title>Contribute - StaticDelivr</title>
+        <meta name="description" content="Join us in improving StaticDelivr by contributing code, documentation, or supporting us." />
+        <meta name="keywords" content="contribute, StaticDelivr, open source, open-source contribution, contribute code, contribute documentation, support open source, StaticDelivr contributors, open-source projects, developer contributions, improving StaticDelivr" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:url" content="https://staticdelivr.com/contribute" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Contribute - StaticDelivr" />
+        <meta property="og:description" content="Join us in improving StaticDelivr by contributing code, documentation, or supporting us." />
+        <meta property="og:image" content="" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/contribute" />
+        <meta name="twitter:title" content="Contribute - StaticDelivr" />
+        <meta name="twitter:description" content="Join us in improving StaticDelivr by contributing code, documentation, or supporting us." />
+        <meta name="twitter:image" content="" />
+      </Head>
+
       <Header />
       <main>
         {/* Hero Section */}

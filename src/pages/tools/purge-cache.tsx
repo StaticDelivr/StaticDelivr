@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import Head from 'next/head';
 import { RefreshCw, Check, AlertCircle } from 'lucide-react';
 import Header from '../../components/Header';
 import Footer from '../../components/Footer';
@@ -22,6 +23,26 @@ const PurgeCachePage = () => {
 
   return (
     <div>
+      <Head>
+        <title>Purge Cache - StaticDelivr</title>
+        <meta name="description" content="Ensure your users see the latest version of your files. Use StaticDelivr's cache purge tool to refresh assets in just a few clicks." />
+        <meta name="keywords" content="StaticDelivr, cache purge, CDN cache, asset refresh, purge tool" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:url" content="https://staticdelivr.com/tools/purge-cache" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Purge Cache - StaticDelivr" />
+        <meta property="og:description" content="Easily update your assets with StaticDelivr's cache purge tool. Ensure your users always get the latest versions." />
+        <meta property="og:image" content="" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/tools/purge-cache" />
+        <meta name="twitter:title" content="Purge Cache - StaticDelivr" />
+        <meta name="twitter:description" content="Easily update your assets with StaticDelivr's cache purge tool. Ensure your users always get the latest versions." />
+        <meta name="twitter:image" content="" />
+      </Head>
+
       <Header />
       <main>
         {/* Hero Section */}
@@ -57,7 +78,7 @@ const PurgeCachePage = () => {
                     required
                   />
                 </div>
-                
+
                 <button
                   type="submit"
                   disabled={isLoading}

@@ -26,13 +26,26 @@ export default function BlogPost({ post }) {
   return (
     <div>
       <Head>
-        <title>{seoTitle || title}</title> {/* Use seoTitle if available, otherwise fallback to title */}
+        <title>{seoTitle || title} - StaticDelivr</title>
         <meta name="description" content={seoDescription || 'Default description if not available'} />
-        {/* Optional: Open Graph / Social Media meta tags */}
-        <meta property="og:title" content={seoTitle || title} />
+        
+        {/* Open Graph Meta Tags */}
+        <meta property="og:title" content={`${seoTitle || title} - StaticDelivr`} />
         <meta property="og:description" content={seoDescription || 'Default description if not available'} />
         <meta property="og:image" content={featuredImage ? `https:${featuredImage.fields.file.url}` : '/default-image.jpg'} />
         <meta property="og:type" content="article" />
+        <meta property="og:url" content={`https://staticdelivr.com/blog/${post.fields.slug}`} />
+
+        {/* Twitter Card Meta Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content={`https://staticdelivr.com/blog/${post.fields.slug}`} />
+        <meta name="twitter:title" content={`${seoTitle || title} - StaticDelivr`} />
+        <meta name="twitter:description" content={seoDescription || 'Default description if not available'} />
+        <meta name="twitter:image" content={featuredImage ? `https:${featuredImage.fields.file.url}` : '/default-image.jpg'} />
+        
+        {/* Tags Meta Tag (for SEO) */}
+        <meta name="keywords" content={tags ? tags.join(', ') : 'StaticDelivr, Blog, Content Delivery, CDN'} />
       </Head>
 
       <Header />

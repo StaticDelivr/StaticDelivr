@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { TrendingUp, TrendingDown, Globe, Server, Zap } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -32,6 +33,26 @@ const StatCard = ({ title, value, change, icon: Icon }) => {
 const StatsPage = () => {
   return (
     <div>
+      <Head>
+        <title>Network Statistics - StaticDelivr</title>
+        <meta name="description" content="Explore real-time insights into StaticDelivr's global network performance and usage, including monthly requests, bandwidth, and cache hit rate." />
+        <meta name="keywords" content="StaticDelivr, network statistics, CDN performance, bandwidth, cache hit rate" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:url" content="https://staticdelivr.com/stats" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Network Statistics - StaticDelivr" />
+        <meta property="og:description" content="Discover key metrics of StaticDelivr's performance including monthly requests, bandwidth usage, and cache hit rate." />
+        <meta property="og:image" content="" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/stats" />
+        <meta name="twitter:title" content="Network Statistics - StaticDelivr" />
+        <meta name="twitter:description" content="Discover key metrics of StaticDelivr's performance including monthly requests, bandwidth usage, and cache hit rate." />
+        <meta name="twitter:image" content="" />
+      </Head>
+
       <Header />
       <main>
         {/* Hero Section */}

@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Globe, Server, Zap, Info } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -7,6 +8,26 @@ import NetworkMap from '@/components/NetworkMap';
 const NetworkPage = () => {
   return (
     <div className="min-h-screen bg-gray-50">
+      <Head>
+        <title>Global Network - StaticDelivr</title>
+        <meta name="description" content="Explore StaticDelivr's global network, covering 350+ locations, offering high-speed content delivery with advanced security and performance." />
+        <meta name="keywords" content="global network, CDN, StaticDelivr, content delivery, 350 locations, network capacity" />
+        <meta name="robots" content="index, follow" />
+        
+        <meta property="og:url" content="https://staticdelivr.com/network" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Global Network - StaticDelivr" />
+        <meta property="og:description" content="Explore StaticDelivr's global network, covering 350+ locations, offering high-speed content delivery with advanced security and performance." />
+        <meta property="og:image" content="" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/network" />
+        <meta name="twitter:title" content="Global Network - StaticDelivr" />
+        <meta name="twitter:description" content="Explore StaticDelivr's global network, covering 350+ locations, offering high-speed content delivery with advanced security and performance." />
+        <meta name="twitter:image" content="" />
+      </Head>
+
       <Header />
       <main>
         {/* Hero Section */}

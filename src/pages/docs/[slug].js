@@ -13,6 +13,23 @@ const DocPage = ({ frontmatter, mdxSource, docsContent, slug }) => {
       <Head>
         <title>{frontmatter.title} - StaticDelivr</title>
         <meta name="description" content={frontmatter.description || 'Documentation Page'} />
+        <meta name="keywords" content={`${frontmatter.title}, StaticDelivr, documentation, CDN, content delivery`} />
+        <meta name="robots" content="index, follow" />
+        
+        {/* Open Graph Tags */}
+        <meta property="og:url" content={`https://staticdelivr.com/docs/${slug}`} />
+        <meta property="og:type" content="article" />
+        <meta property="og:title" content={`${frontmatter.title} - StaticDelivr`} />
+        <meta property="og:description" content={frontmatter.description || 'Documentation Page'} />
+        <meta property="og:image" content="" />
+
+        {/* Twitter Card Tags */}
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content={`https://staticdelivr.com/docs/${slug}`} />
+        <meta name="twitter:title" content={`${frontmatter.title} - StaticDelivr`} />
+        <meta name="twitter:description" content={frontmatter.description || 'Documentation Page'} />
+        <meta name="twitter:image" content="" />
       </Head>
 
       <div className="max-w-3xl mx-auto px-4 py-8">

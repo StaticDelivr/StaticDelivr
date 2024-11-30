@@ -1,4 +1,5 @@
 import React from 'react';
+import Head from 'next/head';
 import { Code2, Users, Zap, Share2 } from 'lucide-react';
 import GradientCard from '../components/GradientCard';
 import Header from '../components/Header';
@@ -7,6 +8,26 @@ import Footer from '../components/Footer';
 const AboutPage = () => {
   return (
     <div>
+      <Head>
+        <title>About - StaticDelivr</title>
+        <meta name="description" content="Learn about StaticDelivr, a free CDN for open-source projects that ensures fast and reliable delivery of assets, libraries, and resources worldwide." />
+        <meta name="keywords" content="StaticDelivr, free CDN, open source CDN, content delivery network, CDN for open-source projects, fast CDN, reliable CDN, open-source assets delivery, web performance, content delivery, global CDN, infrastructure for open-source, fast delivery of resources" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:url" content="https://staticdelivr.com/about" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="About - StaticDelivr" />
+        <meta property="og:description" content="Learn about StaticDelivr, a free CDN for open-source projects that ensures fast and reliable delivery of assets, libraries, and resources worldwide." />
+        <meta property="og:image" content="" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/about" />
+        <meta name="twitter:title" content="About - StaticDelivr" />
+        <meta name="twitter:description" content="Learn about StaticDelivr, a free CDN for open-source projects that ensures fast and reliable delivery of assets, libraries, and resources worldwide." />
+        <meta name="twitter:image" content="" />
+      </Head>
+
       <Header />
       <main>
         {/* Hero Section */}

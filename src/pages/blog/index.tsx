@@ -1,4 +1,5 @@
 import React from 'react'
+import Head from 'next/head' // Import Head from Next.js
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import { getBlogPosts } from '../../lib/contentful'
@@ -35,6 +36,26 @@ interface BlogPageProps {
 export default function BlogPage({ posts }: BlogPageProps) {
   return (
     <div>
+      <Head>
+        <title>Blog - StaticDelivr</title>
+        <meta name="description" content="Insights, tutorials, and stories from the world of open-source development." />
+        <meta name="keywords" content="open source, StaticDelivr, blog, tutorials, development, CDN, content delivery, open-source community" />
+        <meta name="robots" content="index, follow" />
+
+        <meta property="og:url" content="https://staticdelivr.com/blog" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Blog - StaticDelivr" />
+        <meta property="og:description" content="Insights, tutorials, and stories from the world of open-source development." />
+        <meta property="og:image" content="" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/blog" />
+        <meta name="twitter:title" content="Blog - StaticDelivr" />
+        <meta name="twitter:description" content="Insights, tutorials, and stories from the world of open-source development." />
+        <meta name="twitter:image" content="" />
+      </Head>
+
       <Header />
       <main>
         {/* Hero Section */}
