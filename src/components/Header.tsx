@@ -90,7 +90,7 @@ const Header = () => {
       links: [
         { label: 'Blog', href: '/blog' },
         { label: 'Newsletter', href: '/newsletter' },
-        { label: 'Documentation', href: '/documentation' }
+        { label: 'Documentation', href: '/docs' }
       ]
     }
   ];
