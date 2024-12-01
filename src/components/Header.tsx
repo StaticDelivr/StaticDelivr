@@ -113,7 +113,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center">
             <Link href="/">
-              <img src="/api/placeholder/120/40" alt="StaticDelivr Logo" className="h-8" />
+              <img src="/assets/img/horizontal-black.svg" alt="StaticDelivr Logo" className="h-8" />
             </Link>
           </div>
           <div className="hidden md:flex items-center space-x-1">
