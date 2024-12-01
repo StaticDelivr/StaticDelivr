@@ -20,7 +20,7 @@ const Custom404 = () => {
             404
           </h1>
           <p className="text-2xl text-gray-600 mb-8">
-            Oops! The page you're looking for doesn't exist.
+            Oops! The page you're looking for doesn&apos;t exist.
           </p>
           <Link href="/">
             <button
