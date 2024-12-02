@@ -61,7 +61,7 @@ const NetworkPage = () => {
                   </div>
                 </div>
                 <h3 className="text-gray-600 text-sm font-medium mb-2">Global Coverage</h3>
-                <p className="text-2xl font-bold text-gray-900">350+ Locations</p>
+                <p className="text-2xl font-bold text-gray-900">350+ Points of Presence</p>
               </div>
               
               <div className="bg-white rounded-xl shadow-sm p-6">
@@ -70,8 +70,8 @@ const NetworkPage = () => {
                     <Server className="w-6 h-6 text-blue-600" />
                   </div>
                 </div>
-                <h3 className="text-gray-600 text-sm font-medium mb-2">Network Capacity</h3>
-                <p className="text-2xl font-bold text-gray-900">100 Tbps+</p>
+                <h3 className="text-gray-600 text-sm font-medium mb-2">Multi-CDN</h3>
+                <p className="text-2xl font-bold text-gray-900">2 CDN & 2 DNS Providers</p>
               </div>
               
               <div className="bg-white rounded-xl shadow-sm p-6">
@@ -81,7 +81,7 @@ const NetworkPage = () => {
                   </div>
                 </div>
                 <h3 className="text-gray-600 text-sm font-medium mb-2">Average Response Time</h3>
-                <p className="text-2xl font-bold text-gray-900">&lt;50ms</p>
+                <p className="text-2xl font-bold text-gray-900">&lt;50ms Worldwide</p>
               </div>
             </div>
 
@@ -94,15 +94,15 @@ const NetworkPage = () => {
                   <ul className="space-y-3 text-gray-600">
                     <li className="flex items-center">
                       <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      Tier-1 backbone providers
+                      Leveraging two leading CDN providers for global reach
                     </li>
                     <li className="flex items-center">
                       <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      Multiple redundant paths
+                      Redundant DNS services for seamless operation
                     </li>
                     <li className="flex items-center">
                       <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      Automatic failover
+                      Intelligent load balancing for optimal performance
                     </li>
                   </ul>
                 </div>
@@ -111,15 +111,15 @@ const NetworkPage = () => {
                   <ul className="space-y-3 text-gray-600">
                     <li className="flex items-center">
                       <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      DDoS protection
+                      Resilient DDoS mitigation to protect against threats
                     </li>
                     <li className="flex items-center">
                       <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      SSL/TLS encryption
+                      End-to-end SSL/TLS encryption for data integrity
                     </li>
                     <li className="flex items-center">
                       <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      24/7 monitoring
+                      Continuous 24/7 monitoring to ensure reliability
                     </li>
                   </ul>
                 </div>
