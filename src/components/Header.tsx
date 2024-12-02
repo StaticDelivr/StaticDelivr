@@ -44,6 +44,24 @@ const Dropdown = ({
 }: DropdownProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
+  // Close dropdown for mobile when clicking outside
+  useEffect(() => {
+    if (!isMobile || !isOpen) return;
+
+    const handleClickOutside = (event: MouseEvent) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
+        onToggle(); // Close the dropdown
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isOpen, isMobile, onToggle]);
+
+  // Desktop dropdown does not use this logic
+
   return (
     <div 
       ref={dropdownRef}
@@ -87,10 +105,9 @@ const Dropdown = ({
                   href={item.href}
                   className={`
                     block text-gray-700 hover:text-blue-600 
-                    ${isMobile 
-                      ? 'px-4 py-3 text-sm hover:bg-gray-100' 
-                      : 'px-4 py-2 text-sm hover:bg-gray-50'
-                    }
+                    ${isMobile
+                      ? 'px-4 py-3 text-sm hover:bg-gray-100'
+                      : 'px-4 py-2 text-sm hover:bg-gray-50'}
                   `}
                   onClick={onItemClick}
                 >
@@ -109,12 +126,30 @@ const Header = () => {
   const [openDropdown, setOpenDropdown] = useState<string | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
+  const desktopDropdownRef = useRef<HTMLDivElement>(null);
+
   // Toggles the dropdown state for both desktop and mobile
   const handleDropdownToggle = (dropdownName: string) => {
     setOpenDropdown(prev => (prev === dropdownName ? null : dropdownName));
   };
 
-  // Handle mobile item clicks to close mobile menu and dropdowns
+  // Desktop-specific click outside logic
+  useEffect(() => {
+    const handleDesktopClickOutside = (event: MouseEvent) => {
+      if (desktopDropdownRef.current && !desktopDropdownRef.current.contains(event.target as Node)) {
+        setOpenDropdown(null); // Close dropdown
+      }
+    };
+
+    if (window.innerWidth >= 768) {
+      document.addEventListener('mousedown', handleDesktopClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleDesktopClickOutside);
+    };
+  }, [openDropdown]);
+
   const handleMobileItemClick = () => {
     setIsMobileMenuOpen(false);
     setOpenDropdown(null); // Ensure both mobile and desktop dropdowns are closed
@@ -172,7 +207,7 @@ const Header = () => {
           </div>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center space-x-1">
+          <div className="hidden md:flex items-center space-x-1" ref={desktopDropdownRef}>
             <NavLink href="/about" onClick={() => setOpenDropdown(null)}>About</NavLink>
             <NavLink href="/contribute" onClick={() => setOpenDropdown(null)}>Contribute</NavLink>
             <NavLink href="/network" onClick={() => setOpenDropdown(null)}>Network</NavLink>
