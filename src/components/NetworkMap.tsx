@@ -76,7 +76,8 @@ const NetworkMap: React.FC = () => {
       if (!provider) return;
 
       const marker = document.createElement('div');
-      marker.className = `w-3 h-3 rounded-full ${provider.dotColor}`;
+      marker.className = `w-3 h-3 rounded-full border-2 border-white shadow-md ${provider.dotColor}`;
+
 
       new mapboxgl.Marker(marker)
         .setLngLat(pop.coordinates)
