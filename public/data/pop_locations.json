@@ -232,7 +232,7 @@
         ]
     },
     {
-        "city": "Montr\u00e9al",
+        "city": "Montréal",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -73.5673,
@@ -560,7 +560,7 @@
         ]
     },
     {
-        "city": "D\u00fcsseldorf",
+        "city": "Düsseldorf",
         "provider": "CLOUDFLARE",
         "coordinates": [
             6.766,
@@ -792,7 +792,7 @@
         ]
     },
     {
-        "city": "Reykjav\u00edk",
+        "city": "Reykjavík",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -21.8954,
@@ -920,7 +920,7 @@
         ]
     },
     {
-        "city": "Z\u00fcrich",
+        "city": "Zürich",
         "provider": "CLOUDFLARE",
         "coordinates": [
             8.5417,
@@ -1504,7 +1504,7 @@
         ]
     },
     {
-        "city": "Noum\u00e9a",
+        "city": "Nouméa",
         "provider": "CLOUDFLARE",
         "coordinates": [
             166.442,
@@ -1592,7 +1592,7 @@
         ]
     },
     {
-        "city": "Bel\u00e9m",
+        "city": "Belém",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -48.5011,
@@ -1616,7 +1616,7 @@
         ]
     },
     {
-        "city": "Bras\u00edlia",
+        "city": "Brasília",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -47.8823,
@@ -1656,7 +1656,7 @@
         ]
     },
     {
-        "city": "Ca\u00e7ador",
+        "city": "Caçador",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -51.015,
@@ -1672,7 +1672,7 @@
         ]
     },
     {
-        "city": "Concepci\u00f3n",
+        "city": "Concepción",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -73.0503,
@@ -1688,7 +1688,7 @@
         ]
     },
     {
-        "city": "Cuiab\u00e1",
+        "city": "Cuiabá",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -56.0949,
@@ -1704,7 +1704,7 @@
         ]
     },
     {
-        "city": "Florian\u00f3polis",
+        "city": "Florianópolis",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -48.5476,
@@ -1728,7 +1728,7 @@
         ]
     },
     {
-        "city": "Goi\u00e2nia",
+        "city": "Goiânia",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -49.2667,
@@ -1760,7 +1760,7 @@
         ]
     },
     {
-        "city": "Itaja\u00ed",
+        "city": "Itajaí",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -48.659,
@@ -1816,7 +1816,7 @@
         ]
     },
     {
-        "city": "Medell\u00edn",
+        "city": "Medellín",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -75.5636,
@@ -1904,7 +1904,7 @@
         ]
     },
     {
-        "city": "Ribeir\u00e3o Preto",
+        "city": "Ribeirão Preto",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -47.8103,
@@ -1928,7 +1928,7 @@
         ]
     },
     {
-        "city": "San Jos\u00e9",
+        "city": "San José",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -84.0907,
@@ -1984,7 +1984,7 @@
         ]
     },
     {
-        "city": "S\u00e3o Jos\u00e9 do Rio Preto",
+        "city": "São José do Rio Preto",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -49.365,
@@ -1992,7 +1992,7 @@
         ]
     },
     {
-        "city": "S\u00e3o Jos\u00e9 dos Campos",
+        "city": "São José dos Campos",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -45.8869,
@@ -2000,7 +2000,7 @@
         ]
     },
     {
-        "city": "S\u00e3o Paulo",
+        "city": "São Paulo",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -46.6333,
@@ -2024,7 +2024,7 @@
         ]
     },
     {
-        "city": "Uberl\u00e2ndia",
+        "city": "Uberlândia",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -48.2754,
@@ -2032,7 +2032,7 @@
         ]
     },
     {
-        "city": "Valpara\u00edso",
+        "city": "Valparaíso",
         "provider": "CLOUDFLARE",
         "coordinates": [
             -71.6127,
@@ -2925,6 +2925,717 @@
         "coordinates": [
             34.7818,
             32.0853
+        ]
+    },
+    {
+        "city": "Ashburn",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -77.2874,
+            38.9438
+        ]
+    },
+    {
+        "city": "Atlanta",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -84.838,
+            33.999
+        ]
+    },
+    {
+        "city": "Boston",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -71.3589,
+            42.1601
+        ]
+    },
+    {
+        "city": "Calgary",
+        "country": "Canada",
+        "provider": "FASTLY",
+        "coordinates": [
+            -114.2719,
+            51.2447
+        ]
+    },
+    {
+        "city": "Chicago",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -87.7498,
+            41.4781
+        ]
+    },
+    {
+        "city": "Columbus",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -82.7188,
+            39.7112
+        ]
+    },
+    {
+        "city": "Dallas",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -96.457,
+            32.4167
+        ]
+    },
+    {
+        "city": "Denver",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -104.3303,
+            39.4392
+        ]
+    },
+    {
+        "city": "Detroit",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -83.3458,
+            42.6314
+        ]
+    },
+    {
+        "city": "Honolulu",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -157.5583,
+            21.0069
+        ]
+    },
+    {
+        "city": "Houston",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -95.0698,
+            29.4604
+        ]
+    },
+    {
+        "city": "Jacksonville",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -81.3557,
+            30.6322
+        ]
+    },
+    {
+        "city": "Kansas City",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -94.3786,
+            39.5997
+        ]
+    },
+    {
+        "city": "Los Angeles",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -118.5437,
+            34.4522
+        ]
+    },
+    {
+        "city": "Miami",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -80.3918,
+            25.4617
+        ]
+    },
+    {
+        "city": "Minneapolis",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -93.565,
+            44.7778
+        ]
+    },
+    {
+        "city": "Montreal",
+        "country": "Canada",
+        "provider": "FASTLY",
+        "coordinates": [
+            -73.3673,
+            45.3017
+        ]
+    },
+    {
+        "city": "New York",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -74.306,
+            40.4128
+        ]
+    },
+    {
+        "city": "Phoenix",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -112.274,
+            33.1484
+        ]
+    },
+    {
+        "city": "Portland",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -122.4765,
+            45.3231
+        ]
+    },
+    {
+        "city": "San Jose",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -121.6863,
+            37.1382
+        ]
+    },
+    {
+        "city": "Seattle",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -122.1321,
+            47.4062
+        ]
+    },
+    {
+        "city": "St Louis",
+        "country": "United States",
+        "provider": "FASTLY",
+        "coordinates": [
+            -90.3994,
+            38.427
+        ]
+    },
+    {
+        "city": "Toronto",
+        "country": "Canada",
+        "provider": "FASTLY",
+        "coordinates": [
+            -79.5832,
+            43.3532
+        ]
+    },
+    {
+        "city": "Vancouver",
+        "country": "Canada",
+        "provider": "FASTLY",
+        "coordinates": [
+            -123.4216,
+            49.4827
+        ]
+    },
+    {
+        "city": "Bogota",
+        "country": "Colombia",
+        "provider": "FASTLY",
+        "coordinates": [
+            -74.2721,
+            4.411
+        ]
+    },
+    {
+        "city": "Buenos Aires",
+        "country": "Argentina",
+        "provider": "FASTLY",
+        "coordinates": [
+            -58.1816,
+            -34.3037
+        ]
+    },
+    {
+        "city": "Curitiba",
+        "country": "Brazil",
+        "provider": "FASTLY",
+        "coordinates": [
+            -49.4713,
+            -25.329
+        ]
+    },
+    {
+        "city": "Fortaleza",
+        "country": "Brazil",
+        "provider": "FASTLY",
+        "coordinates": [
+            -38.3434,
+            -3.5172
+        ]
+    },
+    {
+        "city": "Lima",
+        "country": "Peru",
+        "provider": "FASTLY",
+        "coordinates": [
+            -77.1428,
+            -12.2464
+        ]
+    },
+    {
+        "city": "São Paulo",
+        "country": "Brazil",
+        "provider": "FASTLY",
+        "coordinates": [
+            -46.4333,
+            -23.3505
+        ]
+    },
+    {
+        "city": "Santiago",
+        "country": "Chile",
+        "provider": "FASTLY",
+        "coordinates": [
+            -70.4483,
+            -33.2489
+        ]
+    },
+    {
+        "city": "Rio de Janeiro",
+        "country": "Brazil",
+        "provider": "FASTLY",
+        "coordinates": [
+            -43.3729,
+            -22.7068
+        ]
+    },
+    {
+        "city": "Amsterdam",
+        "country": "Netherlands",
+        "provider": "FASTLY",
+        "coordinates": [
+            4.6041,
+            52.5676
+        ]
+    },
+    {
+        "city": "Copenhagen",
+        "country": "Denmark",
+        "provider": "FASTLY",
+        "coordinates": [
+            12.3683,
+            55.4761
+        ]
+    },
+    {
+        "city": "Brussels",
+        "country": "Belgium",
+        "provider": "FASTLY",
+        "coordinates": [
+            4.5517,
+            50.6503
+        ]
+    },
+    {
+        "city": "Dublin",
+        "country": "Ireland",
+        "provider": "FASTLY",
+        "coordinates": [
+            -6.4603,
+            53.1498
+        ]
+    },
+    {
+        "city": "Frankfurt",
+        "country": "Germany",
+        "provider": "FASTLY",
+        "coordinates": [
+            8.4821,
+            50.3109
+        ]
+    },
+    {
+        "city": "Helsinki",
+        "country": "Finland",
+        "provider": "FASTLY",
+        "coordinates": [
+            24.7354,
+            60.3699
+        ]
+    },
+    {
+        "city": "Lisbon",
+        "country": "Portugal",
+        "provider": "FASTLY",
+        "coordinates": [
+            -9.3393,
+            38.5223
+        ]
+    },
+    {
+        "city": "London",
+        "country": "United Kingdom",
+        "provider": "FASTLY",
+        "coordinates": [
+            -0.3276,
+            51.3074
+        ]
+    },
+    {
+        "city": "Madrid",
+        "country": "Spain",
+        "provider": "FASTLY",
+        "coordinates": [
+            -3.6038,
+            40.2168
+        ]
+    },
+    {
+        "city": "Manchester",
+        "country": "United Kingdom",
+        "provider": "FASTLY",
+        "coordinates": [
+            -2.1426,
+            53.2808
+        ]
+    },
+    {
+        "city": "Marseille",
+        "country": "France",
+        "provider": "FASTLY",
+        "coordinates": [
+            5.5698,
+            43.3965
+        ]
+    },
+    {
+        "city": "Milan",
+        "country": "Italy",
+        "provider": "FASTLY",
+        "coordinates": [
+            9.2923,
+            45.3642
+        ]
+    },
+    {
+        "city": "Munich",
+        "country": "Germany",
+        "provider": "FASTLY",
+        "coordinates": [
+            11.723,
+            48.3351
+        ]
+    },
+    {
+        "city": "Oslo",
+        "country": "Norway",
+        "provider": "FASTLY",
+        "coordinates": [
+            10.4522,
+            59.6139
+        ]
+    },
+    {
+        "city": "Palermo",
+        "country": "Italy",
+        "provider": "FASTLY",
+        "coordinates": [
+            13.5613,
+            38.3157
+        ]
+    },
+    {
+        "city": "Paris",
+        "country": "France",
+        "provider": "FASTLY",
+        "coordinates": [
+            2.5522,
+            48.3566
+        ]
+    },
+    {
+        "city": "Rome",
+        "country": "Italy",
+        "provider": "FASTLY",
+        "coordinates": [
+            12.5964,
+            41.5028
+        ]
+    },
+    {
+        "city": "Sofia",
+        "country": "Bulgaria",
+        "provider": "FASTLY",
+        "coordinates": [
+            23.5219,
+            42.4977
+        ]
+    },
+    {
+        "city": "Stockholm",
+        "country": "Sweden",
+        "provider": "FASTLY",
+        "coordinates": [
+            18.3686,
+            59.1293
+        ]
+    },
+    {
+        "city": "Vienna",
+        "country": "Austria",
+        "provider": "FASTLY",
+        "coordinates": [
+            16.5738,
+            48.4082
+        ]
+    },
+    {
+        "city": "Accra",
+        "country": "Ghana",
+        "provider": "FASTLY",
+        "coordinates": [
+            -0.386964,
+            5.403717
+        ]
+    },
+    {
+        "city": "Cape Town",
+        "country": "South Africa",
+        "provider": "FASTLY",
+        "coordinates": [
+            18.2241,
+            -33.7249
+        ]
+    },
+    {
+        "city": "Johannesburg",
+        "country": "South Africa",
+        "provider": "FASTLY",
+        "coordinates": [
+            28.2473,
+            -26.4041
+        ]
+    },
+    {
+        "city": "Bangkok",
+        "country": "Thailand",
+        "provider": "FASTLY",
+        "coordinates": [
+            100.3018,
+            13.4563
+        ]
+    },
+    {
+        "city": "Chennai",
+        "country": "India",
+        "provider": "FASTLY",
+        "coordinates": [
+            80.4785,
+            13.2827
+        ]
+    },
+    {
+        "city": "Dubai",
+        "country": "United Arab Emirates",
+        "provider": "FASTLY",
+        "coordinates": [
+            55.4708,
+            25.3048
+        ]
+    },
+    {
+        "city": "Fujairah",
+        "country": "United Arab Emirates",
+        "provider": "FASTLY",
+        "coordinates": [
+            56.5428,
+            25.3283
+        ]
+    },
+    {
+        "city": "Hong Kong",
+        "country": "Hong Kong",
+        "provider": "FASTLY",
+        "coordinates": [
+            114.3694,
+            22.1193
+        ]
+    },
+    {
+        "city": "Hyderabad",
+        "country": "India",
+        "provider": "FASTLY",
+        "coordinates": [
+            78.3867,
+            17.185
+        ]
+    },
+    {
+        "city": "Kolkata",
+        "country": "India",
+        "provider": "FASTLY",
+        "coordinates": [
+            88.4639,
+            22.7726
+        ]
+    },
+    {
+        "city": "Kuala Lumpur",
+        "country": "Malaysia",
+        "provider": "FASTLY",
+        "coordinates": [
+            101.4869,
+            3.339
+        ]
+    },
+    {
+        "city": "Manila",
+        "country": "Philippines",
+        "provider": "FASTLY",
+        "coordinates": [
+            120.7842,
+            14.4995
+        ]
+    },
+    {
+        "city": "Mumbai",
+        "country": "India",
+        "provider": "FASTLY",
+        "coordinates": [
+            72.6777,
+            19.276
+        ]
+    },
+    {
+        "city": "New Delhi",
+        "country": "India",
+        "provider": "FASTLY",
+        "coordinates": [
+            77.409,
+            28.4139
+        ]
+    },
+    {
+        "city": "Osaka",
+        "country": "Japan",
+        "provider": "FASTLY",
+        "coordinates": [
+            135.3023,
+            34.5937
+        ]
+    },
+    {
+        "city": "Seoul",
+        "country": "South Korea",
+        "provider": "FASTLY",
+        "coordinates": [
+            126.578,
+            37.4665
+        ]
+    },
+    {
+        "city": "Singapore",
+        "country": "Singapore",
+        "provider": "FASTLY",
+        "coordinates": [
+            103.5198,
+            1.5521
+        ]
+    },
+    {
+        "city": "Tokyo",
+        "country": "Japan",
+        "provider": "FASTLY",
+        "coordinates": [
+            139.5917,
+            35.4895
+        ]
+    },
+    {
+        "city": "Adelaide",
+        "country": "Australia",
+        "provider": "FASTLY",
+        "coordinates": [
+            138.4007,
+            -34.7285
+        ]
+    },
+    {
+        "city": "Auckland",
+        "country": "New Zealand",
+        "provider": "FASTLY",
+        "coordinates": [
+            174.5633,
+            -36.6485
+        ]
+    },
+    {
+        "city": "Brisbane",
+        "country": "Australia",
+        "provider": "FASTLY",
+        "coordinates": [
+            153.3251,
+            -27.2698
+        ]
+    },
+    {
+        "city": "Christchurch",
+        "country": "New Zealand",
+        "provider": "FASTLY",
+        "coordinates": [
+            172.4306,
+            -43.3321
+        ]
+    },
+    {
+        "city": "Melbourne",
+        "country": "Australia",
+        "provider": "FASTLY",
+        "coordinates": [
+            144.7631,
+            -37.5136
+        ]
+    },
+    {
+        "city": "Perth",
+        "country": "Australia",
+        "provider": "FASTLY",
+        "coordinates": [
+            115.6605,
+            -31.7505
+        ]
+    },
+    {
+        "city": "Sydney",
+        "country": "Australia",
+        "provider": "FASTLY",
+        "coordinates": [
+            151.4093,
+            -33.6688
+        ]
+    },
+    {
+        "city": "Wellington",
+        "country": "New Zealand",
+        "provider": "FASTLY",
+        "coordinates": [
+            174.5787,
+            -41.4865
         ]
     }
 ]
