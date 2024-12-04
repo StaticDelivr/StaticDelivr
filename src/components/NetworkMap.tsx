@@ -7,7 +7,6 @@ mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
 
 interface PoPLocation {
   city: string;
-  country: string;
   coordinates: [number, number];
   provider: string;
 }
@@ -85,7 +84,6 @@ const NetworkMap: React.FC = () => {
           new mapboxgl.Popup({ offset: 25 }).setHTML(`
               <div class="p-2">
                 <h3 class="font-bold">${pop.city}</h3>
-                <p class="text-sm">${pop.country}</p>
                 <p class="text-sm text-gray-600">Provider: ${provider.name}</p>
               </div>
             `),
