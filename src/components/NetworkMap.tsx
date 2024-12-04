@@ -96,7 +96,7 @@ const NetworkMap: React.FC = () => {
   return (
     <div className="relative w-full">
       {/* Provider Legend */}
-      <div className="absolute top-4 right-4 bg-white rounded-lg shadow-sm p-4 z-10">
+      <div className="absolute top-4 right-4 bg-white rounded-lg shadow-xl p-4 z-10 border border-gray-200">
         <div className="flex flex-col space-y-2">
           {Object.entries(providers).map(([key, provider]) => (
             <div key={key} className="flex items-center space-x-2">
