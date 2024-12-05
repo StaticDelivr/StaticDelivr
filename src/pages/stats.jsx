@@ -72,10 +72,10 @@ const StatsPage = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <StatCard
                 title="Total Monthly Requests"
-                value={statsData ? statsData.requests / 1000000 : 0} // Convert to millions
+                value={statsData ? statsData.requests : 0} // Use full number
                 change={2.8}
                 icon={Globe}
-                unit="M"
+                unit=""
               />
               <StatCard
                 title="Total Bandwidth"
