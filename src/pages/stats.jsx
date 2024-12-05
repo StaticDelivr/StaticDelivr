@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
 import { Globe, Server, Zap } from 'lucide-react';
 import Header from '../components/Header';
@@ -6,6 +6,29 @@ import Footer from '../components/Footer';
 import StatCard from '../components/StatCard';
 
 const StatsPage = () => {
+  const [statsData, setStatsData] = useState(null);
+
+  // Fetch statistics data on the client-side
+  useEffect(() => {
+    const fetchStats = async () => {
+      try {
+        const response = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
+        const data = await response.json();
+
+        setStatsData({
+          requests: data.total.requests,
+          bandwidth: data.total.bandwidth,
+        });
+      } catch (error) {
+        console.error('Error fetching stats data:', error);
+        // Optionally, set fallback or error data
+        setStatsData(null);
+      }
+    };
+
+    fetchStats();
+  }, []);
+
   return (
     <div>
       <Head>
@@ -49,21 +72,21 @@ const StatsPage = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <StatCard
                 title="Total Monthly Requests"
-                value="148"
+                value={statsData ? statsData.requests / 1000000 : 0} // Convert to millions
                 change={2.8}
                 icon={Globe}
                 unit="M"
               />
               <StatCard
                 title="Total Bandwidth"
-                value="5.2"
+                value={statsData ? statsData.bandwidth / 1000000000 : 0} // Convert to TB
                 change={-1.2}
                 icon={Server}
                 unit="TB"
               />
               <StatCard
                 title="Cache Hit Rate"
-                value="99.45"
+                value="99.45" // Hardcoded or replace with dynamic data
                 icon={Zap}
                 unit="%"
               />
