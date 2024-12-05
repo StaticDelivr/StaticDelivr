@@ -33,7 +33,15 @@ const StatCard = ({ title, value, change, icon: Icon, unit }) => {
         {change !== undefined && (
           <div className={`flex items-center ${trendColor} text-sm`}>
             <TrendIcon className="w-4 h-4 mr-1" />
-            {Math.abs(change)}%
+            <CountUp
+              start={0} // Start counting from 0
+              end={Math.abs(change)} // Use absolute value for percentage change
+              duration={2} // Same duration for consistency
+              separator=","
+              decimals={2} // You can adjust decimals as needed
+              decimal="."
+            />
+            %
           </div>
         )}
       </div>
