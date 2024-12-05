@@ -1,7 +1,7 @@
 import React from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
 
-const StatCard = ({ title, value, change, icon: Icon }) => {
+const StatCard = ({ title, value, change, icon: Icon, unit }) => {
   const isPositive = change > 0;
   const TrendIcon = isPositive ? TrendingUp : TrendingDown;
   const trendColor = isPositive ? 'text-green-600' : 'text-red-600';
@@ -15,7 +15,9 @@ const StatCard = ({ title, value, change, icon: Icon }) => {
       </div>
       <h3 className="text-gray-600 text-sm font-medium mb-2">{title}</h3>
       <div className="flex items-baseline gap-2">
-        <span className="text-2xl font-bold text-gray-900">{value}</span>
+        <span className="text-2xl font-bold text-gray-900">
+          {value} {unit && <span className="text-gray-900">{unit}</span>}
+        </span>
         {change !== undefined && (
           <div className={`flex items-center ${trendColor} text-sm`}>
             <TrendIcon className="w-4 h-4 mr-1" />

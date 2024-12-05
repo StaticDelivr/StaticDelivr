@@ -49,20 +49,23 @@ const StatsPage = () => {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
               <StatCard
                 title="Total Monthly Requests"
-                value="148M+"
+                value="148"
                 change={2.8}
                 icon={Globe}
+                unit="M"
               />
               <StatCard
                 title="Total Bandwidth"
-                value="5.2 TB"
+                value="5.2"
                 change={-1.2}
                 icon={Server}
+                unit="TB"
               />
               <StatCard
                 title="Cache Hit Rate"
-                value="99.45%"
+                value="99.45"
                 icon={Zap}
+                unit="%"
               />
             </div>
 
