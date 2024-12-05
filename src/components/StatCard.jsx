@@ -7,6 +7,9 @@ const StatCard = ({ title, value, change, icon: Icon, unit }) => {
   const TrendIcon = isPositive ? TrendingUp : TrendingDown;
   const trendColor = isPositive ? 'text-green-600' : 'text-red-600';
 
+  // Check if the value is a whole number
+  const hasDecimal = value % 1 !== 0;
+
   return (
     <div className="bg-white rounded-xl shadow-sm p-6">
       <div className="flex items-center justify-between mb-4">
@@ -22,6 +25,8 @@ const StatCard = ({ title, value, change, icon: Icon, unit }) => {
             end={value} // Dynamic value passed as a prop
             duration={2} // Duration of the animation
             separator="," // Optional: Adds commas to large numbers
+            decimals={hasDecimal ? 2 : 0} // Conditionally render decimals based on value
+            decimal="." // Make sure the decimal point is shown correctly if needed
           />
           {unit && <span className="text-gray-900">{unit}</span>}
         </span>
