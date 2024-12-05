@@ -15,9 +15,14 @@ const StatsPage = () => {
         const response = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
         const data = await response.json();
 
+        // Extract the total stats and the change values
+        const totalStats = data.total;
+
         setStatsData({
-          requests: data.total.requests,
-          bandwidth: data.total.bandwidth,
+          requests: totalStats.requests,
+          bandwidth: totalStats.bandwidth,
+          requestsChange: totalStats.change.requests,
+          bandwidthChange: totalStats.change.bandwidth,
         });
       } catch (error) {
         console.error('Error fetching stats data:', error);
@@ -73,14 +78,14 @@ const StatsPage = () => {
               <StatCard
                 title="Total Monthly Requests"
                 value={statsData ? statsData.requests : 0} // Use full number
-                change={2.8}
+                change={statsData ? statsData.requestsChange : 0} // Use change value for requests
                 icon={Globe}
                 unit=""
               />
               <StatCard
                 title="Total Bandwidth"
                 value={statsData ? statsData.bandwidth / 1000000000 : 0} // Convert to TB
-                change={-1.2}
+                change={statsData ? statsData.bandwidthChange : 0} // Use change value for bandwidth
                 icon={Server}
                 unit="TB"
               />
