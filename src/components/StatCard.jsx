@@ -1,5 +1,6 @@
 import React from 'react';
 import { TrendingUp, TrendingDown } from 'lucide-react';
+import CountUp from 'react-countup'; // Import CountUp
 
 const StatCard = ({ title, value, change, icon: Icon, unit }) => {
   const isPositive = change > 0;
@@ -16,7 +17,13 @@ const StatCard = ({ title, value, change, icon: Icon, unit }) => {
       <h3 className="text-gray-600 text-sm font-medium mb-2">{title}</h3>
       <div className="flex items-baseline gap-2">
         <span className="text-2xl font-bold text-gray-900">
-          {value} {unit && <span className="text-gray-900">{unit}</span>}
+          <CountUp 
+            start={0} // Start counting from 0
+            end={value} // Dynamic value passed as a prop
+            duration={2} // Duration of the animation
+            separator="," // Optional: Adds commas to large numbers
+          />
+          {unit && <span className="text-gray-900">{unit}</span>}
         </span>
         {change !== undefined && (
           <div className={`flex items-center ${trendColor} text-sm`}>
