@@ -1,9 +1,27 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
 import { Rocket, Globe } from 'lucide-react';
 
 const HeroSection = () => {
+  const [monthlyRequests, setMonthlyRequests] = useState(null);
+
+  // Fetch the data when the component mounts
+  useEffect(() => {
+    const fetchMonthlyRequests = async () => {
+      try {
+        const response = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
+        const data = await response.json();
+        // Set the total requests from the API response
+        setMonthlyRequests(data.total.requests);
+      } catch (error) {
+        console.error('Error fetching monthly requests data:', error);
+      }
+    };
+
+    fetchMonthlyRequests();
+  }, []);
+
   const { ref: presenceRef, inView: presenceInView } = useInView({
     triggerOnce: true,
     threshold: 0.1
@@ -70,8 +88,13 @@ const HeroSection = () => {
                   <span className="text-purple-600">
                     {requestsInView ? (
                       <>
-                        <CountUp start={0} end={100} duration={2} />
-                        <span className="text-gray-900">M+</span>
+                        {/* If data is available, display it, else show a default value */}
+                        <CountUp 
+                          start={0} 
+                          end={monthlyRequests ? monthlyRequests / 1000 : 0} 
+                          duration={2} 
+                        />
+                        <span className="text-gray-900">K+</span>
                       </>
                     ) : (
                       '0M+'
