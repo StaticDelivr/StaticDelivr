@@ -3,9 +3,9 @@ import { Heart } from 'lucide-react';
 import Link from 'next/link';
 
 const sponsors = [
-  { name: "ClouDNS", logo: "/assets/sponsors/cloudns.svg" },
-  { name: "Company B", logo: "/api/placeholder/120/60" },
-  { name: "Company C", logo: "/api/placeholder/120/60" },
+  { name: "ClouDNS", logo: "/assets/sponsors/cloudns.svg", website: "https://www.cloudns.net/" },
+  { name: "Company B", logo: "/api/placeholder/200/100", website: "https://companyb.com" },
+  { name: "Company C", logo: "/api/placeholder/200/100", website: "https://companyc.com" },
 ];
 
 const SponsorsSection = () => (
@@ -20,11 +20,13 @@ const SponsorsSection = () => (
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-16 max-w-4xl mx-auto">
         {sponsors.map((sponsor, index) => (
           <div key={index} className="flex items-center justify-center p-4">
-            <img 
-              src={sponsor.logo} 
-              alt={`${sponsor.name} Logo`} 
-              className="max-h-[50px] w-auto object-contain"
-            />
+            <Link href={sponsor.website} target="_blank" rel="noopener noreferrer">
+              <img 
+                src={sponsor.logo} 
+                alt={`${sponsor.name} Logo`} 
+                className="max-h-[50px] w-auto object-contain"
+              />
+            </Link>
           </div>
         ))}
       </div>
