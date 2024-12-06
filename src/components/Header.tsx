@@ -187,7 +187,7 @@ const Header = () => {
         <div className="flex items-center justify-between h-16">
           <div className="flex items-center justify-between w-full">
             <Link href="/" onClick={() => setOpenDropdown(null)}>
-              <img src="/assets/img/horizontal-black.svg" alt="StaticDelivr Logo" className="h-8" />
+              <img src="/assets/img/icons/horizontal-black.svg" alt="StaticDelivr Logo" className="h-8" />
             </Link>
 
             {/* Mobile menu button */}

@@ -6,7 +6,7 @@ const Footer = () => (
     <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
       {/* Logo and Description */}
       <div>
-        <img src="/assets/img/horizontal-white.svg" alt="StaticDelivr Logo" className="h-8 mb-4" />
+        <img src="/assets/img/icons/horizontal-white.svg" alt="StaticDelivr Logo" className="h-8 mb-4" />
         <p className="text-sm">
           A free CDN for open source projects, powered by a global network.
         </p>
