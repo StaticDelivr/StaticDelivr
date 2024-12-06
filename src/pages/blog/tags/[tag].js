@@ -25,7 +25,7 @@ export default function TagPage({ posts, tag }) {
         <section className="pt-32 pb-20 px-4 relative overflow-hidden">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-900 mb-8">
-              Posts Tagged with "{tag}"
+              Posts Tagged with &quot;{tag}&quot;
             </h1>
             <p className="text-xl text-gray-600 max-w-2xl mx-auto">
               Explore blog posts tagged with <strong>{tag}</strong>.
