@@ -3558,5 +3558,1029 @@
             174.7787,
             -41.2865
         ]
+    },
+    {
+        "city": "Ashburn",
+        "provider": "GCORE",
+        "coordinates": [
+            -77.7871,
+            39.0438
+        ]
+    },
+    {
+        "city": "Atlanta",
+        "provider": "GCORE",
+        "coordinates": [
+            -84.588,
+            33.449
+        ]
+    },
+    {
+        "city": "Boston",
+        "provider": "GCORE",
+        "coordinates": [
+            -71.0589,
+            42.1601
+        ]
+    },
+    {
+        "city": "Chicago",
+        "provider": "GCORE",
+        "coordinates": [
+            -88.3298,
+            41.9481
+        ]
+    },
+    {
+        "city": "Dallas",
+        "provider": "GCORE",
+        "coordinates": [
+            -97.197,
+            32.2767
+        ]
+    },
+    {
+        "city": "Denver",
+        "provider": "GCORE",
+        "coordinates": [
+            -105.3903,
+            39.3392
+        ]
+    },
+    {
+        "city": "El Paso",
+        "provider": "GCORE",
+        "coordinates": [
+            -106.485,
+            31.7619
+        ]
+    },
+    {
+        "city": "Los Angeles",
+        "provider": "GCORE",
+        "coordinates": [
+            -117.8437,
+            34.5522
+        ]
+    },
+    {
+        "city": "Manassas",
+        "provider": "GCORE",
+        "coordinates": [
+            -77.1753,
+            38.4509
+        ]
+    },
+    {
+        "city": "McAllen",
+        "provider": "GCORE",
+        "coordinates": [
+            -97.93,
+            26.5034
+        ]
+    },
+    {
+        "city": "Miami",
+        "provider": "GCORE",
+        "coordinates": [
+            -80.4918,
+            26.3617
+        ]
+    },
+    {
+        "city": "Minneapolis",
+        "provider": "GCORE",
+        "coordinates": [
+            -93.765,
+            45.3778
+        ]
+    },
+    {
+        "city": "New York",
+        "provider": "GCORE",
+        "coordinates": [
+            -74.606,
+            40.7128
+        ]
+    },
+    {
+        "city": "San Jose",
+        "provider": "GCORE",
+        "coordinates": [
+            -121.3863,
+            37.5382
+        ]
+    },
+    {
+        "city": "Seattle",
+        "provider": "GCORE",
+        "coordinates": [
+            -122.6321,
+            47.3062
+        ]
+    },
+    {
+        "city": "Asunción",
+        "provider": "GCORE",
+        "coordinates": [
+            -57.3333,
+            -25.5637
+        ]
+    },
+    {
+        "city": "Bogotá",
+        "provider": "GCORE",
+        "coordinates": [
+            -74.3721,
+            5.311
+        ]
+    },
+    {
+        "city": "Buenos Aires",
+        "provider": "GCORE",
+        "coordinates": [
+            -58.6816,
+            -34.3037
+        ]
+    },
+    {
+        "city": "Fortaleza",
+        "provider": "GCORE",
+        "coordinates": [
+            -38.2423,
+            -3.4172
+        ]
+    },
+    {
+        "city": "Guatemala City",
+        "provider": "GCORE",
+        "coordinates": [
+            -90.2167,
+            14.3349
+        ]
+    },
+    {
+        "city": "Guayaquil",
+        "provider": "GCORE",
+        "coordinates": [
+            -79.496,
+            -2.483
+        ]
+    },
+    {
+        "city": "Lima",
+        "provider": "GCORE",
+        "coordinates": [
+            -76.7428,
+            -12.3464
+        ]
+    },
+    {
+        "city": "Panama",
+        "provider": "GCORE",
+        "coordinates": [
+            -79.2167,
+            8.583
+        ]
+    },
+    {
+        "city": "Porto Alegre",
+        "provider": "GCORE",
+        "coordinates": [
+            -51.5177,
+            -30.3346
+        ]
+    },
+    {
+        "city": "Quito",
+        "provider": "GCORE",
+        "coordinates": [
+            -78.6678,
+            -0.5807
+        ]
+    },
+    {
+        "city": "Rio de Janeiro",
+        "provider": "GCORE",
+        "coordinates": [
+            -43.4729,
+            -22.5068
+        ]
+    },
+    {
+        "city": "San José",
+        "provider": "GCORE",
+        "coordinates": [
+            -84.3907,
+            9.5281
+        ]
+    },
+    {
+        "city": "San Salvador",
+        "provider": "GCORE",
+        "coordinates": [
+            -89.5182,
+            13.2929
+        ]
+    },
+    {
+        "city": "Santiago de Chile",
+        "provider": "GCORE",
+        "coordinates": [
+            -70.2483,
+            -33.7489
+        ]
+    },
+    {
+        "city": "Santiago de Querétaro",
+        "provider": "GCORE",
+        "coordinates": [
+            -100.1899,
+            20.1888
+        ]
+    },
+    {
+        "city": "São Paulo",
+        "provider": "GCORE",
+        "coordinates": [
+            -46.3333,
+            -23.1505
+        ]
+    },
+    {
+        "city": "Tegucigalpa",
+        "provider": "GCORE",
+        "coordinates": [
+            -87.5175,
+            14.3818
+        ]
+    },
+    {
+        "city": "Amsterdam",
+        "provider": "GCORE",
+        "coordinates": [
+            4.9041,
+            52.3676
+        ]
+    },
+    {
+        "city": "Athens",
+        "provider": "GCORE",
+        "coordinates": [
+            23.8275,
+            37.9838
+        ]
+    },
+    {
+        "city": "Belgrade",
+        "provider": "GCORE",
+        "coordinates": [
+            20.4573,
+            44.9276
+        ]
+    },
+    {
+        "city": "Brussels",
+        "provider": "GCORE",
+        "coordinates": [
+            4.4517,
+            50.9503
+        ]
+    },
+    {
+        "city": "Bucharest",
+        "provider": "GCORE",
+        "coordinates": [
+            26.2025,
+            44.5268
+        ]
+    },
+    {
+        "city": "Budapest",
+        "provider": "GCORE",
+        "coordinates": [
+            19.1402,
+            47.5979
+        ]
+    },
+    {
+        "city": "Chișinău",
+        "provider": "GCORE",
+        "coordinates": [
+            28.8575,
+            47.0105
+        ]
+    },
+    {
+        "city": "Dublin",
+        "provider": "GCORE",
+        "coordinates": [
+            -6.1603,
+            53.4498
+        ]
+    },
+    {
+        "city": "Frankfurt",
+        "provider": "GCORE",
+        "coordinates": [
+            8.7821,
+            50.2109
+        ]
+    },
+    {
+        "city": "Helsinki",
+        "provider": "GCORE",
+        "coordinates": [
+            25.0354,
+            60.2695
+        ]
+    },
+    {
+        "city": "Kharkiv",
+        "provider": "GCORE",
+        "coordinates": [
+            36.2304,
+            49.9935
+        ]
+    },
+    {
+        "city": "Kyiv",
+        "provider": "GCORE",
+        "coordinates": [
+            30.6234,
+            50.5501
+        ]
+    },
+    {
+        "city": "Lille",
+        "provider": "GCORE",
+        "coordinates": [
+            3.0573,
+            50.6292
+        ]
+    },
+    {
+        "city": "Lisbon",
+        "provider": "GCORE",
+        "coordinates": [
+            -9.039,
+            38.8223
+        ]
+    },
+    {
+        "city": "London",
+        "provider": "GCORE",
+        "coordinates": [
+            -0.2276,
+            51.6074
+        ]
+    },
+    {
+        "city": "Luxembourg",
+        "provider": "GCORE",
+        "coordinates": [
+            6.2319,
+            49.7117
+        ]
+    },
+    {
+        "city": "Lviv",
+        "provider": "GCORE",
+        "coordinates": [
+            24.0316,
+            49.8397
+        ]
+    },
+    {
+        "city": "Lyon",
+        "provider": "GCORE",
+        "coordinates": [
+            4.9357,
+            45.864
+        ]
+    },
+    {
+        "city": "Madrid",
+        "provider": "GCORE",
+        "coordinates": [
+            -3.8038,
+            40.5168
+        ]
+    },
+    {
+        "city": "Marseille",
+        "provider": "GCORE",
+        "coordinates": [
+            5.4698,
+            43.3965
+        ]
+    },
+    {
+        "city": "Milan",
+        "provider": "GCORE",
+        "coordinates": [
+            9.29,
+            45.5642
+        ]
+    },
+    {
+        "city": "Munich",
+        "provider": "GCORE",
+        "coordinates": [
+            11.682,
+            48.2351
+        ]
+    },
+    {
+        "city": "Nicosia",
+        "provider": "GCORE",
+        "coordinates": [
+            33.4823,
+            35.2856
+        ]
+    },
+    {
+        "city": "Oslo",
+        "provider": "GCORE",
+        "coordinates": [
+            10.8522,
+            59.9139
+        ]
+    },
+    {
+        "city": "Palermo",
+        "provider": "GCORE",
+        "coordinates": [
+            13.4615,
+            38.2157
+        ]
+    },
+    {
+        "city": "Paris",
+        "provider": "GCORE",
+        "coordinates": [
+            2.4522,
+            48.9566
+        ]
+    },
+    {
+        "city": "Poitiers",
+        "provider": "GCORE",
+        "coordinates": [
+            0.3404,
+            46.5802
+        ]
+    },
+    {
+        "city": "Prague",
+        "provider": "GCORE",
+        "coordinates": [
+            14.5378,
+            50.1755
+        ]
+    },
+    {
+        "city": "Riga",
+        "provider": "GCORE",
+        "coordinates": [
+            24.2052,
+            57.0496
+        ]
+    },
+    {
+        "city": "Sofia",
+        "provider": "GCORE",
+        "coordinates": [
+            23.4219,
+            42.7977
+        ]
+    },
+    {
+        "city": "Stockholm",
+        "provider": "GCORE",
+        "coordinates": [
+            18.1686,
+            59.4293
+        ]
+    },
+    {
+        "city": "Strasbourg",
+        "provider": "GCORE",
+        "coordinates": [
+            7.8521,
+            48.6734
+        ]
+    },
+    {
+        "city": "Tbilisi",
+        "provider": "GCORE",
+        "coordinates": [
+            44.9271,
+            41.8151
+        ]
+    },
+    {
+        "city": "Vilnius",
+        "provider": "GCORE",
+        "coordinates": [
+            25.3797,
+            54.7872
+        ]
+    },
+    {
+        "city": "Warsaw",
+        "provider": "GCORE",
+        "coordinates": [
+            21.1122,
+            52.3297
+        ]
+    },
+    {
+        "city": "Zürich",
+        "provider": "GCORE",
+        "coordinates": [
+            8.6417,
+            47.4769
+        ]
+    },
+    {
+        "city": "Amman",
+        "provider": "GCORE",
+        "coordinates": [
+            36.0306,
+            31.9516
+        ]
+    },
+    {
+        "city": "Baghdad",
+        "provider": "GCORE",
+        "coordinates": [
+            44.4661,
+            33.4152
+        ]
+    },
+    {
+        "city": "Doha",
+        "provider": "GCORE",
+        "coordinates": [
+            51.631,
+            25.376
+        ]
+    },
+    {
+        "city": "Dubai",
+        "provider": "GCORE",
+        "coordinates": [
+            55.3708,
+            25.3048
+        ]
+    },
+    {
+        "city": "Erbil",
+        "provider": "GCORE",
+        "coordinates": [
+            44.1089,
+            36.2911
+        ]
+    },
+    {
+        "city": "Istanbul",
+        "provider": "GCORE",
+        "coordinates": [
+            29.0784,
+            41.1082
+        ]
+    },
+    {
+        "city": "Kuwait City",
+        "provider": "GCORE",
+        "coordinates": [
+            48.0783,
+            29.4759
+        ]
+    },
+    {
+        "city": "Manama",
+        "provider": "GCORE",
+        "coordinates": [
+            50.6861,
+            26.3285
+        ]
+    },
+    {
+        "city": "Muscat",
+        "provider": "GCORE",
+        "coordinates": [
+            58.6933,
+            23.6859
+        ]
+    },
+    {
+        "city": "Riyadh",
+        "provider": "GCORE",
+        "coordinates": [
+            46.7753,
+            24.8136
+        ]
+    },
+    {
+        "city": "Sana’a",
+        "provider": "GCORE",
+        "coordinates": [
+            44.3074,
+            15.4694
+        ]
+    },
+    {
+        "city": "Tel Aviv",
+        "provider": "GCORE",
+        "coordinates": [
+            34.8818,
+            32.1853
+        ]
+    },
+    {
+        "city": "Abidjan",
+        "provider": "GCORE",
+        "coordinates": [
+            -3.9083,
+            5.4598
+        ]
+    },
+    {
+        "city": "Bamako",
+        "provider": "GCORE",
+        "coordinates": [
+            -7.8922,
+            12.7392
+        ]
+    },
+    {
+        "city": "Cairo",
+        "provider": "GCORE",
+        "coordinates": [
+            31.3357,
+            30.1444
+        ]
+    },
+    {
+        "city": "Cape Town",
+        "provider": "GCORE",
+        "coordinates": [
+            18.5241,
+            -33.8249
+        ]
+    },
+    {
+        "city": "Casablanca",
+        "provider": "GCORE",
+        "coordinates": [
+            -7.4898,
+            33.6731
+        ]
+    },
+    {
+        "city": "Douala",
+        "provider": "GCORE",
+        "coordinates": [
+            9.8085,
+            4.1511
+        ]
+    },
+    {
+        "city": "Harare",
+        "provider": "GCORE",
+        "coordinates": [
+            31.4578,
+            -17.7252
+        ]
+    },
+    {
+        "city": "Johannesburg",
+        "provider": "GCORE",
+        "coordinates": [
+            28.1473,
+            -25.7041
+        ]
+    },
+    {
+        "city": "Kampala",
+        "provider": "GCORE",
+        "coordinates": [
+            32.6825,
+            0.4476
+        ]
+    },
+    {
+        "city": "Lagos",
+        "provider": "GCORE",
+        "coordinates": [
+            3.4792,
+            6.6244
+        ]
+    },
+    {
+        "city": "Lome",
+        "provider": "GCORE",
+        "coordinates": [
+            1.3255,
+            6.2319
+        ]
+    },
+    {
+        "city": "Luanda",
+        "provider": "GCORE",
+        "coordinates": [
+            13.342,
+            -8.739
+        ]
+    },
+    {
+        "city": "Lusaka",
+        "provider": "GCORE",
+        "coordinates": [
+            28.4228,
+            -15.2875
+        ]
+    },
+    {
+        "city": "Nairobi",
+        "provider": "GCORE",
+        "coordinates": [
+            36.9219,
+            -1.1921
+        ]
+    },
+    {
+        "city": "Ouagadougou",
+        "provider": "GCORE",
+        "coordinates": [
+            -1.4233,
+            12.4714
+        ]
+    },
+    {
+        "city": "Rabat",
+        "provider": "GCORE",
+        "coordinates": [
+            -6.7498,
+            34.1209
+        ]
+    },
+    {
+        "city": "Rose Belle",
+        "provider": "GCORE",
+        "coordinates": [
+            57.5917,
+            -20.3997
+        ]
+    },
+    {
+        "city": "Saint-Denis",
+        "provider": "GCORE",
+        "coordinates": [
+            55.5481,
+            -20.7821
+        ]
+    },
+    {
+        "city": "Tripoli",
+        "provider": "GCORE",
+        "coordinates": [
+            13.2913,
+            32.9872
+        ]
+    },
+    {
+        "city": "Windhoek",
+        "provider": "GCORE",
+        "coordinates": [
+            17.1832,
+            -22.4595
+        ]
+    },
+    {
+        "city": "Almaty",
+        "provider": "GCORE",
+        "coordinates": [
+            77.0456,
+            43.322
+        ]
+    },
+    {
+        "city": "Astana",
+        "provider": "GCORE",
+        "coordinates": [
+            71.4673,
+            51.1694
+        ]
+    },
+    {
+        "city": "Baku",
+        "provider": "GCORE",
+        "coordinates": [
+            49.9671,
+            40.5093
+        ]
+    },
+    {
+        "city": "Bangkok",
+        "provider": "GCORE",
+        "coordinates": [
+            100.6018,
+            13.8563
+        ]
+    },
+    {
+        "city": "Bishkek",
+        "provider": "GCORE",
+        "coordinates": [
+            74.5839,
+            42.8746
+        ]
+    },
+    {
+        "city": "Colombo",
+        "provider": "GCORE",
+        "coordinates": [
+            79.9612,
+            7.0271
+        ]
+    },
+    {
+        "city": "Davao",
+        "provider": "GCORE",
+        "coordinates": [
+            125.6131,
+            7.1907
+        ]
+    },
+    {
+        "city": "Dhaka",
+        "provider": "GCORE",
+        "coordinates": [
+            90.5125,
+            23.9103
+        ]
+    },
+    {
+        "city": "Duschanbe",
+        "provider": "GCORE",
+        "coordinates": [
+            68.7806,
+            38.5598
+        ]
+    },
+    {
+        "city": "Hanoi",
+        "provider": "GCORE",
+        "coordinates": [
+            105.9644,
+            21.1285
+        ]
+    },
+    {
+        "city": "Ho Chi Minh City",
+        "provider": "GCORE",
+        "coordinates": [
+            106.7297,
+            10.9231
+        ]
+    },
+    {
+        "city": "Hong Kong",
+        "provider": "GCORE",
+        "coordinates": [
+            114.2694,
+            22.4193
+        ]
+    },
+    {
+        "city": "Karaganda",
+        "provider": "GCORE",
+        "coordinates": [
+            73.0948,
+            49.8057
+        ]
+    },
+    {
+        "city": "Kathmandu",
+        "provider": "GCORE",
+        "coordinates": [
+            85.424,
+            27.8172
+        ]
+    },
+    {
+        "city": "Manila",
+        "provider": "GCORE",
+        "coordinates": [
+            121.0842,
+            14.6995
+        ]
+    },
+    {
+        "city": "Mumbai",
+        "provider": "GCORE",
+        "coordinates": [
+            72.9877,
+            19.176
+        ]
+    },
+    {
+        "city": "Osaka",
+        "provider": "GCORE",
+        "coordinates": [
+            135.6023,
+            34.7937
+        ]
+    },
+    {
+        "city": "Pavlodar",
+        "provider": "GCORE",
+        "coordinates": [
+            76.9548,
+            52.287
+        ]
+    },
+    {
+        "city": "Phnom Penh",
+        "provider": "GCORE",
+        "coordinates": [
+            104.916,
+            11.5564
+        ]
+    },
+    {
+        "city": "Seoul",
+        "provider": "GCORE",
+        "coordinates": [
+            127.078,
+            37.6665
+        ]
+    },
+    {
+        "city": "Singapore",
+        "provider": "GCORE",
+        "coordinates": [
+            103.9198,
+            1.4521
+        ]
+    },
+    {
+        "city": "Tashkent",
+        "provider": "GCORE",
+        "coordinates": [
+            69.3401,
+            41.3995
+        ]
+    },
+    {
+        "city": "Thimphu",
+        "provider": "GCORE",
+        "coordinates": [
+            89.7419,
+            27.5728
+        ]
+    },
+    {
+        "city": "Tokyo",
+        "provider": "GCORE",
+        "coordinates": [
+            139.7917,
+            35.7895
+        ]
+    },
+    {
+        "city": "Ulaanbaatar",
+        "provider": "GCORE",
+        "coordinates": [
+            107.0057,
+            48.2864
+        ]
+    },
+    {
+        "city": "Yerevan",
+        "provider": "GCORE",
+        "coordinates": [
+            44.6146,
+            40.2792
+        ]
+    },
+    {
+        "city": "Melbourne",
+        "provider": "GCORE",
+        "coordinates": [
+            145.0631,
+            -37.7136
+        ]
+    },
+    {
+        "city": "Sydney",
+        "provider": "GCORE",
+        "coordinates": [
+            151.3093,
+            -33.9688
+        ]
     }
 ]
