@@ -15,13 +15,15 @@ const SponsorsSection = () => (
       <p className="text-gray-600 mb-12">
         We’re grateful to our sponsors for supporting free and open-source projects.
       </p>
-      <div className="flex justify-center gap-8 mb-16">
+      
+      {/* Responsive sponsor grid */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-16 max-w-4xl mx-auto">
         {sponsors.map((sponsor, index) => (
-          <div key={index} className="p-4">
+          <div key={index} className="flex items-center justify-center p-4">
             <img 
               src={sponsor.logo} 
               alt={`${sponsor.name} Logo`} 
-              className="h-16 mx-auto"
+              className="max-h-[50px] w-auto object-contain"
             />
           </div>
         ))}
