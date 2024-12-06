@@ -4,8 +4,6 @@ import Link from 'next/link';
 
 const sponsors = [
   { name: "ClouDNS", logo: "/assets/sponsors/cloudns.svg", website: "https://www.cloudns.net/" },
-  { name: "Company B", logo: "/api/placeholder/200/100", website: "https://companyb.com" },
-  { name: "Company C", logo: "/api/placeholder/200/100", website: "https://companyc.com" },
 ];
 
 const SponsorsSection = () => (
