@@ -84,7 +84,7 @@ const StatsPage = () => {
               />
               <StatCard
                 title="Total Bandwidth"
-                value={statsData ? statsData.bandwidth / 1000000000 : 0} // Convert to TB
+                value={statsData ? statsData.bandwidth / 1000000000000 : 0} // Convert to TB
                 change={statsData ? statsData.bandwidthChange : 0} // Use change value for bandwidth
                 icon={Server}
                 unit="TB"
