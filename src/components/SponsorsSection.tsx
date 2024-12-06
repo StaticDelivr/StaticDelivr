@@ -13,7 +13,7 @@ const SponsorsSection = () => (
     <div className="max-w-7xl mx-auto text-center">
       <h2 className="text-3xl md:text-4xl font-bold mb-6">Our Generous Sponsors</h2>
       <p className="text-gray-600 mb-12">
-        We’re grateful to our sponsors for supporting free and open-source projects.
+        StaticDelivr is made possible by our primary sponsors:
       </p>
       
       {/* Responsive sponsor grid */}
