@@ -107,8 +107,8 @@ export default function BlogPost({ post }) {
                     <ul className="flex flex-wrap mt-2">
                       {tags.map((tag, index) => (
                         <li key={index} className="mr-4 mb-2">
-                          <Link href={`/blog/tags/${tag}`}>
-                            <a className="text-blue-600 hover:text-blue-800">{tag}</a>
+                          <Link href={`/blog/tags/${tag}`} className="text-blue-600 hover:text-blue-800">
+                            {tag}
                           </Link>
                         </li>
                       ))}
