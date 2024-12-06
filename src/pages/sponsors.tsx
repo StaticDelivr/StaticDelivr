@@ -7,7 +7,7 @@ import GradientCard from '../components/GradientCard';
 import Link from 'next/link';
 
 const sponsors = [
-  { name: "Company A", logo: "/api/placeholder/200/100", website: "https://companya.com" },
+  { name: "ClouDNS", logo: "/assets/sponsors/cloudns.svg", website: "https://www.cloudns.net/" },
   { name: "Company B", logo: "/api/placeholder/200/100", website: "https://companyb.com" },
   { name: "Company C", logo: "/api/placeholder/200/100", website: "https://companyc.com" },
   { name: "Company D", logo: "/api/placeholder/200/100", website: "https://companyd.com" },

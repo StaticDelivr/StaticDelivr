@@ -3,7 +3,7 @@ import { Heart } from 'lucide-react';
 import Link from 'next/link';
 
 const sponsors = [
-  { name: "Company A", logo: "/api/placeholder/120/60" },
+  { name: "ClouDNS", logo: "/assets/sponsors/cloudns.svg" },
   { name: "Company B", logo: "/api/placeholder/120/60" },
   { name: "Company C", logo: "/api/placeholder/120/60" },
 ];
