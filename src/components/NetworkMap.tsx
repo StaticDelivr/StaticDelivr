@@ -46,7 +46,7 @@ const NetworkMap: React.FC = () => {
         container: 'map',
         style: 'mapbox://styles/mapbox/light-v10',
         center: [0, 20], // Center the map
-        zoom: 2,
+        zoom: 1,
       });
 
       setMap(newMap);
