@@ -19,9 +19,30 @@ export default function BlogPost({ post }) {
   // Rendering options for embedded content (if any)
   const options = {
     renderNode: {
-      'embedded-entry-block': (node) => <p>Embedded entry: {node.data.target.fields.title}</p>,
+      'embedded-asset-block': (node) => {
+        const { file, title } = node.data.target.fields;
+        return (
+          <div className="my-8">
+            <Image
+              src={`https:${file.url}`}
+              alt={title || 'Embedded Image'}
+              width={file.details.image.width || 800} // Fallback to 800 if width not available
+              height={file.details.image.height || 600} // Fallback to 600 if height not available
+              className="rounded-lg"
+            />
+          </div>
+        );
+      },
+      'embedded-entry-block': (node) => {
+        return (
+          <div className="my-8">
+            <p>Embedded entry: {node.data.target.fields.title}</p>
+          </div>
+        );
+      },
     },
-  }
+  };
+  
 
   return (
     <div>
