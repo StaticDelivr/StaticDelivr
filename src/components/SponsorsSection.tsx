@@ -14,10 +14,10 @@ const SponsorsSection = () => (
         StaticDelivr is made possible by our primary sponsors:
       </p>
       
-      {/* Responsive sponsor grid */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 mb-16 max-w-4xl mx-auto">
+      {/* Centered sponsor grid */}
+      <div className="flex justify-center mb-16">
         {sponsors.map((sponsor, index) => (
-          <div key={index} className="flex items-center justify-center p-4">
+          <div key={index} className="p-4">
             <Link href={sponsor.website} target="_blank" rel="noopener noreferrer">
               <img 
                 src={sponsor.logo} 
