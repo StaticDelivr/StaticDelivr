@@ -20,6 +20,7 @@ const NetworkMap: React.FC = () => {
   const [map, setMap] = useState<Map | null>(null);
   const [popLocations, setPopLocations] = useState<PoPLocation[]>([]);
   const [providers, setProviders] = useState<Record<string, Provider>>({});
+  const [is3D, setIs3D] = useState(false);
 
   useEffect(() => {
     // Fetching PoP data from the JSON file
@@ -43,7 +44,7 @@ const NetworkMap: React.FC = () => {
     const initializeMap = () => {
       const newMap = new mapboxgl.Map({
         container: 'map',
-        style: 'mapbox://styles/mapbox/light-v11',
+        style: 'mapbox://styles/mapbox/light-v10',
         center: [0, 20], // Center the map
         zoom: 2,
       });
@@ -64,11 +65,28 @@ const NetworkMap: React.FC = () => {
     };
   }, [map]); // Run effect when map changes
 
-  useEffect(() => {
-    // If popLocations or providers are empty or map is not initialized yet, return early
+  // Handle view toggle
+  const toggleView = () => {
+    if (map) {
+      const newIs3D = !is3D;
+      setIs3D(newIs3D);
+      map.setStyle(newIs3D ? 'mapbox://styles/mapbox/light-v11' : 'mapbox://styles/mapbox/light-v10');
+      
+      // Re-add markers after style change
+      map.once('style.load', () => {
+        addMarkers();
+      });
+    }
+  };
+
+  // Function to add markers
+  const addMarkers = () => {
     if (!map || popLocations.length === 0 || Object.keys(providers).length === 0) return;
 
-    // Add markers for each PoP location
+    // Remove existing markers if any
+    const existingMarkers = document.querySelectorAll('.mapboxgl-marker');
+    existingMarkers.forEach(marker => marker.remove());
+
     popLocations.forEach((pop) => {
       const provider = providers[pop.provider];
 
@@ -91,10 +109,35 @@ const NetworkMap: React.FC = () => {
         )
         .addTo(map);
     });
+  };
+
+  useEffect(() => {
+    addMarkers();
   }, [popLocations, map, providers]); // Run effect when popLocations, map, or providers change
 
   return (
     <div className="relative w-full">
+      {/* Toggle Button */}
+      <button
+        onClick={toggleView}
+        className="absolute top-4 left-4 bg-white px-4 py-2 rounded-lg shadow-xl z-10 border border-gray-200 hover:bg-gray-50 transition-colors duration-200"
+      >
+        <div className="flex items-center space-x-2">
+          <span className="text-sm font-medium">
+            {is3D ? '2D View' : '3D View'}
+          </span>
+          {is3D ? (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M4.293 15.707a1 1 0 010-1.414L8.586 10 4.293 5.707a1 1 0 011.414-1.414l5 5a1 1 0 010 1.414l-5 5a1 1 0 01-1.414 0z" clipRule="evenodd" />
+            </svg>
+          ) : (
+            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+              <path fillRule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm1-11a1 1 0 10-2 0v2H7a1 1 0 100 2h2v2a1 1 0 102 0v-2h2a1 1 0 100-2h-2V7z" clipRule="evenodd" />
+            </svg>
+          )}
+        </div>
+      </button>
+
       {/* Provider Legend */}
       <div className="absolute top-4 right-4 bg-white rounded-lg shadow-xl p-4 z-10 border border-gray-200">
         <div className="flex flex-col space-y-2">
