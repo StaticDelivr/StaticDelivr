@@ -47,6 +47,10 @@ const QuickStartSection = () => {
                 <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
                   https://cdn.staticdelivr.com/gh/user/repo/branch/file
                 </pre>
+                <p className="text-sm text-gray-600 mt-4 mb-2">Example with jQuery:</p>
+                <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                  https://cdn.staticdelivr.com/gh/jquery/jquery/3.6.4/dist/jquery.min.js
+                </pre>
               </div>
             )}
           </div>
