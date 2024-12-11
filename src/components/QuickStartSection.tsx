@@ -9,7 +9,7 @@ const QuickStartSection = () => {
     <section className="py-20 px-4 relative">
       <div className="max-w-4xl mx-auto">
         <div className="bg-white rounded-xl shadow-xl overflow-hidden">
-          {/* Tab navigation for NPM, GitHub, and WordPress */}
+          {/* Tab navigation for NPM, GitHub, WordPress, and Google Fonts */}
           <div className="flex border-b">
             {/* NPM tab */}
             <button
@@ -40,6 +40,16 @@ const QuickStartSection = () => {
             >
               <Package className="w-4 h-4 inline-block mr-2" />
               WordPress
+            </button>
+            {/* Google Fonts tab */}
+            <button
+              className={`flex-1 px-6 py-3 text-sm font-medium ${
+                activeTab === 'google-fonts' ? 'text-blue-600 border-b-2 border-blue-600' : 'text-gray-600'
+              }`}
+              onClick={() => setActiveTab('google-fonts')}
+            >
+              <Package className="w-4 h-4 inline-block mr-2" />
+              Google Fonts
             </button>
           </div>
           {/* Content area based on the active tab */}
@@ -93,6 +103,20 @@ const QuickStartSection = () => {
                 <p className="text-sm text-gray-600 mt-4 mb-2">Example with a plugin:</p>
                 <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
                   https://cdn.staticdelivr.com/wp/plugins/woocommerce/tags/9.3.3/assets/js/frontend/woocommerce.min.js
+                </pre>
+              </div>
+            )}
+            {activeTab === 'google-fonts' && (
+              <div>
+                {/* Instructions for loading Google Fonts */}
+                <p className="text-sm text-gray-600 mb-4">Load any Google Font:</p>
+                <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                  https://cdn.staticdelivr.com/gfonts/css2?family=Font+Name
+                </pre>
+                {/* Example usage for Open Sans */}
+                <p className="text-sm text-gray-600 mt-4 mb-2">Example with Open Sans:</p>
+                <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                  https://cdn.staticdelivr.com/gfonts/css2?family=Open+Sans
                 </pre>
               </div>
             )}
