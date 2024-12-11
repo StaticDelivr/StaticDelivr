@@ -6,7 +6,7 @@ lastUpdated: "30 November 2024"
 ---
 ## Supported Use Cases
 
-StaticDelivr supports various use cases for delivering static content globally. Whether you are working with GitHub, npm, or other static assets, we have you covered.
+StaticDelivr supports various use cases for delivering static content globally. Whether you are working with GitHub, npm, WordPress, Google Fonts, or other static assets, we have you covered.
 
 ### 1. **Serving JavaScript Libraries:**
    - Easily serve libraries like React, Vue, and jQuery from npm:
@@ -22,3 +22,23 @@ StaticDelivr supports various use cases for delivering static content globally. 
 
 ### 3. **Images and Stylesheets:**
    - Use StaticDelivr to serve images, CSS, JS, and other assets hosted in GitHub repositories or npm packages.
+
+### 4. **WordPress Themes and Plugins:**
+   - Serve WordPress themes and plugins effortlessly:
+   
+     **WordPress Themes:**
+     ```html
+     <link rel="stylesheet" href="https://cdn.staticdelivr.com/wp/themes/twentytwentythree/1.0/style.css">
+     ```
+     **WordPress Plugins:**
+     ```html
+     <script src="https://cdn.staticdelivr.com/wp/plugins/woocommerce/tags/9.3.3/assets/js/frontend/woocommerce.min.js"></script>
+     ```
+
+### 5. **Loading Google Fonts:**
+   - Use StaticDelivr to load Google Fonts with ease:
+
+     **Example:**
+     ```html
+     <link href="https://cdn.staticdelivr.com/gfonts/css2?family=Open+Sans" rel="stylesheet">
+     ```
