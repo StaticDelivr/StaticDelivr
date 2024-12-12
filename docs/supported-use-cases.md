@@ -23,8 +23,8 @@ StaticDelivr supports various use cases for delivering static content globally. 
 ### 3. **Images and Stylesheets:**
    - Use StaticDelivr to serve images, CSS, JS, and other assets hosted in GitHub repositories or npm packages.
 
-### 4. **WordPress Themes and Plugins:**
-   - Serve WordPress themes and plugins effortlessly:
+### 4. **WordPress Themes, Plugins, and Core Files:**
+   - Serve WordPress themes, plugins, and core files effortlessly:
    
      **WordPress Themes:**
      ```html
@@ -33,6 +33,10 @@ StaticDelivr supports various use cases for delivering static content globally. 
      **WordPress Plugins:**
      ```html
      <script src="https://cdn.staticdelivr.com/wp/plugins/woocommerce/tags/9.3.3/assets/js/frontend/woocommerce.min.js"></script>
+     ```
+     **WordPress Core Files:**
+     ```html
+     <script src="https://cdn.staticdelivr.com/wp/core/trunk/wp-includes/js/jquery/jquery.min.js"></script>
      ```
 
 ### 5. **Loading Google Fonts:**
