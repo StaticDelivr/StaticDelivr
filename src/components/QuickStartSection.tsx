@@ -104,6 +104,16 @@ const QuickStartSection = () => {
                 <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
                   https://cdn.staticdelivr.com/wp/plugins/woocommerce/tags/9.3.3/assets/js/frontend/woocommerce.min.js
                 </pre>
+                {/* Instructions for loading WordPress core files */}
+                <p className="text-sm text-gray-600 mt-4 mb-2">Load any WordPress core file:</p>
+                <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                  https://cdn.staticdelivr.com/wp/core/path/file
+                </pre>
+                {/* Example usage for WordPress core */}
+                <p className="text-sm text-gray-600 mt-4 mb-2">Example with WordPress core:</p>
+                <pre className="bg-gray-900 text-gray-100 p-4 rounded-lg overflow-x-auto">
+                  https://cdn.staticdelivr.com/wp/core/trunk/wp-includes/js/jquery/jquery.min.js
+                </pre>
               </div>
             )}
             {activeTab === 'google-fonts' && (
