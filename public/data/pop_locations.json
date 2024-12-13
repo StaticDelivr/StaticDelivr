@@ -3483,8 +3483,8 @@
         "city": "Singapore",
         "provider": "FASTLY",
         "coordinates": [
-            103.5198,
-            1.5521
+            103.6398,
+            1.3521
         ]
     },
     {
@@ -4524,7 +4524,7 @@
         "provider": "GCORE",
         "coordinates": [
             103.9198,
-            1.4521
+            1.4221
         ]
     },
     {
