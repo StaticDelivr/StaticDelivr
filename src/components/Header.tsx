@@ -231,6 +231,7 @@ const Header = () => {
               rel="noopener noreferrer"
               className="ml-4 text-gray-600 hover:text-gray-900"
               onClick={() => setOpenDropdown(null)}
+              aria-label="GitHub repository for StaticDelivr" // Accessible label for screen readers
             >
               <Github className="w-5 h-5" />
             </a>
