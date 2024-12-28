@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import { StaticDelivrImage } from 'staticdelivr';
 
 const NetworkMapSection = () => (
   <section className="py-20 px-4 bg-gray-50">
@@ -11,9 +12,9 @@ const NetworkMapSection = () => (
       <div className="relative group cursor-pointer">
         <Link href="/network">
           <div className="relative">
-            <img 
-              src="/assets/img/network-map.png" 
-              alt="World Map showing CDN nodes" 
+            <StaticDelivrImage 
+              src="/assets/img/network-map.png"
+              alt="World Map showing CDN nodes"
               className="w-full rounded-lg shadow-lg brightness-50 transition-all duration-300 group-hover:brightness-75"
             />
             <div className="absolute inset-0 flex items-center justify-center">
