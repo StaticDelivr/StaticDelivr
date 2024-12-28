@@ -4,6 +4,7 @@ import Link from 'next/link';
 
 const sponsors = [
   { name: "ClouDNS", logo: "/assets/sponsors/cloudns.svg", website: "https://www.cloudns.net/" },
+  { name: "Netlify", logo: "/assets/sponsors/netlify.svg", website: "https://www.netlify.com/" },
 ];
 
 const SponsorsSection = () => (
