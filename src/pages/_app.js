@@ -2,6 +2,9 @@
 import '../styles/globals.css'; // Import your Tailwind CSS file
 import { ParallaxProvider } from 'react-scroll-parallax';
 import Head from 'next/head'; // Import Head for managing the <head> section
+import { StaticDelivr } from 'staticdelivr';
+
+StaticDelivr.set({ baseURL: 'https://staticdelivr.com' });
 
 function MyApp({ Component, pageProps }) {
   return (
