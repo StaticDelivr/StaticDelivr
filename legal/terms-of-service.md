@@ -48,4 +48,4 @@ These Terms are governed by the laws of Australia. Any disputes arising from the
 
 We may update these Terms periodically. Continued use of the service after changes are posted constitutes acceptance of the revised Terms.
 
-For questions, contact us at https://staticdelivr.com/contact.
+For questions, contact us at [https://staticdelivr.com/contact](https://staticdelivr.com/contact).

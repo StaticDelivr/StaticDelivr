@@ -49,10 +49,10 @@ If applicable under your jurisdiction, you may:
 - Request access to your data.
 - Request deletion of your data.
 
-Contact us at https://staticdelivr.com/contact for such requests.
+Contact us at [https://staticdelivr.com/contact](https://staticdelivr.com/contact) for such requests.
 
 ## 8. Changes to Privacy Policy
 
 We may update this Privacy Policy. Continued use of the service constitutes acceptance of the revised policy.
 
-For questions, contact us at https://staticdelivr.com/contact.
+For questions, contact us at [https://staticdelivr.com/contact](https://staticdelivr.com/contact).
