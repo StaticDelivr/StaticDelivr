@@ -28,7 +28,7 @@ We use third-party service providers (e.g., Fastly, Cloudflare, Gcore) to delive
 
 - [Cloudflare Privacy Policy](https://www.cloudflare.com/privacypolicy/)
 - [Fastly Privacy Policy](https://www.fastly.com/privacy)
-- [Gcore Privacy Policy](https://gcore.com/legal/privacy-policy/)
+- [Gcore Privacy Policy](https://gcore.com/legal/)
 
 ## 4. Cookies
 
