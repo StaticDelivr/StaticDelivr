@@ -43,6 +43,14 @@ const Footer = () => (
       </div>
     </div>
 
+    {/* Legal Section */}
+    <div className="max-w-7xl mx-auto mt-8">
+      <ul className="flex justify-center space-x-6 text-sm">
+        <li><Link href="/legal/terms-of-service" className="hover:text-white">Terms of Service</Link></li>
+        <li><Link href="/legal/privacy-policy" className="hover:text-white">Privacy Policy</Link></li>
+      </ul>
+    </div>
+
     {/* Footer Bottom Section */}
     <div className="max-w-7xl mx-auto mt-12 pt-8 border-t border-gray-800 text-sm text-center">
       <p>&copy; {new Date().getFullYear()} StaticDelivr. All rights reserved.</p>
