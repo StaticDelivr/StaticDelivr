@@ -127,7 +127,7 @@ const StatsPage = () => {
                     </li>
                     <li className="flex items-center">
                       <div className="w-3 h-3 rounded-full bg-green-600 mr-3"></div>
-                      99.9% Uptime SLA
+                      Global Coverage
                     </li>
                     <li className="flex items-center">
                       <div className="w-3 h-3 rounded-full bg-green-600 mr-3"></div>
