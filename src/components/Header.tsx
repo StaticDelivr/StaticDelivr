@@ -24,6 +24,7 @@ import {
   navigationMenuTriggerStyle,
 } from "@/components/ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import ThemeToggle from './ThemeToggle';
 
 const ListItem = React.forwardRef<
   React.ElementRef<"a">,
@@ -180,6 +181,9 @@ const Header = () => {
             </NavigationMenu>
             
             <div className="flex items-center gap-2 ml-2 pl-2 border-l border-zinc-200 dark:border-zinc-800">
+              {/* Theme toggle */}
+              <ThemeToggle />
+
               {/* GitHub button */}
               <a 
                 href="https://github.com/StaticDelivr/StaticDelivr" 
@@ -318,6 +322,13 @@ const Header = () => {
                         <ArrowRight className="w-4 h-4 ml-2" />
                       </Button>
                     </Link>
+                  </div>
+                  
+                  {/* Theme Toggle */}
+                  <div className="mt-4 px-4">
+                    <div className="flex justify-center">
+                      <ThemeToggle />
+                    </div>
                   </div>
                   
                   {/* GitHub Link */}
