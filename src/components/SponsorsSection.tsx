@@ -37,7 +37,7 @@ const SponsorsSection = () => {
                 alt={`${sponsor.name} Logo`} 
                 width={192}
                 height={48}
-                className="h-12 w-auto object-contain dark:invert"
+                className="h-12 w-auto object-contain"
               />
             </Link>
           ))}
