@@ -128,6 +128,14 @@
         ]
     },
     {
+        "city": "Durham",
+        "provider": "CLOUDFLARE",
+        "coordinates": [
+            -78.8986,
+            35.994
+        ]
+    },
+    {
         "city": "Halifax",
         "provider": "CLOUDFLARE",
         "coordinates": [
@@ -533,6 +541,14 @@
         "coordinates": [
             19.0402,
             47.4979
+        ]
+    },
+    {
+        "city": "Chișinău",
+        "provider": "CLOUDFLARE",
+        "coordinates": [
+            28.8575,
+            47.0105
         ]
     },
     {
@@ -2064,11 +2080,27 @@
         ]
     },
     {
+        "city": "Aktobe",
+        "provider": "CLOUDFLARE",
+        "coordinates": [
+            57.1736,
+            50.2839
+        ]
+    },
+    {
         "city": "Almaty",
         "provider": "CLOUDFLARE",
         "coordinates": [
             76.886,
             43.2383
+        ]
+    },
+    {
+        "city": "Astana",
+        "provider": "CLOUDFLARE",
+        "coordinates": [
+            71.4278,
+            51.1694
         ]
     },
     {
@@ -2117,6 +2149,14 @@
         "coordinates": [
             85.8245,
             20.2961
+        ]
+    },
+    {
+        "city": "Bishkek",
+        "provider": "CLOUDFLARE",
+        "coordinates": [
+            74.585,
+            42.8746
         ]
     },
     {
@@ -2333,6 +2373,14 @@
         "coordinates": [
             101.6869,
             3.139
+        ]
+    },
+    {
+        "city": "Kuching",
+        "provider": "CLOUDFLARE",
+        "coordinates": [
+            110.3470,
+            1.5533
         ]
     },
     {
