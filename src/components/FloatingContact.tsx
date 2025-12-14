@@ -71,7 +71,7 @@ export function FloatingContact() {
         className={cn(
           "flex items-center justify-center w-14 h-14 rounded-full shadow-lg transition-all duration-300",
           isExpanded
-            ? "bg-slate-900 text-white"
+            ? "bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900"
             : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-110"
         )}
       >

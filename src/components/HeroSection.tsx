@@ -21,7 +21,7 @@ const HeroSection = () => {
   useEffect(() => {
     const fetchMonthlyRequests = async () => {
       try {
-        const response = await fetch('https://corsproxy.io/https://stats.staticdelivr.com/api/stats?month=previous');
+        const response = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
         const data = await response.json();
         setMonthlyRequests(data.total.requests);
       } catch (error) {

@@ -80,7 +80,13 @@ const MobileNavItem = ({
 const Header = () => {
   const [isSheetOpen, setIsSheetOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
-  const { theme } = useTheme();
+  const [mounted, setMounted] = useState(false);
+  const { resolvedTheme } = useTheme();
+
+  // Track mounted state to prevent hydration mismatch
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Track scroll position for header styling
   useEffect(() => {
@@ -110,7 +116,7 @@ const Header = () => {
             className="flex items-center gap-2"
           >
             <Image 
-              src={theme === 'dark' ? "/assets/img/icons/horizontal-white.svg" : "/assets/img/icons/horizontal-black.svg"}
+              src={mounted && resolvedTheme === 'dark' ? "/assets/img/icons/horizontal-white.svg" : "/assets/img/icons/horizontal-black.svg"}
               alt="StaticDelivr" 
               width={128}
               height={32}
@@ -220,7 +226,7 @@ const Header = () => {
                 <SheetHeader className="p-4 border-b border-zinc-100 dark:border-zinc-800 flex flex-row items-center justify-between space-y-0">
                   <SheetTitle className="text-left">
                     <Image 
-                      src={theme === 'dark' ? "/assets/img/icons/horizontal-white.svg" : "/assets/img/icons/horizontal-black.svg"}
+                      src={mounted && resolvedTheme === 'dark' ? "/assets/img/icons/horizontal-white.svg" : "/assets/img/icons/horizontal-black.svg"}
                       alt="StaticDelivr" 
                       width={128}
                       height={28}

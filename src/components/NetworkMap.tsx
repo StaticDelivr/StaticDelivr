@@ -120,10 +120,10 @@ const NetworkMap: React.FC = () => {
       {/* Toggle Button */}
       <button
         onClick={toggleView}
-        className="absolute top-4 left-4 bg-white px-4 py-2 rounded-lg shadow-xl z-10 border border-gray-200 hover:bg-gray-50 transition-colors duration-200"
+        className="absolute top-4 left-4 bg-white dark:bg-zinc-900 px-4 py-2 rounded-lg shadow-xl z-10 border border-gray-200 dark:border-zinc-700 hover:bg-gray-50 dark:hover:bg-zinc-800 transition-colors duration-200"
       >
         <div className="flex items-center space-x-2">
-          <span className="text-sm font-medium">
+          <span className="text-sm font-medium text-gray-900 dark:text-zinc-100">
             {is3D ? '2D View' : '3D View'}
           </span>
           {is3D ? (
@@ -139,12 +139,12 @@ const NetworkMap: React.FC = () => {
       </button>
 
       {/* Provider Legend */}
-      <div className="absolute top-4 right-4 bg-white rounded-lg shadow-xl p-4 z-10 border border-gray-200">
+      <div className="absolute top-4 right-4 bg-white dark:bg-zinc-900 rounded-lg shadow-xl p-4 z-10 border border-gray-200 dark:border-zinc-700">
         <div className="flex flex-col space-y-2">
           {Object.entries(providers).map(([key, provider]) => (
             <div key={key} className="flex items-center space-x-2">
               <div className={`w-3 h-3 rounded-full ${provider.dotColor}`}></div>
-              <span className="text-sm text-gray-600">{provider.name}</span>
+              <span className="text-sm text-gray-600 dark:text-zinc-400">{provider.name}</span>
             </div>
           ))}
         </div>

@@ -131,7 +131,7 @@ const features = [
 
 const FeaturesSection = () => {
   return (
-    <section className="py-24 px-4 bg-gradient-to-b from-white to-slate-50 relative overflow-hidden">
+    <section className="py-24 px-4 bg-gradient-to-b from-white to-slate-50 dark:from-zinc-950 dark:to-zinc-900 relative overflow-hidden">
       {/* Subtle background pattern */}
       <div className="absolute inset-0 opacity-[0.02]">
         <div className="absolute inset-0" style={{
@@ -143,7 +143,7 @@ const FeaturesSection = () => {
       <div className="max-w-7xl mx-auto relative z-10">
         <BlurFade delay={0.1} inView>
           <div className="text-center mb-16">
-            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-sm font-medium mb-4">
+            <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-sm font-medium mb-4">
               <Zap className="w-4 h-4" />
               Why StaticDelivr
             </span>
