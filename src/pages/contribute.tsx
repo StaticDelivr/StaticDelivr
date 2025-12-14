@@ -1,13 +1,21 @@
 import React from 'react';
 import Head from 'next/head';
 import { Github, Heart, Bug } from 'lucide-react';
-import { useTheme } from 'next-themes';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AuroraBackground } from '../components/ui/aurora-background';
 import { BentoGrid } from '../components/ui/bento-grid';
 import { BlurFade } from '../components/ui/blur-fade';
 import { cn } from '@/lib/utils';
+
+interface CustomBentoCardProps {
+  name: string;
+  className?: string;
+  background: React.ReactNode;
+  Icon: React.ComponentType<{ className?: string }>;
+  children: React.ReactNode;
+  action?: { href: string; text: string; };
+}
 
 const GithubBackground = () => (
   <div className="absolute inset-0 flex items-center justify-center opacity-10">
@@ -36,7 +44,7 @@ const CustomBentoCard = ({
   children,
   action,
   ...props
-}: any) => (
+}: CustomBentoCardProps & React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
       "group relative flex flex-col justify-between overflow-hidden rounded-xl",
@@ -71,8 +79,6 @@ const CustomBentoCard = ({
 );
 
 const ContributePage = () => {
-  const { theme } = useTheme();
-
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>

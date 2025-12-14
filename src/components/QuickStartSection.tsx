@@ -1,14 +1,12 @@
 "use client";
 
 import React from 'react';
+import Link from 'next/link';
 import { Github, Package, Type, Globe } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CodeBlock } from '@/components/ui/code-block';
-import { useTheme } from 'next-themes';
 
 const QuickStartSection = () => {
-  const { theme } = useTheme();
-
   return (
     <section id="quick-start" className="py-24 px-4 bg-white dark:bg-black">
       <div className="max-w-5xl mx-auto">
@@ -218,9 +216,9 @@ const QuickStartSection = () => {
         <div className="text-center mt-12">
           <p className="text-zinc-600 dark:text-zinc-400">
             Need more examples?{' '}
-            <a href="/docs" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium underline underline-offset-4 transition-colors">
+            <Link href="/docs" className="text-blue-600 dark:text-blue-400 hover:text-blue-700 dark:hover:text-blue-300 font-medium underline underline-offset-4 transition-colors">
               Check our documentation
-            </a>
+            </Link>
           </p>
         </div>
       </div>

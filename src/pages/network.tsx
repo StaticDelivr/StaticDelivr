@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { Globe, Server, Zap, Info, Shield, Activity, Lock, Network } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { Globe, Server, Zap, Info, Shield, Activity, Network } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import NetworkMap from '@/components/NetworkMap';
@@ -9,6 +8,14 @@ import { AuroraBackground } from '../components/ui/aurora-background';
 import { BentoGrid } from '../components/ui/bento-grid';
 import { BlurFade } from '../components/ui/blur-fade';
 import { cn } from '@/lib/utils';
+
+interface CustomBentoCardProps {
+  name: string;
+  className?: string;
+  background: React.ReactNode;
+  Icon: React.ComponentType<{ className?: string }>;
+  children: React.ReactNode;
+}
 
 // Background components
 const GlobeBackground = () => (
@@ -62,7 +69,7 @@ const CustomBentoCard = ({
   Icon,
   children,
   ...props
-}: any) => (
+}: CustomBentoCardProps & React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
       "group relative flex flex-col justify-between overflow-hidden rounded-xl",
@@ -88,8 +95,6 @@ const CustomBentoCard = ({
 );
 
 const NetworkPage = () => {
-  const { theme } = useTheme();
-
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>

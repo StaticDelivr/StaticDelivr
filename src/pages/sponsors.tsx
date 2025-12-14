@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { Building2, Users, UserPlus, Heart, ExternalLink, Rocket, Handshake, Globe } from 'lucide-react';
+import { Building2, Users, UserPlus, Heart, ExternalLink, Rocket } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
 import Header from '../components/Header';
@@ -10,6 +10,14 @@ import { MagicCard } from '../components/ui/magic-card';
 import { BentoGrid } from '../components/ui/bento-grid';
 import { BlurFade } from '../components/ui/blur-fade';
 import { cn } from '@/lib/utils';
+
+interface CustomBentoCardProps {
+  name: string;
+  className?: string;
+  background: React.ReactNode;
+  Icon: React.ComponentType<{ className?: string }>;
+  children: React.ReactNode;
+}
 
 const sponsors = [
   { name: "ClouDNS", logo: "/assets/sponsors/cloudns.svg", website: "https://www.cloudns.net/" },
@@ -49,7 +57,7 @@ const CustomBentoCard = ({
   Icon,
   children,
   ...props
-}: any) => (
+}: CustomBentoCardProps & React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
       "group relative flex flex-col justify-between overflow-hidden rounded-xl",

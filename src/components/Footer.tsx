@@ -1,6 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
-import { Github, Twitter, Mail, Heart, ExternalLink } from 'lucide-react';
+import { Github, Twitter, Mail, Heart } from 'lucide-react';
 
 const footerLinks = {
   product: {

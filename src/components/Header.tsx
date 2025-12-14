@@ -1,8 +1,9 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Github, Menu, FileCode2, BookOpen, ArrowRight, Newspaper, Mail, RefreshCw, GitBranch, Globe, BarChart3, Heart, Info, X } from 'lucide-react';
+import { Github, Menu, BookOpen, ArrowRight, Newspaper, Mail, RefreshCw, GitBranch, Globe, BarChart3, Heart, Info, X } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTheme } from 'next-themes';
 import {
   Sheet,
@@ -107,9 +108,11 @@ const Header = () => {
             href="/" 
             className="flex items-center gap-2"
           >
-            <img 
+            <Image 
               src={theme === 'dark' ? "/assets/img/icons/horizontal-white.svg" : "/assets/img/icons/horizontal-black.svg"}
               alt="StaticDelivr" 
+              width={128}
+              height={32}
               className="h-8 dark:invert-0" 
             />
           </Link>
@@ -212,9 +215,11 @@ const Header = () => {
               <SheetContent side="right" className="w-full sm:w-80 p-0 bg-white dark:bg-zinc-950 border-l border-zinc-200 dark:border-zinc-800 [&>button]:hidden">
                 <SheetHeader className="p-4 border-b border-zinc-100 dark:border-zinc-800 flex flex-row items-center justify-between space-y-0">
                   <SheetTitle className="text-left">
-                    <img 
+                    <Image 
                       src={theme === 'dark' ? "/assets/img/icons/horizontal-white.svg" : "/assets/img/icons/horizontal-black.svg"}
                       alt="StaticDelivr" 
+                      width={128}
+                      height={28}
                       className="h-7" 
                     />
                   </SheetTitle>

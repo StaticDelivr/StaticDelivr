@@ -14,7 +14,6 @@ import { cn } from '@/lib/utils';
 const CustomBentoCard = ({
   name,
   className,
-  background,
   Icon,
   description,
   href,

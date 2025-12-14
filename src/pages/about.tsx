@@ -1,7 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { Code2, Users, Zap, Share2, Shield, Globe2 } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { Code2, Users, Zap, Share2 } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AuroraBackground } from '../components/ui/aurora-background';
@@ -13,7 +12,7 @@ const CodeBackground = () => (
   <div className="absolute inset-0 flex items-center justify-center opacity-15">
     <div className="relative w-full h-full overflow-hidden">
       <div className="absolute top-4 left-4 text-blue-500 font-mono text-xs opacity-50">
-        <div>import &#123; future &#125; from 'open-source';</div>
+        <div>import &#123; future &#125; from &apos;open-source&apos;;</div>
         <div className="ml-4">const build = async () =&gt; &#123;</div>
         <div className="ml-8">await collaborate();</div>
         <div className="ml-4">&#125;;</div>
@@ -90,7 +89,7 @@ const features = [
   {
     Icon: Users,
     name: "Performance and Reliability",
-    description: "We know how important it is to have fast and reliable delivery of your assets. That's why we're committed to delivering your assets quickly and securely.",
+    description: "We know how important it is to have fast and reliable delivery of your assets. That&apos;s why we&apos;re committed to delivering your assets quickly and securely.",
     href: "/network",
     cta: "View Network",
     background: <ServerBackground />,
@@ -99,8 +98,6 @@ const features = [
 ];
 
 const AboutPage = () => {
-  const { theme } = useTheme();
-
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>

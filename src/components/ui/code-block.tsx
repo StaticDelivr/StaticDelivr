@@ -28,7 +28,7 @@ export function CodeBlock({
       setCopied(true);
       toast.success("Copied to clipboard!");
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
+    } catch {
       toast.error("Failed to copy");
     }
   };
@@ -126,7 +126,7 @@ export function InlineCode({ code, className }: InlineCodeProps) {
       setCopied(true);
       toast.success("Copied!");
       setTimeout(() => setCopied(false), 2000);
-    } catch (err) {
+    } catch {
       toast.error("Failed to copy");
     }
   };

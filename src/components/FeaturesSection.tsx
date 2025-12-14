@@ -6,8 +6,7 @@ import {
   Server, 
   Zap, 
   Shield, 
-  GitBranch, 
-  Clock 
+  GitBranch
 } from "lucide-react";
 import { BentoCard, BentoGrid } from "@/components/ui/bento-grid";
 import { BlurFade } from "@/components/ui/blur-fade";
@@ -78,22 +77,6 @@ const GitBackground = () => (
           </div>
         </div>
       </div>
-    </div>
-  </div>
-);
-
-const ClockBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative w-32 h-32">
-      <div className="absolute inset-0 rounded-full border-4 border-cyan-500" />
-      <div 
-        className="absolute top-1/2 left-1/2 w-1 h-10 bg-cyan-500 origin-bottom rounded-full"
-        style={{ transform: "translateX(-50%) rotate(0deg)", animation: "spin 60s linear infinite" }}
-      />
-      <div 
-        className="absolute top-1/2 left-1/2 w-1.5 h-6 bg-cyan-600 origin-bottom rounded-full"
-        style={{ transform: "translateX(-50%) rotate(90deg)", animation: "spin 3600s linear infinite" }}
-      />
     </div>
   </div>
 );

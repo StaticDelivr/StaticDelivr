@@ -11,6 +11,14 @@ import { BentoGrid } from '../components/ui/bento-grid';
 import { BlurFade } from '../components/ui/blur-fade';
 import { cn } from '@/lib/utils';
 
+interface CustomBentoCardProps {
+  name: string;
+  className?: string;
+  background: React.ReactNode;
+  Icon: React.ComponentType<{ className?: string }>;
+  children: React.ReactNode;
+}
+
 const ServerBackground = () => (
   <div className="absolute inset-0 flex items-center justify-center opacity-10">
     <Server className="w-48 h-48 text-blue-500 animate-pulse" style={{ animationDuration: "3s" }} />
@@ -37,7 +45,7 @@ const CustomBentoCard = ({
   Icon,
   children,
   ...props
-}: any) => (
+}: CustomBentoCardProps & React.HTMLAttributes<HTMLDivElement>) => (
   <div
     className={cn(
       "group relative flex flex-col justify-between overflow-hidden rounded-xl",

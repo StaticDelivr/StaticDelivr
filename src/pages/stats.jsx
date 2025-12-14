@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import Head from 'next/head';
-import { Globe, Server, Zap, TrendingUp, TrendingDown, Activity, Shield, Info, Network } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { Globe, Server, Zap, TrendingUp, TrendingDown, Activity, Shield, Network } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AuroraBackground } from '../components/ui/aurora-background';
@@ -88,7 +87,6 @@ const CustomBentoCard = ({
 );
 
 const StatsPage = () => {
-  const { theme } = useTheme();
   const [statsData, setStatsData] = useState(null);
 
   // Fetch statistics data on the client-side

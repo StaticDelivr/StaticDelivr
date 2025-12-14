@@ -3,19 +3,13 @@
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { motion } from 'motion/react';
-import { ArrowRight, Globe, Terminal, Copy, Check, Activity, Zap, Infinity } from 'lucide-react';
+import { ArrowRight, Globe, Copy, Check } from 'lucide-react';
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import { WordRotate } from '@/components/ui/word-rotate';
 import { NumberTicker } from '@/components/ui/number-ticker';
 import { ShineBorder } from '@/components/ui/shine-border';
-import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
-import { cn } from '@/lib/utils';
-
-import { useTheme } from "next-themes";
-import { MagicCard } from "@/components/ui/magic-card";
 
 const HeroSection = () => {
-  const { theme } = useTheme();
   const [monthlyRequests, setMonthlyRequests] = useState<number | null>(null);
   const [mounted, setMounted] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -120,7 +114,7 @@ const HeroSection = () => {
               <div className="p-6 font-mono text-sm md:text-base overflow-x-auto bg-zinc-950">
                 <div className="flex items-center justify-between gap-4 text-zinc-300">
                   <code className="whitespace-nowrap">
-                    <span className="text-blue-400">&lt;script</span> <span className="text-purple-400">src</span>=<span className="text-green-400">"https://cdn.staticdelivr.com/npm/package@version/file"</span><span className="text-blue-400">&gt;&lt;/script&gt;</span>
+                    <span className="text-blue-400">&lt;script</span> <span className="text-purple-400">src</span>=<span className="text-green-400">&quot;https://cdn.staticdelivr.com/npm/package@version/file&quot;</span><span className="text-blue-400">&gt;&lt;/script&gt;</span>
                   </code>
                   <button
                     onClick={copyToClipboard}

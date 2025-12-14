@@ -3,9 +3,7 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 import Link from 'next/link';
-import { MagicCard } from '@/components/ui/magic-card';
 import { Button } from '@/components/ui/button';
-import { useTheme } from 'next-themes';
 
 const sponsors = [
   { name: "ClouDNS", logo: "/assets/sponsors/cloudns.svg", website: "https://www.cloudns.net/" },
@@ -13,8 +11,6 @@ const sponsors = [
 ];
 
 const SponsorsSection = () => {
-  const { theme } = useTheme();
-
   return (
     <section className="py-24 px-4 bg-white dark:bg-black border-t border-zinc-100 dark:border-zinc-900">
       <div className="max-w-7xl mx-auto text-center">

@@ -8,8 +8,6 @@ import { cn } from "@/lib/utils"
  *
  * @param {number} [width=16] - The horizontal spacing between dots
  * @param {number} [height=16] - The vertical spacing between dots
- * @param {number} [x=0] - The x-offset of the entire pattern
- * @param {number} [y=0] - The y-offset of the entire pattern
  * @param {number} [cx=1] - The x-offset of individual dots
  * @param {number} [cy=1] - The y-offset of individual dots
  * @param {number} [cr=1] - The radius of each dot
@@ -19,8 +17,6 @@ import { cn } from "@/lib/utils"
 interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
   width?: number
   height?: number
-  x?: number
-  y?: number
   cx?: number
   cy?: number
   cr?: number
@@ -62,8 +58,6 @@ interface DotPatternProps extends React.SVGProps<SVGSVGElement> {
 export function DotPattern({
   width = 16,
   height = 16,
-  x = 0,
-  y = 0,
   cx = 1,
   cy = 1,
   cr = 1,
@@ -122,7 +116,7 @@ export function DotPattern({
           <stop offset="100%" stopColor="currentColor" stopOpacity="0" />
         </radialGradient>
       </defs>
-      {dots.map((dot, index) => (
+      {dots.map((dot) => (
         <motion.circle
           key={`${dot.x}-${dot.y}`}
           cx={dot.x}
