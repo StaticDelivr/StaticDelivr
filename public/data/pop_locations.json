@@ -3680,6 +3680,14 @@
         ]
     },
     {
+        "city": "Toronto",
+        "provider": "GCORE",
+        "coordinates": [
+            -79.4832,
+            43.5532
+        ]
+    },
+    {
         "city": "Asunción",
         "provider": "GCORE",
         "coordinates": [
