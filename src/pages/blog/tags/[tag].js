@@ -5,7 +5,7 @@ import Header from '../../../components/Header'
 import Footer from '../../../components/Footer'
 import Link from 'next/link'
 import { Calendar, Tag } from 'lucide-react'
-import Image from 'next/image'
+import { StaticDelivrImage } from 'staticdelivr'
 import { AuroraBackground } from '../../../components/ui/aurora-background'
 import { MagicCard } from '../../../components/ui/magic-card'
 import { BlurFade } from '../../../components/ui/blur-fade'
@@ -64,12 +64,14 @@ export default function TagPage({ posts, tag }) {
                     >
                       {post.fields.featuredImage && (
                         <div className="relative h-48 w-full overflow-hidden">
-                          <Image 
+                          <StaticDelivrImage 
                             src={`https:${post.fields.featuredImage.fields.file.url}`}
                             alt={post.fields.title}
-                            fill
-                            className="object-cover group-hover:scale-105 transition-transform duration-500"
-                            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                            width={400}
+                            height={192}
+                            quality={80}
+                            format="webp"
+                            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                           />
                         </div>
                       )}

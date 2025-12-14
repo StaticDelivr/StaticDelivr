@@ -4,7 +4,7 @@ import { Calendar, Tag, ArrowLeft } from 'lucide-react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
-import Image from 'next/image'
+import { StaticDelivrImage } from 'staticdelivr'
 import Head from 'next/head'
 import { AuroraBackground } from '../../components/ui/aurora-background'
 import { BlurFade } from '../../components/ui/blur-fade'
@@ -25,11 +25,13 @@ export default function BlogPost({ post }) {
         const { file, title } = node.data.target.fields;
         return (
           <div className="my-8">
-            <Image
+            <StaticDelivrImage
               src={`https:${file.url}`}
               alt={title || 'Embedded Image'}
-              width={file.details.image.width || 800} // Fallback to 800 if width not available
-              height={file.details.image.height || 600} // Fallback to 600 if height not available
+              width={file.details.image.width || 800}
+              height={file.details.image.height || 600}
+              quality={80}
+              format="webp"
               className="rounded-lg shadow-lg"
             />
           </div>
@@ -112,11 +114,14 @@ export default function BlogPost({ post }) {
             <BlurFade delay={0.4} inView>
               {featuredImage && (
                 <div className="relative h-[400px] w-full mb-12 rounded-2xl overflow-hidden shadow-xl">
-                  <Image
+                  <StaticDelivrImage
                     src={`https:${featuredImage.fields.file.url}`}
                     alt={title}
-                    fill
-                    className="object-cover"
+                    width={1200}
+                    height={400}
+                    quality={80}
+                    format="webp"
+                    className="w-full h-full object-cover"
                   />
                 </div>
               )}
