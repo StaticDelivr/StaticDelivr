@@ -1,13 +1,97 @@
 import React from 'react';
 import Head from 'next/head';
-import { Globe, Server, Zap, Info } from 'lucide-react';
+import { Globe, Server, Zap, Info, Shield, Activity, Lock, Network } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import NetworkMap from '@/components/NetworkMap';
+import { AuroraBackground } from '../components/ui/aurora-background';
+import { BentoGrid } from '../components/ui/bento-grid';
+import { BlurFade } from '../components/ui/blur-fade';
+import { cn } from '@/lib/utils';
+
+// Background components
+const GlobeBackground = () => (
+  <div className="absolute inset-0 flex items-center justify-center opacity-10">
+    <Globe className="w-64 h-64 text-blue-500 animate-pulse" style={{ animationDuration: "3s" }} />
+  </div>
+);
+
+const ServerBackground = () => (
+  <div className="absolute inset-0 overflow-hidden opacity-10">
+    <div className="absolute top-4 left-4 right-4 grid grid-cols-4 gap-2">
+      {[...Array(16)].map((_, i) => (
+        <div
+          key={i}
+          className="h-3 rounded-sm bg-zinc-500 animate-pulse"
+          style={{ animationDelay: `${i * 0.1}s`, animationDuration: "1.5s" }}
+        />
+      ))}
+    </div>
+  </div>
+);
+
+const ZapBackground = () => (
+  <div className="absolute inset-0 overflow-hidden opacity-15">
+    <svg className="absolute top-0 left-1/4 w-16 h-32 text-yellow-500 animate-pulse" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+    </svg>
+    <svg className="absolute top-8 right-1/4 w-12 h-24 text-yellow-400 animate-pulse" style={{ animationDelay: "0.3s" }} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
+    </svg>
+  </div>
+);
+
+const SecurityBackground = () => (
+  <div className="absolute inset-0 flex items-center justify-center opacity-10">
+    <Shield className="w-48 h-48 text-green-500" />
+    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-500/10 via-transparent to-transparent animate-pulse" />
+  </div>
+);
+
+const InfraBackground = () => (
+  <div className="absolute inset-0 flex items-center justify-center opacity-10">
+    <Network className="w-48 h-48 text-purple-500" />
+  </div>
+);
+
+const CustomBentoCard = ({
+  name,
+  className,
+  background,
+  Icon,
+  children,
+  ...props
+}: any) => (
+  <div
+    className={cn(
+      "group relative flex flex-col justify-between overflow-hidden rounded-xl",
+      "bg-white dark:bg-zinc-900 [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
+      "dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] dark:[border:1px_solid_rgba(255,255,255,.1)]",
+      className
+    )}
+    {...props}
+  >
+    <div>{background}</div>
+    <div className="p-6 relative z-10 h-full flex flex-col">
+      <div className="mb-4 p-2 w-fit rounded-lg bg-zinc-100 dark:bg-zinc-800">
+        <Icon className="h-6 w-6 text-zinc-900 dark:text-zinc-100" />
+      </div>
+      <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
+        {name}
+      </h3>
+      <div className="text-zinc-500 dark:text-zinc-400 flex-grow">
+        {children}
+      </div>
+    </div>
+  </div>
+);
 
 const NetworkPage = () => {
+  const { theme } = useTheme();
+
   return (
-    <div className="min-h-screen bg-gray-50">
+    <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
         <title>Global Network - StaticDelivr</title>
         <meta name="description" content="Explore StaticDelivr's global network, covering 350+ locations, offering high-speed content delivery with advanced security and performance." />
@@ -31,100 +115,111 @@ const NetworkPage = () => {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50/30 to-white opacity-70 pointer-events-none"></div>
-          <div className="max-w-4xl mx-auto relative">
-            <h1 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-8">
+        <AuroraBackground className="h-auto min-h-[50vh] py-24">
+          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white mb-8 tracking-tight">
               Global Network
             </h1>
-            <p className="text-xl text-gray-600 text-center mb-12">
+            <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl mx-auto">
               Our network spans the globe with 350+ Points of Presence, ensuring lightning-fast content delivery worldwide.
             </p>
           </div>
-        </section>
+        </AuroraBackground>
 
         {/* Map Section */}
-        <section className="py-12 px-4">
+        <section className="py-12 px-4 bg-white dark:bg-zinc-950">
           <div className="max-w-7xl mx-auto">
-            <div className="bg-white rounded-xl shadow-sm p-8 mb-12">
-              <div className="h-96">
-                <NetworkMap></NetworkMap>
+            <BlurFade delay={0.1} inView>
+              <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 md:p-8 mb-12 shadow-sm">
+                <div className="h-96 rounded-lg overflow-hidden relative z-0">
+                  <NetworkMap />
+                </div>
               </div>
-            </div>
+            </BlurFade>
 
             {/* Network Stats */}
-            <div className="grid md:grid-cols-3 gap-8 mb-12">
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <div className="flex items-center mb-4">
-                  <div className="p-2 rounded-lg bg-blue-50">
-                    <Globe className="w-6 h-6 text-blue-600" />
-                  </div>
-                </div>
-                <h3 className="text-gray-600 text-sm font-medium mb-2">Global Coverage</h3>
-                <p className="text-2xl font-bold text-gray-900">350+ Points of Presence</p>
-              </div>
-              
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <div className="flex items-center mb-4">
-                  <div className="p-2 rounded-lg bg-blue-50">
-                    <Server className="w-6 h-6 text-blue-600" />
-                  </div>
-                </div>
-                <h3 className="text-gray-600 text-sm font-medium mb-2">Multi-CDN</h3>
-                <p className="text-2xl font-bold text-gray-900">2 CDN & 2 DNS Providers</p>
-              </div>
-              
-              <div className="bg-white rounded-xl shadow-sm p-6">
-                <div className="flex items-center mb-4">
-                  <div className="p-2 rounded-lg bg-blue-50">
-                    <Zap className="w-6 h-6 text-blue-600" />
-                  </div>
-                </div>
-                <h3 className="text-gray-600 text-sm font-medium mb-2">Average Response Time</h3>
-                <p className="text-2xl font-bold text-gray-900">&lt;50ms Worldwide</p>
-              </div>
-            </div>
+            <BlurFade delay={0.2} inView>
+              <BentoGrid className="grid-cols-1 md:grid-cols-3 auto-rows-auto gap-6 mb-12">
+                <CustomBentoCard
+                  name="Global Coverage"
+                  Icon={Globe}
+                  background={<GlobeBackground />}
+                  className="col-span-1"
+                >
+                  <p className="text-3xl font-bold text-zinc-900 dark:text-white mt-2">350+</p>
+                  <p className="text-sm mt-1">Points of Presence</p>
+                </CustomBentoCard>
+
+                <CustomBentoCard
+                  name="Multi-CDN"
+                  Icon={Server}
+                  background={<ServerBackground />}
+                  className="col-span-1"
+                >
+                  <p className="text-3xl font-bold text-zinc-900 dark:text-white mt-2">2 CDN</p>
+                  <p className="text-sm mt-1">& 2 DNS Providers</p>
+                </CustomBentoCard>
+
+                <CustomBentoCard
+                  name="Avg Response Time"
+                  Icon={Zap}
+                  background={<ZapBackground />}
+                  className="col-span-1"
+                >
+                  <p className="text-3xl font-bold text-zinc-900 dark:text-white mt-2">&lt;50ms</p>
+                  <p className="text-sm mt-1">Worldwide</p>
+                </CustomBentoCard>
+              </BentoGrid>
+            </BlurFade>
 
             {/* Network Features */}
-            <div className="bg-white rounded-xl shadow-sm p-8">
-              <h2 className="text-2xl font-bold mb-6">Network Features</h2>
-              <div className="grid md:grid-cols-2 gap-8">
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Infrastructure</h3>
-                  <ul className="space-y-3 text-gray-600">
-                    <li className="flex items-center">
-                      <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      Leveraging two leading CDN providers for global reach
+            <BlurFade delay={0.3} inView>
+              <BentoGrid className="grid-cols-1 md:grid-cols-2 auto-rows-auto gap-6">
+                <CustomBentoCard
+                  name="Infrastructure"
+                  Icon={Activity}
+                  background={<InfraBackground />}
+                  className="col-span-1"
+                >
+                  <ul className="space-y-4 mt-4">
+                    <li className="flex items-start gap-3">
+                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
+                      <span>Leveraging two leading CDN providers for global reach</span>
                     </li>
-                    <li className="flex items-center">
-                      <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      Redundant DNS services for seamless operation
+                    <li className="flex items-start gap-3">
+                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
+                      <span>Redundant DNS services for seamless operation</span>
                     </li>
-                    <li className="flex items-center">
-                      <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      Intelligent load balancing for optimal performance
-                    </li>
-                  </ul>
-                </div>
-                <div>
-                  <h3 className="text-lg font-semibold mb-4">Security</h3>
-                  <ul className="space-y-3 text-gray-600">
-                    <li className="flex items-center">
-                      <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      Resilient DDoS mitigation to protect against threats
-                    </li>
-                    <li className="flex items-center">
-                      <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      End-to-end SSL/TLS encryption for data integrity
-                    </li>
-                    <li className="flex items-center">
-                      <Info className="w-5 h-5 text-blue-600 mr-3" />
-                      Continuous 24/7 monitoring to ensure reliability
+                    <li className="flex items-start gap-3">
+                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
+                      <span>Intelligent load balancing for optimal performance</span>
                     </li>
                   </ul>
-                </div>
-              </div>
-            </div>
+                </CustomBentoCard>
+
+                <CustomBentoCard
+                  name="Security"
+                  Icon={Shield}
+                  background={<SecurityBackground />}
+                  className="col-span-1"
+                >
+                  <ul className="space-y-4 mt-4">
+                    <li className="flex items-start gap-3">
+                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
+                      <span>Resilient DDoS mitigation to protect against threats</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
+                      <span>End-to-end SSL/TLS encryption for data integrity</span>
+                    </li>
+                    <li className="flex items-start gap-3">
+                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
+                      <span>Continuous 24/7 monitoring to ensure reliability</span>
+                    </li>
+                  </ul>
+                </CustomBentoCard>
+              </BentoGrid>
+            </BlurFade>
           </div>
         </section>
       </main>

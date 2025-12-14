@@ -1,9 +1,11 @@
 // pages/_app.js
 import '../styles/globals.css'; // Import your Tailwind CSS file
+import 'highlight.js/styles/github-dark.css';
 import { ParallaxProvider } from 'react-scroll-parallax';
 import Head from 'next/head'; // Import Head for managing the <head> section
 import { useRouter } from 'next/router'; // Import useRouter to access the current route
 import { StaticDelivr } from 'staticdelivr';
+import { Toaster } from '@/components/ui/sonner';
 
 StaticDelivr.set({ baseURL: 'https://staticdelivr.com' });
 
@@ -22,6 +24,7 @@ function MyApp({ Component, pageProps }) {
         <link rel="canonical" href={`${baseUrl}${router.asPath}`} />
       </Head>
       <Component {...pageProps} />
+      <Toaster position="bottom-right" richColors />
     </ParallaxProvider>
   );
 }

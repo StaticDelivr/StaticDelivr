@@ -1,314 +1,338 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { Github, ChevronDown, Menu, X } from 'lucide-react';
+"use client";
+
+import React, { useState, useEffect } from 'react';
+import { Github, Menu, FileCode2, BookOpen, ArrowRight, Newspaper, Mail, RefreshCw, GitBranch, Globe, BarChart3, Heart, Info, X } from 'lucide-react';
 import Link from 'next/link';
+import { useTheme } from 'next-themes';
+import {
+  Sheet,
+  SheetContent,
+  SheetHeader,
+  SheetTitle,
+  SheetTrigger,
+  SheetClose,
+} from "@/components/ui/sheet";
+import { Button } from "@/components/ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "@/components/ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
-interface NavLinkProps {
-  children: React.ReactNode;
-  href?: string;
-  className?: string;
+const ListItem = React.forwardRef<
+  React.ElementRef<"a">,
+  React.ComponentPropsWithoutRef<"a">
+>(({ className, title, children, ...props }, ref) => {
+  return (
+    <li>
+      <NavigationMenuLink asChild>
+        <a
+          ref={ref}
+          className={cn(
+            "block select-none space-y-1 rounded-md p-3 leading-none no-underline outline-none transition-colors hover:bg-zinc-50 hover:text-zinc-900 focus:bg-zinc-50 focus:text-zinc-900 dark:hover:bg-zinc-900 dark:hover:text-zinc-50 dark:focus:bg-zinc-900 dark:focus:text-zinc-50",
+            className
+          )}
+          {...props}
+        >
+          <div className="text-sm font-medium leading-none text-zinc-900 dark:text-zinc-100">{title}</div>
+          <p className="line-clamp-2 text-sm leading-snug text-zinc-500 dark:text-zinc-400 mt-1.5">
+            {children}
+          </p>
+        </a>
+      </NavigationMenuLink>
+    </li>
+  )
+})
+ListItem.displayName = "ListItem"
+
+// Mobile navigation item component
+const MobileNavItem = ({ 
+  href, 
+  icon, 
+  label, 
+  onClick 
+}: { 
+  href: string; 
+  icon: React.ReactNode; 
+  label: string; 
   onClick?: () => void;
-}
-
-const NavLink = ({ children, href = "#", className = "", onClick }: NavLinkProps) => (
+}) => (
   <Link 
-    href={href}
-    className={`text-gray-600 hover:text-blue-600 transition-colors duration-200 px-4 py-2 text-sm font-medium ${className}`}
+    href={href} 
+    className="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-lg transition-colors"
     onClick={onClick}
   >
-    {children}
+    <span className="flex-shrink-0 flex items-center justify-center text-zinc-500 dark:text-zinc-400">
+      {icon}
+    </span>
+    <span className="font-medium">{label}</span>
+    <ArrowRight className="w-4 h-4 ml-auto text-zinc-400 dark:text-zinc-600" />
   </Link>
 );
 
-interface DropdownProps {
-  label: string;
-  items: {
-    heading?: string;
-    links: Array<{
-      label: string;
-      href: string;
-    }>;
-  }[];
-  isOpen: boolean;
-  onToggle: () => void;
-  isMobile?: boolean;
-  onItemClick?: () => void;
-}
-
-const Dropdown = ({ 
-  label, 
-  items, 
-  isOpen, 
-  onToggle, 
-  isMobile = false, 
-  onItemClick 
-}: DropdownProps) => {
-  const dropdownRef = useRef<HTMLDivElement>(null);
-
-  // Close dropdown for mobile when clicking outside
-  useEffect(() => {
-    if (!isMobile || !isOpen) return;
-
-    const handleClickOutside = (event: MouseEvent) => {
-      if (dropdownRef.current && !dropdownRef.current.contains(event.target as Node)) {
-        onToggle(); // Close the dropdown
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [isOpen, isMobile, onToggle]);
-
-  // Desktop dropdown does not use this logic
-
-  return (
-    <div 
-      ref={dropdownRef}
-      className={`${isMobile ? 'w-full' : 'relative'}`}
-    >
-      <button
-        onClick={onToggle}
-        className={`
-          flex items-center text-gray-600 hover:text-blue-600 transition-colors duration-200 
-          ${isMobile ? 'w-full text-left px-4 py-3' : 'px-4 py-2 text-sm font-medium'}
-        `}
-      >
-        {label}
-        <ChevronDown className={`w-4 h-4 ml-1 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`} />
-      </button>
-      
-      {isOpen && (
-        <div 
-          className={`
-            ${isMobile 
-              ? 'w-full bg-gray-50 border-t border-gray-100' 
-              : 'absolute top-full right-0 mt-1 w-48 bg-white rounded-md shadow-lg py-1 z-50 border border-gray-100'
-            }
-          `}
-        >
-          {items.map((section, idx) => (
-            <div key={idx}>
-              {section.heading && (
-                <div className={`
-                  ${isMobile 
-                    ? 'px-4 py-2 text-sm text-gray-600 bg-gray-100' 
-                    : 'px-4 py-2 text-sm text-gray-500'
-                  }
-                `}>
-                  {section.heading}
-                </div>
-              )}
-              {section.links.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  className={`
-                    block text-gray-700 hover:text-blue-600 
-                    ${isMobile
-                      ? 'px-4 py-3 text-sm hover:bg-gray-100'
-                      : 'px-4 py-2 text-sm hover:bg-gray-50'}
-                  `}
-                  onClick={onItemClick}
-                >
-                  {item.label}
-                </Link>
-              ))}
-            </div>
-          ))}
-        </div>
-      )}
-    </div>
-  );
-};
-
 const Header = () => {
-  const [openDropdown, setOpenDropdown] = useState<string | null>(null);
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isSheetOpen, setIsSheetOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const { theme } = useTheme();
 
-  const desktopDropdownRef = useRef<HTMLDivElement>(null);
-
-  // Toggles the dropdown state for both desktop and mobile
-  const handleDropdownToggle = (dropdownName: string) => {
-    setOpenDropdown(prev => (prev === dropdownName ? null : dropdownName));
-  };
-
-  // Desktop-specific click outside logic
+  // Track scroll position for header styling
   useEffect(() => {
-    const handleDesktopClickOutside = (event: MouseEvent) => {
-      if (desktopDropdownRef.current && !desktopDropdownRef.current.contains(event.target as Node)) {
-        setOpenDropdown(null); // Close dropdown
-      }
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 10);
     };
-
-    if (window.innerWidth >= 768) {
-      document.addEventListener('mousedown', handleDesktopClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleDesktopClickOutside);
-    };
-  }, [openDropdown]);
+    window.addEventListener('scroll', handleScroll);
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const handleMobileItemClick = () => {
-    setIsMobileMenuOpen(false);
-    setOpenDropdown(null); // Ensure both mobile and desktop dropdowns are closed
+    setIsSheetOpen(false);
   };
-
-  // Toggle mobile menu
-  const toggleMobileMenu = () => {
-    setIsMobileMenuOpen(prev => !prev);
-    setOpenDropdown(null); // Close any open dropdowns
-  };
-
-  const toolsItems = [
-    {
-      links: [{ label: 'Purge Cache', href: '/tools/purge-cache' }]
-    },
-    {
-      heading: 'Convert from:',
-      links: [{ label: 'GitHub', href: '/github' }]
-    }
-  ];
-
-  const resourcesItems = [
-    {
-      links: [
-        { label: 'Blog', href: '/blog' },
-        { label: 'Newsletter', href: '/newsletter' },
-        { label: 'Documentation', href: '/docs' }
-      ]
-    }
-  ];
 
   return (
-    <nav className="fixed top-0 left-0 right-0 bg-white/80 backdrop-blur-md z-50 border-b border-gray-100">
+    <nav className={cn(
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 border-b",
+      isScrolled 
+        ? "bg-white/80 dark:bg-black/80 backdrop-blur-xl border-zinc-200 dark:border-zinc-800" 
+        : "bg-transparent border-transparent"
+    )}>
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex items-center justify-between h-16">
-          <div className="flex items-center justify-between w-full">
-            <Link href="/" onClick={() => setOpenDropdown(null)}>
-              <img src="/assets/img/icons/horizontal-black.svg" alt="StaticDelivr Logo" className="h-8" />
-            </Link>
-
-            {/* Mobile menu button */}
-            <div className="md:hidden">
-              <button 
-                onClick={toggleMobileMenu}
-                className="text-gray-600 hover:text-blue-600 focus:outline-none"
-                aria-label={isMobileMenuOpen ? "Close menu" : "Open menu"}
-              >
-                {isMobileMenuOpen ? (
-                  <X className="w-6 h-6" />
-                ) : (
-                  <Menu className="w-6 h-6" />
-                )}
-              </button>
-            </div>
-          </div>
+          {/* Logo */}
+          <Link 
+            href="/" 
+            className="flex items-center gap-2"
+          >
+            <img 
+              src={theme === 'dark' ? "/assets/img/icons/horizontal-white.svg" : "/assets/img/icons/horizontal-black.svg"}
+              alt="StaticDelivr" 
+              className="h-8 dark:invert-0" 
+            />
+          </Link>
 
           {/* Desktop navigation */}
-          <div className="hidden md:flex items-center space-x-1" ref={desktopDropdownRef}>
-            <NavLink href="/about" onClick={() => setOpenDropdown(null)}>About</NavLink>
-            <NavLink href="/contribute" onClick={() => setOpenDropdown(null)}>Contribute</NavLink>
-            <NavLink href="/network" onClick={() => setOpenDropdown(null)}>Network</NavLink>
-            <NavLink href="/stats" onClick={() => setOpenDropdown(null)}>Stats</NavLink>
-            <NavLink href="/sponsors" onClick={() => setOpenDropdown(null)}>Sponsors</NavLink>
-            <Dropdown 
-              label="Tools" 
-              items={toolsItems} 
-              isOpen={openDropdown === 'tools'}
-              onToggle={() => handleDropdownToggle('tools')}
-            />
-            <Dropdown 
-              label="Resources" 
-              items={resourcesItems}
-              isOpen={openDropdown === 'resources'}
-              onToggle={() => handleDropdownToggle('resources')}
-            />
-            <a 
-              href="https://github.com/coozywana/StaticDelivr" 
-              target="_blank"
-              rel="noopener noreferrer"
-              className="ml-4 text-gray-600 hover:text-gray-900"
-              onClick={() => setOpenDropdown(null)}
-              aria-label="GitHub repository for StaticDelivr" // Accessible label for screen readers
-            >
-              <Github className="w-5 h-5" />
-            </a>
-          </div>
-        </div>
+          <div className="hidden md:flex items-center gap-1">
+            <NavigationMenu>
+              <NavigationMenuList>
+                <NavigationMenuItem>
+                  <Link href="/about" legacyBehavior passHref>
+                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
+                      About
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/network" legacyBehavior passHref>
+                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
+                      Network
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
+                  <Link href="/stats" legacyBehavior passHref>
+                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
+                      Stats
+                    </NavigationMenuLink>
+                  </Link>
+                </NavigationMenuItem>
+                
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 data-[state=open]:bg-transparent data-[state=open]:text-zinc-900 dark:data-[state=open]:text-zinc-100">Tools</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl">
+                      <ListItem href="/tools/purge-cache" title="Purge Cache">
+                        Instantly clear cached files from our global network.
+                      </ListItem>
+                      <ListItem href="/github" title="GitHub Converter">
+                        Convert raw GitHub URLs to production-ready CDN links.
+                      </ListItem>
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
 
-        {/* Mobile navigation menu */}
-        {isMobileMenuOpen && (
-          <div className="md:hidden absolute top-16 left-0 right-0 bg-white shadow-lg">
-            <div className="flex flex-col">
-              <NavLink 
-                href="/about" 
-                className="border-t border-gray-100 py-3"
-                onClick={handleMobileItemClick}
-              >
-                About
-              </NavLink>
-              <NavLink 
-                href="/contribute" 
-                className="border-t border-gray-100 py-3"
-                onClick={handleMobileItemClick}
-              >
-                Contribute
-              </NavLink>
-              <NavLink 
-                href="/network" 
-                className="border-t border-gray-100 py-3"
-                onClick={handleMobileItemClick}
-              >
-                Network
-              </NavLink>
-              <NavLink 
-                href="/stats" 
-                className="border-t border-gray-100 py-3"
-                onClick={handleMobileItemClick}
-              >
-                Stats
-              </NavLink>
-              <NavLink 
-                href="/sponsors" 
-                className="border-t border-gray-100 py-3"
-                onClick={handleMobileItemClick}
-              >
-                Sponsors
-              </NavLink>
-
-              <Dropdown 
-                label="Tools" 
-                items={toolsItems} 
-                isOpen={openDropdown === 'tools'}
-                onToggle={() => handleDropdownToggle('tools')}
-                isMobile
-                onItemClick={handleMobileItemClick}
-              />
-              
-              <Dropdown 
-                label="Resources" 
-                items={resourcesItems}
-                isOpen={openDropdown === 'resources'}
-                onToggle={() => handleDropdownToggle('resources')}
-                isMobile
-                onItemClick={handleMobileItemClick}
-              />
-              
+                <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 data-[state=open]:bg-transparent data-[state=open]:text-zinc-900 dark:data-[state=open]:text-zinc-100">Resources</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl">
+                      <ListItem href="/docs" title="Documentation">
+                        Comprehensive guides and API references.
+                      </ListItem>
+                      <ListItem href="/blog" title="Blog">
+                        Latest updates, tutorials, and announcements.
+                      </ListItem>
+                      <ListItem href="/newsletter" title="Newsletter">
+                        Subscribe to get notified about new features.
+                      </ListItem>
+                      <ListItem href="/sponsors" title="Sponsors">
+                        Our partners who make this service possible.
+                      </ListItem>
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+              </NavigationMenuList>
+            </NavigationMenu>
+            
+            <div className="flex items-center gap-2 ml-2 pl-2 border-l border-zinc-200 dark:border-zinc-800">
+              {/* GitHub button */}
               <a 
-                href="https://github.com/coozywana/StaticDelivr" 
+                href="https://github.com/StaticDelivr/StaticDelivr" 
                 target="_blank"
                 rel="noopener noreferrer"
-                className="flex items-center px-4 py-3 text-sm text-gray-600 hover:text-blue-600 border-t border-gray-100"
-                onClick={handleMobileItemClick}
+                className="p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md transition-colors"
+                aria-label="GitHub repository"
               >
-                <Github className="w-5 h-5 mr-2" />
-                GitHub
+                <Github className="w-5 h-5" />
               </a>
+
+              {/* CTA Button */}
+              <Link href="/docs/getting-started">
+                <Button 
+                  size="sm" 
+                  className="bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200 font-medium"
+                >
+                  Get Started
+                </Button>
+              </Link>
             </div>
           </div>
-        )}
+
+          {/* Mobile menu button */}
+          <div className="md:hidden">
+            <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
+              <SheetTrigger asChild>
+                <Button variant="ghost" size="icon" className="text-zinc-600 dark:text-zinc-400">
+                  <Menu className="w-5 h-5" />
+                  <span className="sr-only">Open menu</span>
+                </Button>
+              </SheetTrigger>
+              <SheetContent side="right" className="w-full sm:w-80 p-0 bg-white dark:bg-zinc-950 border-l border-zinc-200 dark:border-zinc-800 [&>button]:hidden">
+                <SheetHeader className="p-4 border-b border-zinc-100 dark:border-zinc-800 flex flex-row items-center justify-between space-y-0">
+                  <SheetTitle className="text-left">
+                    <img 
+                      src={theme === 'dark' ? "/assets/img/icons/horizontal-white.svg" : "/assets/img/icons/horizontal-black.svg"}
+                      alt="StaticDelivr" 
+                      className="h-7" 
+                    />
+                  </SheetTitle>
+                  <SheetClose asChild>
+                    <Button variant="ghost" size="icon" className="text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100">
+                      <X className="w-5 h-5" />
+                      <span className="sr-only">Close</span>
+                    </Button>
+                  </SheetClose>
+                </SheetHeader>
+                
+                <div className="flex flex-col py-4 h-full overflow-y-auto">
+                  {/* Main Navigation */}
+                  <div className="px-2 space-y-1">
+                    <MobileNavItem 
+                      href="/about" 
+                      icon={<Info className="w-5 h-5" />} 
+                      label="About" 
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem 
+                      href="/network" 
+                      icon={<Globe className="w-5 h-5" />} 
+                      label="Network" 
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem 
+                      href="/stats" 
+                      icon={<BarChart3 className="w-5 h-5" />} 
+                      label="Stats" 
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem 
+                      href="/sponsors" 
+                      icon={<Heart className="w-5 h-5" />} 
+                      label="Sponsors" 
+                      onClick={handleMobileItemClick}
+                    />
+                  </div>
+                  
+                  {/* Divider */}
+                  <div className="my-4 border-t border-zinc-100 dark:border-zinc-800" />
+                  
+                  {/* Tools Section */}
+                  <div className="px-4 mb-2">
+                    <h3 className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Tools</h3>
+                  </div>
+                  <div className="px-2 space-y-1">
+                    <MobileNavItem 
+                      href="/tools/purge-cache" 
+                      icon={<RefreshCw className="w-5 h-5" />} 
+                      label="Purge Cache" 
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem 
+                      href="/github" 
+                      icon={<GitBranch className="w-5 h-5" />} 
+                      label="GitHub Converter" 
+                      onClick={handleMobileItemClick}
+                    />
+                  </div>
+                  
+                  {/* Divider */}
+                  <div className="my-4 border-t border-zinc-100 dark:border-zinc-800" />
+                  
+                  {/* Resources Section */}
+                  <div className="px-4 mb-2">
+                    <h3 className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Resources</h3>
+                  </div>
+                  <div className="px-2 space-y-1">
+                    <MobileNavItem 
+                      href="/blog" 
+                      icon={<Newspaper className="w-5 h-5" />} 
+                      label="Blog" 
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem 
+                      href="/newsletter" 
+                      icon={<Mail className="w-5 h-5" />} 
+                      label="Newsletter" 
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem 
+                      href="/docs" 
+                      icon={<BookOpen className="w-5 h-5" />} 
+                      label="Documentation" 
+                      onClick={handleMobileItemClick}
+                    />
+                  </div>
+                  
+                  {/* CTA Button */}
+                  <div className="mt-6 px-4">
+                    <Link href="/docs/getting-started" onClick={handleMobileItemClick}>
+                      <Button className="w-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 hover:bg-zinc-800 dark:hover:bg-zinc-200">
+                        Get Started
+                        <ArrowRight className="w-4 h-4 ml-2" />
+                      </Button>
+                    </Link>
+                  </div>
+                  
+                  {/* GitHub Link */}
+                  <div className="mt-4 px-4 pb-8">
+                    <a 
+                      href="https://github.com/StaticDelivr/StaticDelivr" 
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center justify-center gap-2 px-4 py-3 text-sm text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 border border-zinc-200 dark:border-zinc-800 rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors"
+                      onClick={handleMobileItemClick}
+                    >
+                      <Github className="w-5 h-5" />
+                      View on GitHub
+                    </a>
+                  </div>
+                </div>
+              </SheetContent>
+            </Sheet>
+          </div>
+        </div>
       </div>
     </nav>
   );

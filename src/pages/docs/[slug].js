@@ -5,6 +5,8 @@ import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
 import Head from 'next/head';
 import DocsLayout from '../../components/DocsLayout';
+import { BlurFade } from '../../components/ui/blur-fade';
+import rehypeHighlight from 'rehype-highlight';
 
 const DocPage = ({ frontmatter, mdxSource, docsContent, slug }) => {
   return (
@@ -32,35 +34,43 @@ const DocPage = ({ frontmatter, mdxSource, docsContent, slug }) => {
         <meta name="twitter:image" content="" />
       </Head>
 
-      <div className="max-w-3xl mx-auto px-4 py-8">
+      <div className="max-w-4xl mx-auto px-4 py-8">
         {/* Header */}
         <header className="mb-12">
-          <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-4">
-            {frontmatter.title}
-          </h1>
+          <BlurFade delay={0.1} inView>
+            <h1 className="text-4xl font-bold text-zinc-900 dark:text-white mb-4 tracking-tight">
+              {frontmatter.title}
+            </h1>
+          </BlurFade>
           {frontmatter.description && (
-            <p className="text-lg text-gray-600 dark:text-gray-300">
-              {frontmatter.description}
-            </p>
+            <BlurFade delay={0.2} inView>
+              <p className="text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed">
+                {frontmatter.description}
+              </p>
+            </BlurFade>
           )}
         </header>
 
         {/* Markdown Content */}
-        <article
-          className="prose prose-lg dark:prose-invert prose-headings:font-semibold 
-            prose-a:text-blue-600 hover:prose-a:text-blue-500
-            prose-code:text-blue-600 dark:prose-code:text-blue-400
-            prose-pre:bg-gray-100 dark:prose-pre:bg-gray-800
-            prose-blockquote:border-l-4 prose-blockquote:border-blue-500
-            prose-img:rounded-lg prose-img:shadow-md
-            max-w-none"
-        >
-          <MDXRemote {...mdxSource} />
-        </article>
+        <BlurFade delay={0.3} inView>
+          <article
+            className="prose prose-lg prose-zinc dark:prose-invert 
+              prose-headings:font-semibold prose-headings:tracking-tight
+              prose-a:text-blue-600 hover:prose-a:text-blue-500 dark:prose-a:text-blue-400 dark:hover:prose-a:text-blue-300
+              prose-code:text-zinc-900 dark:prose-code:text-zinc-200 prose-code:bg-zinc-100 dark:prose-code:bg-zinc-800 prose-code:px-1 prose-code:py-0.5 prose-code:rounded
+              prose-pre:bg-zinc-900 dark:prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-zinc-800
+              [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-zinc-50 dark:[&_pre_code]:text-zinc-50
+              prose-blockquote:border-l-4 prose-blockquote:border-zinc-300 dark:prose-blockquote:border-zinc-700 prose-blockquote:bg-zinc-50 dark:prose-blockquote:bg-zinc-900/50 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
+              prose-img:rounded-xl prose-img:shadow-lg prose-img:border prose-img:border-zinc-200 dark:prose-img:border-zinc-800
+              max-w-none"
+          >
+            <MDXRemote {...mdxSource} />
+          </article>
+        </BlurFade>
 
         {/* Footer */}
-        <footer className="mt-16 pt-8 border-t border-gray-200 dark:border-gray-700">
-          <div className="flex justify-between text-sm text-gray-500 dark:text-gray-400">
+        <footer className="mt-16 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+          <div className="flex justify-between text-sm text-zinc-500 dark:text-zinc-400">
             {frontmatter.lastUpdated ? (
               <span>Last updated: {frontmatter.lastUpdated}</span>
             ) : (
@@ -120,7 +130,11 @@ export async function getStaticProps({ params }) {
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { data: frontmatter, content } = matter(fileContent);
 
-  const mdxSource = await serialize(content);
+  const mdxSource = await serialize(content, {
+    mdxOptions: {
+      rehypePlugins: [rehypeHighlight],
+    },
+  });
 
   return {
     props: {

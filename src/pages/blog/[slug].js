@@ -1,11 +1,13 @@
 import { getBlogPostBySlug, getBlogPosts } from '../../lib/contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { Calendar } from 'lucide-react'
+import { Calendar, Tag, ArrowLeft } from 'lucide-react'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import Link from 'next/link'
 import Image from 'next/image'
-import Head from 'next/head' // Import Head component
+import Head from 'next/head'
+import { AuroraBackground } from '../../components/ui/aurora-background'
+import { BlurFade } from '../../components/ui/blur-fade'
 
 // Blog Post Page Component
 export default function BlogPost({ post }) {
@@ -28,15 +30,15 @@ export default function BlogPost({ post }) {
               alt={title || 'Embedded Image'}
               width={file.details.image.width || 800} // Fallback to 800 if width not available
               height={file.details.image.height || 600} // Fallback to 600 if height not available
-              className="rounded-lg"
+              className="rounded-lg shadow-lg"
             />
           </div>
         );
       },
       'embedded-entry-block': (node) => {
         return (
-          <div className="my-8">
-            <p>Embedded entry: {node.data.target.fields.title}</p>
+          <div className="my-8 p-4 bg-zinc-100 dark:bg-zinc-800 rounded-lg">
+            <p className="text-zinc-600 dark:text-zinc-400">Embedded entry: {node.data.target.fields.title}</p>
           </div>
         );
       },
@@ -45,7 +47,7 @@ export default function BlogPost({ post }) {
   
 
   return (
-    <div>
+    <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
         <title>{seoTitle || title} - StaticDelivr</title>
         <meta name="description" content={seoDescription || 'Default description if not available'} />
@@ -71,51 +73,71 @@ export default function BlogPost({ post }) {
 
       <Header />
       <main>
-        {/* Blog Content Section */}
-        <section className="py-20 px-4 bg-white">
-          <div className="max-w-7xl mx-auto">
-            <div className="prose max-w-full mx-auto">
-              <div className="relative">
-                {featuredImage && (
-                  <div className="relative h-72 w-full mb-8">
-                    <Image
-                      src={`https:${featuredImage.fields.file.url}`}
-                      alt={title}
-                      fill
-                      className="object-cover rounded-lg"
-                    />
-                  </div>
-                )}
-
-                {/* Post Metadata */}
-                <div className="flex items-center text-sm text-gray-500 mb-6">
-                  <Calendar className="w-4 h-4 mr-2" />
-                  {new Date(publishDate).toLocaleDateString('en-US', {
-                    year: 'numeric',
-                    month: 'long',
-                    day: 'numeric',
-                  })}
-                </div>
-
-                <h1 className="text-4xl font-bold text-gray-900 mb-6">{title}</h1>
-                <div>{documentToReactComponents(body, options)}</div>
-
-                {/* Tags */}
-                {tags && tags.length > 0 && (
-                  <div className="mt-8">
-                    <h3 className="text-xl font-semibold text-gray-800">Tags:</h3>
-                    <ul className="flex flex-wrap mt-2">
-                      {tags.map((tag, index) => (
-                        <li key={index} className="mr-4 mb-2">
-                          <Link href={`/blog/tags/${tag}`} className="text-blue-600 hover:text-blue-800">
-                            {tag}
-                          </Link>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-                )}
+        {/* Hero Section */}
+        <AuroraBackground className="h-auto min-h-[40vh] py-20">
+          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <BlurFade delay={0.1} inView>
+              <div className="flex items-center justify-center gap-2 text-zinc-600 dark:text-zinc-400 mb-6">
+                <Calendar className="w-4 h-4" />
+                {new Date(publishDate).toLocaleDateString('en-US', {
+                  year: 'numeric',
+                  month: 'long',
+                  day: 'numeric',
+                })}
               </div>
+            </BlurFade>
+            <BlurFade delay={0.2} inView>
+              <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-6 tracking-tight">
+                {title}
+              </h1>
+            </BlurFade>
+            {tags && (
+              <BlurFade delay={0.3} inView>
+                <div className="flex flex-wrap justify-center gap-2">
+                  {tags.map(tag => (
+                    <Link key={tag} href={`/blog/tags/${tag}`} className="inline-flex items-center px-3 py-1 rounded-full text-sm font-medium bg-white/50 dark:bg-zinc-800/50 text-zinc-800 dark:text-zinc-200 backdrop-blur-sm hover:bg-white dark:hover:bg-zinc-800 transition-colors">
+                      <Tag className="w-3 h-3 mr-1.5" />
+                      {tag}
+                    </Link>
+                  ))}
+                </div>
+              </BlurFade>
+            )}
+          </div>
+        </AuroraBackground>
+
+        {/* Blog Content Section */}
+        <section className="py-12 px-4 bg-white dark:bg-zinc-950">
+          <div className="max-w-3xl mx-auto">
+            <BlurFade delay={0.4} inView>
+              {featuredImage && (
+                <div className="relative h-[400px] w-full mb-12 rounded-2xl overflow-hidden shadow-xl">
+                  <Image
+                    src={`https:${featuredImage.fields.file.url}`}
+                    alt={title}
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              )}
+            </BlurFade>
+
+            <BlurFade delay={0.5} inView>
+              <article className="prose prose-lg prose-zinc dark:prose-invert max-w-none
+                prose-headings:font-bold prose-headings:tracking-tight
+                prose-a:text-blue-600 hover:prose-a:text-blue-500 dark:prose-a:text-blue-400
+                prose-img:rounded-xl prose-img:shadow-lg
+                prose-pre:bg-zinc-900 dark:prose-pre:bg-zinc-900 prose-pre:border prose-pre:border-zinc-800
+              ">
+                {documentToReactComponents(body, options)}
+              </article>
+            </BlurFade>
+
+            <div className="mt-12 pt-8 border-t border-zinc-200 dark:border-zinc-800">
+              <Link href="/blog" className="inline-flex items-center text-zinc-600 dark:text-zinc-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors">
+                <ArrowLeft className="w-4 h-4 mr-2" />
+                Back to Blog
+              </Link>
             </div>
           </div>
         </section>

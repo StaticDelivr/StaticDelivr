@@ -7,6 +7,7 @@ import FeaturesSection from '../components/FeaturesSection';
 import NetworkMapSection from '../components/NetworkMapSection';
 import SponsorsSection from '../components/SponsorsSection';
 import Footer from '../components/Footer';
+import { FloatingContact } from '../components/FloatingContact';
 
 export default function Home() {
   return (
@@ -40,6 +41,7 @@ export default function Home() {
         <SponsorsSection />
       </main>
       <Footer />
+      <FloatingContact />
     </div>
   );
 }

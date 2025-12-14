@@ -6,6 +6,7 @@ import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
 import LegalLayout from '../../components/LegalLayout';
+import { BlurFade } from '../../components/ui/blur-fade';
 
 const PrivacyPolicy = ({ frontmatter, mdxSource }) => {
   return (
@@ -33,7 +34,9 @@ const PrivacyPolicy = ({ frontmatter, mdxSource }) => {
         <meta name="twitter:image" content="" />
       </Head>
 
-      <MDXRemote {...mdxSource} />
+      <BlurFade delay={0.1} inView>
+        <MDXRemote {...mdxSource} />
+      </BlurFade>
     </LegalLayout>
   );
 };

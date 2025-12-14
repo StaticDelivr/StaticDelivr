@@ -1,11 +1,16 @@
 import React, { useState } from 'react';
 import Head from 'next/head';
-import { AlertCircle, Copy, ArrowRight } from 'lucide-react';
+import { AlertCircle, Copy, ArrowRight, Check } from 'lucide-react';
+import { useTheme } from 'next-themes';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { Alert, AlertDescription } from '@/components/Alert';
+import { AuroraBackground } from '../components/ui/aurora-background';
+import { MagicCard } from '../components/ui/magic-card';
+import { BlurFade } from '../components/ui/blur-fade';
 
 const GitHubConverterPage = () => {
+  const { theme } = useTheme();
   const [githubUrl, setGithubUrl] = useState('');
   const [convertedUrl, setConvertedUrl] = useState('');
   const [error, setError] = useState('');
@@ -56,7 +61,7 @@ const GitHubConverterPage = () => {
   };
 
   return (
-    <div>
+    <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
         <title>Convert from GitHub - StaticDelivr</title>
         <meta name="description" content="Convert GitHub file URLs to StaticDelivr CDN URLs for faster delivery and performance." />
@@ -80,112 +85,118 @@ const GitHubConverterPage = () => {
       <Header />
       <main>
         {/* Hero Section */}
-        <section className="pt-32 pb-20 px-4 relative overflow-hidden">
-          <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50/30 to-white opacity-70 pointer-events-none"></div>
-          <div className="max-w-4xl mx-auto relative">
-            <h1 className="text-4xl md:text-5xl font-bold text-center text-gray-900 mb-8">
+        <AuroraBackground className="h-auto min-h-[50vh] py-24">
+          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
+            <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white mb-8 tracking-tight">
               GitHub to CDN Converter
             </h1>
-            <p className="text-xl text-gray-600 text-center mb-12">
+            <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl mx-auto">
               Convert your GitHub file URLs to StaticDelivr CDN URLs for faster delivery
               and better performance.
             </p>
           </div>
-        </section>
+        </AuroraBackground>
 
         {/* Converter Section */}
-        <section className="py-20 px-4">
+        <section className="py-20 px-4 bg-white dark:bg-zinc-950">
           <div className="max-w-3xl mx-auto">
-            <div className="bg-white rounded-xl shadow-sm p-8 mb-8">
-              <form onSubmit={handleSubmit} className="space-y-6">
-                <div>
-                  <label htmlFor="github-url" className="block text-sm font-medium text-gray-700 mb-2">
-                    GitHub URL
-                  </label>
-                  <input
-                    type="url"
-                    id="github-url"
-                    value={githubUrl}
-                    onChange={(e) => setGithubUrl(e.target.value)}
-                    placeholder="https://github.com/user/repo/blob/branch/file.js"
-                    className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                    required
-                  />
-                </div>
-
-                <button
-                  type="submit"
-                  className="w-full flex items-center justify-center px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-colors"
-                >
-                  <ArrowRight className="w-5 h-5 mr-2" />
-                  Convert URL
-                </button>
-              </form>
-
-              {error && (
-                <Alert className="mt-6 bg-red-50 border-red-200">
-                  <AlertCircle className="w-5 h-5 text-red-600" />
-                  <AlertDescription className="text-red-700">
-                    {error}
-                  </AlertDescription>
-                </Alert>
-              )}
-
-              {convertedUrl && (
-                <div className="mt-6">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    CDN URL
-                  </label>
-                  <div className="flex items-center gap-2">
+            <BlurFade delay={0.1} inView>
+              <MagicCard
+                className="p-8 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 mb-8"
+                gradientColor={theme === "dark" ? "#262626" : "#E4E4E7"}
+              >
+                <form onSubmit={handleSubmit} className="space-y-6">
+                  <div>
+                    <label htmlFor="github-url" className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                      GitHub URL
+                    </label>
                     <input
-                      type="text"
-                      value={convertedUrl}
-                      readOnly
-                      className="w-full px-4 py-2 bg-gray-50 border border-gray-300 rounded-lg"
+                      type="url"
+                      id="github-url"
+                      value={githubUrl}
+                      onChange={(e) => setGithubUrl(e.target.value)}
+                      placeholder="https://github.com/user/repo/blob/branch/file.js"
+                      className="w-full px-4 py-2 bg-white dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg focus:ring-2 focus:ring-zinc-500 focus:border-zinc-500 text-zinc-900 dark:text-white placeholder-zinc-400"
+                      required
                     />
-                    <button
-                      onClick={handleCopy}
-                      className="flex-shrink-0 p-2 text-gray-600 hover:text-blue-600 transition-colors"
-                      title="Copy to clipboard"
-                    >
-                      <Copy className="w-5 h-5" />
-                    </button>
                   </div>
-                  {copied && (
-                    <p className="mt-2 text-sm text-green-600">
-                      Copied to clipboard!
-                    </p>
-                  )}
-                </div>
-              )}
-            </div>
+
+                  <button
+                    type="submit"
+                    className="w-full flex items-center justify-center px-6 py-3 bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 font-medium rounded-lg transition-colors"
+                  >
+                    <ArrowRight className="w-5 h-5 mr-2" />
+                    Convert URL
+                  </button>
+                </form>
+
+                {error && (
+                  <Alert className="mt-6 bg-red-50 dark:bg-red-900/20 border-red-200 dark:border-red-800">
+                    <AlertCircle className="w-5 h-5 text-red-600 dark:text-red-400" />
+                    <AlertDescription className="text-red-700 dark:text-red-300">
+                      {error}
+                    </AlertDescription>
+                  </Alert>
+                )}
+
+                {convertedUrl && (
+                  <div className="mt-6">
+                    <label className="block text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">
+                      CDN URL
+                    </label>
+                    <div className="flex items-center gap-2">
+                      <input
+                        type="text"
+                        value={convertedUrl}
+                        readOnly
+                        className="w-full px-4 py-2 bg-zinc-50 dark:bg-zinc-900 border border-zinc-300 dark:border-zinc-700 rounded-lg text-zinc-900 dark:text-white"
+                      />
+                      <button
+                        onClick={handleCopy}
+                        className="flex-shrink-0 p-2 text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                        title="Copy to clipboard"
+                      >
+                        {copied ? <Check className="w-5 h-5 text-green-500" /> : <Copy className="w-5 h-5" />}
+                      </button>
+                    </div>
+                    {copied && (
+                      <p className="mt-2 text-sm text-green-600 dark:text-green-400">
+                        Copied to clipboard!
+                      </p>
+                    )}
+                  </div>
+                )}
+              </MagicCard>
+            </BlurFade>
 
             {/* Instructions */}
-            <div className="bg-gray-50 rounded-xl p-8">
-              <h3 className="text-lg font-semibold mb-4">How to Use:</h3>
-              <ol className="space-y-4 list-decimal pl-5">
-                <li className="text-gray-600">
-                  Copy your GitHub file URL (either from github.com or raw.githubusercontent.com)
-                </li>
-                <li className="text-gray-600">
-                  Paste the URL into the input field above
-                </li>
-                <li className="text-gray-600">
-                  Click &quot;Convert URL&quot; to get your StaticDelivr CDN URL
-                </li>
-                <li className="text-gray-600">
-                  Use the generated URL in your project for faster content delivery
-                </li>
-              </ol>
+            <BlurFade delay={0.2} inView>
+              <div className="bg-zinc-50 dark:bg-zinc-900 rounded-xl p-8 border border-zinc-200 dark:border-zinc-800">
+                <h3 className="text-lg font-semibold mb-4 text-zinc-900 dark:text-white">How to Use:</h3>
+                <ol className="space-y-4 list-decimal pl-5">
+                  <li className="text-zinc-600 dark:text-zinc-300">
+                    Copy your GitHub file URL (either from github.com or raw.githubusercontent.com)
+                  </li>
+                  <li className="text-zinc-600 dark:text-zinc-300">
+                    Paste the URL into the input field above
+                  </li>
+                  <li className="text-zinc-600 dark:text-zinc-300">
+                    Click &quot;Convert URL&quot; to get your StaticDelivr CDN URL
+                  </li>
+                  <li className="text-zinc-600 dark:text-zinc-300">
+                    Use the generated URL in your project for faster content delivery
+                  </li>
+                </ol>
 
-              <div className="mt-8">
-                <h4 className="font-semibold mb-2">Supported URL Formats:</h4>
-                <ul className="space-y-2 text-gray-600">
-                  <li>• https://github.com/user/repo/blob/branch/path/to/file.js</li>
-                  <li>• https://raw.githubusercontent.com/user/repo/branch/path/to/file.js</li>
-                </ul>
+                <div className="mt-8">
+                  <h4 className="font-semibold mb-2 text-zinc-900 dark:text-white">Supported URL Formats:</h4>
+                  <ul className="space-y-2 text-zinc-600 dark:text-zinc-300">
+                    <li>• https://github.com/user/repo/blob/branch/path/to/file.js</li>
+                    <li>• https://raw.githubusercontent.com/user/repo/branch/path/to/file.js</li>
+                  </ul>
+                </div>
               </div>
-            </div>
+            </BlurFade>
           </div>
         </section>
       </main>

@@ -1,113 +1,179 @@
+"use client";
+
 import React, { useState, useEffect } from 'react';
-import CountUp from 'react-countup';
-import { useInView } from 'react-intersection-observer';
-import { Rocket, Globe } from 'lucide-react';
+import Link from 'next/link';
+import { motion } from 'motion/react';
+import { ArrowRight, Globe, Terminal, Copy, Check, Activity, Zap, Infinity } from 'lucide-react';
+import { AuroraBackground } from '@/components/ui/aurora-background';
+import { WordRotate } from '@/components/ui/word-rotate';
+import { NumberTicker } from '@/components/ui/number-ticker';
+import { ShineBorder } from '@/components/ui/shine-border';
+import { AnimatedShinyText } from '@/components/ui/animated-shiny-text';
+import { cn } from '@/lib/utils';
+
+import { useTheme } from "next-themes";
+import { MagicCard } from "@/components/ui/magic-card";
 
 const HeroSection = () => {
-  const [monthlyRequests, setMonthlyRequests] = useState(null);
+  const { theme } = useTheme();
+  const [monthlyRequests, setMonthlyRequests] = useState<number | null>(null);
+  const [mounted, setMounted] = useState(false);
+  const [copied, setCopied] = useState(false);
 
-  // Fetch the data when the component mounts
+  useEffect(() => {
+    setMounted(true);
+  }, []);
+
   useEffect(() => {
     const fetchMonthlyRequests = async () => {
       try {
-        const response = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
+        const response = await fetch('https://corsproxy.io/https://stats.staticdelivr.com/api/stats?month=previous');
         const data = await response.json();
-        // Set the total requests from the API response
         setMonthlyRequests(data.total.requests);
       } catch (error) {
         console.error('Error fetching monthly requests data:', error);
       }
     };
-
     fetchMonthlyRequests();
   }, []);
 
-  const { ref: presenceRef, inView: presenceInView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  });
-
-  const { ref: requestsRef, inView: requestsInView } = useInView({
-    triggerOnce: true,
-    threshold: 0.1
-  });
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText('https://cdn.staticdelivr.com/npm/package@version/file');
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
+  };
 
   return (
-    <section className="relative pt-32 pb-20 px-4 overflow-hidden bg-white">
-      {/* Gradient Background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-blue-50 via-purple-50/30 to-white opacity-70 pointer-events-none"></div>
-      
-      {/* Subtle Grid Background */}
-      <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
-        <div className="absolute inset-0 bg-[linear-gradient(to_right,#e5e7eb_1px,transparent_1px),linear-gradient(to_bottom,#e5e7eb_1px,transparent_1px)] bg-[size:32px_32px]"></div>
-      </div>
-
-      {/* Decorative Shapes */}
-      <div className="absolute top-0 right-0 w-96 h-96 bg-blue-100/50 rounded-full blur-3xl -z-10"></div>
-      <div className="absolute bottom-0 left-0 w-96 h-96 bg-purple-100/50 rounded-full blur-3xl -z-10"></div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        <div className="text-center">
-          {/* Hero Headline */}
-          <div className="mb-6 space-y-5">
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-gray-900">
-              Free CDN for 
-              <span className="bg-gradient-to-r from-blue-600 to-purple-600 text-transparent bg-clip-text ml-3">
-                Open Source
-              </span>
-            </h1>
-            <p className="text-xl text-gray-600 max-w-2xl mx-auto">
-              Accelerate your Open Source Projects with StaticDelivr&apos;s globally distributed network
-            </p>
-          </div>
-
-          {/* Statistics */}
-          <div className="flex justify-center gap-16 mb-16">
-            <div className="text-center group" ref={presenceRef}>
-              <div className="flex items-center justify-center mb-2">
-                <Globe className="w-8 h-8 mr-2 text-blue-600 group-hover:scale-110 transition" />
-                <div className="text-4xl font-bold text-gray-900">
-                  <span className="text-blue-600">
-                    {presenceInView ? (
-                      <>
-                        <CountUp start={0} end={350} duration={2} />
-                        <span className="text-gray-900">+</span>
-                      </>
-                    ) : (
-                      '0+'
-                    )}
-                  </span>
-                </div>
-              </div>
-              <div className="text-gray-600 font-medium">Points of Presence</div>
+    <AuroraBackground className="h-auto min-h-screen py-20 lg:py-32">
+      <motion.div
+        initial={{ opacity: 0.0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{
+          delay: 0.3,
+          duration: 0.8,
+          ease: "easeInOut",
+        }}
+        className="relative flex flex-col gap-4 items-center justify-center px-4"
+      >
+        {/* Heading */}
+        <div className="text-center max-w-4xl mx-auto">
+          <h1 className="text-5xl md:text-7xl font-bold dark:text-white text-zinc-900 tracking-tight leading-tight mb-6">
+            The Free CDN for <br />
+            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">
+              Open Source
+            </span>
+          </h1>
+          
+          <div className="text-lg md:text-2xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed mb-10 flex flex-col sm:block items-center">
+            <span>Serve your </span>
+            <div className="inline-flex align-bottom min-w-[140px] justify-center sm:justify-start font-semibold text-zinc-900 dark:text-white">
+              {mounted ? (
+                <WordRotate
+                  words={['npm packages', 'GitHub files', 'Google Fonts', 'WordPress plugins']}
+                  className="text-left"
+                  duration={3000}
+                />
+              ) : (
+                <span>npm packages</span>
+              )}
             </div>
-            <div className="text-center group" ref={requestsRef}>
-              <div className="flex items-center justify-center mb-2">
-                <Rocket className="w-8 h-8 mr-2 text-purple-600 group-hover:scale-110 transition" />
-                <div className="text-4xl font-bold text-gray-900">
-                  <span className="text-purple-600">
-                    {requestsInView ? (
-                      <>
-                        {/* If data is available, display it, else show a default value */}
-                        <CountUp 
-                          start={0} 
-                          end={monthlyRequests ? monthlyRequests / 1000 : 0} 
-                          duration={2} 
-                        />
-                        <span className="text-gray-900">K+</span>
-                      </>
-                    ) : (
-                      '0M+'
-                    )}
-                  </span>
+            <span> with lightning-fast global delivery.</span>
+          </div>
+        </div>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row items-center gap-4 mb-12">
+          <Link
+            href="/docs/getting-started"
+            className="h-12 px-8 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium flex items-center gap-2 hover:scale-105 transition-transform shadow-lg hover:shadow-xl"
+          >
+            Get Started
+            <ArrowRight className="w-4 h-4" />
+          </Link>
+          <Link
+            href="/network"
+            className="h-12 px-8 rounded-full bg-white/50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white font-medium flex items-center gap-2 hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-colors backdrop-blur-sm"
+          >
+            <Globe className="w-4 h-4" />
+            View Network
+          </Link>
+        </div>
+
+        {/* Code Snippet / Terminal */}
+        <div className="w-full max-w-2xl mx-auto mb-16">
+          <div className="relative flex w-full flex-col items-center justify-center overflow-hidden rounded-xl border border-zinc-800 bg-zinc-950 md:shadow-xl">
+            <ShineBorder
+              className="text-center text-2xl font-bold capitalize"
+              shineColor={["#A07CFE", "#FE8FB5", "#FFBE7B"]}
+              borderWidth={1.5}
+            />
+            <div className="w-full relative z-10">
+              <div className="flex items-center justify-between px-4 py-3 bg-zinc-900/50 border-b border-zinc-800">
+                <div className="flex gap-2">
+                  <div className="w-3 h-3 rounded-full bg-red-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-yellow-500/80" />
+                  <div className="w-3 h-3 rounded-full bg-green-500/80" />
+                </div>
+                <div className="text-xs text-zinc-500 font-mono">example.html</div>
+                <div className="w-12" /> {/* Spacer for centering */}
+              </div>
+              <div className="p-6 font-mono text-sm md:text-base overflow-x-auto bg-zinc-950">
+                <div className="flex items-center justify-between gap-4 text-zinc-300">
+                  <code className="whitespace-nowrap">
+                    <span className="text-blue-400">&lt;script</span> <span className="text-purple-400">src</span>=<span className="text-green-400">"https://cdn.staticdelivr.com/npm/package@version/file"</span><span className="text-blue-400">&gt;&lt;/script&gt;</span>
+                  </code>
+                  <button
+                    onClick={copyToClipboard}
+                    className="p-2 hover:bg-zinc-800 rounded-md transition-colors text-zinc-400 hover:text-white focus:outline-none"
+                    title="Copy to clipboard"
+                  >
+                    {copied ? <Check className="w-4 h-4 text-green-400" /> : <Copy className="w-4 h-4" />}
+                  </button>
                 </div>
               </div>
-              <div className="text-gray-600 font-medium">Monthly Requests</div>
             </div>
           </div>
         </div>
-      </div>
-    </section>
+
+        {/* Stats */}
+        <div className="w-full max-w-5xl mx-auto mt-20">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-8 border-t border-zinc-200 dark:border-zinc-800 pt-10">
+            <div className="flex flex-col items-center justify-center gap-2">
+              <div className="text-4xl md:text-5xl font-mono font-bold text-zinc-900 dark:text-white tracking-tighter">
+                {monthlyRequests ? (
+                  <NumberTicker value={monthlyRequests} className="text-zinc-900 dark:text-white" />
+                ) : (
+                  "100B+"
+                )}
+              </div>
+              <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">Requests / Mo</div>
+            </div>
+
+            <div className="flex flex-col items-center justify-center gap-2">
+              <div className="text-4xl md:text-5xl font-mono font-bold text-zinc-900 dark:text-white tracking-tighter">
+                <NumberTicker value={350} className="text-zinc-900 dark:text-white" />+
+              </div>
+              <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">Global PoPs</div>
+            </div>
+
+            <div className="flex flex-col items-center justify-center gap-2">
+              <div className="text-4xl md:text-5xl font-mono font-bold text-zinc-900 dark:text-white tracking-tighter">
+                <NumberTicker value={100} className="text-zinc-900 dark:text-white" />%
+              </div>
+              <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">Uptime</div>
+            </div>
+
+            <div className="flex flex-col items-center justify-center gap-2">
+              <div className="text-4xl md:text-5xl font-mono font-bold text-zinc-900 dark:text-white tracking-tighter">
+                ∞
+              </div>
+              <div className="text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-widest">Free Bandwidth</div>
+            </div>
+          </div>
+        </div>
+
+      </motion.div>
+    </AuroraBackground>
   );
 };
 
