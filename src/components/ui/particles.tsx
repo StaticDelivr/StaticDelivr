@@ -2,6 +2,7 @@
 
 import React, {
   ComponentPropsWithoutRef,
+  useCallback,
   useEffect,
   useRef,
   useState,
@@ -100,49 +101,12 @@ export const Particles: React.FC<ParticlesProps> = ({
   const rafID = useRef<number | null>(null)
   const resizeTimeout = useRef<NodeJS.Timeout | null>(null)
 
-  useEffect(() => {
-    if (canvasRef.current) {
-      context.current = canvasRef.current.getContext("2d")
-    }
-    initCanvas()
-    animate()
-
-    const handleResize = () => {
-      if (resizeTimeout.current) {
-        clearTimeout(resizeTimeout.current)
-      }
-      resizeTimeout.current = setTimeout(() => {
-        initCanvas()
-      }, 200)
-    }
-
-    window.addEventListener("resize", handleResize)
-
-    return () => {
-      if (rafID.current != null) {
-        window.cancelAnimationFrame(rafID.current)
-      }
-      if (resizeTimeout.current) {
-        clearTimeout(resizeTimeout.current)
-      }
-      window.removeEventListener("resize", handleResize)
-    }
-  }, [color])
-
-  useEffect(() => {
-    onMouseMove()
-  }, [mousePosition.x, mousePosition.y])
-
-  useEffect(() => {
-    initCanvas()
-  }, [refresh])
-
-  const initCanvas = () => {
+  const initCanvas = useCallback(() => {
     resizeCanvas()
     drawParticles()
-  }
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
-  const onMouseMove = () => {
+  const onMouseMove = useCallback(() => {
     if (canvasRef.current) {
       const rect = canvasRef.current.getBoundingClientRect()
       const { w, h } = canvasSize.current
@@ -154,7 +118,7 @@ export const Particles: React.FC<ParticlesProps> = ({
         mouse.current.y = y
       }
     }
-  }
+  }, [mousePosition.x, mousePosition.y])
 
   const resizeCanvas = () => {
     if (canvasContainerRef.current && canvasRef.current && context.current) {
@@ -251,7 +215,7 @@ export const Particles: React.FC<ParticlesProps> = ({
     return remapped > 0 ? remapped : 0
   }
 
-  const animate = () => {
+  const animate = useCallback(() => {
     clearContext()
     circles.current.forEach((circle: Circle, i: number) => {
       // Handle the alpha value
@@ -299,7 +263,44 @@ export const Particles: React.FC<ParticlesProps> = ({
       }
     })
     rafID.current = window.requestAnimationFrame(animate)
-  }
+  }, [staticity, ease, vx, vy]) // eslint-disable-line react-hooks/exhaustive-deps
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      context.current = canvasRef.current.getContext("2d")
+    }
+    initCanvas()
+    animate()
+
+    const handleResize = () => {
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current)
+      }
+      resizeTimeout.current = setTimeout(() => {
+        initCanvas()
+      }, 200)
+    }
+
+    window.addEventListener("resize", handleResize)
+
+    return () => {
+      if (rafID.current != null) {
+        window.cancelAnimationFrame(rafID.current)
+      }
+      if (resizeTimeout.current) {
+        clearTimeout(resizeTimeout.current)
+      }
+      window.removeEventListener("resize", handleResize)
+    }
+  }, [color, initCanvas, animate])
+
+  useEffect(() => {
+    onMouseMove()
+  }, [mousePosition.x, mousePosition.y, onMouseMove])
+
+  useEffect(() => {
+    initCanvas()
+  }, [refresh, initCanvas])
 
   return (
     <div
