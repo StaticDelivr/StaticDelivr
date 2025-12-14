@@ -5,26 +5,26 @@ import Footer from './Footer';
 import { Menu, X } from 'lucide-react';
 import { cn } from '@/lib/utils';
 
+// Define the manual order for categories (moved outside component as constants)
+const categoryOrder = [
+  "Introduction",
+  "Use Cases",
+  "Developer Resources",
+  "Contribution",
+  "Help & Support"
+];
+
+const pageOrder = {
+  "Introduction": ["Getting Started", "FAQ"],
+  "Use Cases": ["Supported Use Cases"],
+  "Developer Resources": ["API & Tools", "Caching & Performance"],
+  "Contribution": ["Contributing"],
+  "Help & Support": ["Contact & Support"]
+};
+
 const DocsLayout = ({ children, docsContent, currentSlug }) => {
   const [sortedDocsContent, setSortedDocsContent] = useState([]);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
-
-  // Define the manual order for categories
-  const categoryOrder = [
-    "Introduction",
-    "Use Cases",
-    "Developer Resources",
-    "Contribution",
-    "Help & Support"
-  ];
-
-  const pageOrder = {
-    "Introduction": ["Getting Started", "FAQ"],
-    "Use Cases": ["Supported Use Cases"],
-    "Developer Resources": ["API & Tools", "Caching & Performance"],
-    "Contribution": ["Contributing"],
-    "Help & Support": ["Contact & Support"]
-  };
 
   useEffect(() => {
     const sortedCategories = docsContent
