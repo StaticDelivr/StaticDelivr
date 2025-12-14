@@ -467,8 +467,8 @@
         "city": "Amsterdam",
         "provider": "CLOUDFLARE",
         "coordinates": [
-            4.9041,
-            52.3676
+            4.6041,
+            52.7676
         ]
     },
     {
@@ -3899,8 +3899,8 @@
         "city": "Chișinău",
         "provider": "GCORE",
         "coordinates": [
-            28.8575,
-            47.0105
+            28.6575,
+            47.2105
         ]
     },
     {
