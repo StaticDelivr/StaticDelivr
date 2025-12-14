@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { Building2, Users, UserPlus, Heart, ExternalLink, Rocket } from 'lucide-react';
 import { useTheme } from 'next-themes';
 import Link from 'next/link';
+import Image from 'next/image';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AuroraBackground } from '../components/ui/aurora-background';
@@ -142,9 +143,11 @@ const SponsorsPage = () => {
                       gradientColor={theme === "dark" ? "#262626" : "#E4E4E7"}
                     >
                       <div className="w-full h-48 bg-zinc-50 dark:bg-zinc-900 p-8 flex items-center justify-center border-b border-zinc-200 dark:border-zinc-800">
-                        <img
+                        <Image
                           src={sponsor.logo}
                           alt={`${sponsor.name} logo`}
+                          width={200}
+                          height={96}
                           className="max-w-full max-h-full object-contain transition-transform duration-200 hover:scale-105"
                         />
                       </div>

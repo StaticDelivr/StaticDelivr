@@ -3,6 +3,7 @@
 import React from 'react';
 import { Heart } from 'lucide-react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Button } from '@/components/ui/button';
 
 const sponsors = [
@@ -31,9 +32,11 @@ const SponsorsSection = () => {
               rel="noopener noreferrer"
               className="opacity-90 hover:opacity-100 transition-opacity"
             >
-              <img 
+              <Image 
                 src={sponsor.logo} 
                 alt={`${sponsor.name} Logo`} 
+                width={192}
+                height={48}
                 className="h-12 w-auto object-contain dark:invert"
               />
             </Link>

@@ -1,5 +1,6 @@
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Github, Twitter, Mail, Heart } from 'lucide-react';
 
 const footerLinks = {
@@ -54,9 +55,11 @@ const Footer = () => (
           {/* Brand Section - spans 2 columns */}
           <div className="col-span-2">
             <Link href="/" className="inline-block mb-6">
-              <img 
+              <Image 
                 src="/assets/img/icons/horizontal-white.svg" 
                 alt="StaticDelivr" 
+                width={128}
+                height={32}
                 className="h-8" 
               />
             </Link>
