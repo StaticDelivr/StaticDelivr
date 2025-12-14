@@ -8,6 +8,11 @@ import { cn } from "@/lib/utils";
 export function FloatingContact() {
   const [isVisible, setIsVisible] = useState(false);
   const [isExpanded, setIsExpanded] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  useEffect(() => {
+    setMounted(true);
+  }, []);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -19,8 +24,8 @@ export function FloatingContact() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Only show on mobile
-  if (typeof window !== "undefined" && window.innerWidth > 768) {
+  // Only show on mobile and after mount
+  if (!mounted || (typeof window !== "undefined" && window.innerWidth > 768)) {
     return null;
   }
 
