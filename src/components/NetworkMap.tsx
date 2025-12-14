@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import mapboxgl, { Map } from 'mapbox-gl'; // Importing Map type from mapbox-gl
 import 'mapbox-gl/dist/mapbox-gl.css';
 
@@ -80,7 +80,7 @@ const NetworkMap: React.FC = () => {
   };
 
   // Function to add markers
-  const addMarkers = () => {
+  const addMarkers = useCallback(() => {
     if (!map || popLocations.length === 0 || Object.keys(providers).length === 0) return;
 
     // Remove existing markers if any
@@ -109,11 +109,11 @@ const NetworkMap: React.FC = () => {
         )
         .addTo(map);
     });
-  };
+  }, [map, popLocations, providers]);
 
   useEffect(() => {
     addMarkers();
-  }, [popLocations, map, providers]); // Run effect when popLocations, map, or providers change
+  }, [popLocations, map, providers, addMarkers]); // Run effect when popLocations, map, or providers change
 
   return (
     <div className="relative w-full">
