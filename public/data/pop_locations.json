@@ -3048,6 +3048,14 @@
         ]
     },
     {
+        "city": "Gainesville",
+        "provider": "FASTLY",
+        "coordinates": [
+            -82.3248,
+            29.6516
+        ]
+    },
+    {
         "city": "Honolulu",
         "provider": "FASTLY",
         "coordinates": [
@@ -3120,6 +3128,14 @@
         ]
     },
     {
+        "city": "Newark",
+        "provider": "FASTLY",
+        "coordinates": [
+            -74.173402,
+            40.736844
+        ]
+    },
+    {
         "city": "Phoenix",
         "provider": "FASTLY",
         "coordinates": [
@@ -3141,6 +3157,14 @@
         "coordinates": [
             -121.6863,
             37.1382
+        ]
+    },
+    {
+        "city": "Palo Alto",
+        "provider": "FASTLY",
+        "coordinates": [
+            -122.110783,
+            37.454965
         ]
     },
     {
@@ -3432,11 +3456,131 @@
         ]
     },
     {
+        "city": "Anantapur",
+        "provider": "FASTLY",
+        "coordinates": [
+            77.565,
+            14.637
+        ]
+    },
+    {
+        "city": "Bangalore Peenya",
+        "provider": "FASTLY",
+        "coordinates": [
+            77.559,
+            13.033
+        ]
+    },
+    {
+        "city": "Berhampur",
+        "provider": "FASTLY",
+        "coordinates": [
+            88.265,
+            24.078
+        ]
+    },
+    {
+        "city": "Bhopal",
+        "provider": "FASTLY",
+        "coordinates": [
+            77.354,
+            23.296
+        ]
+    },
+    {
+        "city": "Bhubaneswar",
+        "provider": "FASTLY",
+        "coordinates": [
+            85.825,
+            20.296
+        ]
+    },
+    {
+        "city": "Chandigarh",
+        "provider": "FASTLY",
+        "coordinates": [
+            76.703,
+            30.71
+        ]
+    },
+    {
+        "city": "Delhi",
+        "provider": "FASTLY",
+        "coordinates": [
+            77.378557,
+            28.506912
+        ]
+    },
+    {
+        "city": "Delhi Lawrence Road",
+        "provider": "FASTLY",
+        "coordinates": [
+            77.155,
+            28.684
+        ]
+    },
+    {
+        "city": "Dhanbad",
+        "provider": "FASTLY",
+        "coordinates": [
+            85.27,
+            25.52
+        ]
+    },
+    {
+        "city": "Howrah",
+        "provider": "FASTLY",
+        "coordinates": [
+            88.297,
+            22.58
+        ]
+    },
+    {
         "city": "Chennai",
         "provider": "FASTLY",
         "coordinates": [
             80.4785,
             13.2827
+        ]
+    },
+    {
+        "city": "Jamnagar",
+        "provider": "FASTLY",
+        "coordinates": [
+            69.845,
+            22.355
+        ]
+    },
+    {
+        "city": "Kanpur",
+        "provider": "FASTLY",
+        "coordinates": [
+            80.413,
+            26.401
+        ]
+    },
+    {
+        "city": "Karnal",
+        "provider": "FASTLY",
+        "coordinates": [
+            76.99,
+            29.685
+        ]
+    },
+    {
+        "city": "Kochi",
+        "provider": "FASTLY",
+        "coordinates": [
+            76.267,
+            9.931
+        ]
+    },
+    {
+        "city": "Kota",
+        "provider": "FASTLY",
+        "coordinates": [
+            75.834,
+            25.199
         ]
     },
     {
@@ -3472,11 +3616,91 @@
         ]
     },
     {
+        "city": "Madurai",
+        "provider": "FASTLY",
+        "coordinates": [
+            78.094,
+            9.922
+        ]
+    },
+    {
+        "city": "Meerut",
+        "provider": "FASTLY",
+        "coordinates": [
+            77.706,
+            28.984
+        ]
+    },
+    {
         "city": "Kolkata",
         "provider": "FASTLY",
         "coordinates": [
             88.4639,
             22.7726
+        ]
+    },
+    {
+        "city": "Prayagraj",
+        "provider": "FASTLY",
+        "coordinates": [
+            81.835,
+            25.453
+        ]
+    },
+    {
+        "city": "Pune",
+        "provider": "FASTLY",
+        "coordinates": [
+            73.727,
+            18.596
+        ]
+    },
+    {
+        "city": "Raipur",
+        "provider": "FASTLY",
+        "coordinates": [
+            81.598,
+            21.228
+        ]
+    },
+    {
+        "city": "Ranchi",
+        "provider": "FASTLY",
+        "coordinates": [
+            86.464,
+            23.812
+        ]
+    },
+    {
+        "city": "Salem",
+        "provider": "FASTLY",
+        "coordinates": [
+            78.132,
+            11.642
+        ]
+    },
+    {
+        "city": "Sambalpur",
+        "provider": "FASTLY",
+        "coordinates": [
+            79.152,
+            21.078
+        ]
+    },
+    {
+        "city": "Solapur",
+        "provider": "FASTLY",
+        "coordinates": [
+            75.906,
+            17.66
+        ]
+    },
+    {
+        "city": "Surat",
+        "provider": "FASTLY",
+        "coordinates": [
+            72.952,
+            21.266
         ]
     },
     {
@@ -3501,6 +3725,14 @@
         "coordinates": [
             72.6777,
             19.276
+        ]
+    },
+    {
+        "city": "Varanasi",
+        "provider": "FASTLY",
+        "coordinates": [
+            84.32,
+            24.652
         ]
     },
     {
