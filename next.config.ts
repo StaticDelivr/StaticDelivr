@@ -30,6 +30,19 @@ const nextConfig: NextConfig = {
   },
   // Output optimization
   output: undefined,
+  experimental: {
+    optimizePackageImports: [
+      '@radix-ui/react-navigation-menu',
+      '@radix-ui/react-dialog',
+      '@radix-ui/react-tabs',
+      '@radix-ui/react-tooltip',
+      'lucide-react',
+      'motion',
+      'sonner',
+      'react-intersection-observer',
+      'react-scroll-parallax',
+    ],
+  },
 };
 
 export default nextConfig;

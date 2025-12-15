@@ -1,13 +1,25 @@
 import React from 'react';
 import Head from 'next/head';
 import dynamic from 'next/dynamic';
-import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
-import QuickStartSection from '../components/QuickStartSection';
-import FeaturesSection from '../components/FeaturesSection';
-import Footer from '../components/Footer';
+
+// Lazy load above-the-fold components that use heavy libraries
+const Header = dynamic(() => import('../components/Header'), {
+  loading: () => <div className="h-16 bg-white dark:bg-zinc-900 border-b" />,
+});
+
+// Lazy load mid-fold components
+const QuickStartSection = dynamic(() => import('../components/QuickStartSection'), {
+  loading: () => <div className="h-96" />,
+});
+const FeaturesSection = dynamic(() => import('../components/FeaturesSection'), {
+  loading: () => <div className="h-96" />,
+});
 
 // Lazy load below-the-fold components
+const Footer = dynamic(() => import('../components/Footer'), {
+  loading: () => <div className="h-64 bg-slate-900" />,
+});
 const NetworkMapSection = dynamic(() => import('../components/NetworkMapSection'), {
   loading: () => <div className="h-96" />,
 });

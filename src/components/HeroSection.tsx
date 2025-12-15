@@ -2,7 +2,6 @@
 
 import React, { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { motion } from 'motion/react';
 import { ArrowRight, Globe, Copy, Check } from 'lucide-react';
 import { AuroraBackground } from '@/components/ui/aurora-background';
 import { WordRotate } from '@/components/ui/word-rotate';
@@ -54,14 +53,7 @@ const HeroSection = () => {
 
   return (
     <AuroraBackground className="h-auto min-h-screen py-20 lg:py-32">
-      <motion.div
-        initial={{ opacity: 0.0, y: 40 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.3,
-          duration: 0.8,
-          ease: "easeInOut",
-        }}
+      <div
         className="relative flex flex-col gap-4 items-center justify-center px-4"
       >
         {/* Heading */}
@@ -177,7 +169,7 @@ const HeroSection = () => {
           </div>
         </div>
 
-      </motion.div>
+      </div>
     </AuroraBackground>
   );
 };
