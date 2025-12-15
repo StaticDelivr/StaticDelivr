@@ -87,11 +87,11 @@ export default {
   		},
   		keyframes: {
   			aurora: {
-  				"0%": { backgroundPosition: "0% 50%", transform: "rotate(-5deg) scale(0.9)" },
+  				"0%": { backgroundPosition: "0% 50%", transform: "rotate(-5deg) scale(1.2)" },
   				"25%": { backgroundPosition: "50% 100%", transform: "rotate(5deg) scale(1.1)" },
-  				"50%": { backgroundPosition: "100% 50%", transform: "rotate(-3deg) scale(0.95)" },
+  				"50%": { backgroundPosition: "100% 50%", transform: "rotate(-3deg) scale(1.25)" },
   				"75%": { backgroundPosition: "50% 0%", transform: "rotate(3deg) scale(1.05)" },
-  				"100%": { backgroundPosition: "0% 50%", transform: "rotate(-5deg) scale(0.9)" },
+  				"100%": { backgroundPosition: "0% 50%", transform: "rotate(-5deg) scale(1.2)" },
   			},
   		}
   	}

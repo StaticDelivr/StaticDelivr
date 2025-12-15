@@ -22,6 +22,12 @@ const nextConfig: NextConfig = {
   productionBrowserSourceMaps: false,
   // Remove X-Powered-By header
   poweredByHeader: false,
+  // Compiler options
+  compiler: {
+    removeConsole: process.env.NODE_ENV === 'production' ? { exclude: ['error', 'warn'] } : false,
+  },
+  // Output optimization
+  output: undefined,
 };
 
 export default nextConfig;

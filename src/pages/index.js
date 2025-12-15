@@ -1,13 +1,22 @@
 import React from 'react';
 import Head from 'next/head';
+import dynamic from 'next/dynamic';
 import Header from '../components/Header';
 import HeroSection from '../components/HeroSection';
 import QuickStartSection from '../components/QuickStartSection';
 import FeaturesSection from '../components/FeaturesSection';
-import NetworkMapSection from '../components/NetworkMapSection';
-import SponsorsSection from '../components/SponsorsSection';
 import Footer from '../components/Footer';
-import { FloatingContact } from '../components/FloatingContact';
+
+// Lazy load below-the-fold components
+const NetworkMapSection = dynamic(() => import('../components/NetworkMapSection'), {
+  loading: () => <div className="h-96" />,
+});
+const SponsorsSection = dynamic(() => import('../components/SponsorsSection'), {
+  loading: () => <div className="h-64" />,
+});
+const FloatingContact = dynamic(() => import('../components/FloatingContact').then(mod => ({ default: mod.FloatingContact })), {
+  ssr: false,
+});
 
 export default function Home() {
   return (
