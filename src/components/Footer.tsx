@@ -43,9 +43,9 @@ const footerLinks = {
 const Footer = () => (
   <footer className="bg-slate-900 text-slate-300 relative overflow-hidden">
     {/* Background decoration */}
-    <div className="absolute inset-0 opacity-5" aria-hidden="true" role="presentation">
-      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl" />
-      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl" />
+    <div className="absolute inset-0 pointer-events-none" aria-hidden="true" role="presentation">
+      <div className="absolute top-0 -left-1/4 w-96 h-96 bg-blue-500 rounded-full blur-3xl opacity-30" />
+      <div className="absolute bottom-0 -right-1/4 w-96 h-96 bg-purple-500 rounded-full blur-3xl opacity-30" />
     </div>
 
     <div className="relative z-10">
