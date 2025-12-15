@@ -19,7 +19,9 @@ const nextConfig: NextConfig = {
   // Enable compression
   compress: true,
   // Optimize production builds
-  productionBrowserSourceMaps: false,
+  // Enable production source maps so diagnostic tools (Lighthouse) can map minified bundles
+  // back to original source for debugging and to avoid "Missing source maps" warnings.
+  productionBrowserSourceMaps: true,
   // Remove X-Powered-By header
   poweredByHeader: false,
   // Compiler options
