@@ -1,6 +1,7 @@
 "use client"
 
 import React, { memo } from "react"
+import { motion } from "motion/react"
 
 interface AuroraTextProps {
   children: React.ReactNode
@@ -28,13 +29,21 @@ export const AuroraText = memo(
     return (
       <span className={`relative inline-block ${className}`}>
         <span className="sr-only">{children}</span>
-        <span
+        <motion.span
           className="relative bg-[length:200%_auto] bg-clip-text text-transparent"
           style={gradientStyle}
+          animate={{
+            backgroundPosition: ["0% 50%", "100% 50%", "0% 50%"],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "linear",
+          }}
           aria-hidden="true"
         >
           {children}
-        </span>
+        </motion.span>
       </span>
     )
   }
