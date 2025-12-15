@@ -8,6 +8,7 @@ import { AuroraBackground } from '@/components/ui/aurora-background';
 import { WordRotate } from '@/components/ui/word-rotate';
 import { NumberTicker } from '@/components/ui/number-ticker';
 import { ShineBorder } from '@/components/ui/shine-border';
+import { AuroraText } from '@/components/ui/aurora-text';
 
 const HeroSection = () => {
   const [monthlyRequests, setMonthlyRequests] = useState<number | null>(null);
@@ -53,9 +54,9 @@ const HeroSection = () => {
         <div className="text-center max-w-4xl mx-auto">
           <h1 className="text-5xl md:text-7xl font-bold dark:text-white text-zinc-900 tracking-tight leading-tight mb-6">
             The Free CDN for <br />
-            <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 via-indigo-500 to-purple-600 dark:from-blue-400 dark:via-indigo-400 dark:to-purple-400">
+            <AuroraText className="text-5xl md:text-7xl font-bold">
               Open Source
-            </span>
+            </AuroraText>
           </h1>
           
           <div className="text-lg md:text-2xl text-zinc-600 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed mb-10 flex flex-col sm:block items-center">
