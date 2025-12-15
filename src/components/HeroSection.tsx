@@ -126,9 +126,9 @@ const HeroSection = () => {
                 <div className="text-[10px] sm:text-xs text-zinc-500 font-mono">example.html</div>
                 <div className="w-8 sm:w-12" /> {/* Spacer for centering */}
               </div>
-              <div className="p-3 sm:p-6 font-mono text-[10px] sm:text-sm md:text-base overflow-x-auto bg-zinc-950">
+              <div className="p-3 sm:p-6 font-mono text-[10px] sm:text-sm md:text-base bg-zinc-950">
                 <div className="flex items-center justify-between gap-2 sm:gap-4 text-zinc-300">
-                  <code className="whitespace-pre-wrap break-all sm:whitespace-nowrap sm:break-normal">
+                  <code className="whitespace-pre-wrap break-all flex-1">
                     <span className="text-blue-400">&lt;script</span> <span className="text-purple-400">src</span>=<span className="text-green-400">&quot;https://cdn.staticdelivr.com/npm/package@version/file&quot;</span><span className="text-blue-400">&gt;&lt;/script&gt;</span>
                   </code>
                   <button
