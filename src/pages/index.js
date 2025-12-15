@@ -22,14 +22,14 @@ export default function Home() {
         <meta property="og:type" content="website" />
         <meta property="og:title" content="StaticDelivr - Free and Open Source CDN for Open Source Projects" />
         <meta property="og:description" content="StaticDelivr offers a fast, reliable, and open-source content delivery network, providing an alternative to jsDelivr for faster access to your assets." />
-        <meta property="og:image" content="" />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com" />
         <meta name="twitter:title" content="StaticDelivr - Free and Open Source CDN for Open Source Projects" />
         <meta name="twitter:description" content="StaticDelivr offers a fast, reliable, and open-source content delivery network, providing an alternative to jsDelivr for faster access to your assets." />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

@@ -11,6 +11,9 @@ class MyDocument extends Document {
           <link rel="preconnect" href="https://www.clarity.ms" />
           <link rel="preconnect" href="https://scripts.clarity.ms" />
           
+          {/* DNS prefetch for additional external domains */}
+          <link rel="dns-prefetch" href="https://images.ctfassets.net" />
+          
           {/* Microsoft Clarity Tracking Script - Deferred for better performance */}
           <script
             type="text/javascript"
