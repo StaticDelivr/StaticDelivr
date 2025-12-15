@@ -96,7 +96,7 @@ const features = [
     name: "Multi-CDN Architecture",
     description: "2 enterprise CDN providers with intelligent load balancing and automatic failover for 99.99% uptime.",
     href: "/about",
-    cta: "Learn More",
+    cta: "Learn about Multi‑CDN Architecture",
     background: <ServerBackground />,
     className: "lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
   },
