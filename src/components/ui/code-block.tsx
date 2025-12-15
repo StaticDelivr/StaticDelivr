@@ -105,7 +105,15 @@ export function CodeBlock({
       <div
         onClick={handleCopy}
         className="absolute inset-0 cursor-pointer md:hidden"
+        role="button"
+        tabIndex={0}
         aria-label="Tap to copy"
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            handleCopy();
+          }
+        }}
       />
     </div>
   );

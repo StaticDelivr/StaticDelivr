@@ -79,6 +79,8 @@ export function FloatingContact() {
             ? "bg-slate-900 dark:bg-zinc-100 text-white dark:text-zinc-900"
             : "bg-gradient-to-r from-blue-600 to-purple-600 text-white hover:scale-110"
         )}
+        aria-label={isExpanded ? "Close contact menu" : "Open contact menu"}
+        aria-expanded={isExpanded}
       >
         {isExpanded ? (
           <X className="w-6 h-6" />

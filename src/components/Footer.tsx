@@ -63,7 +63,7 @@ const Footer = () => (
                 className="h-8" 
               />
             </Link>
-            <p className="text-sm text-slate-400 mb-6 max-w-xs">
+            <p className="text-sm text-slate-300 mb-6 max-w-xs">
               A free, fast, and reliable CDN for open source projects. Serving billions of requests with 350+ global PoPs.
             </p>
             
@@ -106,7 +106,7 @@ const Footer = () => (
                   <li key={link.href}>
                     <Link 
                       href={link.href}
-                      className="text-sm text-slate-400 hover:text-white transition-colors inline-flex items-center gap-1 group"
+                      className="text-sm text-slate-300 hover:text-white transition-colors inline-flex items-center gap-1 group"
                     >
                       {link.label}
                     </Link>
@@ -124,7 +124,7 @@ const Footer = () => (
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="text-center md:text-left">
               <h5 className="text-white font-semibold mb-1">Stay Updated</h5>
-              <p className="text-sm text-slate-400">Get notified about new features and updates.</p>
+              <p className="text-sm text-slate-300">Get notified about new features and updates.</p>
             </div>
             <Link 
               href="/newsletter"
@@ -141,10 +141,10 @@ const Footer = () => (
       <div className="border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-            <p className="text-slate-500">
+            <p className="text-slate-400">
               &copy; {new Date().getFullYear()} StaticDelivr. All rights reserved.
             </p>
-            <p className="flex items-center gap-1 text-slate-500">
+            <p className="flex items-center gap-1 text-slate-400">
               Made with <Heart className="w-4 h-4 text-red-500 fill-red-500" /> for the open source community
             </p>
           </div>
