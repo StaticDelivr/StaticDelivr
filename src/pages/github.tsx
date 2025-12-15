@@ -63,23 +63,26 @@ const GitHubConverterPage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>Convert from GitHub - StaticDelivr</title>
-        <meta name="description" content="Convert GitHub file URLs to StaticDelivr CDN URLs for faster delivery and performance." />
-        <meta name="keywords" content="GitHub, StaticDelivr, CDN, convert GitHub files, GitHub to CDN, faster delivery, CDN URLs, performance, StaticDelivr CDN, GitHub assets delivery, open source CDN, GitHub content delivery" />
-        <meta name="robots" content="index, follow" />
+        <title>GitHub to CDN URL Converter | StaticDelivr</title>
+        <meta name="description" content="Convert GitHub file URLs to StaticDelivr CDN URLs instantly. Get faster delivery and better performance for your GitHub-hosted assets." />
+        <meta name="keywords" content="GitHub CDN, convert GitHub URL, GitHub to CDN, raw GitHub alternative, GitHub file delivery, CDN converter, faster GitHub files, StaticDelivr GitHub" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
         <meta property="og:url" content="https://staticdelivr.com/github" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Convert from GitHub - StaticDelivr" />
-        <meta property="og:description" content="Convert GitHub file URLs to StaticDelivr CDN URLs for faster delivery and performance." />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content="GitHub to CDN URL Converter | StaticDelivr" />
+        <meta property="og:description" content="Convert GitHub file URLs to StaticDelivr CDN URLs instantly. Get faster delivery for your GitHub-hosted assets." />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
         
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/github" />
-        <meta name="twitter:title" content="Convert from GitHub - StaticDelivr" />
-        <meta name="twitter:description" content="Convert GitHub file URLs to StaticDelivr CDN URLs for faster delivery and performance." />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:title" content="GitHub to CDN URL Converter | StaticDelivr" />
+        <meta name="twitter:description" content="Convert GitHub file URLs to StaticDelivr CDN URLs instantly. Get faster delivery for your GitHub-hosted assets." />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

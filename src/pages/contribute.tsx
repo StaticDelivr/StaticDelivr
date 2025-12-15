@@ -82,23 +82,26 @@ const ContributePage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>Contribute - StaticDelivr</title>
-        <meta name="description" content="Join us in improving StaticDelivr by contributing code, documentation, or supporting us." />
-        <meta name="keywords" content="contribute, StaticDelivr, open source, open-source contribution, contribute code, contribute documentation, support open source, StaticDelivr contributors, open-source projects, developer contributions, improving StaticDelivr" />
-        <meta name="robots" content="index, follow" />
+        <title>Contribute to Open Source CDN | Join StaticDelivr</title>
+        <meta name="description" content="Join the StaticDelivr community! Contribute code, documentation, or support to help build the best free CDN for open-source projects." />
+        <meta name="keywords" content="contribute open source, StaticDelivr contribution, open source CDN, developer community, code contribution, documentation, GitHub contribution" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
         <meta property="og:url" content="https://staticdelivr.com/contribute" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Contribute - StaticDelivr" />
-        <meta property="og:description" content="Join us in improving StaticDelivr by contributing code, documentation, or supporting us." />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content="Contribute to Open Source CDN | Join StaticDelivr" />
+        <meta property="og:description" content="Join the StaticDelivr community! Contribute code, documentation, or support to help build the best free CDN." />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/contribute" />
-        <meta name="twitter:title" content="Contribute - StaticDelivr" />
-        <meta name="twitter:description" content="Join us in improving StaticDelivr by contributing code, documentation, or supporting us." />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:title" content="Contribute to Open Source CDN | Join StaticDelivr" />
+        <meta name="twitter:description" content="Join the StaticDelivr community! Contribute code, documentation, or support to help build the best free CDN." />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

@@ -5,6 +5,11 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
+          {/* Viewport and mobile optimization */}
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+          <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+          <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+          
           {/* Preconnect to external domains for faster loading */}
           <link rel="preconnect" href="https://stats.staticdelivr.com" />
           <link rel="preconnect" href="https://cdn.staticdelivr.com" />

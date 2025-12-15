@@ -13,25 +13,28 @@ const TermsOfService = ({ frontmatter, mdxSource }) => {
     <LegalLayout title={frontmatter.title}>
       {/* Dynamic Metadata */}
       <Head>
-        <title>{frontmatter.title} - StaticDelivr</title>
-        <meta name="description" content={frontmatter.description || 'StaticDelivr Terms of Service - Understanding our service terms and conditions.'} />
-        <meta name="keywords" content={`${frontmatter.title}, StaticDelivr, terms of service, legal terms, conditions`} />
-        <meta name="robots" content="index, follow" />
+        <title>{frontmatter.title} | Legal - StaticDelivr</title>
+        <meta name="description" content={frontmatter.description || 'StaticDelivr Terms of Service - Read our service terms and conditions for using the free open-source CDN.'} />
+        <meta name="keywords" content="terms of service, StaticDelivr terms, usage agreement, CDN terms, service conditions" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
         
         {/* Open Graph Tags */}
         <meta property="og:url" content="https://staticdelivr.com/legal/terms-of-service" />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={`${frontmatter.title} - StaticDelivr`} />
+        <meta property="og:title" content={`${frontmatter.title} | Legal - StaticDelivr`} />
         <meta property="og:description" content={frontmatter.description || 'StaticDelivr Terms of Service - Understanding our service terms and conditions.'} />
-        <meta property="og:image" content="" />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/legal/terms-of-service" />
-        <meta name="twitter:title" content={`${frontmatter.title} - StaticDelivr`} />
+        <meta name="twitter:title" content={`${frontmatter.title} | Legal - StaticDelivr`} />
         <meta name="twitter:description" content={frontmatter.description || 'StaticDelivr Terms of Service - Understanding our service terms and conditions.'} />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <BlurFade delay={0.1} inView>

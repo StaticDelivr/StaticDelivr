@@ -17,12 +17,26 @@ export default function TagPage({ posts, tag }) {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>{tag} - StaticDelivr Blog</title>
-        <meta name="description" content={`Blog posts tagged with "${tag}"`} />
-        <meta name="keywords" content={`StaticDelivr, Blog, ${tag}`} />
+        <title>{tag} | Blog Tags - StaticDelivr</title>
+        <meta name="description" content={`Browse all StaticDelivr blog posts tagged with "${tag}". Find CDN insights, tutorials, and updates.`} />
+        <meta name="keywords" content={`StaticDelivr, Blog, ${tag}, CDN articles, tutorials`} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+
         <meta property="og:url" content={`https://staticdelivr.com/blog/tags/${tag}`} />
-        <meta property="og:title" content={`${tag} - StaticDelivr Blog`} />
-        <meta property="og:description" content={`Blog posts tagged with "${tag}"`} />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={`${tag} | Blog Tags - StaticDelivr`} />
+        <meta property="og:description" content={`Browse all StaticDelivr blog posts tagged with "${tag}".`} />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content={`https://staticdelivr.com/blog/tags/${tag}`} />
+        <meta name="twitter:title" content={`${tag} | Blog Tags - StaticDelivr`} />
+        <meta name="twitter:description" content={`Browse all StaticDelivr blog posts tagged with "${tag}".`} />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

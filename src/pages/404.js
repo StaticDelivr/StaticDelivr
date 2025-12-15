@@ -11,8 +11,9 @@ const Custom404 = () => {
   return (
     <div className="min-h-screen flex flex-col bg-zinc-50 dark:bg-zinc-950">
       <Head>
-        <title>404 - Page Not Found</title>
-        <meta name="description" content="Sorry, the page you are looking for does not exist. Please check the URL or return to the homepage." />
+        <title>404 - Page Not Found | StaticDelivr</title>
+        <meta name="description" content="Sorry, the page you are looking for does not exist. Return to StaticDelivr homepage to explore our free open-source CDN." />
+        <meta name="robots" content="noindex, follow" />
       </Head>
 
       <Header />

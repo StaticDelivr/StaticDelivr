@@ -43,23 +43,26 @@ export default function BlogPage({ posts }: BlogPageProps) {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>Blog - StaticDelivr</title>
-        <meta name="description" content="Insights, tutorials, and stories from the world of open-source development." />
-        <meta name="keywords" content="open source, StaticDelivr, blog, tutorials, development, CDN, content delivery, open-source community" />
-        <meta name="robots" content="index, follow" />
+        <title>Blog | CDN Insights & Tutorials - StaticDelivr</title>
+        <meta name="description" content="Read the latest insights, tutorials, and open-source stories from StaticDelivr. Learn CDN best practices, performance tips, and developer tutorials." />
+        <meta name="keywords" content="CDN blog, StaticDelivr tutorials, open source development, CDN best practices, web performance, developer guides" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
         <meta property="og:url" content="https://staticdelivr.com/blog" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Blog - StaticDelivr" />
-        <meta property="og:description" content="Insights, tutorials, and stories from the world of open-source development." />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content="Blog | CDN Insights & Tutorials - StaticDelivr" />
+        <meta property="og:description" content="Read the latest insights, tutorials, and open-source stories from StaticDelivr. Learn CDN best practices and performance tips." />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/blog" />
-        <meta name="twitter:title" content="Blog - StaticDelivr" />
-        <meta name="twitter:description" content="Insights, tutorials, and stories from the world of open-source development." />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:title" content="Blog | CDN Insights & Tutorials - StaticDelivr" />
+        <meta name="twitter:description" content="Read the latest insights, tutorials, and open-source stories from StaticDelivr. Learn CDN best practices and performance tips." />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

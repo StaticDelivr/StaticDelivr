@@ -76,23 +76,26 @@ const BecomeSponsorPage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>Become a Sponsor - StaticDelivr</title>
-        <meta name="description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure expenses and support the development of new features for the open-source community." />
-        <meta name="keywords" content="become a sponsor, StaticDelivr sponsorship, support open-source, sponsor StaticDelivr, open-source infrastructure, contribute to open-source, StaticDelivr support, open-source community, infrastructure expenses, open-source projects sponsorship" />
-        <meta name="robots" content="index, follow" />
+        <title>Become a Sponsor | Support Open Source CDN - StaticDelivr</title>
+        <meta name="description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure costs and fund new features for the free, open-source CDN serving millions of developers worldwide." />
+        <meta name="keywords" content="sponsor open source, CDN sponsorship, support StaticDelivr, open source funding, infrastructure sponsor, developer tools sponsorship" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
         
-        <meta property="og:url" content="https://staticdelivr.com/become-sponsor" />
+        <meta property="og:url" content="https://staticdelivr.com/become-a-sponsor" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Become a Sponsor - StaticDelivr" />
-        <meta property="og:description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure expenses and support the development of new features for the open-source community." />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content="Become a Sponsor | Support Open Source CDN - StaticDelivr" />
+        <meta property="og:description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure costs and fund new features for the free, open-source CDN." />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
-        <meta property="twitter:url" content="https://staticdelivr.com/become-sponsor" />
-        <meta name="twitter:title" content="Become a Sponsor - StaticDelivr" />
-        <meta name="twitter:description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure expenses and support the development of new features for the open-source community." />
-        <meta name="twitter:image" content="" />
+        <meta property="twitter:url" content="https://staticdelivr.com/become-a-sponsor" />
+        <meta name="twitter:title" content="Become a Sponsor | Support Open Source CDN - StaticDelivr" />
+        <meta name="twitter:description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure costs and fund new features for the free, open-source CDN." />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

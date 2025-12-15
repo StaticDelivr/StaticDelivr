@@ -90,23 +90,26 @@ const NewsletterPage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>Newsletter - StaticDelivr</title>
-        <meta name="description" content="Stay updated with the latest news, technical insights, and community highlights from StaticDelivr." />
-        <meta name="keywords" content="newsletter, StaticDelivr, open source, CDN, community updates" />
-        <meta name="robots" content="index, follow" />
+        <title>Newsletter | CDN Updates & News - StaticDelivr</title>
+        <meta name="description" content="Subscribe to the StaticDelivr newsletter for the latest CDN updates, technical insights, performance tips, and open-source community highlights." />
+        <meta name="keywords" content="CDN newsletter, StaticDelivr updates, open source news, developer newsletter, CDN performance tips, tech updates" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
         <meta property="og:url" content="https://staticdelivr.com/newsletter" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Newsletter - StaticDelivr" />
-        <meta property="og:description" content="Stay updated with the latest news, technical insights, and community highlights from StaticDelivr." />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content="Newsletter | CDN Updates & News - StaticDelivr" />
+        <meta property="og:description" content="Subscribe to the StaticDelivr newsletter for the latest CDN updates, technical insights, and open-source community highlights." />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/newsletter" />
-        <meta name="twitter:title" content="Newsletter - StaticDelivr" />
-        <meta name="twitter:description" content="Stay updated with the latest news, technical insights, and community highlights from StaticDelivr." />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:title" content="Newsletter | CDN Updates & News - StaticDelivr" />
+        <meta name="twitter:description" content="Subscribe to the StaticDelivr newsletter for the latest CDN updates, technical insights, and open-source community highlights." />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

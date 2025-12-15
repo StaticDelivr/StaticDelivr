@@ -9,29 +9,72 @@ import { BlurFade } from '../../components/ui/blur-fade';
 import rehypeHighlight from 'rehype-highlight';
 
 const DocPage = ({ frontmatter, mdxSource, docsContent, slug }) => {
+  // Generate FAQ Schema for the FAQ page
+  const faqSchema = slug === 'faq' ? {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "What is StaticDelivr?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "StaticDelivr is a free, open-source CDN designed to serve static assets globally, ensuring fast and reliable delivery."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Can I use StaticDelivr for private repositories?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "StaticDelivr currently supports public repositories on GitHub and npm. Private repositories are not supported."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "How can I report issues?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "You can report any issues through our GitHub repository's issues section."
+        }
+      }
+    ]
+  } : null;
+
   return (
     <DocsLayout docsContent={docsContent} currentSlug={`/docs/${slug}`}>
       {/* Dynamic Metadata */}
       <Head>
-        <title>{frontmatter.title} - StaticDelivr</title>
-        <meta name="description" content={frontmatter.description || 'Documentation Page'} />
-        <meta name="keywords" content={`${frontmatter.title}, StaticDelivr, documentation, CDN, content delivery`} />
-        <meta name="robots" content="index, follow" />
+        <title>{frontmatter.title} | Documentation - StaticDelivr</title>
+        <meta name="description" content={frontmatter.description || 'StaticDelivr documentation - Learn how to use the free open-source CDN for static assets.'} />
+        <meta name="keywords" content={`${frontmatter.title}, StaticDelivr, documentation, CDN, content delivery, open source CDN`} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
         
         {/* Open Graph Tags */}
         <meta property="og:url" content={`https://staticdelivr.com/docs/${slug}`} />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={`${frontmatter.title} - StaticDelivr`} />
-        <meta property="og:description" content={frontmatter.description || 'Documentation Page'} />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content={`${frontmatter.title} | Documentation - StaticDelivr`} />
+        <meta property="og:description" content={frontmatter.description || 'StaticDelivr documentation - Learn how to use the free open-source CDN.'} />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content={`https://staticdelivr.com/docs/${slug}`} />
-        <meta name="twitter:title" content={`${frontmatter.title} - StaticDelivr`} />
-        <meta name="twitter:description" content={frontmatter.description || 'Documentation Page'} />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:title" content={`${frontmatter.title} | Documentation - StaticDelivr`} />
+        <meta name="twitter:description" content={frontmatter.description || 'StaticDelivr documentation - Learn how to use the free open-source CDN.'} />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+
+        {/* FAQ Schema for FAQ page */}
+        {faqSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+          />
+        )}
       </Head>
 
       <div className="max-w-4xl mx-auto px-4 py-8">

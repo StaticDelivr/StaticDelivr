@@ -141,11 +141,29 @@ const DocsIndex = ({ docsContent }) => {
   return (
     <>
       <Head>
-        <title>Documentation - StaticDelivr</title>
+        <title>Documentation | Guides & API Reference - StaticDelivr</title>
         <meta
           name="description"
-          content="Explore the comprehensive documentation for StaticDelivr, including guides and resources to help you get started, contribute, and more."
+          content="Comprehensive documentation for StaticDelivr CDN. Learn how to integrate the free open-source CDN, optimize performance, and access API references."
         />
+        <meta name="keywords" content="StaticDelivr documentation, CDN guides, API reference, open source CDN tutorial, getting started, developer docs" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
+
+        <meta property="og:url" content="https://staticdelivr.com/docs" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Documentation | Guides & API Reference - StaticDelivr" />
+        <meta property="og:description" content="Comprehensive documentation for StaticDelivr CDN. Learn how to integrate the free open-source CDN." />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta property="twitter:domain" content="staticdelivr.com" />
+        <meta property="twitter:url" content="https://staticdelivr.com/docs" />
+        <meta name="twitter:title" content="Documentation | Guides & API Reference - StaticDelivr" />
+        <meta name="twitter:description" content="Comprehensive documentation for StaticDelivr CDN. Learn how to integrate the free open-source CDN." />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <DocsLayout docsContent={docsContent} currentSlug="/docs">

@@ -51,26 +51,62 @@ export default function BlogPost({ post }) {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>{seoTitle || title} - StaticDelivr</title>
-        <meta name="description" content={seoDescription || 'Default description if not available'} />
+        <title>{seoTitle || title} | Blog - StaticDelivr</title>
+        <meta name="description" content={seoDescription || 'Read the latest insights from StaticDelivr'} />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
         
         {/* Open Graph Meta Tags */}
-        <meta property="og:title" content={`${seoTitle || title} - StaticDelivr`} />
-        <meta property="og:description" content={seoDescription || 'Default description if not available'} />
-        <meta property="og:image" content={featuredImage ? `https:${featuredImage.fields.file.url}` : '/default-image.jpg'} />
+        <meta property="og:title" content={`${seoTitle || title} | Blog - StaticDelivr`} />
+        <meta property="og:description" content={seoDescription || 'Read the latest insights from StaticDelivr'} />
+        <meta property="og:image" content={featuredImage ? `https:${featuredImage.fields.file.url}` : 'https://staticdelivr.com/assets/img/og-image.png'} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
         <meta property="og:type" content="article" />
         <meta property="og:url" content={`https://staticdelivr.com/blog/${post.fields.slug}`} />
+        <meta property="og:site_name" content="StaticDelivr" />
+        <meta property="article:published_time" content={publishDate} />
 
         {/* Twitter Card Meta Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content={`https://staticdelivr.com/blog/${post.fields.slug}`} />
-        <meta name="twitter:title" content={`${seoTitle || title} - StaticDelivr`} />
-        <meta name="twitter:description" content={seoDescription || 'Default description if not available'} />
-        <meta name="twitter:image" content={featuredImage ? `https:${featuredImage.fields.file.url}` : '/default-image.jpg'} />
+        <meta name="twitter:title" content={`${seoTitle || title} | Blog - StaticDelivr`} />
+        <meta name="twitter:description" content={seoDescription || 'Read the latest insights from StaticDelivr'} />
+        <meta name="twitter:image" content={featuredImage ? `https:${featuredImage.fields.file.url}` : 'https://staticdelivr.com/assets/img/og-image.png'} />
         
         {/* Tags Meta Tag (for SEO) */}
         <meta name="keywords" content={tags ? tags.join(', ') : 'StaticDelivr, Blog, Content Delivery, CDN'} />
+        
+        {/* Article Schema */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "BlogPosting",
+              "headline": seoTitle || title,
+              "description": seoDescription,
+              "image": featuredImage ? `https:${featuredImage.fields.file.url}` : 'https://staticdelivr.com/assets/img/og-image.png',
+              "datePublished": publishDate,
+              "author": {
+                "@type": "Organization",
+                "name": "StaticDelivr"
+              },
+              "publisher": {
+                "@type": "Organization",
+                "name": "StaticDelivr",
+                "logo": {
+                  "@type": "ImageObject",
+                  "url": "https://staticdelivr.com/assets/img/icons/staticdelivr-logo.svg"
+                }
+              },
+              "mainEntityOfPage": {
+                "@type": "WebPage",
+                "@id": `https://staticdelivr.com/blog/${post.fields.slug}`
+              }
+            })
+          }}
+        />
       </Head>
 
       <Header />

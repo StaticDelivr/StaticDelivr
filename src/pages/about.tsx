@@ -101,23 +101,26 @@ const AboutPage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>About - StaticDelivr</title>
+        <title>About StaticDelivr | Free Open Source CDN Platform</title>
         <meta name="description" content="Learn about StaticDelivr, a free CDN for open-source projects that ensures fast and reliable delivery of assets, libraries, and resources worldwide." />
         <meta name="keywords" content="StaticDelivr, free CDN, open source CDN, content delivery network, CDN for open-source projects, fast CDN, reliable CDN, open-source assets delivery, web performance, content delivery, global CDN, infrastructure for open-source, fast delivery of resources" />
-        <meta name="robots" content="index, follow" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
         <meta property="og:url" content="https://staticdelivr.com/about" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="About - StaticDelivr" />
+        <meta property="og:title" content="About StaticDelivr | Free Open Source CDN Platform" />
         <meta property="og:description" content="Learn about StaticDelivr, a free CDN for open-source projects that ensures fast and reliable delivery of assets, libraries, and resources worldwide." />
-        <meta property="og:image" content="" />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/about" />
-        <meta name="twitter:title" content="About - StaticDelivr" />
+        <meta name="twitter:title" content="About StaticDelivr | Free Open Source CDN Platform" />
         <meta name="twitter:description" content="Learn about StaticDelivr, a free CDN for open-source projects that ensures fast and reliable delivery of assets, libraries, and resources worldwide." />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

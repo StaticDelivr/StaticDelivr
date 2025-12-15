@@ -115,23 +115,26 @@ const ContactPage: React.FC = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>Contact - StaticDelivr</title>
-        <meta name="description" content="Get in touch with the StaticDelivr team. Reach out with your questions, suggestions, or feedback." />
-        <meta name="keywords" content="contact StaticDelivr, reach out, contact support, questions, feedback, suggestions, open-source support, StaticDelivr team, get in touch, customer support, StaticDelivr contact" />
-        <meta name="robots" content="index, follow" />
+        <title>Contact Us | Get Support - StaticDelivr</title>
+        <meta name="description" content="Get in touch with the StaticDelivr team. Reach out for support, questions, suggestions, or partnership inquiries. We're here to help!" />
+        <meta name="keywords" content="contact StaticDelivr, CDN support, get help, feedback, questions, partnership, customer support, reach out" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
         <meta property="og:url" content="https://staticdelivr.com/contact" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Contact - StaticDelivr" />
-        <meta property="og:description" content="Get in touch with the StaticDelivr team. Reach out with your questions, suggestions, or feedback." />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content="Contact Us | Get Support - StaticDelivr" />
+        <meta property="og:description" content="Get in touch with the StaticDelivr team. We're here to help with your questions and feedback." />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/contact" />
-        <meta name="twitter:title" content="Contact - StaticDelivr" />
-        <meta name="twitter:description" content="Get in touch with the StaticDelivr team. Reach out with your questions, suggestions, or feedback." />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:title" content="Contact Us | Get Support - StaticDelivr" />
+        <meta name="twitter:description" content="Get in touch with the StaticDelivr team. We're here to help with your questions and feedback." />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

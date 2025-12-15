@@ -89,23 +89,26 @@ const SponsorsPage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>Our Sponsors - StaticDelivr</title>
-        <meta name="description" content="Meet our amazing sponsors who support StaticDelivr and make free CDN services possible for the open-source community." />
-        <meta name="keywords" content="StaticDelivr sponsors, open-source support, CDN sponsorship, tech companies" />
-        <meta name="robots" content="index, follow" />
+        <title>Our Sponsors | Support Open Source CDN - StaticDelivr</title>
+        <meta name="description" content="Meet the amazing sponsors who make StaticDelivr possible. Their support enables free CDN services for the open-source community worldwide." />
+        <meta name="keywords" content="StaticDelivr sponsors, open source sponsors, CDN sponsorship, tech sponsors, support open source, CDN infrastructure sponsors" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
         <meta property="og:url" content="https://staticdelivr.com/sponsors" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Our Sponsors - StaticDelivr" />
-        <meta property="og:description" content="Learn more about the sponsors backing StaticDelivr and their contributions to the open-source community." />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content="Our Sponsors | Support Open Source CDN - StaticDelivr" />
+        <meta property="og:description" content="Meet the amazing sponsors who make StaticDelivr possible. Their support enables free CDN services for the open-source community." />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/sponsors" />
-        <meta name="twitter:title" content="Our Sponsors - StaticDelivr" />
-        <meta name="twitter:description" content="Discover the incredible companies sponsoring StaticDelivr and supporting the open-source ecosystem." />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:title" content="Our Sponsors | Support Open Source CDN - StaticDelivr" />
+        <meta name="twitter:description" content="Meet the amazing sponsors who make StaticDelivr possible. Their support enables free CDN services for the open-source community." />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
       
       <Header />

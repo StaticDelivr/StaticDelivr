@@ -145,23 +145,26 @@ const StatsPage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>Network Statistics - StaticDelivr</title>
-        <meta name="description" content="Explore real-time insights into StaticDelivr's global network performance and usage, including monthly requests, bandwidth, and cache hit rate." />
-        <meta name="keywords" content="StaticDelivr, network statistics, CDN performance, bandwidth, cache hit rate" />
-        <meta name="robots" content="index, follow" />
+        <title>CDN Statistics & Performance Metrics | StaticDelivr</title>
+        <meta name="description" content="Real-time insights into StaticDelivr's global CDN performance. View monthly requests, bandwidth usage, cache hit rates, and network status across 350+ PoPs." />
+        <meta name="keywords" content="CDN statistics, network performance, StaticDelivr stats, bandwidth metrics, cache hit rate, CDN analytics, request statistics, global CDN performance" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
         <meta property="og:url" content="https://staticdelivr.com/stats" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Network Statistics - StaticDelivr" />
-        <meta property="og:description" content="Discover key metrics of StaticDelivr's performance including monthly requests, bandwidth usage, and cache hit rate." />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content="CDN Statistics & Performance Metrics | StaticDelivr" />
+        <meta property="og:description" content="Real-time insights into StaticDelivr's global CDN performance. View monthly requests, bandwidth usage, and cache hit rates." />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/stats" />
-        <meta name="twitter:title" content="Network Statistics - StaticDelivr" />
-        <meta name="twitter:description" content="Discover key metrics of StaticDelivr's performance including monthly requests, bandwidth usage, and cache hit rate." />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:title" content="CDN Statistics & Performance Metrics | StaticDelivr" />
+        <meta name="twitter:description" content="Real-time insights into StaticDelivr's global CDN performance. View monthly requests, bandwidth usage, and cache hit rates." />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

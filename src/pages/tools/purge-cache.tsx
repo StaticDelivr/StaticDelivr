@@ -29,23 +29,26 @@ const PurgeCachePage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>Purge Cache - StaticDelivr</title>
-        <meta name="description" content="Ensure your users see the latest version of your files. Use StaticDelivr's cache purge tool to refresh assets in just a few clicks." />
-        <meta name="keywords" content="StaticDelivr, cache purge, CDN cache, asset refresh, purge tool" />
-        <meta name="robots" content="index, follow" />
+        <title>Purge CDN Cache Tool | Clear Assets - StaticDelivr</title>
+        <meta name="description" content="Instantly purge cached files from StaticDelivr's global CDN network. Ensure users always see the latest version of your assets with our easy cache purge tool." />
+        <meta name="keywords" content="purge cache, CDN cache clear, refresh CDN assets, cache invalidation, StaticDelivr cache, clear cached files, update CDN content" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
 
         <meta property="og:url" content="https://staticdelivr.com/tools/purge-cache" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Purge Cache - StaticDelivr" />
-        <meta property="og:description" content="Easily update your assets with StaticDelivr's cache purge tool. Ensure your users always get the latest versions." />
-        <meta property="og:image" content="" />
+        <meta property="og:title" content="Purge CDN Cache Tool | Clear Assets - StaticDelivr" />
+        <meta property="og:description" content="Instantly purge cached files from StaticDelivr's global CDN network. Ensure users always see the latest version of your assets." />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/tools/purge-cache" />
-        <meta name="twitter:title" content="Purge Cache - StaticDelivr" />
-        <meta name="twitter:description" content="Easily update your assets with StaticDelivr's cache purge tool. Ensure your users always get the latest versions." />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:title" content="Purge CDN Cache Tool | Clear Assets - StaticDelivr" />
+        <meta name="twitter:description" content="Instantly purge cached files from StaticDelivr's global CDN network. Ensure users always see the latest version of your assets." />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <Header />

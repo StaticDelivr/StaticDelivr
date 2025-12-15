@@ -1,0 +1,100 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background gradient -->
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#0a0a0a"/>
+      <stop offset="50%" style="stop-color:#171717"/>
+      <stop offset="100%" style="stop-color:#0a0a0a"/>
+    </linearGradient>
+    <linearGradient id="accentGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#3b82f6"/>
+      <stop offset="50%" style="stop-color:#8b5cf6"/>
+      <stop offset="100%" style="stop-color:#ec4899"/>
+    </linearGradient>
+    <linearGradient id="textGradient" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#60a5fa"/>
+      <stop offset="100%" style="stop-color:#a78bfa"/>
+    </linearGradient>
+    <!-- Logo gradient (purple to red) -->
+    <linearGradient id="logoGradient" x1="0%" y1="50%" x2="100%" y2="50%">
+      <stop offset="0%" stop-color="#7b4397"/>
+      <stop offset="100%" stop-color="#dc2430"/>
+    </linearGradient>
+    <!-- Glow effect -->
+    <filter id="glow" x="-50%" y="-50%" width="200%" height="200%">
+      <feGaussianBlur stdDeviation="20" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+    <!-- Logo glow effect -->
+    <filter id="logoGlow" x="-100%" y="-100%" width="300%" height="300%">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background -->
+  <rect width="1200" height="630" fill="url(#bgGradient)"/>
+  
+  <!-- Decorative grid pattern -->
+  <g opacity="0.1">
+    <pattern id="grid" width="60" height="60" patternUnits="userSpaceOnUse">
+      <path d="M 60 0 L 0 0 0 60" fill="none" stroke="#ffffff" stroke-width="0.5"/>
+    </pattern>
+    <rect width="1200" height="630" fill="url(#grid)"/>
+  </g>
+  
+  <!-- Decorative circles -->
+  <circle cx="100" cy="100" r="200" fill="url(#accentGradient)" opacity="0.1" filter="url(#glow)"/>
+  <circle cx="1100" cy="530" r="250" fill="url(#accentGradient)" opacity="0.08" filter="url(#glow)"/>
+  
+  <!-- StaticDelivr Logo Icon (centered, scaled up) -->
+  <g transform="translate(551, 140) scale(1.0)" filter="url(#logoGlow)">
+    <path fill="url(#logoGradient)" fill-rule="evenodd" d="M0,31.39h0c0,.94.45,1.86,1.34,2.42l13.58,8.49,29.07-18.17c2.78-1.74,6.3-1.74,9.08,0l29.07,18.17,13.58-8.49c.89-.56,1.34-1.49,1.34-2.41h0c0-.94-.45-1.87-1.34-2.43L50.06.43c-.93-.58-2.1-.58-3.03,0L1.36,28.97C.47,29.53.02,30.46.02,31.4h-.02ZM97.06,59.93c0-.93-.45-1.86-1.34-2.41l-13.58-8.49-29.07,18.17c-2.78,1.74-6.3,1.74-9.08,0l-29.07-18.17L1.34,57.52c-.89.56-1.34,1.49-1.34,2.42h0c0,.94.45,1.86,1.34,2.42l45.67,28.54c.46.29.99.43,1.51.43s1.05-.14,1.51-.43l45.67-28.54c.89-.56,1.34-1.49,1.34-2.41h0s.02-.02.02-.02ZM50.05,62.36l26.71-16.69-26.71-16.69c-.93-.58-2.1-.58-3.03,0l-26.71,16.69,26.71,16.69c.93.58,2.1.58,3.03,0Z"/>
+  </g>
+  
+  <!-- Main title -->
+  <text x="600" y="290" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="72" font-weight="800" fill="#ffffff">
+    StaticDelivr
+  </text>
+  
+  <!-- Tagline -->
+  <text x="600" y="355" text-anchor="middle" font-family="system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="32" font-weight="500" fill="#a1a1aa">
+    Free &amp; Open Source CDN
+  </text>
+  
+  <!-- Accent line -->
+  <rect x="450" y="385" width="300" height="4" rx="2" fill="url(#accentGradient)"/>
+  
+  <!-- Stats badges -->
+  <g transform="translate(250, 440)">
+    <!-- 350+ PoPs -->
+    <rect x="0" y="0" width="200" height="70" rx="12" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+    <text x="100" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="url(#textGradient)">350+</text>
+    <text x="100" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#71717a">Global PoPs</text>
+  </g>
+  
+  <g transform="translate(500, 440)">
+    <!-- Multi-CDN -->
+    <rect x="0" y="0" width="200" height="70" rx="12" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+    <text x="100" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="url(#textGradient)">Multi-CDN</text>
+    <text x="100" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#71717a">Architecture</text>
+  </g>
+  
+  <g transform="translate(750, 440)">
+    <!-- 100% Free -->
+    <rect x="0" y="0" width="200" height="70" rx="12" fill="#18181b" stroke="#27272a" stroke-width="1"/>
+    <text x="100" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="url(#textGradient)">100%</text>
+    <text x="100" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#71717a">Free Forever</text>
+  </g>
+  
+  <!-- URL at bottom -->
+  <text x="600" y="580" text-anchor="middle" font-family="system-ui, sans-serif" font-size="20" fill="#52525b">
+    staticdelivr.com
+  </text>
+</svg>

@@ -13,25 +13,28 @@ const PrivacyPolicy = ({ frontmatter, mdxSource }) => {
     <LegalLayout title={frontmatter.title}>
       {/* Dynamic Metadata */}
       <Head>
-        <title>{frontmatter.title} - StaticDelivr</title>
-        <meta name="description" content={frontmatter.description || 'StaticDelivr Privacy Policy - Learn how we collect, use, and protect your data.'} />
-        <meta name="keywords" content={`${frontmatter.title}, StaticDelivr, privacy policy, data protection, user privacy`} />
-        <meta name="robots" content="index, follow" />
+        <title>{frontmatter.title} | Legal - StaticDelivr</title>
+        <meta name="description" content={frontmatter.description || 'StaticDelivr Privacy Policy - Learn how we collect, use, and protect your data when using our free CDN service.'} />
+        <meta name="keywords" content="privacy policy, StaticDelivr privacy, data protection, GDPR, user privacy, CDN privacy" />
+        <meta name="robots" content="index, follow, max-image-preview:large" />
         
         {/* Open Graph Tags */}
         <meta property="og:url" content="https://staticdelivr.com/legal/privacy-policy" />
         <meta property="og:type" content="article" />
-        <meta property="og:title" content={`${frontmatter.title} - StaticDelivr`} />
+        <meta property="og:title" content={`${frontmatter.title} | Legal - StaticDelivr`} />
         <meta property="og:description" content={frontmatter.description || 'StaticDelivr Privacy Policy - Learn how we collect, use, and protect your data.'} />
-        <meta property="og:image" content="" />
+        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:site_name" content="StaticDelivr" />
 
         {/* Twitter Card Tags */}
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/legal/privacy-policy" />
-        <meta name="twitter:title" content={`${frontmatter.title} - StaticDelivr`} />
+        <meta name="twitter:title" content={`${frontmatter.title} | Legal - StaticDelivr`} />
         <meta name="twitter:description" content={frontmatter.description || 'StaticDelivr Privacy Policy - Learn how we collect, use, and protect your data.'} />
-        <meta name="twitter:image" content="" />
+        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
       <BlurFade delay={0.1} inView>
