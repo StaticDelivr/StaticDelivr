@@ -3,7 +3,11 @@ import Head from 'next/head';
 import { Globe, Server, Zap, Info, Shield, Activity, Network } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import NetworkMap from '@/components/NetworkMap';
+import dynamic from 'next/dynamic';
+const NetworkMap = dynamic(() => import('@/components/NetworkMap'), {
+  ssr: false,
+  loading: () => <div className="h-full w-full bg-zinc-50" />,
+});
 import { AuroraBackground } from '../components/ui/aurora-background';
 import { BentoGrid } from '../components/ui/bento-grid';
 import { BlurFade } from '../components/ui/blur-fade';

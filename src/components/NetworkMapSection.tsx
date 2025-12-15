@@ -40,6 +40,9 @@ const NetworkMapSection = () => {
                <StaticDelivrImage 
                 src="/assets/img/network-map.png"
                 alt="World Map showing CDN nodes"
+                width={1090}
+                height={455}
+                quality={75}
                 className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 opacity-80 dark:opacity-60 grayscale hover:grayscale-0"
               />
               
