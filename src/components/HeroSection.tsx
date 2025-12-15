@@ -23,10 +23,15 @@ const HeroSection = () => {
     const fetchMonthlyRequests = async () => {
       try {
         const response = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         setMonthlyRequests(data.total.requests);
       } catch (error) {
         console.error('Error fetching monthly requests data:', error);
+        // Set a fallback value to prevent UI issues
+        setMonthlyRequests(100000000000); // 100B+ as shown in UI
       }
     };
     fetchMonthlyRequests();

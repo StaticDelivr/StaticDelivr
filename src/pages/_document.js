@@ -5,9 +5,16 @@ class MyDocument extends Document {
     return (
       <Html lang="en">
         <Head>
-          {/* Microsoft Clarity Tracking Script */}
+          {/* Preconnect to external domains for faster loading */}
+          <link rel="preconnect" href="https://stats.staticdelivr.com" />
+          <link rel="preconnect" href="https://cdn.staticdelivr.com" />
+          <link rel="preconnect" href="https://www.clarity.ms" />
+          <link rel="preconnect" href="https://scripts.clarity.ms" />
+          
+          {/* Microsoft Clarity Tracking Script - Deferred for better performance */}
           <script
             type="text/javascript"
+            defer
             dangerouslySetInnerHTML={{
               __html: `
                 (function(c,l,a,r,i,t,y){

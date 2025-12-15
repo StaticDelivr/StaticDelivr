@@ -120,7 +120,8 @@ const Header = () => {
               alt="StaticDelivr" 
               width={128}
               height={32}
-              className="h-8 dark:invert-0" 
+              className="h-8 dark:invert-0"
+              priority
             />
           </Link>
 
@@ -129,25 +130,19 @@ const Header = () => {
             <NavigationMenu>
               <NavigationMenuList>
                 <NavigationMenuItem>
-                  <Link href="/about" legacyBehavior passHref>
-                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
-                      About
-                    </NavigationMenuLink>
-                  </Link>
+                  <NavigationMenuLink href="/about" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
+                    About
+                  </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link href="/network" legacyBehavior passHref>
-                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
-                      Network
-                    </NavigationMenuLink>
-                  </Link>
+                  <NavigationMenuLink href="/network" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
+                    Network
+                  </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
-                  <Link href="/stats" legacyBehavior passHref>
-                    <NavigationMenuLink className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
-                      Stats
-                    </NavigationMenuLink>
-                  </Link>
+                  <NavigationMenuLink href="/stats" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
+                    Stats
+                  </NavigationMenuLink>
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
