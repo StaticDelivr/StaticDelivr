@@ -8,6 +8,7 @@ import { cn } from '@/lib/utils';
 // Define the manual order for categories (moved outside component as constants)
 const categoryOrder = [
   "Introduction",
+  "Integration",
   "Use Cases",
   "Developer Resources",
   "Contribution",
@@ -16,6 +17,7 @@ const categoryOrder = [
 
 const pageOrder = {
   "Introduction": ["Getting Started", "FAQ"],
+  "Integration": ["WordPress Integration Guide", "Frontend Usage Guide"],
   "Use Cases": ["Supported Use Cases"],
   "Developer Resources": ["API & Tools", "Caching & Performance"],
   "Contribution": ["Contributing"],
@@ -28,13 +30,23 @@ const DocsLayout = ({ children, docsContent, currentSlug }) => {
 
   useEffect(() => {
     const sortedCategories = docsContent
-      .sort((a, b) => categoryOrder.indexOf(a.category) - categoryOrder.indexOf(b.category))
+      .sort((a, b) => {
+        const aIndex = categoryOrder.indexOf(a.category);
+        const bIndex = categoryOrder.indexOf(b.category);
+        // Put unknown categories at the end
+        return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+      })
       .map((category) => ({
         ...category,
-        items: category.items.sort((a, b) => 
-          pageOrder[category.category].indexOf(a.title) - 
-          pageOrder[category.category].indexOf(b.title)
-        )
+        items: category.items.sort((a, b) => {
+          const order = pageOrder[category.category];
+          // If category not in pageOrder, don't sort
+          if (!order) return 0;
+          const aIndex = order.indexOf(a.title);
+          const bIndex = order.indexOf(b.title);
+          // Put unknown pages at the end
+          return (aIndex === -1 ? 999 : aIndex) - (bIndex === -1 ? 999 : bIndex);
+        })
       }));
     setSortedDocsContent(sortedCategories);
   }, [docsContent]);

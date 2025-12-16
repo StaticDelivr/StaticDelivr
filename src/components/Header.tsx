@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Github, Menu, BookOpen, ArrowRight, Newspaper, Mail, RefreshCw, GitBranch, Globe, BarChart3, Heart, Info, X } from 'lucide-react';
+import { Github, Menu, BookOpen, ArrowRight, Newspaper, Mail, RefreshCw, GitBranch, Globe, BarChart3, Heart, Info, X, Package, Blocks } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
@@ -146,6 +146,26 @@ const Header = () => {
                 </NavigationMenuItem>
                 
                 <NavigationMenuItem>
+                  <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 data-[state=open]:bg-transparent data-[state=open]:text-zinc-900 dark:data-[state=open]:text-zinc-100">Products</NavigationMenuTrigger>
+                  <NavigationMenuContent>
+                    <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl">
+                      <ListItem href="/npm" title="npm CDN">
+                        Serve any npm package via our global CDN instantly.
+                      </ListItem>
+                      <ListItem href="/wordpress" title="WordPress Plugin">
+                        Free CDN plugin with automatic image optimization.
+                      </ListItem>
+                      <ListItem href="/github" title="GitHub CDN">
+                        Convert raw GitHub URLs to production-ready CDN links.
+                      </ListItem>
+                      <ListItem href="/docs/frontend-usage" title="React Component">
+                        StaticDelivrImage component for frontend developers.
+                      </ListItem>
+                    </ul>
+                  </NavigationMenuContent>
+                </NavigationMenuItem>
+
+                <NavigationMenuItem>
                   <NavigationMenuTrigger className="bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100 data-[state=open]:bg-transparent data-[state=open]:text-zinc-900 dark:data-[state=open]:text-zinc-100">Tools</NavigationMenuTrigger>
                   <NavigationMenuContent>
                     <ul className="grid w-[400px] gap-3 p-4 md:w-[500px] md:grid-cols-2 lg:w-[600px] bg-white dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 rounded-xl">
@@ -261,6 +281,28 @@ const Header = () => {
                       href="/sponsors" 
                       icon={<Heart className="w-5 h-5" />} 
                       label="Sponsors" 
+                      onClick={handleMobileItemClick}
+                    />
+                  </div>
+                  
+                  {/* Divider */}
+                  <div className="my-4 border-t border-zinc-100 dark:border-zinc-800" />
+                  
+                  {/* Products Section */}
+                  <div className="px-4 mb-2">
+                    <h3 className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Products</h3>
+                  </div>
+                  <div className="px-2 space-y-1">
+                    <MobileNavItem 
+                      href="/npm" 
+                      icon={<Package className="w-5 h-5" />} 
+                      label="npm CDN" 
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem 
+                      href="/wordpress" 
+                      icon={<Blocks className="w-5 h-5" />} 
+                      label="WordPress Plugin" 
                       onClick={handleMobileItemClick}
                     />
                   </div>

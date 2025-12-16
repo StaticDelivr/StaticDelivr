@@ -81,7 +81,9 @@ export default function Home() {
                   },
                   "description": "Free and open-source CDN for open source projects with 570+ global PoPs",
                   "sameAs": [
-                    "https://github.com/StaticDelivr/StaticDelivr"
+                    "https://github.com/StaticDelivr/StaticDelivr",
+                    "https://twitter.com/staticdelivr",
+                    "https://www.npmjs.com/package/staticdelivr"
                   ],
                   "contactPoint": {
                     "@type": "ContactPoint",
@@ -98,25 +100,76 @@ export default function Home() {
                   "publisher": {
                     "@id": "https://staticdelivr.com/#organization"
                   },
-                  "inLanguage": "en-US"
+                  "inLanguage": "en-US",
+                  "potentialAction": {
+                    "@type": "SearchAction",
+                    "target": "https://staticdelivr.com/npm?q={search_term_string}",
+                    "query-input": "required name=search_term_string"
+                  }
                 },
                 {
                   "@type": "SoftwareApplication",
+                  "@id": "https://staticdelivr.com/#cdn",
                   "name": "StaticDelivr CDN",
                   "applicationCategory": "DeveloperApplication",
+                  "applicationSubCategory": "Content Delivery Network",
                   "operatingSystem": "Any",
                   "offers": {
                     "@type": "Offer",
                     "price": "0",
                     "priceCurrency": "USD"
                   },
-                  "description": "Free and reliable CDN serving billions of requests with 570+ global PoPs",
+                  "description": "Free and reliable CDN serving billions of requests with 570+ global PoPs. Supports npm packages, GitHub files, WordPress assets, and Google Fonts.",
+                  "featureList": [
+                    "570+ Global Points of Presence",
+                    "npm package hosting",
+                    "GitHub file hosting",
+                    "WordPress plugin with image optimization",
+                    "Google Fonts proxy",
+                    "Multi-CDN architecture",
+                    "Free SSL/TLS",
+                    "DDoS protection"
+                  ],
                   "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "5",
                     "ratingCount": "1000",
                     "bestRating": "5"
+                  },
+                  "author": {
+                    "@id": "https://staticdelivr.com/#organization"
                   }
+                },
+                {
+                  "@type": "SoftwareApplication",
+                  "@id": "https://staticdelivr.com/#wordpress-plugin",
+                  "name": "StaticDelivr CDN WordPress Plugin",
+                  "applicationCategory": "WebApplication",
+                  "applicationSubCategory": "WordPress Plugin",
+                  "operatingSystem": "WordPress 5.8+",
+                  "offers": {
+                    "@type": "Offer",
+                    "price": "0",
+                    "priceCurrency": "USD"
+                  },
+                  "description": "Free WordPress CDN plugin with automatic image optimization to WebP/AVIF and smart fallback.",
+                  "downloadUrl": "https://wordpress.org/plugins/staticdelivr/",
+                  "softwareVersion": "1.3.0",
+                  "aggregateRating": {
+                    "@type": "AggregateRating",
+                    "ratingValue": "5",
+                    "ratingCount": "50",
+                    "bestRating": "5"
+                  }
+                },
+                {
+                  "@type": "SoftwareSourceCode",
+                  "@id": "https://staticdelivr.com/#npm-package",
+                  "name": "staticdelivr",
+                  "codeRepository": "https://github.com/StaticDelivr/StaticDelivr-CDN-NPM-Package",
+                  "programmingLanguage": "TypeScript",
+                  "runtimePlatform": "Node.js",
+                  "description": "React component library for automatic image optimization via StaticDelivr CDN"
                 }
               ]
             })

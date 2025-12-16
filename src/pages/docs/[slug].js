@@ -105,6 +105,10 @@ const DocPage = ({ frontmatter, mdxSource, docsContent, slug }) => {
               [&_pre_code]:bg-transparent [&_pre_code]:p-0 [&_pre_code]:text-zinc-50 dark:[&_pre_code]:text-zinc-50
               prose-blockquote:border-l-4 prose-blockquote:border-zinc-300 dark:prose-blockquote:border-zinc-700 prose-blockquote:bg-zinc-50 dark:prose-blockquote:bg-zinc-900/50 prose-blockquote:py-1 prose-blockquote:px-4 prose-blockquote:rounded-r-lg
               prose-img:rounded-xl prose-img:shadow-lg prose-img:border prose-img:border-zinc-200 dark:prose-img:border-zinc-800
+              prose-table:border-collapse prose-table:w-full prose-table:border prose-table:border-zinc-200 dark:prose-table:border-zinc-800 prose-table:rounded-lg prose-table:overflow-hidden
+              prose-th:bg-zinc-100 dark:prose-th:bg-zinc-800 prose-th:px-4 prose-th:py-3 prose-th:text-left prose-th:font-semibold prose-th:border prose-th:border-zinc-200 dark:prose-th:border-zinc-700
+              prose-td:px-4 prose-td:py-3 prose-td:border prose-td:border-zinc-200 dark:prose-td:border-zinc-800
+              prose-tr:even:bg-zinc-50 dark:prose-tr:even:bg-zinc-900/50
               max-w-none"
           >
             <MDXRemote {...mdxSource} />

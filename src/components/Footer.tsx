@@ -4,31 +4,31 @@ import Image from 'next/image';
 import { Github, Twitter, Mail, Heart } from 'lucide-react';
 
 const footerLinks = {
-  product: {
-    title: 'Product',
+  products: {
+    title: 'Products',
     links: [
-      { label: 'Documentation', href: '/docs' },
-      { label: 'Network Map', href: '/network' },
-      { label: 'Statistics', href: '/stats' },
-      { label: 'Purge Cache', href: '/tools/purge-cache' },
+      { label: 'npm CDN', href: '/npm' },
+      { label: 'WordPress Plugin', href: '/wordpress' },
+      { label: 'GitHub CDN', href: '/github' },
+      { label: 'React Component', href: '/docs/frontend-usage' },
     ],
   },
   resources: {
     title: 'Resources',
     links: [
+      { label: 'Documentation', href: '/docs' },
       { label: 'Getting Started', href: '/docs/getting-started' },
       { label: 'API Reference', href: '/docs/api-tools' },
       { label: 'Blog', href: '/blog' },
-      { label: 'FAQ', href: '/docs/faq' },
     ],
   },
   company: {
     title: 'Company',
     links: [
       { label: 'About Us', href: '/about' },
+      { label: 'Network Map', href: '/network' },
+      { label: 'Statistics', href: '/stats' },
       { label: 'Sponsors', href: '/sponsors' },
-      { label: 'Contact', href: '/contact' },
-      { label: 'Contribute', href: '/contribute' },
     ],
   },
   legal: {
@@ -36,6 +36,8 @@ const footerLinks = {
     links: [
       { label: 'Terms of Service', href: '/legal/terms-of-service' },
       { label: 'Privacy Policy', href: '/legal/privacy-policy' },
+      { label: 'Contact', href: '/contact' },
+      { label: 'Contribute', href: '/contribute' },
     ],
   },
 };
@@ -141,9 +143,11 @@ const Footer = () => (
       <div className="border-t border-slate-800">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-            <p className="text-slate-300">
-              &copy; {new Date().getFullYear()} StaticDelivr. All rights reserved.
-            </p>
+            <div className="flex items-center gap-4">
+              <p className="text-slate-300">
+                &copy; {new Date().getFullYear()} StaticDelivr. All rights reserved.
+              </p>
+            </div>
             <p className="flex items-center gap-1 text-slate-300">
               Made with <Heart className="w-4 h-4 text-red-500 fill-red-500" aria-hidden={true} /> for the open source community
             </p>

@@ -69,6 +69,7 @@ export async function getStaticProps() {
   // Define the manual order for categories
   const categoryOrder = [
     "Introduction",
+    "Integration",
     "Use Cases",
     "Developer Resources",
     "Contribution",
@@ -83,6 +84,10 @@ export async function getStaticProps() {
     ],
     "Use Cases": [
       "Supported Use Cases"
+    ],
+    "Integration": [
+      "WordPress Integration Guide",
+      "Frontend Usage Guide"
     ],
     "Developer Resources": [
       "API & Tools",
