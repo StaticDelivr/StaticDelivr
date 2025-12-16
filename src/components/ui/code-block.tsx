@@ -46,7 +46,7 @@ export function CodeBlock({
     >
       {/* Language badge */}
       {language && (
-        <div className="absolute top-2 left-3 text-xs text-slate-500 font-mono">
+        <div className="absolute top-2 left-3 text-xs text-slate-200 font-mono">
           {language}
         </div>
       )}

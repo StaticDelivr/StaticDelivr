@@ -115,7 +115,7 @@ const HeroSection = () => {
                   <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-yellow-500/80" />
                   <div className="w-2.5 h-2.5 sm:w-3 sm:h-3 rounded-full bg-green-500/80" />
                 </div>
-                <div className="text-[10px] sm:text-xs text-zinc-500 font-mono">example.html</div>
+                <div className="text-[10px] sm:text-xs text-zinc-200 font-mono">example.html</div>
                 <div className="w-8 sm:w-12" /> {/* Spacer for centering */}
               </div>
               <div className="p-3 sm:p-6 font-mono text-[10px] sm:text-sm md:text-base bg-zinc-950">
