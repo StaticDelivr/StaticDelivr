@@ -64,7 +64,7 @@ const Footer = () => (
               />
             </Link>
             <p className="text-sm text-slate-200 mb-6 max-w-xs">
-              A free, fast, and reliable CDN for open source projects. Serving billions of requests with 350+ global PoPs.
+              A free, fast, and reliable CDN for open source projects. Serving billions of requests with 570+ global PoPs.
             </p>
             
             {/* Social Links */}

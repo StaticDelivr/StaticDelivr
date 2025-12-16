@@ -13,7 +13,7 @@ StaticDelivr leverages powerful caching mechanisms and a global network of provi
 StaticDelivr automatically handles caching for you, caching assets on edge servers around the world for better performance.
 
 ### Performance Optimization
-With over 350+ Points of Presence (PoPs) globally, StaticDelivr ensures your assets are delivered with low latency and fast load times from servers that are geographically closer to your users.
+With over 570+ Points of Presence (PoPs) globally, StaticDelivr ensures your assets are delivered with low latency and fast load times from servers that are geographically closer to your users.
 
 ### Multiple Providers for Enhanced Reliability
 StaticDelivr uses multiple content delivery providers, ensuring high availability and performance through diverse and redundant networks. This multi-provider strategy helps deliver assets quickly and reliably, even in cases of network issues with one provider. 

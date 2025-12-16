@@ -35,7 +35,7 @@ export default function Home() {
     <div>
       <Head>
         <title>StaticDelivr - Free and Open Source CDN for Open Source Projects</title>
-        <meta name="description" content="StaticDelivr is a free and open-source CDN for accelerating open-source projects. With 350+ Points of Presence and multi-CDN support, it ensures fast, reliable content delivery worldwide." />
+        <meta name="description" content="StaticDelivr is a free and open-source CDN for accelerating open-source projects. With 570+ Points of Presence and multi-CDN support, it ensures fast, reliable content delivery worldwide." />
         <meta name="keywords" content="CDN, free CDN, open source CDN, StaticDelivr, npm CDN, github CDN, WordPress CDN, jsDelivr alternative, fast CDN, content delivery network, global CDN, free content delivery" />
         <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
         <meta name="author" content="StaticDelivr" />
@@ -79,7 +79,7 @@ export default function Home() {
                     "width": 128,
                     "height": 32
                   },
-                  "description": "Free and open-source CDN for open source projects with 350+ global PoPs",
+                  "description": "Free and open-source CDN for open source projects with 570+ global PoPs",
                   "sameAs": [
                     "https://github.com/StaticDelivr/StaticDelivr"
                   ],
@@ -110,7 +110,7 @@ export default function Home() {
                     "price": "0",
                     "priceCurrency": "USD"
                   },
-                  "description": "Free and reliable CDN serving billions of requests with 350+ global PoPs",
+                  "description": "Free and reliable CDN serving billions of requests with 570+ global PoPs",
                   "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "5",

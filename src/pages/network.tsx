@@ -102,15 +102,15 @@ const NetworkPage = () => {
   return (
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
-        <title>Global CDN Network | 350+ PoPs Worldwide - StaticDelivr</title>
-        <meta name="description" content="Explore StaticDelivr's global network with 350+ Points of Presence across 6 continents, offering sub-50ms latency and high-speed content delivery with advanced security." />
-        <meta name="keywords" content="global network, CDN network, StaticDelivr, content delivery, 350 locations, network capacity, PoPs, points of presence, multi-CDN, edge network, global CDN infrastructure" />
+        <title>Global CDN Network | 570+ PoPs Worldwide - StaticDelivr</title>
+        <meta name="description" content="Explore StaticDelivr's global network with 570+ Points of Presence across 6 continents, offering sub-50ms latency and high-speed content delivery with advanced security." />
+        <meta name="keywords" content="global network, CDN network, StaticDelivr, content delivery, 570 locations, network capacity, PoPs, points of presence, multi-CDN, edge network, global CDN infrastructure" />
         <meta name="robots" content="index, follow, max-image-preview:large" />
         
         <meta property="og:url" content="https://staticdelivr.com/network" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Global CDN Network | 350+ PoPs Worldwide - StaticDelivr" />
-        <meta property="og:description" content="Explore StaticDelivr's global network with 350+ Points of Presence across 6 continents, offering sub-50ms latency and high-speed content delivery." />
+        <meta property="og:title" content="Global CDN Network | 570+ PoPs Worldwide - StaticDelivr" />
+        <meta property="og:description" content="Explore StaticDelivr's global network with 570+ Points of Presence across 6 continents, offering sub-50ms latency and high-speed content delivery." />
         <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
         <meta property="og:image:width" content="1200" />
         <meta property="og:image:height" content="630" />
@@ -119,8 +119,8 @@ const NetworkPage = () => {
         <meta name="twitter:card" content="summary_large_image" />
         <meta property="twitter:domain" content="staticdelivr.com" />
         <meta property="twitter:url" content="https://staticdelivr.com/network" />
-        <meta name="twitter:title" content="Global CDN Network | 350+ PoPs Worldwide - StaticDelivr" />
-        <meta name="twitter:description" content="Explore StaticDelivr's global network with 350+ Points of Presence across 6 continents, offering sub-50ms latency and high-speed content delivery." />
+        <meta name="twitter:title" content="Global CDN Network | 570+ PoPs Worldwide - StaticDelivr" />
+        <meta name="twitter:description" content="Explore StaticDelivr's global network with 570+ Points of Presence across 6 continents, offering sub-50ms latency and high-speed content delivery." />
         <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
       </Head>
 
@@ -133,7 +133,7 @@ const NetworkPage = () => {
               Global Network
             </h1>
             <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl mx-auto">
-              Our network spans the globe with 350+ Points of Presence, ensuring lightning-fast content delivery worldwide.
+              Our network spans the globe with 570+ Points of Presence, ensuring lightning-fast content delivery worldwide.
             </p>
           </div>
         </AuroraBackground>
@@ -158,7 +158,7 @@ const NetworkPage = () => {
                   background={<GlobeBackground />}
                   className="col-span-1"
                 >
-                  <p className="text-3xl font-bold text-zinc-900 dark:text-white mt-2">350+</p>
+                  <p className="text-3xl font-bold text-zinc-900 dark:text-white mt-2">570+</p>
                   <p className="text-sm mt-1">Points of Presence</p>
                 </CustomBentoCard>
 

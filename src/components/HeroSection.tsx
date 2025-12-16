@@ -148,7 +148,7 @@ const HeroSection = () => {
 
             <div className="flex flex-col items-center justify-center gap-1 sm:gap-2">
               <div className="text-xl sm:text-3xl md:text-5xl font-mono font-bold text-zinc-900 dark:text-white tracking-tighter">
-                350+
+                570+
               </div>
               <div className="text-[9px] sm:text-xs font-mono text-zinc-500 dark:text-zinc-400 uppercase tracking-wider sm:tracking-widest text-center">Global PoPs</div>
             </div>

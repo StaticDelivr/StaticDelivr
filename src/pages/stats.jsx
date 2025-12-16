@@ -146,7 +146,7 @@ const StatsPage = () => {
     <div className="min-h-screen bg-white dark:bg-zinc-950">
       <Head>
         <title>CDN Statistics & Performance Metrics | StaticDelivr</title>
-        <meta name="description" content="Real-time insights into StaticDelivr's global CDN performance. View monthly requests, bandwidth usage, cache hit rates, and network status across 350+ PoPs." />
+        <meta name="description" content="Real-time insights into StaticDelivr's global CDN performance. View monthly requests, bandwidth usage, cache hit rates, and network status across 570+ PoPs." />
         <meta name="keywords" content="CDN statistics, network performance, StaticDelivr stats, bandwidth metrics, cache hit rate, CDN analytics, request statistics, global CDN performance" />
         <meta name="robots" content="index, follow, max-image-preview:large" />
 
@@ -227,7 +227,7 @@ const StatsPage = () => {
                   <ul className="space-y-4 mt-4">
                     <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-blue-500" />
-                      <span>350+ Points of Presence</span>
+                      <span>570+ Points of Presence</span>
                     </li>
                     <li className="flex items-center gap-3">
                       <div className="w-2 h-2 rounded-full bg-blue-500" />

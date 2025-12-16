@@ -85,7 +85,7 @@ const features = [
   {
     Icon: Globe2,
     name: "Global Network",
-    description: "350+ Points of Presence across 6 continents ensuring blazing fast content delivery worldwide with <50ms latency.",
+    description: "570+ Points of Presence across 6 continents ensuring blazing fast content delivery worldwide with <50ms latency.",
     href: "/network",
     cta: "View Network Map",
     background: <GlobeBackground />,

@@ -73,9 +73,9 @@
   
   <!-- Stats badges -->
   <g transform="translate(250, 440)">
-    <!-- 350+ PoPs -->
+    <!-- 570+ PoPs -->
     <rect x="0" y="0" width="200" height="70" rx="12" fill="#18181b" stroke="#27272a" stroke-width="1"/>
-    <text x="100" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="url(#textGradient)">350+</text>
+    <text x="100" y="35" text-anchor="middle" font-family="system-ui, sans-serif" font-size="24" font-weight="700" fill="url(#textGradient)">570+</text>
     <text x="100" y="55" text-anchor="middle" font-family="system-ui, sans-serif" font-size="14" fill="#71717a">Global PoPs</text>
   </g>
   
