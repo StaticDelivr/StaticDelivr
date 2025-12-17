@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Github, Menu, BookOpen, ArrowRight, Newspaper, Mail, RefreshCw, GitBranch, Globe, BarChart3, Heart, Info, X, Package, Blocks } from 'lucide-react';
+import { Github, Menu, BookOpen, ArrowRight, Newspaper, Mail, RefreshCw, GitBranch, Globe, BarChart3, Heart, Info, X, Package, Blocks, Code } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
@@ -155,14 +155,14 @@ const Header = () => {
                       <ListItem href="/github" title="GitHub CDN">
                         Convert raw GitHub URLs to production-ready CDN links.
                       </ListItem>
+                      <ListItem href="/package" title="React Component">
+                        StaticDelivrImage component for automatic optimization.
+                      </ListItem>
                       <ListItem href="/wordpress" title="WordPress Plugin">
                         Free CDN plugin with automatic image optimization.
                       </ListItem>
                       <ListItem href="/google-fonts" title="Google Fonts">
                         Privacy-first Google Fonts proxy with global delivery.
-                      </ListItem>
-                      <ListItem href="/docs/frontend-usage" title="React Component">
-                        StaticDelivrImage component for frontend developers.
                       </ListItem>
                     </ul>
                   </NavigationMenuContent>
@@ -306,6 +306,12 @@ const Header = () => {
                       href="/github"
                       icon={<GitBranch className="w-5 h-5" />}
                       label="GitHub CDN"
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem
+                      href="/package"
+                      icon={<Code className="w-5 h-5" />}
+                      label="React Component"
                       onClick={handleMobileItemClick}
                     />
                     <MobileNavItem

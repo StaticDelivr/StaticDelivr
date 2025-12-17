@@ -592,70 +592,31 @@ const NpmPage = () => {
         </div>
       </section>
 
-      {/* npm Package Section */}
-      <section className="py-24 px-4 bg-white dark:bg-black">
-        <div className="max-w-5xl mx-auto">
+      {/* React Component CTA Section */}
+      <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white dark:from-zinc-900 dark:to-zinc-950">
+        <div className="max-w-4xl mx-auto text-center">
           <BlurFade delay={0.1} inView>
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-emerald-50 dark:bg-emerald-900/20 text-emerald-600 dark:text-emerald-400 text-sm font-medium mb-4">
-                <Terminal className="w-4 h-4" />
-                npm Package
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-4">
-                Built for{" "}
-                <span className="bg-gradient-to-r from-emerald-600 to-teal-600 bg-clip-text text-transparent">
-                  React Developers
-                </span>
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Install our npm package for automatic image optimization with the StaticDelivrImage component.
-              </p>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.2} inView>
-            <div className="grid md:grid-cols-2 gap-8">
-              {/* Installation */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-                <div className="p-6">
-                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-4 text-lg">Installation</h3>
-                  <CodeBlock 
-                    code="npm install staticdelivr"
-                    language="bash"
-                  />
-                  <p className="mt-4 text-sm text-zinc-500 dark:text-zinc-400">
-                    Or with yarn: <code className="bg-zinc-100 dark:bg-zinc-800 px-1.5 py-0.5 rounded">yarn add staticdelivr</code>
-                  </p>
-                </div>
-              </div>
-
-              {/* Usage */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-                <div className="p-6">
-                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-4 text-lg">Basic Usage</h3>
-                  <CodeBlock 
-                    code={`import { StaticDelivrImage } from 'staticdelivr';
-
-<StaticDelivrImage
-  src="https://example.com/image.jpg"
-  width={800}
-  quality={80}
-  format="webp"
-/>`}
-                    language="jsx"
-                  />
-                </div>
-              </div>
-            </div>
-
-            <div className="mt-8 text-center">
+            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4">
+              Need Image Optimization?
+            </h2>
+            <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
+              Check out our React component for automatic WebP/AVIF conversion and CDN delivery.
+            </p>
+            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+              <Link
+                href="/package"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors"
+              >
+                <Package className="w-5 h-5" />
+                View React Component
+                <ArrowRight className="w-4 h-4" />
+              </Link>
               <Link
                 href="/docs/frontend-usage"
-                className="inline-flex items-center gap-2 text-orange-600 dark:text-orange-400 font-medium hover:underline"
+                className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white font-medium rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
               >
-                <BookOpen className="w-4 h-4" />
-                View full documentation
-                <ArrowRight className="w-4 h-4" />
+                <BookOpen className="w-5 h-5" />
+                View Documentation
               </Link>
             </div>
           </BlurFade>
