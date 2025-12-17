@@ -2,7 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Github, Package, Type, Globe } from 'lucide-react';
+import { Github, Package, Type, Globe, ArrowRight } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { CodeBlock } from '@/components/ui/code-block';
 
@@ -78,6 +78,16 @@ const QuickStartSection = () => {
                     allowOpen={true}
                   />
                 </div>
+
+                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                  <Link 
+                    href="/npm" 
+                    className="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                  >
+                    Learn more about npm packages
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
               </div>
             </div>
           </TabsContent>
@@ -108,6 +118,16 @@ const QuickStartSection = () => {
                     language="url"
                     allowOpen={true}
                   />
+                </div>
+
+                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                  <Link 
+                    href="/github" 
+                    className="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                  >
+                    Learn more about GitHub files
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
             </div>
@@ -170,6 +190,16 @@ const QuickStartSection = () => {
                     allowOpen={true}
                   />
                 </div>
+
+                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                  <Link 
+                    href="/wordpress" 
+                    className="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                  >
+                    Learn more about WordPress assets
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
+                </div>
               </div>
             </div>
           </TabsContent>
@@ -206,6 +236,16 @@ const QuickStartSection = () => {
                     language="html"
                     allowOpen={true}
                   />
+                </div>
+
+                <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800">
+                  <Link 
+                    href="/google-fonts" 
+                    className="inline-flex items-center gap-2 text-sm font-medium text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors"
+                  >
+                    Learn more about Google Fonts
+                    <ArrowRight className="w-4 h-4" />
+                  </Link>
                 </div>
               </div>
             </div>
