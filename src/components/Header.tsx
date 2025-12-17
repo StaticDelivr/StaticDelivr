@@ -158,6 +158,9 @@ const Header = () => {
                       <ListItem href="/github" title="GitHub CDN">
                         Convert raw GitHub URLs to production-ready CDN links.
                       </ListItem>
+                      <ListItem href="/google-fonts" title="Google Fonts">
+                        Privacy-first Google Fonts proxy with global delivery.
+                      </ListItem>
                       <ListItem href="/docs/frontend-usage" title="React Component">
                         StaticDelivrImage component for frontend developers.
                       </ListItem>
@@ -305,6 +308,18 @@ const Header = () => {
                       label="WordPress Plugin" 
                       onClick={handleMobileItemClick}
                     />
+                    <MobileNavItem 
+                      href="/github" 
+                      icon={<GitBranch className="w-5 h-5" />} 
+                      label="GitHub CDN" 
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem 
+                      href="/google-fonts" 
+                      icon={<Globe className="w-5 h-5" />} 
+                      label="Google Fonts" 
+                      onClick={handleMobileItemClick}
+                    />
                   </div>
                   
                   {/* Divider */}
@@ -319,12 +334,6 @@ const Header = () => {
                       href="/tools/purge-cache" 
                       icon={<RefreshCw className="w-5 h-5" />} 
                       label="Purge Cache" 
-                      onClick={handleMobileItemClick}
-                    />
-                    <MobileNavItem 
-                      href="/github" 
-                      icon={<GitBranch className="w-5 h-5" />} 
-                      label="GitHub Converter" 
                       onClick={handleMobileItemClick}
                     />
                   </div>

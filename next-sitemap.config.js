@@ -24,16 +24,21 @@ module.exports = {
       '/': 1.0,
       '/wordpress': 0.95,
       '/npm': 0.95,
+      '/github': 0.9,
+      '/google-fonts': 0.9,
       '/docs': 0.9,
       '/docs/getting-started': 0.9,
       '/docs/wordpress-integration': 0.9,
       '/docs/frontend-usage': 0.9,
+      '/docs/api-tools': 0.85,
       '/network': 0.8,
       '/about': 0.8,
-      '/github': 0.8,
       '/sponsors': 0.7,
       '/blog': 0.7,
       '/stats': 0.7,
+      '/tools/purge-cache': 0.7,
+      '/contact': 0.6,
+      '/contribute': 0.6,
     };
 
     return {

@@ -1,38 +1,63 @@
 ---
 title: "Contributing"
-description: "Learn how you can contribute to StaticDelivr."
+description: "Learn how you can contribute to StaticDelivr CDN, documentation, and open-source projects."
 category: "Contribution"
-lastUpdated: "30 November 2024"
+lastUpdated: "17 December 2025"
 ---
 
 ## Contributing to StaticDelivr
 
-We welcome contributions to make StaticDelivr even better. Whether you want to fix bugs, add features, or improve the documentation, your help is appreciated.
+We welcome contributions to make StaticDelivr even better. Whether you want to fix bugs, add features, or improve documentation, your help is appreciated.
 
-### How to Contribute:
+---
 
-1. **Fork the repository**:  
-   - Make your changes in your fork.
-2. **Submit a pull request**:  
-   - Provide a detailed explanation of what changes you’ve made and why.
-3. **Testing**:  
-   - Ensure your changes don’t break the current functionality.
+### How to Contribute
 
-### Community Guidelines:
-Please read our contributing guidelines and code of conduct to ensure a positive collaboration environment.
+1. **Fork the repository**  
+   Clone your fork locally and create a new branch for your changes.
 
-For more detailed information on how to contribute, please visit our full [Contributing Guide](/contribute).
+2. **Make your changes**  
+   Follow our coding standards and ensure your code is well-documented.
 
-### More Ways to Support Us
+3. **Test your changes**  
+   Ensure your changes don't break existing functionality.
 
-- **GitHub**:  
-   Check out our code on [GitHub](https://github.com/Coozywana/StaticDelivr) and contribute to our open-source projects.  
-   [Visit GitHub](https://github.com/Coozywana/StaticDelivr)
+4. **Submit a pull request**  
+   Provide a detailed explanation of what you've changed and why.
 
-- **Support Us**:  
-   Become a sponsor or make a donation to help us continue our work.  
-   [Become a Sponsor](/become-a-sponsor)
+---
 
-- **Submit a Bug Report**:  
-   Found a bug? Let us know by submitting a bug report.  
-   [Report Bug](https://github.com/coozywana/StaticDelivr/issues)
+### Repositories
+
+| Repository | Description |
+|------------|-------------|
+| [StaticDelivr](https://github.com/StaticDelivr/StaticDelivr) | Main website and CDN proxy |
+| [npm Package](https://github.com/StaticDelivr/StaticDelivr-CDN-NPM-Package) | React component library |
+| [WordPress Plugin](https://wordpress.org/plugins/staticdelivr/) | WordPress CDN plugin |
+
+---
+
+### Types of Contributions
+
+- **Bug Fixes**: Found a bug? Submit a fix!
+- **Features**: Have an idea? Open an issue first to discuss.
+- **Documentation**: Help improve our docs.
+- **Translations**: Help translate the WordPress plugin.
+
+---
+
+### Community Guidelines
+
+- Be respectful and constructive
+- Follow our code of conduct
+- Test your changes before submitting
+- Keep PRs focused on a single change
+
+---
+
+### Other Ways to Support
+
+- **Star us on GitHub**: [github.com/StaticDelivr/StaticDelivr](https://github.com/StaticDelivr/StaticDelivr)
+- **Become a Sponsor**: [Support our work](/become-a-sponsor)
+- **Report Bugs**: [Submit an issue](https://github.com/StaticDelivr/StaticDelivr/issues)
+- **Spread the Word**: Tell others about StaticDelivr!
