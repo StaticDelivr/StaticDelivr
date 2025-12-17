@@ -2,7 +2,7 @@
 title: "Getting Started"
 description: "Learn how to quickly set up and use StaticDelivr CDN for your projects."
 category: "Introduction"
-lastUpdated: "17 December 2024"
+lastUpdated: "17 December 2025"
 ---
 
 ## Getting Started with StaticDelivr
@@ -59,6 +59,19 @@ Load Google Fonts through our CDN:
 <link href="https://cdn.staticdelivr.com/gfonts/css2?family=Open+Sans" rel="stylesheet">
 ```
 
+### Image Optimization
+
+Optimize any image on-the-fly with our image API:
+
+```html
+<img src="https://cdn.staticdelivr.com/img/images?url=https://example.com/photo.jpg&w=800&q=80&format=webp" alt="Optimized image">
+```
+
+- `url` – Original image URL (must be publicly accessible)
+- `w` / `h` – Optional width/height in pixels (max 4000)
+- `q` – Optional quality (1–100), defaults to 80
+- `format` – Optional output format (`webp`, `avif`, `jpeg`, `png`)
+
 ## URL Structure Reference
 
 | Source | URL Pattern |
@@ -69,6 +82,7 @@ Load Google Fonts through our CDN:
 | WordPress Plugins | `/wp/plugins/name/tags/version/file` |
 | WordPress Core | `/wp/core/trunk/file` |
 | Google Fonts | `/gfonts/css2?family=FontName` |
+| Images | `/img/images?url=SOURCE_URL` |
 
 ## Version Syntax
 
@@ -82,13 +96,14 @@ For npm packages, you can use semantic versioning:
 ## Best Practices
 
 1. **Always specify versions in production** - This ensures your site won't break if a package updates.
-
 2. **Use minified files** - Most packages include `.min.js` or `.min.css` versions for smaller file sizes.
-
 3. **Combine with your build process** - For complex applications, use StaticDelivr for third-party libraries while bundling your own code.
+4. **Use official integrations** - Let our WordPress plugin and `StaticDelivrImage` React component handle URL rewriting and image optimization where possible.
 
 ## What's Next?
 
 - [Supported Use Cases](/docs/supported-use-cases) - See all the ways you can use StaticDelivr
 - [Caching & Performance](/docs/caching-performance) - Understand how caching works
 - [API & Tools](/docs/api-tools) - Explore advanced features
+- [WordPress Integration Guide](/docs/wordpress-integration) - Install the free WordPress plugin
+- [Frontend Usage Guide](/docs/frontend-usage) - Use the React/Next.js image component

@@ -2,7 +2,7 @@
 title: "Frontend Usage Guide"
 description: "Learn how to use the StaticDelivr npm package and React component for automatic image optimization in your frontend applications."
 category: "Integration"
-lastUpdated: "17 December 2024"
+lastUpdated: "17 December 2025"
 ---
 
 ## Frontend Usage Guide

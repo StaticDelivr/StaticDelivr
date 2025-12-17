@@ -130,12 +130,6 @@ export default function Home() {
                     "Free SSL/TLS",
                     "DDoS protection"
                   ],
-                  "aggregateRating": {
-                    "@type": "AggregateRating",
-                    "ratingValue": "5",
-                    "ratingCount": "1000",
-                    "bestRating": "5"
-                  },
                   "author": {
                     "@id": "https://staticdelivr.com/#organization"
                   }
@@ -158,7 +152,7 @@ export default function Home() {
                   "aggregateRating": {
                     "@type": "AggregateRating",
                     "ratingValue": "5",
-                    "ratingCount": "50",
+                    "ratingCount": "1",
                     "bestRating": "5"
                   }
                 },
