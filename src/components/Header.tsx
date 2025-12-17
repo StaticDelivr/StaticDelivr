@@ -152,11 +152,11 @@ const Header = () => {
                       <ListItem href="/npm" title="npm CDN">
                         Serve any npm package via our global CDN instantly.
                       </ListItem>
-                      <ListItem href="/wordpress" title="WordPress Plugin">
-                        Free CDN plugin with automatic image optimization.
-                      </ListItem>
                       <ListItem href="/github" title="GitHub CDN">
                         Convert raw GitHub URLs to production-ready CDN links.
+                      </ListItem>
+                      <ListItem href="/wordpress" title="WordPress Plugin">
+                        Free CDN plugin with automatic image optimization.
                       </ListItem>
                       <ListItem href="/google-fonts" title="Google Fonts">
                         Privacy-first Google Fonts proxy with global delivery.
@@ -296,28 +296,28 @@ const Header = () => {
                     <h3 className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Products</h3>
                   </div>
                   <div className="px-2 space-y-1">
-                    <MobileNavItem 
-                      href="/npm" 
-                      icon={<Package className="w-5 h-5" />} 
-                      label="npm CDN" 
+                    <MobileNavItem
+                      href="/npm"
+                      icon={<Package className="w-5 h-5" />}
+                      label="npm CDN"
                       onClick={handleMobileItemClick}
                     />
-                    <MobileNavItem 
-                      href="/wordpress" 
-                      icon={<Blocks className="w-5 h-5" />} 
-                      label="WordPress Plugin" 
+                    <MobileNavItem
+                      href="/github"
+                      icon={<GitBranch className="w-5 h-5" />}
+                      label="GitHub CDN"
                       onClick={handleMobileItemClick}
                     />
-                    <MobileNavItem 
-                      href="/github" 
-                      icon={<GitBranch className="w-5 h-5" />} 
-                      label="GitHub CDN" 
+                    <MobileNavItem
+                      href="/wordpress"
+                      icon={<Blocks className="w-5 h-5" />}
+                      label="WordPress Plugin"
                       onClick={handleMobileItemClick}
                     />
-                    <MobileNavItem 
-                      href="/google-fonts" 
-                      icon={<Globe className="w-5 h-5" />} 
-                      label="Google Fonts" 
+                    <MobileNavItem
+                      href="/google-fonts"
+                      icon={<Globe className="w-5 h-5" />}
+                      label="Google Fonts"
                       onClick={handleMobileItemClick}
                     />
                   </div>
