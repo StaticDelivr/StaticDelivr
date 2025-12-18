@@ -8,7 +8,7 @@ import {
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
-import { cn } from '@/lib/utils'; // Assuming you have this, otherwise remove cn usage
+import { cn } from '@/lib/utils'; 
 
 // --- Animation Wrapper ---
 const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
@@ -60,7 +60,6 @@ const MinimalGlobe = () => (
   </div>
 );
 
-
 // --- Page Logic ---
 
 interface ImpactStats {
@@ -95,6 +94,7 @@ export async function getStaticProps() {
 
     return { props: { stats }, revalidate: 86400 };
   } catch (error) {
+    // Fallback data if API fails
     return {
       props: {
         stats: { co2: 150, lightbulbs: 31579, bandwidthSavedGB: 2000, requests: 800000000 }
@@ -128,7 +128,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
               </div>
             </FadeIn>
             
-            {/* Heading - Reduced Size & Thinner */}
+            {/* Heading */}
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 The fastest byte is the one<br />
@@ -136,7 +136,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
               </h1>
             </FadeIn>
 
-            {/* Description - Specific Bolding */}
+            {/* Description */}
             <FadeIn delay={0.2}>
               <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light">
                 We optimize assets at the edge, effectively <strong className="font-semibold text-zinc-900 dark:text-white">"deleting" waste</strong> from the internet. 
@@ -146,12 +146,12 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
           </div>
         </section>
 
-        {/* --- Stats Grid (Refined based on screenshots) --- */}
+        {/* --- Stats Grid --- */}
         <section className="px-6 mb-32 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
               
-              {/* Primary Stat: Bandwidth (Clean White Look) */}
+              {/* Primary Stat: Bandwidth */}
               <FadeIn className="md:col-span-2 relative group overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 md:p-10 shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
                 <div className="relative z-10 flex flex-col h-full justify-between">
                   <div className="flex items-center gap-2 mb-6 text-emerald-600 dark:text-emerald-500">
@@ -179,7 +179,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
               {/* Secondary Stats Column */}
               <div className="flex flex-col gap-6">
                 
-                {/* CO2 (Clean White) */}
+                {/* CO2 */}
                 <FadeIn delay={0.1} className="flex-1 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 flex flex-col justify-center shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
                   <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-2 text-xs font-semibold uppercase tracking-wider">
                      <Leaf className="w-4 h-4" /> Carbon Avoided
@@ -189,7 +189,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                   </div>
                 </FadeIn>
 
-                {/* Energy (Dark Card - Based on Screenshot) */}
+                {/* Energy */}
                 <FadeIn delay={0.2} className="flex flex-col">
                   <div className="flex-1 rounded-3xl bg-zinc-900 dark:bg-white p-8 flex flex-col justify-center shadow-lg relative overflow-hidden group">
                      {/* Subtle inner glow */}
@@ -206,18 +206,17 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                      </div>
                   </div>
                   
-                  {/* Stats BELOW the card as requested */}
+                  {/* Stats BELOW the card */}
                   <div className="mt-3 flex justify-between px-2 text-[10px] sm:text-xs text-zinc-400 dark:text-zinc-500 font-mono">
                      <span>0.15 kWh/GB Intensity</span>
                      <span>•</span>
                      <span>0.475 kg CO₂/kWh Grid Avg</span>
                   </div>
                 </FadeIn>
-
               </div>
             </div>
             
-            {/* Disclaimer back in original spot */}
+            {/* Disclaimer */}
             <FadeIn delay={0.3} className="mt-8 text-center border-t border-dashed border-zinc-200 dark:border-zinc-800 pt-8">
               <p className="text-xs text-zinc-400 dark:text-zinc-600 font-normal">
                 Calculations based on {stats.requests.toLocaleString()} real-time requests from the previous 30 days.
@@ -226,7 +225,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
           </div>
         </section>
 
-        {/* --- Inequality Section --- */}
+        {/* --- Inequality Section (UPDATED) --- */}
         <section className="px-6 py-24 bg-white dark:bg-zinc-950 border-y border-zinc-200 dark:border-zinc-900">
           <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
             
@@ -241,33 +240,34 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
               </h2>
               <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
                 <p>
-                  A 3MB hero image loads instantly on fiber in San Francisco, but it's a "white screen of death" for users in rural areas or developing nations.
+                  A 3MB hero image loads instantly on fiber in San Francisco, but it <strong className="font-medium text-zinc-900 dark:text-white">times out completely</strong> for users in rural areas or developing nations.
                 </p>
                 <p>
                   We treat performance as a <strong className="font-medium text-zinc-900 dark:text-white">human right</strong>. StaticDelivr democratizes access by compressing content to the absolute minimum viable size.
                 </p>
               </div>
               
-              {/* 3G Stat Card (Redesigned: Light Pink Background) */}
-              <div className="mt-10 p-6 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/50">
-                 <div className="flex flex-col sm:flex-row items-start gap-5">
-                    <div className="p-3 bg-rose-100 dark:bg-rose-900/50 rounded-xl text-rose-600 dark:text-rose-400 shrink-0">
-                       <Globe className="w-6 h-6" />
+              {/* 3G Stat Card (OPTIMIZED) */}
+              <div className="mt-10 p-6 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/50 group hover:border-rose-200 transition-colors">
+                  <div className="flex flex-col sm:flex-row items-start gap-5">
+                    <div className="p-3 bg-rose-100 dark:bg-rose-900/50 rounded-xl text-rose-600 dark:text-rose-400 shrink-0 relative">
+                        <Globe className="w-6 h-6 relative z-10" />
+                        {/* Subtle pulse effect */}
+                        <div className="absolute inset-0 bg-rose-400/20 rounded-xl animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
                     </div>
                     <div>
-                       <div className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">
-                          40% of the world is still on 3G
-                       </div>
-                       <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed font-normal">
-                          Optimization isn't just about speed scores. For billions of users, 
-                          it's the difference between a working site and a broken one.
-                       </p>
+                        <div className="text-xl font-bold text-zinc-900 dark:text-white mb-2">
+                          40% of the world relies on 3G
+                        </div>
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed font-normal">
+                          Optimization isn't just speed scores. For 3 billion users, it's the difference between <strong className="text-rose-600 dark:text-rose-400 font-medium">access</strong> and <strong className="text-rose-600 dark:text-rose-400 font-medium">exclusion</strong>.
+                        </p>
                     </div>
-                 </div>
+                  </div>
               </div>
             </FadeIn>
 
-            {/* DevTools Component (Kept as requested) */}
+            {/* DevTools Component */}
             <FadeIn delay={0.2}>
               <div className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 shadow-xl">
                 <div className="h-10 bg-zinc-100 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 flex items-center px-4 gap-2">
@@ -319,7 +319,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
           </div>
         </section>
 
-        {/* --- Sustainability Section (Redesigned Globe & Cards) --- */}
+        {/* --- Sustainability Section --- */}
         <section className="px-6 py-24">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -349,7 +349,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                     </p>
                   </div>
 
-                  {/* Redesigned Cards (White, Clean, Small Icons) */}
+                  {/* Feature Cards */}
                   <div className="mt-8 flex flex-col sm:flex-row gap-4">
                      <div className="p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 w-full shadow-[0_2px_15px_rgba(0,0,0,0.02)]">
                         <TrendingDown className="w-5 h-5 text-emerald-500 mb-4" />
