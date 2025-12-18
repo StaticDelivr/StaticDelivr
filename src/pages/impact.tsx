@@ -114,7 +114,10 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
 
       <Header />
 
-      <main className="relative pt-32 pb-20 overflow-x-hidden">
+      <main className="relative pt-32 pb-20 overflow-hidden">
+        
+        {/* Background Gradients */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[400px] bg-emerald-500/10 dark:bg-emerald-500/5 blur-[100px] rounded-full pointer-events-none" />
         
         {/* --- Hero Section --- */}
         <section className="px-6 mb-24 relative z-10">
