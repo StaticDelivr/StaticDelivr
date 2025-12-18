@@ -228,97 +228,126 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
           </div>
         </section>
 
-        {/* --- Inequality Section (UPDATED) --- */}
+        {/* --- MERGED: Inequality Mission + Visual Proof --- */}
         <section className="px-6 py-24 bg-white dark:bg-zinc-950 border-y border-zinc-200 dark:border-zinc-900">
-          <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-16 items-center">
+          <div className="max-w-7xl mx-auto space-y-24">
             
-            {/* Text Content */}
-            <FadeIn>
-              <div className="inline-flex items-center gap-2 text-rose-500 font-medium mb-6">
-                <Heart className="w-5 h-5" />
-                <span>Digital Inclusion</span>
-              </div>
-              <h2 className="text-4xl font-semibold text-zinc-900 dark:text-white tracking-tight mb-6">
-                Performance inequality <br />is a bug. We fixed it.
-              </h2>
-              <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
-                <p>
-                  A 3MB hero image loads instantly on fiber in San Francisco, but it <strong className="font-medium text-zinc-900 dark:text-white">times out completely</strong> for users in rural areas or developing nations.
-                </p>
-                <p>
-                  We treat performance as a <strong className="font-medium text-zinc-900 dark:text-white">human right</strong>. StaticDelivr democratizes access by compressing content to the absolute minimum viable size.
-                </p>
-              </div>
-              
-              {/* 3G Stat Card (OPTIMIZED) */}
-              <div className="mt-10 p-6 rounded-2xl bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/50 group hover:border-rose-200 transition-colors">
-                  <div className="flex flex-col sm:flex-row items-start gap-5">
-                    <div className="p-3 bg-rose-100 dark:bg-rose-900/50 rounded-xl text-rose-600 dark:text-rose-400 shrink-0 relative">
-                        <Globe className="w-6 h-6 relative z-10" />
-                        {/* Subtle pulse effect */}
-                        <div className="absolute inset-0 bg-rose-400/20 rounded-xl animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
-                    </div>
-                    <div>
-                        <div className="text-xl font-bold text-zinc-900 dark:text-white mb-2">
-                          40% of the world relies on 3G
-                        </div>
-                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed font-normal">
-                          Optimization isn't just speed scores. For 3 billion users, it's the difference between <strong className="text-rose-600 dark:text-rose-400 font-medium">access</strong> and <strong className="text-rose-600 dark:text-rose-400 font-medium">exclusion</strong>.
-                        </p>
-                    </div>
-                  </div>
-              </div>
-            </FadeIn>
-
-            {/* DevTools Component */}
-            <FadeIn delay={0.2}>
-              <div className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 shadow-xl">
-                <div className="h-10 bg-zinc-100 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 flex items-center px-4 gap-2">
-                  <div className="flex gap-1.5">
-                    <div className="w-3 h-3 rounded-full bg-rose-400/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-amber-400/80"></div>
-                    <div className="w-3 h-3 rounded-full bg-emerald-400/80"></div>
-                  </div>
-                  <div className="ml-4 text-xs font-mono text-zinc-400">DevTools / Network</div>
+            {/* PART 1: The Philosophy (Your New Section) */}
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+              {/* Left: Large text */}
+              <FadeIn>
+                <div className="inline-flex items-center gap-2 text-rose-500 font-medium mb-6">
+                  <Heart className="w-5 h-5" />
+                  <span>Digital Inclusion</span>
                 </div>
-                
-                <div className="p-6 space-y-8 font-mono text-sm">
-                  <div>
-                    <div className="flex justify-between text-zinc-500 mb-2 text-xs uppercase tracking-wide font-medium">
-                      <span>Standard CDN Origin</span>
-                      <span className="text-rose-500">3.2 MB / 12s on 3G</span>
-                    </div>
-                    <div className="relative h-10 bg-zinc-200 dark:bg-zinc-800 rounded-md overflow-hidden flex items-center px-4">
-                      <span className="relative z-10 text-zinc-500 dark:text-zinc-400 text-xs">hero-image.png</span>
-                      <div className="absolute top-0 left-0 h-full w-full bg-zinc-300 dark:bg-zinc-700"></div>
-                    </div>
-                  </div>
+                <h2 className="text-5xl md:text-7xl font-bold text-zinc-900 dark:text-white mb-8 leading-[1.1] tracking-tight">
+                  Built for the
+                  <span className="text-emerald-500"> billions</span>,
+                  not just the privileged
+                </h2>
+              </FadeIn>
 
-                  <div>
-                    <div className="flex justify-between text-zinc-500 mb-2 text-xs uppercase tracking-wide font-medium">
-                      <span>StaticDelivr Edge</span>
-                      <span className="text-emerald-500">320 KB / 0.8s on 3G</span>
+              {/* Right: Body copy */}
+              <FadeIn delay={0.2} className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                <p>
+                  Modern web development assumes everyone has fiber internet and unlimited data. 
+                  <span className="text-zinc-900 dark:text-white font-medium"> They don't.</span>
+                </p>
+                <p>
+                  A 3MB hero image loads instantly in Silicon Valley but becomes a financial burden 
+                  in regions where 1GB costs a day's wages. This is <span className="text-zinc-900 dark:text-white font-medium">Performance Inequality</span>.
+                </p>
+                <p>
+                  StaticDelivr democratizes access through automatic edge optimization. 
+                  Rural users, developing nations, and budget data plans get the same fast experience 
+                  as tech hubs—while dramatically reducing the web's carbon footprint.
+                </p>
+
+                <div className="pt-4">
+                  <Link
+                    href="/sponsors"
+                    className="inline-flex items-center gap-2 text-emerald-600 dark:text-emerald-400 font-medium hover:gap-3 transition-all group"
+                  >
+                    Support this mission
+                    <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                  </Link>
+                </div>
+              </FadeIn>
+            </div>
+
+            {/* PART 2: The Visual Proof (Moved Old Components Here) */}
+            <div className="grid md:grid-cols-2 gap-16 items-start">
+               {/* 3G Stat Card */}
+               <FadeIn delay={0.3} className="h-full">
+                <div className="h-full p-8 rounded-3xl bg-rose-50 dark:bg-rose-950/30 border border-rose-100 dark:border-rose-900/50 group hover:border-rose-200 transition-colors">
+                    <div className="flex flex-col gap-6">
+                      <div className="w-12 h-12 flex items-center justify-center bg-rose-100 dark:bg-rose-900/50 rounded-2xl text-rose-600 dark:text-rose-400 shrink-0 relative">
+                          <Globe className="w-6 h-6 relative z-10" />
+                          <div className="absolute inset-0 bg-rose-400/20 rounded-2xl animate-ping opacity-0 group-hover:opacity-100 transition-opacity duration-1000" />
+                      </div>
+                      <div>
+                          <div className="text-2xl font-bold text-zinc-900 dark:text-white mb-3">
+                            40% of the world relies on 3G
+                          </div>
+                          <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed font-normal">
+                            Optimization isn't just speed scores. For 3 billion users, it's the difference between <strong className="text-rose-600 dark:text-rose-400 font-medium">access</strong> and <strong className="text-rose-600 dark:text-rose-400 font-medium">exclusion</strong>.
+                          </p>
+                      </div>
                     </div>
-                    <div className="relative h-10 bg-emerald-500/10 dark:bg-emerald-500/10 rounded-md overflow-hidden flex items-center px-4 border border-emerald-500/20">
-                      <span className="relative z-10 text-emerald-700 dark:text-emerald-400 font-bold flex items-center gap-2 text-xs">
-                        hero-image.webp <span className="px-1.5 py-0.5 rounded bg-emerald-200 dark:bg-emerald-900 text-[10px]">Optimized</span>
-                      </span>
-                      <motion.div 
-                        initial={{ width: 0 }}
-                        whileInView={{ width: '10%' }}
-                        transition={{ duration: 1, delay: 0.5 }}
-                        className="absolute top-0 left-0 h-full bg-emerald-500/30"
-                      />
+                </div>
+               </FadeIn>
+
+               {/* DevTools Component */}
+               <FadeIn delay={0.4}>
+                <div className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 shadow-xl">
+                  <div className="h-10 bg-zinc-100 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 flex items-center px-4 gap-2">
+                    <div className="flex gap-1.5">
+                      <div className="w-3 h-3 rounded-full bg-rose-400/80"></div>
+                      <div className="w-3 h-3 rounded-full bg-amber-400/80"></div>
+                      <div className="w-3 h-3 rounded-full bg-emerald-400/80"></div>
                     </div>
+                    <div className="ml-4 text-xs font-mono text-zinc-400">DevTools / Network</div>
                   </div>
                   
-                  <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex justify-between text-xs">
-                    <span className="text-zinc-400">Impact</span>
-                    <span className="text-emerald-600 dark:text-emerald-400 font-bold">-90% Data Transfer</span>
+                  <div className="p-6 space-y-8 font-mono text-sm">
+                    <div>
+                      <div className="flex justify-between text-zinc-500 mb-2 text-xs uppercase tracking-wide font-medium">
+                        <span>Standard CDN Origin</span>
+                        <span className="text-rose-500">3.2 MB / 12s on 3G</span>
+                      </div>
+                      <div className="relative h-10 bg-zinc-200 dark:bg-zinc-800 rounded-md overflow-hidden flex items-center px-4">
+                        <span className="relative z-10 text-zinc-500 dark:text-zinc-400 text-xs">hero-image.png</span>
+                        <div className="absolute top-0 left-0 h-full w-full bg-zinc-300 dark:bg-zinc-700"></div>
+                      </div>
+                    </div>
+
+                    <div>
+                      <div className="flex justify-between text-zinc-500 mb-2 text-xs uppercase tracking-wide font-medium">
+                        <span>StaticDelivr Edge</span>
+                        <span className="text-emerald-500">320 KB / 0.8s on 3G</span>
+                      </div>
+                      <div className="relative h-10 bg-emerald-500/10 dark:bg-emerald-500/10 rounded-md overflow-hidden flex items-center px-4 border border-emerald-500/20">
+                        <span className="relative z-10 text-emerald-700 dark:text-emerald-400 font-bold flex items-center gap-2 text-xs">
+                          hero-image.webp <span className="px-1.5 py-0.5 rounded bg-emerald-200 dark:bg-emerald-900 text-[10px]">Optimized</span>
+                        </span>
+                        <motion.div 
+                          initial={{ width: 0 }}
+                          whileInView={{ width: '10%' }}
+                          transition={{ duration: 1, delay: 0.5 }}
+                          className="absolute top-0 left-0 h-full bg-emerald-500/30"
+                        />
+                      </div>
+                    </div>
+                    
+                    <div className="pt-4 border-t border-zinc-200 dark:border-zinc-800 flex justify-between text-xs">
+                      <span className="text-zinc-400">Impact</span>
+                      <span className="text-emerald-600 dark:text-emerald-400 font-bold">-90% Data Transfer</span>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </FadeIn>
+              </FadeIn>
+            </div>
+
           </div>
         </section>
 
