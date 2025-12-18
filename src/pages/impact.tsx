@@ -16,7 +16,7 @@ const formatNumber = (num: number) => new Intl.NumberFormat('en-US').format(num)
 
 interface ImpactStats {
   co2: number;
-  trees: number;
+  lightbulbs: number;
   bandwidthSavedGB: number;
   requests: number;
 }
@@ -38,11 +38,12 @@ export async function getStaticProps() {
     const gbSaved = bytesSaved / (1024 * 1024 * 1024);
     const kwhSaved = gbSaved * 0.15; // 0.15 kWh/GB energy intensity
     const kgCo2 = kwhSaved * 0.475; // 0.475 kg CO₂/kWh global average
-    const trees = Math.round(kgCo2 / 22); // ~22kg CO₂ per tree/year
+    // Calculate lightbulb-hours: 0.01 kWh per bulb-hour × 0.475 kg CO₂/kWh = 0.00475 kg CO₂ per bulb-hour
+    const lightbulbs = Math.round(kgCo2 / 0.00475); // Total bulb-hours saved
 
     const stats = {
       co2: Math.round(kgCo2),
-      trees: trees,
+      lightbulbs: lightbulbs,
       bandwidthSavedGB: Math.round(gbSaved),
       requests: data.total.requests || 800000000
     };
@@ -58,7 +59,7 @@ export async function getStaticProps() {
       props: {
         stats: {
           co2: 150,
-          trees: 7,
+          lightbulbs: 31579, // 150 kg CO₂ / 0.00475 kg CO₂ per bulb-hour
           bandwidthSavedGB: 2000,
           requests: 800000000
         }
@@ -180,21 +181,21 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                 <Card className="border-zinc-200 dark:border-zinc-800">
                   <CardHeader className="pb-3">
                     <div className="flex items-center gap-3">
-                      <div className="p-2 rounded-lg bg-blue-100 dark:bg-blue-900/20">
-                        <Globe className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+                      <div className="p-2 rounded-lg bg-yellow-100 dark:bg-yellow-900/20">
+                        <Zap className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                       </div>
-                      <CardTitle className="text-lg">Trees Equivalent</CardTitle>
+                      <CardTitle className="text-lg">Lightbulbs Powered</CardTitle>
                     </div>
                   </CardHeader>
                   <CardContent>
                     <div className="text-3xl font-bold text-zinc-900 dark:text-white mb-2 font-mono">
-                      {formatNumber(stats.trees)}
+                      {formatNumber(stats.lightbulbs)}
                     </div>
                     <CardDescription className="text-sm">
-                      Trees planted equivalent
+                      Lightbulb-hours powered
                     </CardDescription>
                     <Badge variant="secondary" className="mt-2">
-                      ~22kg CO₂ absorbed per tree annually
+                      10W LED bulbs × global carbon intensity
                     </Badge>
                   </CardContent>
                 </Card>
@@ -210,7 +211,8 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                     <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       We estimate that 30% of CDN traffic is optimizable images, with an average of 400KB saved per optimized image.
                       Using industry-standard energy intensity (0.15 kWh/GB) and global carbon intensity (0.475 kg CO₂/kWh),
-                      we calculate the environmental impact of our optimization efforts. These figures are updated daily.
+                      we calculate the environmental impact. Lightbulb equivalent assumes 10W LED bulbs (0.01 kWh/hour).
+                      These figures are updated daily.
                     </p>
                   </div>
                 </div>
