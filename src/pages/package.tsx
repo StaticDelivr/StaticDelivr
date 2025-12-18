@@ -86,6 +86,17 @@ const LayersBackground = () => (
   </div>
 );
 
+interface NpmStats {
+  weekly: number;
+  monthly: number;
+  yearly: number;
+  lastUpdated: string;
+}
+
+interface PackagePageProps {
+  npmStats?: NpmStats;
+}
+
 const features = [
   {
     Icon: ImageIcon,
@@ -93,6 +104,8 @@ const features = [
     description: "Convert images to WebP/AVIF automatically. Resize, compress, and deliver the optimal format for each browser.",
     background: <ZapBackground />,
     className: "lg:row-start-1 lg:row-end-2 lg:col-start-1 lg:col-end-2",
+    href: "/docs/frontend-usage#optimization",
+    cta: "Learn more",
   },
   {
     Icon: Package,
@@ -100,6 +113,8 @@ const features = [
     description: "Replace <img> or Next.js <Image> components seamlessly. Same API, better performance.",
     background: <PackageBackground />,
     className: "lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
+    href: "/docs/frontend-usage#installation",
+    cta: "Get started",
   },
   {
     Icon: Code,
@@ -107,6 +122,8 @@ const features = [
     description: "Full TypeScript support with proper types for all props and configurations.",
     background: <CodeBackground />,
     className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
+    href: "/docs/frontend-usage#typescript",
+    cta: "View types",
   },
   {
     Icon: Layers,
@@ -114,10 +131,12 @@ const features = [
     description: "Works with React, Next.js, Vite, or any modern React-based framework.",
     background: <LayersBackground />,
     className: "lg:col-start-1 lg:col-end-4 lg:row-start-2 lg:row-end-3",
+    href: "/docs/frontend-usage#frameworks",
+    cta: "See examples",
   },
 ];
 
-const PackagePage = ({ npmStats }) => {
+const PackagePage: React.FC<PackagePageProps> = ({ npmStats }) => {
   return (
     <div className="min-h-screen bg-white dark:bg-black">
       <Head>
