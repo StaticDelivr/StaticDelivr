@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { Leaf, Globe, Zap, Heart, ArrowRight, TrendingUp, CheckCircle } from 'lucide-react';
+import { Leaf, Globe, Zap, Heart, ArrowRight, TrendingUp, CheckCircle, Lightbulb } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AuroraBackground } from '../components/ui/aurora-background';
@@ -182,7 +182,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                   <CardHeader className="pb-3">
                     <div className="flex items-center gap-3">
                       <div className="p-2 rounded-lg bg-yellow-100 dark:bg-yellow-900/20">
-                        <Zap className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
+                        <Lightbulb className="w-6 h-6 text-yellow-600 dark:text-yellow-400" />
                       </div>
                       <CardTitle className="text-lg">Lightbulbs Powered</CardTitle>
                     </div>
