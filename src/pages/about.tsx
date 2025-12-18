@@ -1,6 +1,6 @@
 import React from 'react';
 import Head from 'next/head';
-import { Code2, Users, Zap, Share2 } from 'lucide-react';
+import { Code2, Users, Zap, Share2, Leaf } from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import { AuroraBackground } from '../components/ui/aurora-background';
@@ -58,6 +58,18 @@ const ServerBackground = () => (
   </div>
 );
 
+// New Background for Sustainability Card
+const LeafBackground = () => (
+  <div className="absolute inset-0 flex items-center justify-center opacity-15">
+    <div className="relative w-full h-full overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent" />
+      <Leaf className="absolute -bottom-8 -right-8 w-48 h-48 text-green-500/20 rotate-12" />
+      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-green-500 rounded-full animate-ping" />
+      <div className="absolute bottom-1/3 right-1/3 w-3 h-3 bg-green-400 rounded-full animate-ping" style={{ animationDelay: "0.5s" }} />
+    </div>
+  </div>
+);
+
 const features = [
   {
     Icon: Code2,
@@ -94,6 +106,15 @@ const features = [
     cta: "View Network",
     background: <ServerBackground />,
     className: "col-span-1",
+  },
+  {
+    Icon: Leaf,
+    name: "Performance Inequality",
+    description: "Digital exclusion is real. We fight it by optimizing assets for the 40% of the world still on 3G and metered connections, saving users money and reducing energy waste.",
+    href: "/impact",
+    cta: "See Our Impact",
+    background: <LeafBackground />,
+    className: "col-span-1 md:col-span-2",
   },
 ];
 
@@ -179,8 +200,8 @@ const AboutPage = () => {
             </BlurFade>
             
             <BlurFade delay={0.2} inView>
-              <BentoGrid className="grid-cols-1 md:grid-cols-2 auto-rows-[20rem]">
-                {features.map((feature) => (
+              <BentoGrid className="grid-cols-1 md:grid-cols-3 auto-rows-[20rem]">
+                {features.map((feature, i) => (
                   <BentoCard key={feature.name} {...feature} />
                 ))}
               </BentoGrid>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState, useEffect } from 'react';
-import { Github, Menu, BookOpen, ArrowRight, Newspaper, Mail, RefreshCw, GitBranch, Globe, BarChart3, Heart, Info, X, Package, Blocks, Code } from 'lucide-react';
+import { Github, Menu, BookOpen, ArrowRight, Newspaper, Mail, RefreshCw, GitBranch, Globe, BarChart3, Heart, Info, X, Package, Blocks, Code, Leaf } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTheme } from 'next-themes';
@@ -135,6 +135,11 @@ const Header = () => {
                   </NavigationMenuLink>
                 </NavigationMenuItem>
                 <NavigationMenuItem>
+                  <NavigationMenuLink href="/impact" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
+                    Impact
+                  </NavigationMenuLink>
+                </NavigationMenuItem>
+                <NavigationMenuItem>
                   <NavigationMenuLink href="/network" className={cn(navigationMenuTriggerStyle(), "bg-transparent hover:bg-transparent text-zinc-600 dark:text-zinc-400 hover:text-zinc-900 dark:hover:text-zinc-100")}>
                     Network
                   </NavigationMenuLink>
@@ -262,16 +267,22 @@ const Header = () => {
                 <div className="flex flex-col py-4 h-full overflow-y-auto">
                   {/* Main Navigation */}
                   <div className="px-2 space-y-1">
-                    <MobileNavItem 
-                      href="/about" 
-                      icon={<Info className="w-5 h-5" />} 
-                      label="About" 
+                    <MobileNavItem
+                      href="/about"
+                      icon={<Info className="w-5 h-5" />}
+                      label="About"
                       onClick={handleMobileItemClick}
                     />
-                    <MobileNavItem 
-                      href="/network" 
-                      icon={<Globe className="w-5 h-5" />} 
-                      label="Network" 
+                    <MobileNavItem
+                      href="/impact"
+                      icon={<Leaf className="w-5 h-5" />}
+                      label="Impact"
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem
+                      href="/network"
+                      icon={<Globe className="w-5 h-5" />}
+                      label="Network"
                       onClick={handleMobileItemClick}
                     />
                     <MobileNavItem 

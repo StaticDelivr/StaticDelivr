@@ -51,6 +51,26 @@ const HeartBackground = () => (
   </div>
 );
 
+// Background for Digital Equity & Climate card
+const EquityBackground = () => (
+  <div className="absolute inset-0 flex items-center justify-center opacity-15">
+    <div className="relative w-full h-full overflow-hidden">
+      <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-blue-500/10" />
+      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-green-500 rounded-full animate-ping" />
+      <div className="absolute bottom-1/3 right-1/3 w-3 h-3 bg-blue-500 rounded-full animate-ping" style={{ animationDelay: "0.5s" }} />
+      <div className="absolute top-1/2 right-1/4 w-1 h-1 bg-green-400 rounded-full animate-pulse" style={{ animationDelay: "1s" }} />
+      {/* Network/connection lines */}
+      <svg className="absolute inset-0 w-full h-full opacity-20" viewBox="0 0 100 100">
+        <path d="M20,20 L80,20 L80,80 L20,80 Z" stroke="currentColor" strokeWidth="0.5" fill="none" className="text-green-500" />
+        <circle cx="20" cy="20" r="1" fill="currentColor" className="text-blue-500" />
+        <circle cx="80" cy="20" r="1" fill="currentColor" className="text-blue-500" />
+        <circle cx="80" cy="80" r="1" fill="currentColor" className="text-blue-500" />
+        <circle cx="20" cy="80" r="1" fill="currentColor" className="text-blue-500" />
+      </svg>
+    </div>
+  </div>
+);
+
 const CustomBentoCard = ({
   name,
   className,
@@ -173,7 +193,7 @@ const SponsorsPage = () => {
               <h2 className="text-3xl font-bold text-center mb-16 text-zinc-900 dark:text-white">Why Become a Sponsor?</h2>
             </BlurFade>
             
-            <BentoGrid className="max-w-7xl mx-auto">
+            <BentoGrid className="grid-cols-1 md:grid-cols-3 auto-rows-[20rem] max-w-7xl mx-auto">
               <BlurFade delay={0.2} inView className="md:col-span-1">
                 <CustomBentoCard
                   name="Visibility and Branding"
@@ -215,6 +235,29 @@ const SponsorsPage = () => {
                   className="h-full"
                 >
                   Help support the development and maintenance of valuable open source projects that benefit the wider community. Make a lasting impact on the future of software.
+                </CustomBentoCard>
+              </BlurFade>
+
+              <BlurFade delay={0.6} inView className="md:col-span-2">
+                <CustomBentoCard
+                  name="Digital Equity & Climate"
+                  Icon={Heart}
+                  background={<EquityBackground />}
+                  className="h-full"
+                >
+                  <div className="space-y-3">
+                    <p className="text-sm leading-relaxed text-zinc-600 dark:text-zinc-400">
+                      Sponsoring StaticDelivr directly combats <strong>Performance Inequality</strong>.
+                    </p>
+                    <ul className="list-disc pl-4 space-y-2 text-sm text-zinc-600 dark:text-zinc-400">
+                      <li>
+                        <strong>Eco-Efficient:</strong> Our optimization reduces bandwidth usage by <strong>up to 90%</strong>, directly reducing network energy use.
+                      </li>
+                      <li>
+                        <strong>Inclusive:</strong> We make the open web accessible to users on <strong>slow devices</strong> and <strong>expensive data plans</strong> in developing regions.
+                      </li>
+                    </ul>
+                  </div>
                 </CustomBentoCard>
               </BlurFade>
             </BentoGrid>

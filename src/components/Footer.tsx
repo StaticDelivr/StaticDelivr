@@ -28,6 +28,7 @@ const footerLinks = {
     links: [
       { label: 'About Us', href: '/about' },
       { label: 'Network Map', href: '/network' },
+      { label: 'Impact & Sustainability', href: '/impact' },
       { label: 'Statistics', href: '/stats' },
       { label: 'Sponsors', href: '/sponsors' },
     ],
