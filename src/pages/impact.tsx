@@ -34,7 +34,7 @@ const NumberTicker = ({ value }: { value: number }) => (
 const MinimalGlobe = () => (
   <div className="relative w-64 h-64 flex items-center justify-center">
     {/* Static Lines */}
-    <svg viewBox="0 0 100 100" className="w-full h-full text-zinc-300 dark:text-zinc-700 stroke-[1px] fill-none">
+    <svg viewBox="0 0 100 100" className="w-full h-full text-zinc-400 dark:text-zinc-600 stroke-current stroke-[1px] fill-none">
       <circle cx="50" cy="50" r="45" />
       <ellipse cx="50" cy="50" rx="20" ry="45" />
       <path d="M5 50h90" />
