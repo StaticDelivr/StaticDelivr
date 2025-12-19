@@ -1,502 +1,444 @@
-"use client";
-
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowRight, 
-  Check, 
-  Copy,
-  RefreshCw,
-  ExternalLink,
-  Zap,
-  Globe,
-  Shield,
-  ArrowDown,
-  Package
+  RefreshCw, ArrowRight, Copy, Check, 
+  Terminal, AlertCircle, Sparkles, 
+  Search, ExternalLink 
 } from 'lucide-react';
-import { AuroraBackground } from '@/components/ui/aurora-background';
-import { BentoCard, BentoGrid } from '@/components/ui/bento-grid';
-import { BlurFade } from '@/components/ui/blur-fade';
-import { CodeBlock } from '@/components/ui/code-block';
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
-const Header = dynamic(() => import('@/components/Header'), {
-  loading: () => <div className="h-16 bg-white dark:bg-zinc-900 border-b" />,
-});
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-const Footer = dynamic(() => import('@/components/Footer'), {
-  loading: () => <div className="h-64 bg-slate-900" />,
-});
-
-// Feature backgrounds
-const GlobeBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative w-40 h-40">
-      <div className="absolute inset-0 rounded-full border-2 border-blue-500/30 animate-ping" style={{ animationDuration: "3s" }} />
-      <div className="absolute inset-4 rounded-full border-2 border-blue-500/40 animate-ping" style={{ animationDuration: "2.5s", animationDelay: "0.5s" }} />
-      <div className="absolute inset-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
-    </div>
-  </div>
+// --- Animation Wrapper ---
+const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.5, delay, ease: "easeOut" }}
+    className={className}
+  >
+    {children}
+  </motion.div>
 );
-
-const ShieldBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <Shield className="w-32 h-32 text-green-500" />
-  </div>
-);
-
-const ZapBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <Zap className="w-32 h-32 text-yellow-500" />
-  </div>
-);
-
-const features = [
-  {
-    Icon: Globe,
-    name: "570+ Global PoPs",
-    description: "Multi-CDN infrastructure with automatic failover ensures your assets are always available.",
-    href: "/network",
-    cta: "View Network",
-    background: <GlobeBackground />,
-    className: "lg:col-start-1 lg:col-end-2",
-  },
-  {
-    Icon: Shield,
-    name: "99.99% Uptime",
-    description: "If one CDN provider fails, traffic automatically routes to another. Your assets stay online.",
-    href: "/about",
-    cta: "Our Infrastructure",
-    background: <ShieldBackground />,
-    className: "lg:col-start-2 lg:col-end-3",
-  },
-  {
-    Icon: Zap,
-    name: "Same URL Structure",
-    description: "Simple domain swap. Your existing paths work exactly the same way.",
-    href: "/docs/getting-started",
-    cta: "Get Started",
-    background: <ZapBackground />,
-    className: "lg:col-start-3 lg:col-end-4",
-  },
-];
-
-type CDNSource = 'jsdelivr' | 'unpkg' | 'npmjs';
 
 const MigratePage = () => {
-  const [activeTab, setActiveTab] = useState<CDNSource>('jsdelivr');
+  // --- State ---
   const [inputUrl, setInputUrl] = useState('');
   const [outputUrl, setOutputUrl] = useState('');
+  const [detectedType, setDetectedType] = useState<string | null>(null);
   const [error, setError] = useState('');
+  
   const [copied, setCopied] = useState(false);
+  const [activeTab, setActiveTab] = useState<'url' | 'script' | 'esm'>('url');
 
-  const convertUrl = useCallback((url: string, source: CDNSource): string => {
-    if (!url.trim()) return '';
-
-    const cdn = 'https://cdn.staticdelivr.com';
-
-    if (source === 'jsdelivr') {
-      // jsDelivr npm: https://cdn.jsdelivr.net/npm/package@version/file
-      const npmMatch = url.match(/cdn\.jsdelivr\.net\/npm\/([^/]+)(?:@([^/]+))?(?:\/(.+))?/);
-      if (npmMatch) {
-        const [, pkg, version, file] = npmMatch;
-        const versionPart = version ? `@${version}` : '';
-        const filePart = file ? `/${file}` : '';
-        return `${cdn}/npm/${pkg}${versionPart}${filePart}`;
-      }
-
-      // jsDelivr gh: https://cdn.jsdelivr.net/gh/user/repo@version/file
-      const ghMatch = url.match(/cdn\.jsdelivr\.net\/gh\/([^/]+)\/([^@/]+)(?:@([^/]+))?(?:\/(.+))?/);
-      if (ghMatch) {
-        const [, user, repo, version, file] = ghMatch;
-        const branch = version || 'main';
-        const filePart = file || '';
-        return `${cdn}/gh/${user}/${repo}/${branch}/${filePart}`;
-      }
-
-      throw new Error('Please enter a valid jsDelivr URL');
-    }
-
-    if (source === 'unpkg') {
-      // unpkg: https://unpkg.com/package@version/file
-      const match = url.match(/unpkg\.com\/([^/]+)(?:@([^/]+))?(?:\/(.+))?/);
-      if (match) {
-        const [, pkg, version, file] = match;
-        const versionPart = version ? `@${version}` : '';
-        const filePart = file ? `/${file}` : '';
-        return `${cdn}/npm/${pkg}${versionPart}${filePart}`;
-      }
-
-      throw new Error('Please enter a valid unpkg URL');
-    }
-
-    if (source === 'npmjs') {
-      // npmjs CDN: https://registry.npmjs.org/package/-/package-version.tgz
-      // or direct file references - convert to our npm format
-      const registryMatch = url.match(/registry\.npmjs\.org\/([^/]+)/);
-      if (registryMatch) {
-        const [, pkg] = registryMatch;
-        return `${cdn}/npm/${pkg}`;
-      }
-
-      // npmjs package page: https://www.npmjs.com/package/packagename
-      const pageMatch = url.match(/(?:www\.)?npmjs\.com\/package\/([^/?#]+)/);
-      if (pageMatch) {
-        const [, pkg] = pageMatch;
-        return `${cdn}/npm/${pkg}`;
-      }
-
-      throw new Error('Please enter a valid npm URL');
-    }
-
-    throw new Error('Unknown source');
-  }, []);
-
-  useEffect(() => {
-    if (!inputUrl.trim()) {
+  // --- Logic: Smart Auto-Convert ---
+  const convertUrl = useCallback((url: string) => {
+    if (!url.trim()) {
       setOutputUrl('');
+      setDetectedType(null);
       setError('');
       return;
     }
 
+    const cdn = 'https://cdn.staticdelivr.com';
+    let result = '';
+    let type = '';
+
     try {
-      const result = convertUrl(inputUrl, activeTab);
-      setOutputUrl(result);
-      setError('');
-    } catch (err) {
-      setError(err instanceof Error ? err.message : 'Invalid URL');
-      setOutputUrl('');
+      // 1. unpkg (NPM)
+      const unpkgMatch = url.match(/unpkg\.com\/(@?[^@/]+)(?:@([^/]+))?(?:\/(.+))?/);
+      if (unpkgMatch) {
+        const [, pkg, version, file] = unpkgMatch;
+        result = `${cdn}/npm/${pkg}${version ? `@${version}` : ''}${file ? `/${file}` : ''}`;
+        type = 'unpkg';
+      }
+
+      // 2. jsDelivr (NPM)
+      else if (url.includes('jsdelivr.net/npm/')) {
+        const npmMatch = url.match(/cdn\.jsdelivr\.net\/npm\/(@?[^@/]+)(?:@([^/]+))?(?:\/(.+))?/);
+        if (npmMatch) {
+          const [, pkg, version, file] = npmMatch;
+          result = `${cdn}/npm/${pkg}${version ? `@${version}` : ''}${file ? `/${file}` : ''}`;
+          type = 'jsDelivr (NPM)';
+        }
+      }
+
+      // 3. jsDelivr (GitHub)
+      else if (url.includes('jsdelivr.net/gh/')) {
+        const ghMatch = url.match(/cdn\.jsdelivr\.net\/gh\/([^/]+)\/([^@/]+)(?:@([^/]+))?(?:\/(.+))?/);
+        if (ghMatch) {
+          const [, user, repo, version, file] = ghMatch;
+          result = `${cdn}/gh/${user}/${repo}/${version || 'main'}/${file || ''}`;
+          type = 'jsDelivr (GitHub)';
+        }
+      }
+
+      // 4. GitHub Raw / Blob
+      else if (url.includes('github.com') || url.includes('githubusercontent.com')) {
+         // Raw
+         const rawMatch = url.match(/raw\.githubusercontent\.com\/([^/]+)\/([^/]+)\/([^/]+)\/(.+)/);
+         if (rawMatch) {
+            const [, user, repo, ref, file] = rawMatch;
+            result = `${cdn}/gh/${user}/${repo}/${ref}/${file}`;
+            type = 'GitHub Raw';
+         }
+         // Blob
+         else {
+            const blobMatch = url.match(/github\.com\/([^/]+)\/([^/]+)\/blob\/([^/]+)\/(.+)/);
+            if (blobMatch) {
+               const [, user, repo, ref, file] = blobMatch;
+               result = `${cdn}/gh/${user}/${repo}/${ref}/${file}`;
+               type = 'GitHub Blob';
+            }
+         }
+      }
+
+      // 5. NPM Registry / Website
+      else if (url.includes('npmjs.com') || url.includes('registry.npmjs.org')) {
+         const pageMatch = url.match(/(?:www\.)?npmjs\.com\/package\/([^/?#]+)/);
+         const regMatch = url.match(/registry\.npmjs\.org\/([^/]+)/);
+         const pkgName = pageMatch?.[1] || regMatch?.[1];
+         
+         if (pkgName) {
+            result = `${cdn}/npm/${pkgName}`;
+            type = 'NPM Page';
+         }
+      }
+
+      if (result) {
+        setOutputUrl(result);
+        setDetectedType(type);
+        setError('');
+      } else if (url.length > 15) {
+        setError('Could not detect a supported URL format.');
+        setDetectedType(null);
+        setOutputUrl('');
+      } else {
+        setError('');
+        setDetectedType(null);
+        setOutputUrl('');
+      }
+
+    } catch (e) {
+      setError('Invalid URL format.');
     }
-  }, [inputUrl, activeTab, convertUrl]);
+  }, []);
+
+  useEffect(() => {
+    convertUrl(inputUrl);
+  }, [inputUrl, convertUrl]);
 
   const copyToClipboard = () => {
-    if (outputUrl) {
-      navigator.clipboard.writeText(outputUrl);
+    let textToCopy = outputUrl;
+    if (activeTab === 'script') {
+       textToCopy = `<script src="${outputUrl}"></script>`;
+    } else if (activeTab === 'esm') {
+       textToCopy = `import pkg from "${outputUrl}/+esm";`;
+    }
+
+    if (textToCopy) {
+      navigator.clipboard.writeText(textToCopy);
       setCopied(true);
       setTimeout(() => setCopied(false), 2000);
     }
   };
 
-  const getPlaceholder = (source: CDNSource) => {
-    switch (source) {
-      case 'jsdelivr':
-        return 'https://cdn.jsdelivr.net/npm/react@18.2.0/umd/react.production.min.js';
-      case 'unpkg':
-        return 'https://unpkg.com/react@18.2.0/umd/react.production.min.js';
-      case 'npmjs':
-        return 'https://www.npmjs.com/package/react';
-    }
-  };
-
-  const getSupportedFormats = (source: CDNSource) => {
-    switch (source) {
-      case 'jsdelivr':
-        return 'cdn.jsdelivr.net/npm/*, cdn.jsdelivr.net/gh/*';
-      case 'unpkg':
-        return 'unpkg.com/*';
-      case 'npmjs':
-        return 'npmjs.com/package/*, registry.npmjs.org/*';
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
+    <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-cyan-500/30 font-sans">
       <Head>
-        <title>Migrate to StaticDelivr | CDN Migration Tool</title>
-        <meta name="description" content="Migrate from jsDelivr, unpkg, or npmjs to StaticDelivr. Convert your CDN URLs instantly with our free migration tool." />
-        <meta name="keywords" content="CDN migration, jsDelivr alternative, unpkg alternative, migrate CDN, CDN converter, StaticDelivr migration" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-        <link rel="canonical" href="https://staticdelivr.com/migrate" />
-
-        <meta property="og:url" content="https://staticdelivr.com/migrate" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Migrate to StaticDelivr | CDN Migration Tool" />
-        <meta property="og:description" content="Convert your jsDelivr, unpkg, or npmjs URLs to StaticDelivr instantly." />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-        <meta property="og:site_name" content="StaticDelivr" />
-        
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Migrate to StaticDelivr | CDN Migration Tool" />
-        <meta name="twitter:description" content="Convert your jsDelivr, unpkg, or npmjs URLs to StaticDelivr instantly." />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              "name": "StaticDelivr Migration Tool",
-              "applicationCategory": "DeveloperApplication",
-              "operatingSystem": "Any",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              },
-              "description": "Migrate from jsDelivr, unpkg, or npmjs to StaticDelivr CDN",
-              "author": {
-                "@type": "Organization",
-                "name": "StaticDelivr",
-                "url": "https://staticdelivr.com"
-              }
-            })
-          }}
-        />
+        <title>Migrate to StaticDelivr | CDN Converter</title>
+        <meta name="description" content="Switch from unpkg, jsDelivr, or cdnjs to a reliable multi-CDN infrastructure." />
       </Head>
 
       <Header />
 
-      {/* Hero Section */}
-      <AuroraBackground className="min-h-[80vh] flex items-center justify-center pt-16">
-        <div className="relative z-10 max-w-4xl mx-auto px-4 py-20">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-12">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium mb-8">
-                <RefreshCw className="w-4 h-4" />
-                Migration Tool
-              </div>
+      <main className="relative pt-32 pb-20 overflow-hidden">
+        
+        {/* Background Gradients (Cyan) */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-cyan-500/10 dark:bg-cyan-500/5 blur-[120px] rounded-full pointer-events-none" />
 
-              {/* Main Headline */}
-              <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight mb-6">
-                Migrate to{" "}
-                <span className="bg-gradient-to-r from-zinc-600 to-zinc-900 dark:from-zinc-300 dark:to-white bg-clip-text text-transparent">
-                  StaticDelivr
-                </span>
+        {/* --- Hero Section --- */}
+        <section className="px-6 mb-16 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+                <RefreshCw className="w-3 h-3" />
+                <span>$ staticdelivr --migrate --all</span>
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
+                Upgrade your<br />
+                <span className="text-zinc-400 dark:text-zinc-600">infrastructure.</span>
               </h1>
+            </FadeIn>
 
-              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Convert your existing CDN URLs from jsDelivr, unpkg, or npm to StaticDelivr. 
-                Same files, better infrastructure.
+            <FadeIn delay={0.2}>
+              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+                Moving from <strong>unpkg</strong>, <strong>jsDelivr</strong>, or <strong>cdnjs</strong>? 
+                Convert your links instantly. Same files, same structure, but delivered via our redundant multi-CDN edge.
               </p>
-            </div>
-          </BlurFade>
+            </FadeIn>
+          </div>
+        </section>
 
-          {/* Converter Card */}
-          <BlurFade delay={0.2} inView>
-            <div className="max-w-2xl mx-auto">
-              <div className="flex w-full flex-col overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-lg">
+        {/* --- Smart Converter --- */}
+        <section className="px-6 mb-32 relative z-10">
+          <div className="max-w-3xl mx-auto">
+             <FadeIn delay={0.3}>
                 
-                {/* Source Tabs */}
-                <div className="p-4 border-b border-zinc-200 dark:border-zinc-800">
-                  <Tabs value={activeTab} onValueChange={(v) => { setActiveTab(v as CDNSource); setInputUrl(''); }}>
-                    <TabsList className="grid w-full grid-cols-3 h-auto p-1 bg-zinc-100/50 dark:bg-zinc-900/50 border border-zinc-200 dark:border-zinc-800 rounded-lg">
-                      <TabsTrigger 
-                        value="jsdelivr"
-                        className="py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-zinc-800 data-[state=active]:shadow-sm rounded-md transition-all text-sm font-medium"
-                      >
-                        jsDelivr
-                      </TabsTrigger>
-                      <TabsTrigger 
-                        value="unpkg"
-                        className="py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-zinc-800 data-[state=active]:shadow-sm rounded-md transition-all text-sm font-medium"
-                      >
-                        unpkg
-                      </TabsTrigger>
-                      <TabsTrigger 
-                        value="npmjs"
-                        className="py-2.5 data-[state=active]:bg-white dark:data-[state=active]:bg-zinc-800 data-[state=active]:shadow-sm rounded-md transition-all text-sm font-medium"
-                      >
-                        npm
-                      </TabsTrigger>
-                    </TabsList>
-                  </Tabs>
-                </div>
-
-                {/* Input Section */}
-                <div className="p-6">
-                  <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-3">
-                    {activeTab === 'jsdelivr' && 'jsDelivr URL'}
-                    {activeTab === 'unpkg' && 'unpkg URL'}
-                    {activeTab === 'npmjs' && 'npm URL'}
-                  </label>
-                  <input
-                    type="text"
-                    value={inputUrl}
-                    onChange={(e) => setInputUrl(e.target.value)}
-                    placeholder={getPlaceholder(activeTab)}
-                    className="w-full h-12 px-4 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:focus:ring-zinc-600 font-mono text-sm"
-                  />
-                  {error && (
-                    <p className="mt-2 text-sm text-red-500 dark:text-red-400">{error}</p>
-                  )}
-                  
-                  <div className="mt-3 text-xs text-zinc-500 dark:text-zinc-500">
-                    Supports: {getSupportedFormats(activeTab)}
-                  </div>
-                </div>
-
-                {/* Arrow indicator */}
-                {outputUrl && (
-                  <div className="flex justify-center py-2 bg-zinc-50 dark:bg-zinc-900/50">
-                    <ArrowDown className="w-4 h-4 text-zinc-400" />
-                  </div>
-                )}
-
-                {/* Output Section */}
-                {outputUrl && (
-                  <div className="p-6 bg-zinc-900">
-                    <div className="flex items-center justify-between mb-3">
-                      <label className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
-                        StaticDelivr URL
-                      </label>
-                      <div className="flex items-center gap-2">
-                        <a
-                          href={outputUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-300 hover:text-white transition-colors"
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          Open
-                        </a>
-                        <button
-                          onClick={copyToClipboard}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-600 text-xs font-medium text-zinc-900 dark:text-white transition-colors"
-                        >
-                          {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                          {copied ? 'Copied!' : 'Copy'}
-                        </button>
+                {/* Input Card */}
+                <div className="relative z-20 mb-8">
+                   <div className="relative group">
+                      {/* Cyan Glow */}
+                      <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/20 to-blue-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      
+                      <div className="relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden p-2">
+                         <div className="flex items-center px-4 py-2">
+                            <Search className="w-5 h-5 text-zinc-400 mr-4" />
+                            <input 
+                               type="text" 
+                               value={inputUrl}
+                               onChange={(e) => setInputUrl(e.target.value)}
+                               placeholder="Paste unpkg, jsDelivr, or GitHub URL..."
+                               className="w-full bg-transparent border-none focus:ring-0 text-zinc-900 dark:text-white placeholder:text-zinc-400 font-mono text-sm h-10"
+                            />
+                            {detectedType && (
+                              <div className="hidden sm:flex items-center gap-1.5 px-3 py-1 rounded-full bg-cyan-50 dark:bg-cyan-900/20 border border-cyan-100 dark:border-cyan-900/30 text-cyan-600 dark:text-cyan-400 text-xs font-medium whitespace-nowrap">
+                                 <Sparkles className="w-3 h-3" />
+                                 {detectedType}
+                              </div>
+                            )}
+                         </div>
                       </div>
-                    </div>
-                    <div className="p-3 rounded-lg bg-zinc-800 border border-zinc-700">
-                      <code className="text-green-400 text-sm font-mono break-all">{outputUrl}</code>
-                    </div>
-                  </div>
-                )}
-              </div>
-            </div>
-          </BlurFade>
-        </div>
-      </AuroraBackground>
-
-      {/* Why Migrate Section */}
-      <section className="py-20 px-4 bg-white dark:bg-zinc-950">
-        <div className="max-w-6xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4">
-                Why Migrate to StaticDelivr?
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Multi-CDN redundancy means your assets are always available, even if one provider goes down.
-              </p>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.2} inView>
-            <BentoGrid className="lg:grid-cols-3">
-              {features.map((feature) => (
-                <BentoCard key={feature.name} {...feature} />
-              ))}
-            </BentoGrid>
-          </BlurFade>
-        </div>
-      </section>
-
-      {/* URL Mapping Section */}
-      <section className="py-20 px-4 bg-zinc-50 dark:bg-zinc-900">
-        <div className="max-w-4xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4">
-                URL Mapping Reference
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Simple find-and-replace patterns to migrate your codebase.
-              </p>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.2} inView>
-            <div className="space-y-6">
-              {/* jsDelivr npm */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 overflow-hidden">
-                <div className="p-6">
-                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-4 text-lg">jsDelivr npm → StaticDelivr</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase">Before</span>
-                      <CodeBlock code="https://cdn.jsdelivr.net/npm/package@version/file" language="url" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase">After</span>
-                      <CodeBlock code="https://cdn.staticdelivr.com/npm/package@version/file" language="url" />
-                    </div>
-                  </div>
+                   </div>
+                   
+                   {/* Error Message */}
+                   <AnimatePresence>
+                     {error && (
+                       <motion.div 
+                         initial={{ opacity: 0, y: -10 }}
+                         animate={{ opacity: 1, y: 0 }}
+                         exit={{ opacity: 0, y: -10 }}
+                         className="flex items-center gap-2 text-rose-500 text-sm mt-3 px-4"
+                       >
+                         <AlertCircle className="w-4 h-4" /> {error}
+                       </motion.div>
+                     )}
+                   </AnimatePresence>
                 </div>
-              </div>
 
-              {/* jsDelivr gh */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 overflow-hidden">
-                <div className="p-6">
-                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-4 text-lg">jsDelivr GitHub → StaticDelivr</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase">Before</span>
-                      <CodeBlock code="https://cdn.jsdelivr.net/gh/user/repo@version/file" language="url" />
-                    </div>
-                    <div>
-                      <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase">After</span>
-                      <CodeBlock code="https://cdn.staticdelivr.com/gh/user/repo/version/file" language="url" />
-                    </div>
-                  </div>
+                {/* Output Card */}
+                <div className="relative rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl overflow-hidden">
+                   {/* Header / Tabs */}
+                   <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5">
+                      <div className="flex items-center gap-1.5">
+                         <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                         <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+                      </div>
+                      <div className="flex gap-1 bg-zinc-900 p-1 rounded-lg border border-zinc-800">
+                         {(['url', 'script', 'esm'] as const).map((tab) => (
+                            <button
+                               key={tab}
+                               onClick={() => setActiveTab(tab)}
+                               className={`px-3 py-1 rounded-md text-[10px] font-medium transition-colors uppercase tracking-wider ${
+                                  activeTab === tab 
+                                    ? 'bg-zinc-800 text-white' 
+                                    : 'text-zinc-500 hover:text-zinc-300'
+                               }`}
+                            >
+                               {tab}
+                            </button>
+                         ))}
+                      </div>
+                   </div>
+
+                   {/* Content */}
+                   <div className="p-6 font-mono text-sm break-all min-h-[100px] flex items-center">
+                      {outputUrl ? (
+                         <>
+                           {activeTab === 'url' && (
+                              <span className="text-green-400">{outputUrl}</span>
+                           )}
+                           {activeTab === 'script' && (
+                              <span className="text-zinc-400">
+                                 <span className="text-purple-400">&lt;script</span> <span className="text-blue-400">src</span>=<span className="text-green-400">"{outputUrl}"</span><span className="text-purple-400">&gt;&lt;/script&gt;</span>
+                              </span>
+                           )}
+                           {activeTab === 'esm' && (
+                              <span className="text-zinc-400">
+                                 <span className="text-purple-400">import</span> <span className="text-yellow-400">pkg</span> <span className="text-purple-400">from</span> <span className="text-green-400">"{outputUrl}/+esm"</span>;
+                              </span>
+                           )}
+                         </>
+                      ) : (
+                         <span className="text-zinc-600 italic select-none">
+                            // Waiting for valid input...
+                         </span>
+                      )}
+                   </div>
+
+                   {/* Actions */}
+                   {outputUrl && (
+                      <div className="px-4 py-3 border-t border-white/10 bg-white/5 flex justify-end gap-2">
+                         <a 
+                            href={outputUrl} 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+                         >
+                            <ExternalLink className="w-3 h-3" /> Test URL
+                         </a>
+                         <button 
+                            onClick={copyToClipboard}
+                            className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-zinc-900 hover:bg-zinc-200 transition-colors min-w-[80px] justify-center"
+                         >
+                            {copied ? (
+                               <>
+                                 <Check className="w-3 h-3 text-emerald-600" /> Copied
+                               </>
+                            ) : (
+                               <>
+                                 <Copy className="w-3 h-3" /> Copy
+                               </>
+                            )}
+                         </button>
+                      </div>
+                   )}
                 </div>
-              </div>
 
-              {/* unpkg */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 overflow-hidden">
-                <div className="p-6">
-                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-4 text-lg">unpkg → StaticDelivr</h3>
-                  <div className="space-y-3">
-                    <div>
-                      <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase">Before</span>
-                      <CodeBlock code="https://unpkg.com/package@version/file" language="url" />
+             </FadeIn>
+          </div>
+        </section>
+
+        {/* --- Why Migrate Grid (Cyan Accents) --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-6xl mx-auto">
+              <FadeIn className="mb-12 text-center">
+                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Why make the switch?</h2>
+              </FadeIn>
+
+              <div className="grid md:grid-cols-3 gap-6">
+                 
+                 <FadeIn delay={0.1} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-xl bg-cyan-50 dark:bg-cyan-900/10 flex items-center justify-center text-cyan-600 dark:text-cyan-500 mb-6">
+                       <RefreshCw className="w-6 h-6" />
                     </div>
-                    <div>
-                      <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase">After</span>
-                      <CodeBlock code="https://cdn.staticdelivr.com/npm/package@version/file" language="url" />
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Auto-Redundancy</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                       We aggregate Cloudflare, Fastly, and Gcore. If one provider fails, we route traffic to another instantly.
+                    </p>
+                 </FadeIn>
+
+                 <FadeIn delay={0.2} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-500 mb-6">
+                       <Sparkles className="w-6 h-6" />
                     </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Smart Routing</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                       Our DNS steers users to the closest performant PoP, not just the closest datacenter, reducing latency.
+                    </p>
+                 </FadeIn>
+
+                 <FadeIn delay={0.3} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/10 flex items-center justify-center text-emerald-600 dark:text-emerald-500 mb-6">
+                       <Search className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Global Scale</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                       With 570+ PoPs worldwide, we deliver assets from the edge, ensuring consistent speed for global audiences.
+                    </p>
+                 </FadeIn>
+
+              </div>
+           </div>
+        </section>
+
+        {/* --- Batch Migration Reference --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-4xl mx-auto">
+              <FadeIn className="text-center mb-10">
+                 <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white">Batch Migration Patterns</h2>
+                 <p className="text-zinc-500 dark:text-zinc-400 mt-2">Use "Find & Replace" in your codebase with these patterns.</p>
+              </FadeIn>
+              
+              <div className="space-y-6">
+                 
+                 {/* jsDelivr Pattern */}
+                 <FadeIn delay={0.1} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6">
+                    <div className="flex items-center gap-2 mb-4 font-semibold text-zinc-900 dark:text-white">
+                       <span className="w-2 h-2 rounded-full bg-orange-500" /> jsDelivr (NPM & GitHub)
+                    </div>
+                    <div className="flex flex-col sm:flex-row items-center gap-4">
+                       <code className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-red-500 dark:text-red-400 font-mono text-center">
+                          cdn.jsdelivr.net
+                       </code>
+                       <ArrowRight className="w-5 h-5 text-zinc-300" />
+                       <code className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-mono text-center">
+                          cdn.staticdelivr.com
+                       </code>
+                    </div>
+                    <p className="text-center text-xs text-zinc-500 mt-3">
+                       Works for both <code>/npm/</code> and <code>/gh/</code> paths automatically.
+                    </p>
+                 </FadeIn>
+
+                 {/* unpkg Pattern */}
+                 <FadeIn delay={0.2} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6">
+                    <div className="flex items-center gap-2 mb-4 font-semibold text-zinc-900 dark:text-white">
+                       <span className="w-2 h-2 rounded-full bg-blue-500" /> unpkg
+                    </div>
+                    <div className="flex flex-col sm:flex-row items-center gap-4">
+                       <code className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-red-500 dark:text-red-400 font-mono text-center">
+                          unpkg.com/
+                       </code>
+                       <ArrowRight className="w-5 h-5 text-zinc-300" />
+                       <code className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-mono text-center">
+                          cdn.staticdelivr.com/npm/
+                       </code>
+                    </div>
+                    <p className="text-center text-xs text-zinc-500 mt-3">
+                       Note: You must append <code>/npm/</code> to the replacement URL.
+                    </p>
+                 </FadeIn>
+
+              </div>
+           </div>
+        </section>
+
+        {/* --- Final CTA --- */}
+        <section className="px-6 pb-24 relative z-10">
+          <FadeIn>
+            <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-zinc-900 dark:bg-zinc-900 border border-zinc-800 p-12 md:p-20 text-center shadow-2xl">
+               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_#27272a_0%,_transparent_70%)] opacity-50 pointer-events-none" />
+               <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 text-zinc-400 font-medium mb-6">
+                     <Terminal className="w-5 h-5" />
+                     <span>Read the full guide</span>
                   </div>
-                </div>
-              </div>
+                  <h2 className="text-3xl md:text-5xl font-semibold text-white mb-8 tracking-tight">
+                     Need help with a large migration?
+                  </h2>
+                  <div className="flex justify-center gap-4">
+                     <Link href="/docs/getting-started" className="h-12 px-8 rounded-full bg-white text-zinc-900 font-medium flex items-center hover:bg-zinc-200 transition-colors">
+                        Read Docs <ArrowRight className="w-4 h-4 ml-2" />
+                     </Link>
+                     <Link href="/contact" className="h-12 px-8 rounded-full border border-zinc-700 text-white font-medium flex items-center hover:bg-zinc-800 transition-colors">
+                        Contact Support
+                     </Link>
+                  </div>
+               </div>
             </div>
-          </BlurFade>
-        </div>
-      </section>
+          </FadeIn>
+        </section>
 
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-zinc-900">
-        <div className="max-w-4xl mx-auto text-center">
-          <BlurFade delay={0.1} inView>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Start Your Migration
-            </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto mb-8">
-              Our documentation has everything you need to make a seamless transition.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/docs/getting-started"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-zinc-900 font-semibold rounded-lg hover:bg-zinc-100 transition-colors"
-              >
-                Read the Docs
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/github"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-700 text-white font-semibold rounded-lg hover:bg-zinc-800 transition-colors"
-              >
-                GitHub Converter
-              </Link>
-            </div>
-          </BlurFade>
-        </div>
-      </section>
-
+      </main>
       <Footer />
     </div>
   );
