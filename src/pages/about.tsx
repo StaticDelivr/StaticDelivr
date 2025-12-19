@@ -1,215 +1,492 @@
 import React from 'react';
 import Head from 'next/head';
-import { Code2, Users, Zap, Share2, Leaf } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { 
+  Terminal, ArrowRight, Heart, Code2, 
+  Globe, Zap, Leaf, Box, Type, 
+  Layout, Webhook, ExternalLink, GitBranch,
+  ShieldCheck, Share2
+} from 'lucide-react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { AuroraBackground } from '../components/ui/aurora-background';
-import { BentoGrid, BentoCard } from '../components/ui/bento-grid';
-import { BlurFade } from '../components/ui/blur-fade';
+import Link from 'next/link';
+import { cn } from '@/lib/utils'; 
 
-// Background components for Bento Cards
-const CodeBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative w-full h-full overflow-hidden">
-      <div className="absolute top-4 left-4 text-blue-500 font-mono text-xs opacity-50">
-        <div>import &#123; future &#125; from &apos;open-source&apos;;</div>
-        <div className="ml-4">const build = async () =&gt; &#123;</div>
-        <div className="ml-8">await collaborate();</div>
-        <div className="ml-4">&#125;;</div>
+// --- Animation Wrapper ---
+const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.5, delay, ease: "easeOut" }}
+    className={className}
+  >
+    {children}
+  </motion.div>
+);
+
+// --- Number Ticker ---
+const NumberTicker = ({ value }: { value: number }) => (
+  <span className="tabular-nums tracking-tight">
+    {new Intl.NumberFormat('en-US', { maximumFractionDigits: 0 }).format(value)}
+  </span>
+);
+
+// --- 1. Terminal Component ---
+const TerminalVisual = () => (
+  <div className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 shadow-xl font-mono text-sm">
+    <div className="h-10 bg-zinc-100 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 flex items-center px-4 relative">
+      <div className="flex gap-2">
+        <div className="w-3 h-3 rounded-full bg-rose-400"></div>
+        <div className="w-3 h-3 rounded-full bg-amber-400"></div>
+        <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
       </div>
-      <Code2 className="absolute -bottom-8 -right-8 w-48 h-48 text-blue-500/20" />
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+        <span className="text-zinc-400 text-xs">terminal</span>
+      </div>
+    </div>
+    <div className="p-6 space-y-4">
+      <div className="flex flex-wrap gap-2">
+        <span className="text-emerald-500 font-bold">$</span>
+        <span className="text-zinc-700 dark:text-zinc-300">
+          curl -s https://cdn.staticdelivr.com/npm/react
+        </span>
+      </div>
+      <div className="space-y-2 pl-4">
+        <motion.div 
+          initial={{ opacity: 0, x: -5 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.3 }}
+          className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400"
+        >
+          <span>✓</span> Fetched from edge node (2ms)
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, x: -5 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.5 }}
+          className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400"
+        >
+          <span>✓</span> Optimized & compressed
+        </motion.div>
+        <motion.div 
+          initial={{ opacity: 0, x: -5 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          transition={{ delay: 0.7 }}
+          className="flex items-center gap-2 text-emerald-600 dark:text-emerald-500 font-medium"
+        >
+          <span>✓</span> Delivered globally in 45ms
+        </motion.div>
+      </div>
     </div>
   </div>
 );
 
-const ZapBackground = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-20">
-    <svg className="absolute top-0 left-1/4 w-16 h-32 text-yellow-500 animate-pulse" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-    </svg>
-    <svg className="absolute top-8 right-1/4 w-12 h-24 text-yellow-400 animate-pulse" style={{ animationDelay: "0.3s" }} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-    </svg>
-  </div>
-);
 
-const ShareBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative w-full h-full">
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-500/20 via-transparent to-transparent" />
-      <Share2 className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-32 h-32 text-green-500/20" />
-      <div className="absolute top-1/4 left-1/4 w-3 h-3 bg-green-500 rounded-full animate-ping" />
-      <div className="absolute bottom-1/4 right-1/4 w-3 h-3 bg-green-500 rounded-full animate-ping" style={{ animationDelay: "0.5s" }} />
-    </div>
-  </div>
-);
 
-const ServerBackground = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-15">
-    <div className="absolute top-4 left-4 right-4 grid grid-cols-4 gap-2">
-      {[...Array(16)].map((_, i) => (
-        <div
-          key={i}
-          className="h-3 rounded-sm bg-purple-500 animate-pulse"
-          style={{ animationDelay: `${i * 0.1}s`, animationDuration: "1.5s" }}
-        />
-      ))}
-    </div>
-  </div>
-);
+// --- Data Fetching ---
+interface AboutPageProps {
+  stats: {
+    requests: number;
+  };
+}
 
-// New Background for Sustainability Card
-const LeafBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative w-full h-full overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-green-500/10 to-transparent" />
-      <Leaf className="absolute -bottom-8 -right-8 w-48 h-48 text-green-500/20 rotate-12" />
-      <div className="absolute top-1/4 left-1/4 w-2 h-2 bg-green-500 rounded-full animate-ping" />
-      <div className="absolute bottom-1/3 right-1/3 w-3 h-3 bg-green-400 rounded-full animate-ping" style={{ animationDelay: "0.5s" }} />
-    </div>
-  </div>
-);
+export async function getStaticProps() {
+  try {
+    const response = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
+    const data = await response.json();
 
-const features = [
-  {
-    Icon: Code2,
-    name: "Open-Source Development",
-    description: "We believe in the power of open-source development and are committed to supporting the community with our platform.",
-    href: "/contribute",
-    cta: "Contribute",
-    background: <CodeBackground />,
-    className: "col-span-1",
-  },
-  {
-    Icon: Zap,
-    name: "Developer Experience",
-    description: "We strive to make the developer experience as seamless as possible by integrating with popular package managers and providing reliable and fast delivery of assets.",
-    href: "/docs",
-    cta: "Read Docs",
-    background: <ZapBackground />,
-    className: "col-span-1",
-  },
-  {
-    Icon: Share2,
-    name: "Collaboration and Sharing",
-    description: "We are dedicated to providing a platform for developers to collaborate and share their projects with the world.",
-    href: "/github",
-    cta: "Join Us",
-    background: <ShareBackground />,
-    className: "col-span-1",
-  },
-  {
-    Icon: Users,
-    name: "Performance and Reliability",
-    description: "We know how important it is to have fast and reliable delivery of your assets. That&apos;s why we&apos;re committed to delivering your assets quickly and securely.",
-    href: "/network",
-    cta: "View Network",
-    background: <ServerBackground />,
-    className: "col-span-1",
-  },
-  {
-    Icon: Leaf,
-    name: "Performance Inequality",
-    description: "Digital exclusion is real. We fight it by optimizing assets for the 40% of the world still on 3G and metered connections, saving users money and reducing energy waste.",
-    href: "/impact",
-    cta: "See Our Impact",
-    background: <LeafBackground />,
-    className: "col-span-1 md:col-span-2",
-  },
-];
+    return { 
+      props: { 
+        stats: {
+          requests: data.total.requests || 800000000 
+        } 
+      }, 
+      revalidate: 3600 
+    };
+  } catch (error) {
+    return {
+      props: {
+        stats: { requests: 800000000 }
+      },
+      revalidate: 3600
+    };
+  }
+}
 
-const AboutPage = () => {
+const AboutPage: React.FC<AboutPageProps> = ({ stats }) => {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-emerald-500/30 font-sans">
       <Head>
-        <title>About StaticDelivr | Free Open Source CDN Platform</title>
-        <meta name="description" content="Learn about StaticDelivr, a free CDN for open-source projects that ensures fast and reliable delivery of assets, libraries, and resources worldwide." />
-        <meta name="keywords" content="StaticDelivr, free CDN, open source CDN, content delivery network, CDN for open-source projects, fast CDN, reliable CDN, open-source assets delivery, web performance, content delivery, global CDN, infrastructure for open-source, fast delivery of resources" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-
-        <meta property="og:url" content="https://staticdelivr.com/about" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="About StaticDelivr | Free Open Source CDN Platform" />
-        <meta property="og:description" content="Learn about StaticDelivr, a free CDN for open-source projects that ensures fast and reliable delivery of assets, libraries, and resources worldwide." />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="StaticDelivr" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="staticdelivr.com" />
-        <meta property="twitter:url" content="https://staticdelivr.com/about" />
-        <meta name="twitter:title" content="About StaticDelivr | Free Open Source CDN Platform" />
-        <meta name="twitter:description" content="Learn about StaticDelivr, a free CDN for open-source projects that ensures fast and reliable delivery of assets, libraries, and resources worldwide." />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <title>About | StaticDelivr</title>
+        <meta name="description" content="Infrastructure for the open source world. Free, fast, and transparent." />
       </Head>
 
       <Header />
-      
-      <main>
-        {/* Hero Section */}
-        <AuroraBackground className="h-auto min-h-[60vh] py-32">
-          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white mb-8 tracking-tight">
-              About StaticDelivr
-            </h1>
-            <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl mx-auto">
-              We are committed to making open-source projects more accessible 
-              and easier to use for developers worldwide.
-            </p>
-          </div>
-        </AuroraBackground>
 
-        {/* Main Content */}
-        <section className="py-20 px-4 bg-white dark:bg-zinc-950">
-          <div className="max-w-3xl mx-auto prose prose-lg prose-zinc dark:prose-invert">
-            <p className="text-xl text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed">
-              At StaticDelivr, we are committed to making open-source projects more accessible 
-              and easier to use for developers worldwide. Our platform provides an efficient 
-              and reliable way to deliver assets, libraries, and resources for open-source projects.
-            </p>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed">
-              As an open-source enthusiast, you know how critical it is to have a fast and 
-              efficient way to deliver your projects to users. With StaticDelivr, you can 
-              deliver your assets with ease, no matter the size or complexity of your project. 
-              Plus, our platform integrates seamlessly with popular package managers like npm 
-              and GitHub, making it easy for developers to integrate your project into their workflow.
-            </p>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-6 leading-relaxed">
-              Our team is dedicated to supporting the open-source community by providing a free 
-              and open platform for developers to share and collaborate on their projects. With 
-              StaticDelivr, you can be confident that your assets are being delivered quickly 
-              and securely to developers worldwide.
-            </p>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed">
-              We believe that open-source development is the future of software development, 
-              and we are committed to providing the tools and resources that developers need 
-              to make their projects successful. Join us today and see how StaticDelivr can 
-              help you take your open-source project to the next level.
-            </p>
-          </div>
-        </section>
-
-        {/* Focus Areas Section */}
-        <section className="py-20 px-4 bg-zinc-50 dark:bg-zinc-900/50">
-          <div className="max-w-7xl mx-auto">
-            <BlurFade delay={0.1} inView>
-              <h2 className="text-3xl font-bold text-center text-zinc-900 dark:text-white mb-16">
-                What We Are Focused On
-              </h2>
-            </BlurFade>
+      <main className="relative pt-32 pb-20 overflow-hidden">
+        
+        {/* Background Gradients */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-500/10 dark:bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+        
+        {/* --- Hero Section --- */}
+        <section className="px-6 mb-24 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
             
-            <BlurFade delay={0.2} inView>
-              <BentoGrid className="grid-cols-1 md:grid-cols-3 auto-rows-[20rem]">
-                {features.map((feature, i) => (
-                  <BentoCard key={feature.name} {...feature} />
-                ))}
-              </BentoGrid>
-            </BlurFade>
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+                <Terminal className="w-3 h-3" />
+                <span>$ staticdelivr --about</span>
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
+                Infrastructure for open source.<br />
+                <span className="text-zinc-400 dark:text-zinc-600">Built by one, for all.</span>
+              </h1>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+                StaticDelivr is a <strong className="font-semibold text-zinc-900 dark:text-white">CDN for open source</strong> focused on the outcome that matters: 
+                fewer wasted bytes, faster loads, and a modern web that works for everyone.
+              </p>
+            </FadeIn>
+
+            <FadeIn delay={0.3} className="flex flex-wrap items-center justify-center gap-4">
+               <Link href="/docs" className="h-10 px-6 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium flex items-center hover:opacity-90 transition-opacity">
+                  Read the Docs
+               </Link>
+               <Link href="/sponsors" className="h-10 px-6 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
+                  <Heart className="w-4 h-4 mr-2 text-rose-500" /> Support the project
+               </Link>
+            </FadeIn>
           </div>
         </section>
-      </main>
 
+        {/* --- Stats & Philosophy Grid --- */}
+        <section className="px-6 mb-32 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+              
+              {/* Primary Stat: Requests */}
+              <FadeIn className="md:col-span-2 relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 md:p-10 shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
+                <div className="relative z-10">
+                  <div className="flex items-center gap-2 mb-6 text-emerald-600 dark:text-emerald-500">
+                    <Globe className="w-5 h-5" />
+                    <span className="font-medium tracking-tight">Proof of scale</span>
+                  </div>
+                  
+                  <div className="text-6xl md:text-8xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-3">
+                    <NumberTicker value={stats.requests} />
+                  </div>
+                  <p className="text-zinc-500 dark:text-zinc-400 max-w-lg mt-2 text-base font-normal">
+                    Requests served in the last 30 days. We might be small, but our infrastructure handles traffic at scale.
+                  </p>
+                </div>
+              </FadeIn>
+
+              {/* Philosophy Card */}
+              <FadeIn delay={0.1} className="flex flex-col rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 p-8 justify-center">
+                <div className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                   Default Stance
+                </div>
+                <div className="text-2xl font-semibold text-zinc-900 dark:text-white tracking-tight mb-2">
+                   No Paywalls.<br/>No Tracking.
+                </div>
+                <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
+                   Public infrastructure should be boring, reliable, and transparent. We don't track your users or upsell features.
+                </p>
+              </FadeIn>
+            </div>
+          </div>
+        </section>
+
+        {/* --- How It Works (Text + Terminal) --- */}
+        <section className="px-6 mb-32">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid md:grid-cols-2 gap-16 items-center">
+               
+               <FadeIn>
+                  <div className="inline-flex items-center gap-2 text-blue-600 dark:text-blue-500 font-medium mb-6">
+                    <Zap className="w-5 h-5" />
+                    <span>Zero Config</span>
+                  </div>
+                  <h2 className="text-4xl md:text-5xl font-semibold text-zinc-900 dark:text-white tracking-tight mb-6 leading-[1.1]">
+                    Drop in a URL.<br />
+                    <span className="text-emerald-500">It just works.</span>
+                  </h2>
+                  <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                    <p>
+                      No API keys. No dashboards. No complicated setups. 
+                      Just <strong className="font-medium text-zinc-900 dark:text-white">paste a URL</strong> and 
+                      your assets are automatically optimized and delivered from the nearest edge.
+                    </p>
+                    <p>
+                      We act as a proxy for the tools you already use, adding a layer of caching, compression, and stability.
+                    </p>
+                  </div>
+               </FadeIn>
+
+               <FadeIn delay={0.2}>
+                  <TerminalVisual />
+               </FadeIn>
+            </div>
+          </div>
+        </section>
+
+        {/* --- "Green Delivery" Feature Card --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-6xl mx-auto">
+              <FadeIn>
+                <div className="relative overflow-hidden rounded-3xl bg-emerald-900 dark:bg-emerald-950 p-10 md:p-14 text-white">
+                   <div className="relative z-10 grid md:grid-cols-2 gap-10 items-center">
+                      <div>
+                         <div className="inline-flex items-center gap-2 text-emerald-300 font-medium mb-4">
+                            <Leaf className="w-5 h-5" />
+                            <span>Sustainability</span>
+                         </div>
+                         <h2 className="text-3xl md:text-4xl font-bold mb-4 tracking-tight">
+                            The cleanest byte is the one you don't send.
+                         </h2>
+                         <p className="text-emerald-100/80 leading-relaxed mb-8 max-w-md">
+                            By optimizing images and minifying code at the edge, we drastically reduce data transfer. Less data means less energy used by networks and devices.
+                         </p>
+                         <Link href="/impact" className="inline-flex items-center gap-2 text-white font-medium hover:gap-3 transition-all">
+                            View Impact Report <ArrowRight className="w-4 h-4" />
+                         </Link>
+                      </div>
+                      
+                      {/* Abstract Visual - Updated values */}
+                      <div className="relative h-full min-h-[200px] flex items-center justify-center">
+                         <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
+                         <div className="relative bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl w-full max-w-sm">
+                            <div className="flex justify-between items-center mb-4 pb-4 border-b border-white/10">
+                               <span className="text-xs uppercase tracking-widest text-emerald-200">Transfer Size</span>
+                               <span className="text-xs bg-emerald-500/20 text-emerald-200 px-2 py-1 rounded">-90%</span>
+                            </div>
+                            <div className="space-y-4">
+                               <div>
+                                  <div className="flex justify-between text-xs mb-1 opacity-70">
+                                     <span>Original (PNG)</span>
+                                     <span>1.2 MB</span>
+                                  </div>
+                                  <div className="h-1.5 bg-white/10 rounded-full w-full" />
+                               </div>
+                               <div>
+                                  <div className="flex justify-between text-xs mb-1 text-emerald-300 font-medium">
+                                     <span>Optimized (WebP)</span>
+                                     <span>120 KB</span>
+                                  </div>
+                                  <div className="h-1.5 bg-emerald-500 rounded-full w-[10%]" />
+                               </div>
+                            </div>
+                         </div>
+                      </div>
+                   </div>
+                </div>
+              </FadeIn>
+           </div>
+        </section>
+
+        {/* --- "Open Source" Design (Requested Style) --- */}
+        <section className="px-6 mb-32">
+          <div className="max-w-6xl mx-auto">
+            <FadeIn>
+              <div className="relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-gradient-to-br from-zinc-100 to-white dark:from-zinc-900 dark:to-zinc-950 p-10 md:p-16">
+                
+                {/* Background Pattern */}
+                <div className="absolute inset-0 opacity-[0.03] pointer-events-none">
+                  <div className="absolute inset-0" style={{
+                    backgroundImage: `url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23000' fill-opacity='1'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E")`
+                  }} />
+                </div>
+
+                <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
+                  
+                  {/* Left: Copy (Adjusted for accuracy) */}
+                  <div>
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-200 dark:bg-zinc-800 text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-6">
+                      <ShieldCheck className="w-3 h-3" />
+                      Transparency
+                    </div>
+                    <h2 className="text-3xl md:text-4xl font-semibold text-zinc-900 dark:text-white tracking-tight mb-4">
+                      Built in the open,<br />for the open web.
+                    </h2>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6 font-light">
+                      We believe in radical transparency. While our edge network runs on enterprise-grade infrastructure, our integration code, website, and documentation are 100% open source.
+                    </p>
+                    <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-8">
+                       Fork the docs, improve the logic, or learn from the project structure. We build in public.
+                    </p>
+                    <div className="flex flex-wrap gap-4">
+                      <Link
+                        href="https://github.com/staticdelivr/staticdelivr"
+                        target="_blank"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium hover:opacity-90 transition-opacity"
+                      >
+                        <GitBranch className="w-5 h-5" />
+                        View on GitHub
+                      </Link>
+                      <Link
+                        href="/docs/contributing"
+                        className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-zinc-300 dark:border-zinc-700 text-zinc-700 dark:text-zinc-300 font-medium hover:bg-zinc-100 dark:hover:bg-zinc-800 transition-colors"
+                      >
+                        Contributing Guide
+                        <ExternalLink className="w-4 h-4" />
+                      </Link>
+                    </div>
+                  </div>
+
+                  {/* GitHub Stats Mockup */}
+                  <div className="hidden md:block">
+                    <div className="bg-white dark:bg-zinc-900 rounded-2xl border border-zinc-200 dark:border-zinc-800 p-6 shadow-lg">
+                      <div className="flex items-center gap-3 mb-6">
+                        <div className="w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                          <Code2 className="w-5 h-5 text-zinc-600 dark:text-zinc-400" />
+                        </div>
+                        <div>
+                          <div className="font-semibold text-zinc-900 dark:text-white">staticdelivr/staticdelivr</div>
+                          <div className="text-sm text-zinc-500">Public repository</div>
+                        </div>
+                      </div>
+                      <div className="grid grid-cols-3 gap-4 text-center">
+                        <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
+                          <div className="text-2xl font-bold text-zinc-900 dark:text-white">7</div>
+                          <div className="text-xs text-zinc-500">Stars</div>
+                        </div>
+                        <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
+                          <div className="text-2xl font-bold text-zinc-900 dark:text-white">0</div>
+                          <div className="text-xs text-zinc-500">Forks</div>
+                        </div>
+                        <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
+                          <div className="text-2xl font-bold text-zinc-900 dark:text-white">1</div>
+                          <div className="text-xs text-zinc-500">Contributors</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* --- Use Cases Grid (Redesigned) --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-6xl mx-auto">
+              <FadeIn className="text-center mb-16">
+                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">One platform, many use cases</h2>
+                 <p className="text-zinc-500 dark:text-zinc-400">Everything we serve is optimized by default.</p>
+              </FadeIn>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                 
+                 {/* NPM */}
+                 <FadeIn delay={0.1}>
+                    <Link href="/npm" className="block h-full group">
+                       <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all hover:border-red-200 dark:hover:border-red-900/50 hover:shadow-sm">
+                          <div className="w-12 h-12 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center mb-6 text-red-500 group-hover:scale-110 transition-transform">
+                             <Box className="w-6 h-6" />
+                          </div>
+                          <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">NPM Packages</h3>
+                          <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                             Fast delivery for millions of files from the npm registry. Just replace the hostname and you're set.
+                          </p>
+                       </div>
+                    </Link>
+                 </FadeIn>
+
+                 {/* WordPress */}
+                 <FadeIn delay={0.2}>
+                    <Link href="/wordpress" className="block h-full group">
+                       <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all hover:border-blue-200 dark:hover:border-blue-900/50 hover:shadow-sm">
+                          <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-6 text-blue-500 group-hover:scale-110 transition-transform">
+                             <Layout className="w-6 h-6" />
+                          </div>
+                          <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">WordPress</h3>
+                          <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                             Instant acceleration for themes, plugins, and core assets. Drop-in replacement for the ecosystem.
+                          </p>
+                       </div>
+                    </Link>
+                 </FadeIn>
+
+                 {/* Fonts */}
+                 <FadeIn delay={0.3}>
+                    <Link href="/google-fonts" className="block h-full group">
+                       <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all hover:border-amber-200 dark:hover:border-amber-900/50 hover:shadow-sm">
+                          <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center mb-6 text-amber-500 group-hover:scale-110 transition-transform">
+                             <Type className="w-6 h-6" />
+                          </div>
+                          <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">Google Fonts</h3>
+                          <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                             Privacy-friendly, self-hostable font delivery that respects user privacy and speeds up rendering.
+                          </p>
+                       </div>
+                    </Link>
+                 </FadeIn>
+
+                 {/* Tools */}
+                 <FadeIn delay={0.4}>
+                    <Link href="/docs/api-tools" className="block h-full group">
+                       <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all hover:border-purple-200 dark:hover:border-purple-900/50 hover:shadow-sm">
+                          <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center mb-6 text-purple-500 group-hover:scale-110 transition-transform">
+                             <Webhook className="w-6 h-6" />
+                          </div>
+                          <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">API & Tools</h3>
+                          <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                             Programmatic access for advanced integrations, cache purging, and file introspection.
+                          </p>
+                       </div>
+                    </Link>
+                 </FadeIn>
+              </div>
+           </div>
+        </section>
+
+        {/* --- Final CTA --- */}
+        <section className="px-6 pb-24">
+          <FadeIn>
+            <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-zinc-900 dark:bg-zinc-900 border border-zinc-800 p-12 md:p-20 text-center shadow-2xl">
+              {/* Background Glow */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-zinc-800 via-zinc-900 to-transparent opacity-55 pointer-events-none" />
+
+              <div className="relative z-10">
+                <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6 tracking-tight">
+                  Join the movement for a<br className="hidden md:block" />
+                  <span className="bg-gradient-to-r from-emerald-400 to-blue-300 bg-clip-text text-transparent">
+                    faster, fairer internet.
+                  </span>
+                </h2>
+
+                <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto font-light">
+                  Use StaticDelivr today (no sign-up), and if it helps your users, consider supporting the infrastructure.
+                </p>
+
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <Link
+                    href="/docs"
+                    className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-zinc-950 transition-all duration-300 hover:bg-zinc-200 hover:scale-105"
+                  >
+                    <span className="mr-2">Get Started</span>
+                    <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
+                  </Link>
+
+                  <Link
+                    href="/sponsors"
+                    className="inline-flex h-12 items-center justify-center rounded-full px-8 font-medium text-white transition-colors hover:text-zinc-300 border border-zinc-700 hover:bg-zinc-800"
+                  >
+                    Become a Sponsor <Heart className="ml-2 h-4 w-4 text-rose-500" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        </section>
+
+      </main>
       <Footer />
     </div>
   );
