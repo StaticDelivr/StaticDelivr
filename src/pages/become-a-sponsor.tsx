@@ -1,233 +1,378 @@
 import React from 'react';
 import Head from 'next/head';
-import { Heart, Server, Gift, Code, Mail } from 'lucide-react';
-import { useTheme } from 'next-themes';
-import Link from 'next/link';
+import { motion } from 'framer-motion';
+import { 
+  Server, Zap, Code2, Heart, ArrowRight, 
+  Globe, ShieldCheck, Mail, Terminal, 
+  Handshake, BarChart3
+} from 'lucide-react';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { AuroraBackground } from '../components/ui/aurora-background';
-import { MagicCard } from '../components/ui/magic-card';
-import { BentoGrid } from '../components/ui/bento-grid';
-import { BlurFade } from '../components/ui/blur-fade';
-import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
-interface CustomBentoCardProps {
-  name: string;
-  className?: string;
-  background: React.ReactNode;
-  Icon: React.ComponentType<{ className?: string }>;
-  children: React.ReactNode;
-}
-
-const ServerBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-    <Server className="w-48 h-48 text-blue-500 animate-pulse" style={{ animationDuration: "3s" }} />
-  </div>
-);
-
-const GiftBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-    <Gift className="w-48 h-48 text-purple-500" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent animate-pulse" />
-  </div>
-);
-
-const CodeBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-    <Code className="w-48 h-48 text-green-500" />
-  </div>
-);
-
-const CustomBentoCard = ({
-  name,
-  className,
-  background,
-  Icon,
-  children,
-  ...props
-}: CustomBentoCardProps & React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "group relative flex flex-col justify-between overflow-hidden rounded-xl",
-      "bg-white dark:bg-zinc-900 [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
-      "dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] dark:[border:1px_solid_rgba(255,255,255,.1)]",
-      className
-    )}
-    {...props}
+// --- Animation Wrapper ---
+const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.5, delay, ease: "easeOut" }}
+    className={className}
   >
-    <div>{background}</div>
-    <div className="p-6 relative z-10 h-full flex flex-col">
-      <div className="mb-4 p-2 w-fit rounded-lg bg-zinc-100 dark:bg-zinc-800">
-        <Icon className="h-6 w-6 text-zinc-900 dark:text-zinc-100" />
+    {children}
+  </motion.div>
+);
+
+// --- Code Block Visual (With Live Data) ---
+const JsonVisual = ({ requests, carbon }: { requests: string, carbon: string }) => (
+  <div className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 shadow-xl font-mono text-sm">
+    <div className="h-10 bg-zinc-100 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 flex items-center px-4 justify-between">
+      <div className="flex gap-2">
+        <div className="w-3 h-3 rounded-full bg-rose-400"></div>
+        <div className="w-3 h-3 rounded-full bg-amber-400"></div>
+        <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
       </div>
-      <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
-        {name}
-      </h3>
-      <div className="text-zinc-500 dark:text-zinc-400 flex-grow">
-        {children}
+      <div className="text-xs text-zinc-400">sponsorship_config.json</div>
+    </div>
+    <div className="p-6 overflow-x-auto">
+      <div className="text-zinc-600 dark:text-zinc-400 space-y-1">
+        <div><span className="text-purple-600 dark:text-purple-400">"sponsor_goals"</span>: {'{'}</div>
+        <div className="pl-4">
+          <span className="text-blue-600 dark:text-blue-400">"brand_visibility"</span>: <span className="text-emerald-600 dark:text-emerald-500">true</span>,
+        </div>
+        <div className="pl-4">
+          <span className="text-blue-600 dark:text-blue-400">"sustainability"</span>: <span className="text-emerald-600 dark:text-emerald-500">true</span>,
+        </div>
+        <div className="pl-4">
+          <span className="text-blue-600 dark:text-blue-400">"hiring_pool"</span>: <span className="text-amber-600 dark:text-amber-500">"global_engineers"</span>
+        </div>
+        <div>{'}'},</div>
+        <div><span className="text-purple-600 dark:text-purple-400">"impact_metrics"</span>: {'{'}</div>
+        <div className="pl-4">
+          <span className="text-blue-600 dark:text-blue-400">"monthly_requests"</span>: <span className="text-rose-500">{requests}</span>,
+        </div>
+        <div className="pl-4">
+          <span className="text-blue-600 dark:text-blue-400">"carbon_avoided"</span>: <span className="text-amber-600 dark:text-amber-500">"{carbon}_annually"</span>
+        </div>
+        <div>{'}'}</div>
       </div>
     </div>
   </div>
 );
 
-const BecomeSponsorPage = () => {
-  const { theme } = useTheme();
+// --- Data Fetching (ISR) ---
+interface PageProps {
+  stats: {
+    requests: string;
+    carbon: string;
+  };
+}
 
+export async function getStaticProps() {
+  const props = {
+    stats: { 
+      requests: "800,000,000", 
+      carbon: "120t" 
+    }
+  };
+
+  try {
+    // 1. Fetch from API
+    const res = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
+    const data = await res.json();
+    const totalRequests = data?.total?.requests || 800000000;
+
+    // 2. Format Requests
+    props.stats.requests = new Intl.NumberFormat('en-US').format(totalRequests);
+
+    // 3. Calculate Carbon Impact (Logic mirrored from Impact Page)
+    // Assumption: 30% of requests are images, saving ~400KB per request vs unoptimized
+    const imageReqs = totalRequests * 0.30;
+    const bytesSaved = imageReqs * (400 * 1024);
+    const gbSaved = bytesSaved / (1024 * 1024 * 1024);
+    const kwhSaved = gbSaved * 0.15; // 0.15 kWh per GB
+    const kgCo2 = kwhSaved * 0.475; // 0.475 kg CO2 per kWh
+    
+    // Annualize it (Monthly * 12) and convert to Tonnes
+    const annualTonnes = (kgCo2 * 12) / 1000;
+    props.stats.carbon = `${Math.round(annualTonnes)}t`;
+
+  } catch (error) {
+    console.error("Error fetching stats:", error);
+  }
+
+  return { 
+    props, 
+    revalidate: 3600 // Revalidate every hour
+  };
+}
+
+const BecomeSponsorPage: React.FC<PageProps> = ({ stats }) => {
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-rose-500/30 font-sans">
       <Head>
-        <title>Become a Sponsor | Support Open Source CDN - StaticDelivr</title>
-        <meta name="description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure costs and fund new features for the free, open-source CDN serving millions of developers worldwide." />
-        <meta name="keywords" content="sponsor open source, CDN sponsorship, support StaticDelivr, open source funding, infrastructure sponsor, developer tools sponsorship" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-        
-        <meta property="og:url" content="https://staticdelivr.com/become-a-sponsor" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Become a Sponsor | Support Open Source CDN - StaticDelivr" />
-        <meta property="og:description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure costs and fund new features for the free, open-source CDN." />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="StaticDelivr" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="staticdelivr.com" />
-        <meta property="twitter:url" content="https://staticdelivr.com/become-a-sponsor" />
-        <meta name="twitter:title" content="Become a Sponsor | Support Open Source CDN - StaticDelivr" />
-        <meta name="twitter:description" content="Support StaticDelivr by becoming a sponsor. Help cover infrastructure costs and fund new features for the free, open-source CDN." />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <title>Become a Sponsor | StaticDelivr</title>
+        <meta name="description" content="Support the infrastructure that powers the open source web." />
       </Head>
 
       <Header />
-      <main>
-        {/* Hero Section */}
-        <AuroraBackground className="h-auto min-h-[50vh] py-24">
-          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white mb-8 tracking-tight">
-              Become a Sponsor
-            </h1>
-            <div className="prose prose-lg mx-auto">
-              <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8">
-                Join us in making StaticDelivr better by becoming a sponsor today. Your support 
-                helps us cover infrastructure expenses and sponsor the development of new features.
+
+      <main className="relative pt-32 pb-20 overflow-hidden">
+        
+        {/* Background Gradients */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-rose-500/10 dark:bg-rose-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+        {/* --- Hero Section --- */}
+        <section className="px-6 mb-24 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+                <Terminal className="w-3 h-3" />
+                <span>$ staticdelivr --sponsor</span>
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
+                Infrastructure for the<br />
+                <span className="text-zinc-400 dark:text-zinc-600">open web.</span>
+              </h1>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+                We are looking for organizations aligned with our mission to provide <strong className="font-semibold text-zinc-900 dark:text-white">free, fast, and carbon-neutral</strong> delivery for open source projects.
               </p>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400">
-                As an open-source project, we rely on the support of our community and sponsors 
-                to maintain and improve our services. Your sponsorship directly contributes to 
-                the sustainability and growth of StaticDelivr.
-              </p>
+            </FadeIn>
+
+            <FadeIn delay={0.3} className="flex flex-col sm:flex-row items-center justify-center gap-4">
+               <a 
+                 href="mailto:sponsors@staticdelivr.com?subject=Sponsorship%20Inquiry" 
+                 className="h-12 px-8 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium flex items-center hover:opacity-90 transition-opacity"
+               >
+                  <Mail className="w-4 h-4 mr-2" /> Contact Team
+               </a>
+               <Link 
+                 href="/impact" 
+                 className="h-12 px-8 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+               >
+                  View Impact Report <ArrowRight className="w-4 h-4 ml-2" />
+               </Link>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* --- The Value Prop (Split Layout) --- */}
+        <section className="px-6 mb-32 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <div className="grid lg:grid-cols-2 gap-16 items-center">
+              
+              {/* Left: Text Content */}
+              <FadeIn>
+                <div className="inline-flex items-center gap-2 text-rose-600 dark:text-rose-500 font-medium mb-6">
+                  <Handshake className="w-5 h-5" />
+                  <span>Strategic Alignment</span>
+                </div>
+                <h2 className="text-3xl md:text-5xl font-semibold text-zinc-900 dark:text-white tracking-tight mb-6 leading-[1.1]">
+                  CSR meets <br />
+                  <span className="text-zinc-400 dark:text-zinc-600">Engineering.</span>
+                </h2>
+                <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
+                  <p>
+                    Sponsoring StaticDelivr isn't a donation; it's a strategic alliance. We help you achieve <strong className="text-zinc-900 dark:text-white font-medium">Corporate Social Responsibility</strong> goals by democratizing access and reducing digital carbon footprints.
+                  </p>
+                  <p>
+                    In return, your brand gains visibility among millions of developers and demonstrates technical leadership by powering a global edge network.
+                  </p>
+                </div>
+              </FadeIn>
+
+              {/* Right: Visual */}
+              <FadeIn delay={0.2} className="relative">
+                <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/20 to-blue-500/20 blur-3xl rounded-full opacity-50" />
+                <JsonVisual requests={stats.requests} carbon={stats.carbon} />
+              </FadeIn>
+
             </div>
           </div>
-        </AuroraBackground>
-
-        {/* Sponsorship Options Section */}
-        <section className="py-20 px-4 bg-white dark:bg-zinc-950">
-          <div className="max-w-7xl mx-auto">
-            <BlurFade delay={0.1} inView>
-              <h2 className="text-3xl font-bold text-center mb-16 text-zinc-900 dark:text-white">How to Sponsor Us</h2>
-            </BlurFade>
-            <BentoGrid className="max-w-7xl mx-auto">
-              <BlurFade delay={0.2} inView className="md:col-span-1">
-                <CustomBentoCard
-                  name="Infrastructure Support"
-                  Icon={Server}
-                  background={<ServerBackground />}
-                  className="h-full"
-                >
-                  Provide us with services like CDN, DNS, web hosting, or other infrastructure needs that help us maintain and scale our platform.
-                </CustomBentoCard>
-              </BlurFade>
-              <BlurFade delay={0.3} inView className="md:col-span-1">
-                <CustomBentoCard
-                  name="Monthly Donations"
-                  Icon={Gift}
-                  background={<GiftBackground />}
-                  className="h-full"
-                >
-                  Support us with monthly donations to help cover development costs, infrastructure expenses, and other operational needs.
-                </CustomBentoCard>
-              </BlurFade>
-              <BlurFade delay={0.4} inView className="md:col-span-1">
-                <CustomBentoCard
-                  name="Development Resources"
-                  Icon={Code}
-                  background={<CodeBackground />}
-                  className="h-full"
-                >
-                  Contribute development hours from your team to help us improve and maintain the platform.
-                </CustomBentoCard>
-              </BlurFade>
-            </BentoGrid>
-          </div>
         </section>
 
-        {/* Sponsorship Platforms Section */}
-        <section className="py-20 px-4 bg-zinc-50 dark:bg-zinc-900">
-          <div className="max-w-3xl mx-auto text-center">
-            <BlurFade delay={0.2} inView>
-              <h2 className="text-3xl font-bold mb-12 text-zinc-900 dark:text-white">Ready to Support Us?</h2>
-              <div className="grid md:grid-cols-2 gap-8 mb-12">
-                <a
-                  aria-disabled="true"
-                  className="flex items-center justify-center px-8 py-4 bg-zinc-200 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400 font-medium rounded-lg transition-colors cursor-not-allowed"
-                >
-                  Sponsor on GitHub (Coming Soon)
-                </a>
-                <a
-                  href="https://opencollective.com/staticdelivr"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center justify-center px-8 py-4 bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 font-medium rounded-lg transition-colors"
-                >
-                  Sponsor on Open Collective
-                </a>
+        {/* --- What We Need (Sponsorship Areas) --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-6xl mx-auto">
+              <FadeIn className="text-center mb-16">
+                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">How you can contribute</h2>
+                 <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto">
+                    We prefer <strong className="text-zinc-900 dark:text-white">resources over cash</strong>. 
+                    If your company provides infrastructure, observability, or engineering talent, let's integrate.
+                 </p>
+              </FadeIn>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                 
+                 {/* 1. Infrastructure */}
+                 <FadeIn delay={0.1}>
+                    <div className="group relative h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-shadow hover:shadow-xl">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                        
+                        <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                           <Server className="w-6 h-6" />
+                        </div>
+                        
+                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Core Infrastructure</h3>
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                           We process petabytes of traffic. We need Edge Nodes (VPS), Object Storage (S3-compatible), and Global DNS services.
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2 mt-auto">
+                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Compute</span>
+                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Bandwidth</span>
+                        </div>
+                    </div>
+                 </FadeIn>
+
+                 {/* 2. Tooling / SaaS */}
+                 <FadeIn delay={0.2}>
+                    <div className="group relative h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-shadow hover:shadow-xl">
+                        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                        
+                        <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-900/10 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-6 group-hover:scale-110 transition-transform">
+                           <Zap className="w-6 h-6" />
+                        </div>
+                        
+                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Enterprise Tooling</h3>
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                           Observability is key to uptime. We need enterprise accounts for log management, error tracking, and security scanning.
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2 mt-auto">
+                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Logs</span>
+                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">APM</span>
+                        </div>
+                    </div>
+                 </FadeIn>
+
+                 {/* 3. Engineering */}
+                 <FadeIn delay={0.3}>
+                    <div className="group relative h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-shadow hover:shadow-xl">
+                        <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                        
+                        <div className="w-12 h-12 rounded-2xl bg-rose-50 dark:bg-rose-900/10 flex items-center justify-center text-rose-600 dark:text-rose-400 mb-6 group-hover:scale-110 transition-transform">
+                           <Code2 className="w-6 h-6" />
+                        </div>
+                        
+                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Engineering Time</h3>
+                        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                           Assign engineering hours to help maintain our open source integrations or sponsor specific plugin development.
+                        </p>
+                        
+                        <div className="flex flex-wrap gap-2 mt-auto">
+                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Audit</span>
+                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Dev</span>
+                        </div>
+                    </div>
+                 </FadeIn>
+
               </div>
-              <MagicCard
-                className="p-8 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950"
-                gradientColor={theme === "dark" ? "#262626" : "#E4E4E7"}
-              >
-                <div className="flex items-center justify-center mb-4">
-                  <Mail className="w-6 h-6 text-zinc-400 mr-2" />
-                  <h3 className="text-xl font-semibold text-zinc-900 dark:text-white">Contact Us</h3>
-                </div>
-                <p className="text-zinc-600 dark:text-zinc-300 mb-4">
-                  Have questions about sponsorship? Want to discuss custom sponsorship options?
-                </p>
-                <a
-                  href="mailto:coozy@staticdelivr.com"
-                  className="text-zinc-900 dark:text-white hover:underline font-medium"
-                >
-                  coozy@staticdelivr.com
-                </a>
-              </MagicCard>
-            </BlurFade>
+           </div>
+        </section>
+
+        {/* --- Benefits Grid --- */}
+        <section className="px-6 mb-32">
+          <div className="max-w-5xl mx-auto">
+             <FadeIn className="text-center mb-16">
+                <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Why Sponsor?</h2>
+             </FadeIn>
+             
+             <div className="grid md:grid-cols-2 gap-4">
+                <FadeIn delay={0.1} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
+                   <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                      <BarChart3 className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
+                   </div>
+                   <div>
+                      <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Brand Visibility</h3>
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                        Top-tier logo placement on our homepage, documentation, and GitHub repository.
+                      </p>
+                   </div>
+                </FadeIn>
+
+                <FadeIn delay={0.2} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
+                   <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                      <ShieldCheck className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
+                   </div>
+                   <div>
+                      <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Technical Credibility</h3>
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                        Prove your infrastructure's reliability by powering a high-traffic, global CDN.
+                      </p>
+                   </div>
+                </FadeIn>
+                
+                <FadeIn delay={0.3} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
+                   <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                      <Globe className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
+                   </div>
+                   <div>
+                      <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Talent Acquisition</h3>
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                        Appeal to engineers who value open source, performance, and digital equity.
+                      </p>
+                   </div>
+                </FadeIn>
+
+                <FadeIn delay={0.4} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
+                   <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                      <Heart className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
+                   </div>
+                   <div>
+                      <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Case Studies</h3>
+                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                        We write detailed technical blog posts about how our sponsors help solve our scale challenges.
+                      </p>
+                   </div>
+                </FadeIn>
+             </div>
           </div>
         </section>
 
-        {/* Benefits Section */}
-        <section className="py-20 px-4 bg-white dark:bg-zinc-950">
-          <div className="max-w-3xl mx-auto text-center">
-            <BlurFade delay={0.3} inView>
-              <MagicCard
-                className="p-12 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950"
-                gradientColor={theme === "dark" ? "#262626" : "#E4E4E7"}
-              >
-                <h2 className="text-3xl font-bold mb-6 text-zinc-900 dark:text-white">Benefits of Sponsorship</h2>
-                <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-8">
-                  As a sponsor, you&apos;ll receive recognition on our website, access to priority support,
-                  and the satisfaction of supporting open-source software that benefits developers worldwide.
+        {/* --- Final CTA --- */}
+        <section className="px-6 pb-24 relative z-10">
+          <FadeIn>
+            <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-zinc-900 dark:bg-zinc-900 border border-zinc-800 p-12 md:p-20 text-center shadow-2xl">
+              {/* Glow Effect */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-rose-900/40 via-zinc-900 to-transparent opacity-50 pointer-events-none" />
+              
+              <div className="relative z-10">
+                <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6 tracking-tight">
+                  Build a lasting legacy.<br />
+                </h2>
+                <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                  Your infrastructure support directly translates to a faster, greener, and more accessible internet for millions. Let's make it happen.
                 </p>
-                <Link
-                  href="/sponsors"
-                  className="inline-flex items-center px-8 py-4 bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-zinc-900 font-medium rounded-lg transition-colors"
-                >
-                  <Heart className="w-5 h-5 mr-2" />
-                  View Our Current Sponsors
-                </Link>
-              </MagicCard>
-            </BlurFade>
-          </div>
+                
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <a
+                    href="mailto:sponsors@staticdelivr.com?subject=Sponsorship%20Inquiry"
+                    className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-zinc-950 transition-all duration-300 hover:bg-zinc-200 hover:scale-105"
+                  >
+                    <Mail className="h-4 w-4 mr-2" />
+                    sponsors@staticdelivr.com
+                  </a>
+                  <Link
+                    href="/sponsors"
+                    className="inline-flex h-12 items-center justify-center rounded-full px-8 font-medium text-white transition-colors hover:text-zinc-300 border border-zinc-700 hover:bg-zinc-800"
+                  >
+                    See current sponsors
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
         </section>
+
       </main>
       <Footer />
     </div>
