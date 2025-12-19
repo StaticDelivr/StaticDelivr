@@ -133,7 +133,7 @@ const StatsPage = ({ stats, generatedAt }) => {
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
 
-  const gbSaved = stats.bandwidthBytes / (1024 * 1024 * 1024);
+  const gbSaved = stats.bandwidthBytes / 1000000000;
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-emerald-500/30 font-sans">
