@@ -24,8 +24,8 @@ const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode,
   </motion.div>
 );
 
-// --- Code Block Visual (With Live Data) ---
-const JsonVisual = ({ requests, carbon }: { requests: string, carbon: string }) => (
+// --- Code Block Visual (Scale-Agnostic) ---
+const JsonVisual = () => (
   <div className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 shadow-xl font-mono text-sm">
     <div className="h-10 bg-zinc-100 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 flex items-center px-4 justify-between">
       <div className="flex gap-2">
@@ -45,15 +45,18 @@ const JsonVisual = ({ requests, carbon }: { requests: string, carbon: string }) 
           <span className="text-blue-600 dark:text-blue-400">"sustainability"</span>: <span className="text-emerald-600 dark:text-emerald-500">true</span>,
         </div>
         <div className="pl-4">
-          <span className="text-blue-600 dark:text-blue-400">"hiring_pool"</span>: <span className="text-amber-600 dark:text-amber-500">"global_engineers"</span>
+          <span className="text-blue-600 dark:text-blue-400">"talent_pipeline"</span>: <span className="text-amber-600 dark:text-amber-500">"global_engineers"</span>
         </div>
         <div>{'}'},</div>
-        <div><span className="text-purple-600 dark:text-purple-400">"impact_metrics"</span>: {'{'}</div>
+        <div><span className="text-purple-600 dark:text-purple-400">"network_specs"</span>: {'{'}</div>
         <div className="pl-4">
-          <span className="text-blue-600 dark:text-blue-400">"monthly_requests"</span>: <span className="text-rose-500">{requests}</span>,
+          <span className="text-blue-600 dark:text-blue-400">"reach"</span>: <span className="text-amber-600 dark:text-amber-500">"global_edge"</span>,
         </div>
         <div className="pl-4">
-          <span className="text-blue-600 dark:text-blue-400">"carbon_avoided"</span>: <span className="text-amber-600 dark:text-amber-500">"{carbon}_annually"</span>
+          <span className="text-blue-600 dark:text-blue-400">"avg_compression"</span>: <span className="text-rose-500">"~40%"</span>,
+        </div>
+        <div className="pl-4">
+          <span className="text-blue-600 dark:text-blue-400">"open_source"</span>: <span className="text-emerald-600 dark:text-emerald-500">true</span>
         </div>
         <div>{'}'}</div>
       </div>
@@ -61,54 +64,7 @@ const JsonVisual = ({ requests, carbon }: { requests: string, carbon: string }) 
   </div>
 );
 
-// --- Data Fetching (ISR) ---
-interface PageProps {
-  stats: {
-    requests: string;
-    carbon: string;
-  };
-}
-
-export async function getStaticProps() {
-  const props = {
-    stats: { 
-      requests: "800,000,000", 
-      carbon: "120t" 
-    }
-  };
-
-  try {
-    // 1. Fetch from API
-    const res = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
-    const data = await res.json();
-    const totalRequests = data?.total?.requests || 800000000;
-
-    // 2. Format Requests
-    props.stats.requests = new Intl.NumberFormat('en-US').format(totalRequests);
-
-    // 3. Calculate Carbon Impact (Logic mirrored from Impact Page)
-    // Assumption: 30% of requests are images, saving ~400KB per request vs unoptimized
-    const imageReqs = totalRequests * 0.30;
-    const bytesSaved = imageReqs * (400 * 1024);
-    const gbSaved = bytesSaved / (1024 * 1024 * 1024);
-    const kwhSaved = gbSaved * 0.15; // 0.15 kWh per GB
-    const kgCo2 = kwhSaved * 0.475; // 0.475 kg CO2 per kWh
-    
-    // Annualize it (Monthly * 12) and convert to Tonnes
-    const annualTonnes = (kgCo2 * 12) / 1000;
-    props.stats.carbon = `${Math.round(annualTonnes)}t`;
-
-  } catch (error) {
-    console.error("Error fetching stats:", error);
-  }
-
-  return { 
-    props, 
-    revalidate: 3600 // Revalidate every hour
-  };
-}
-
-const BecomeSponsorPage: React.FC<PageProps> = ({ stats }) => {
+const BecomeSponsorPage = () => {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-rose-500/30 font-sans">
       <Head>
@@ -192,7 +148,7 @@ const BecomeSponsorPage: React.FC<PageProps> = ({ stats }) => {
               {/* Right: Visual */}
               <FadeIn delay={0.2} className="relative">
                 <div className="absolute inset-0 bg-gradient-to-tr from-rose-500/20 to-blue-500/20 blur-3xl rounded-full opacity-50" />
-                <JsonVisual requests={stats.requests} carbon={stats.carbon} />
+                <JsonVisual />
               </FadeIn>
 
             </div>
@@ -223,7 +179,7 @@ const BecomeSponsorPage: React.FC<PageProps> = ({ stats }) => {
                         
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Core Infrastructure</h3>
                         <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
-                           We process petabytes of traffic. We need Edge Nodes (VPS), Object Storage (S3-compatible), and Global DNS services.
+                           We need Edge Nodes (VPS), Object Storage (S3-compatible), and Global DNS services.
                         </p>
                         
                         <div className="flex flex-wrap gap-2 mt-auto">
@@ -306,7 +262,7 @@ const BecomeSponsorPage: React.FC<PageProps> = ({ stats }) => {
                    <div>
                       <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Technical Credibility</h3>
                       <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                        Prove your infrastructure's reliability by powering a high-traffic, global CDN.
+                        Prove your infrastructure's reliability by powering a high-performance global CDN.
                       </p>
                    </div>
                 </FadeIn>
@@ -350,7 +306,7 @@ const BecomeSponsorPage: React.FC<PageProps> = ({ stats }) => {
                   Build a lasting legacy.<br />
                 </h2>
                 <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                  Your infrastructure support directly translates to a faster, greener, and more accessible internet for millions. Let's make it happen.
+                  Your infrastructure support directly translates to a faster, greener, and more accessible internet for the open source community.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
