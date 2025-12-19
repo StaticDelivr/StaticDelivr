@@ -1,120 +1,73 @@
-"use client";
-
-import React, { useState, useCallback, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowRight, 
-  Check, 
-  Copy,
-  Type,
-  ExternalLink,
-  Zap,
-  Globe,
-  Shield,
-  Lock,
-  ArrowDown
+  Type, ArrowRight, Copy, Check, 
+  ExternalLink, Globe, Zap, ShieldCheck, 
+  Terminal, AlertCircle, Lock, MousePointerClick,
+  Layers, Plus 
 } from 'lucide-react';
-import { AuroraBackground } from '@/components/ui/aurora-background';
-import { BentoCard, BentoGrid } from '@/components/ui/bento-grid';
-import { BlurFade } from '@/components/ui/blur-fade';
-import { CodeBlock } from '@/components/ui/code-block';
+import { SiGooglefonts } from 'react-icons/si';
 
-const Header = dynamic(() => import('@/components/Header'), {
-  loading: () => <div className="h-16 bg-white dark:bg-zinc-900 border-b" />,
-});
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-const Footer = dynamic(() => import('@/components/Footer'), {
-  loading: () => <div className="h-64 bg-slate-900" />,
-});
-
-// Feature backgrounds
-const GlobeBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative w-40 h-40">
-      <div className="absolute inset-0 rounded-full border-2 border-purple-500/30 animate-ping" style={{ animationDuration: "3s" }} />
-      <div className="absolute inset-4 rounded-full border-2 border-purple-500/40 animate-ping" style={{ animationDuration: "2.5s", animationDelay: "0.5s" }} />
-      <div className="absolute inset-12 rounded-full bg-gradient-to-br from-purple-400 to-purple-600" />
-    </div>
-  </div>
+// --- Animation Wrapper ---
+const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.5, delay, ease: "easeOut" }}
+    className={className}
+  >
+    {children}
+  </motion.div>
 );
 
-const LockBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <Lock className="w-32 h-32 text-green-500" />
-  </div>
-);
-
-const ZapBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <Zap className="w-32 h-32 text-yellow-500" />
-  </div>
-);
-
-const features = [
-  {
-    Icon: Globe,
-    name: "570+ Global PoPs",
-    description: "Fonts served from the closest edge location for lightning-fast load times worldwide.",
-    href: "/network",
-    cta: "View Network",
-    background: <GlobeBackground />,
-    className: "lg:col-start-1 lg:col-end-2",
-  },
-  {
-    Icon: Lock,
-    name: "Privacy First",
-    description: "No tracking, no cookies, no data collection. Your visitors' privacy is protected.",
-    href: "/about",
-    cta: "Learn More",
-    background: <LockBackground />,
-    className: "lg:col-start-2 lg:col-end-3",
-  },
-  {
-    Icon: Zap,
-    name: "Drop-in Replacement",
-    description: "Same syntax as Google Fonts. Just change the domain and you're done.",
-    href: "/docs/getting-started",
-    cta: "Get Started",
-    background: <ZapBackground />,
-    className: "lg:col-start-3 lg:col-end-4",
-  },
-];
-
-const popularFonts = [
-  { name: 'Inter', weights: '400;500;600;700' },
-  { name: 'Roboto', weights: '400;500;700' },
-  { name: 'Open Sans', weights: '400;600;700' },
-  { name: 'Poppins', weights: '400;500;600;700' },
-  { name: 'Lato', weights: '400;700' },
-  { name: 'Montserrat', weights: '400;500;600;700' },
+// --- Popular Fonts Data ---
+const POPULAR_FONTS = [
+  { name: 'Inter', weights: '100..900', label: 'Variable (100-900)' },
+  { name: 'Roboto', weights: '100,300,400,500,700,900', label: '100, 300, 400, 500, 700, 900' },
+  { name: 'Open Sans', weights: '300..800', label: 'Variable (300-800)' },
+  { name: 'Poppins', weights: '100,200,300,400,500,600,700,800,900', label: '100-900 (All Weights)' },
+  { name: 'Montserrat', weights: '100..900', label: 'Variable (100-900)' },
+  { name: 'Lato', weights: '100,300,400,700,900', label: '100, 300, 400, 700, 900' },
 ];
 
 const GoogleFontsPage = () => {
+  // --- State ---
   const [inputUrl, setInputUrl] = useState('');
   const [outputUrl, setOutputUrl] = useState('');
   const [error, setError] = useState('');
-  const [copied, setCopied] = useState(false);
+  
+  // UX States
+  const [copiedConverter, setCopiedConverter] = useState(false);
+  const [copiedMulti, setCopiedMulti] = useState(false);
+  const [copiedFontName, setCopiedFontName] = useState<string | null>(null);
+  
+  const [activeTab, setActiveTab] = useState<'html' | 'css'>('html');
 
+  // --- Logic: Convert URL ---
   const convertUrl = useCallback((url: string): string => {
     if (!url.trim()) return '';
 
     const cdn = 'https://cdn.staticdelivr.com';
 
-    // Google Fonts CSS2 URL
+    // 1. CSS2 API (Handles simple and multiple families)
     const css2Match = url.match(/fonts\.googleapis\.com\/css2\?(.+)/);
     if (css2Match) {
       return `${cdn}/gfonts/css2?${css2Match[1]}`;
     }
 
-    // Google Fonts CSS URL (legacy)
+    // 2. Legacy CSS API
     const cssMatch = url.match(/fonts\.googleapis\.com\/css\?(.+)/);
     if (cssMatch) {
       return `${cdn}/gfonts/css?${cssMatch[1]}`;
     }
 
-    throw new Error('Please enter a valid Google Fonts URL');
+    throw new Error('Invalid Google Fonts URL format');
   }, []);
 
   useEffect(() => {
@@ -129,323 +82,390 @@ const GoogleFontsPage = () => {
       setOutputUrl(result);
       setError('');
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Invalid URL');
+      if (inputUrl.length > 20) {
+        setError('Please paste a valid fonts.googleapis.com URL.');
+      }
       setOutputUrl('');
     }
   }, [inputUrl, convertUrl]);
 
-  const copyToClipboard = () => {
-    if (outputUrl) {
-      navigator.clipboard.writeText(outputUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+  // --- Clipboard Helpers ---
+  const copyConverter = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedConverter(true);
+    setTimeout(() => setCopiedConverter(false), 2000);
   };
 
-  const generateFontUrl = (font: typeof popularFonts[0]) => {
-    const fontName = font.name.replace(/ /g, '+');
-    return `https://cdn.staticdelivr.com/gfonts/css2?family=${fontName}:wght@${font.weights}&display=swap`;
+  const copyMulti = (text: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedMulti(true);
+    setTimeout(() => setCopiedMulti(false), 2000);
+  };
+
+  const copyFont = (text: string, fontName: string) => {
+    navigator.clipboard.writeText(text);
+    setCopiedFontName(fontName);
+    setTimeout(() => setCopiedFontName(null), 2000);
+  };
+
+  const generateFontUrl = (fontName: string, weights: string) => {
+    const formattedWeights = weights.includes('..') 
+      ? weights 
+      : weights.replace(/,/g, ';');
+      
+    return `https://cdn.staticdelivr.com/gfonts/css2?family=${fontName.replace(/ /g, '+')}:wght@${formattedWeights}&display=swap`;
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
+    <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-amber-500/30 font-sans">
       <Head>
-        <title>Google Fonts CDN | StaticDelivr</title>
-        <meta name="description" content="Serve Google Fonts from StaticDelivr's global CDN. Privacy-first, no tracking, same API. Drop-in replacement for Google Fonts." />
-        <meta name="keywords" content="Google Fonts CDN, privacy fonts, self-host Google Fonts, Google Fonts proxy, GDPR fonts, font CDN, StaticDelivr" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-        <link rel="canonical" href="https://staticdelivr.com/google-fonts" />
-
-        <meta property="og:url" content="https://staticdelivr.com/google-fonts" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Google Fonts CDN | StaticDelivr" />
-        <meta property="og:description" content="Serve Google Fonts from StaticDelivr's global CDN. Privacy-first, no tracking." />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-        <meta property="og:site_name" content="StaticDelivr" />
-        
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Google Fonts CDN | StaticDelivr" />
-        <meta name="twitter:description" content="Serve Google Fonts from StaticDelivr's global CDN. Privacy-first, no tracking." />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "WebApplication",
-              "name": "StaticDelivr Google Fonts CDN",
-              "applicationCategory": "DeveloperApplication",
-              "operatingSystem": "Any",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              },
-              "description": "Serve Google Fonts from a privacy-focused CDN",
-              "author": {
-                "@type": "Organization",
-                "name": "StaticDelivr",
-                "url": "https://staticdelivr.com"
-              }
-            })
-          }}
+        <title>Google Fonts Proxy | StaticDelivr</title>
+        <meta name="description" content="Serve Google Fonts with better privacy and speed. Supports multiple font families in a single request." />
+        <link 
+          href="https://cdn.staticdelivr.com/gfonts/css2?family=Inter:wght@400;700&family=Roboto:wght@400;700&family=Open+Sans:wght@400;700&family=Poppins:wght@400;700&family=Montserrat:wght@400;700&family=Lato:wght@400;700&display=swap" 
+          rel="stylesheet" 
         />
       </Head>
 
       <Header />
 
-      {/* Hero Section */}
-      <AuroraBackground className="min-h-[80vh] flex items-center justify-center pt-16">
-        <div className="relative z-10 max-w-4xl mx-auto px-4 py-20">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-12">
-              {/* Badge */}
-              <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-700 dark:text-zinc-300 text-sm font-medium mb-8">
-                <Type className="w-4 h-4" />
-                Google Fonts CDN
-              </div>
+      <main className="relative pt-32 pb-20 overflow-hidden">
+        
+        {/* Background Gradients */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-amber-500/10 dark:bg-amber-500/5 blur-[120px] rounded-full pointer-events-none" />
 
-              {/* Main Headline */}
-              <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight mb-6">
-                Google Fonts,{" "}
-                <span className="bg-gradient-to-r from-zinc-600 to-zinc-900 dark:from-zinc-300 dark:to-white bg-clip-text text-transparent">
-                  Privacy First
-                </span>
+        {/* --- Hero Section --- */}
+        <section className="px-6 mb-16 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+                <SiGooglefonts className="w-3 h-3" />
+                <span>$ staticdelivr --fonts --privacy</span>
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
+                Google Fonts,<br />
+                <span className="text-zinc-400 dark:text-zinc-600">minus the tracking.</span>
               </h1>
+            </FadeIn>
 
-              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Serve Google Fonts from our global CDN without compromising your visitors' privacy. 
-                Same syntax, better performance, no tracking.
+            <FadeIn delay={0.2}>
+              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+                A drop-in replacement for Google Fonts. Proxy CSS and font files through our global CDN to strip tracking cookies while maintaining 100% API compatibility.
               </p>
-            </div>
-          </BlurFade>
+            </FadeIn>
+          </div>
+        </section>
 
-          {/* Converter Card */}
-          <BlurFade delay={0.2} inView>
-            <div className="max-w-2xl mx-auto">
-              <div className="flex w-full flex-col overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-lg">
+        {/* --- Converter Tool --- */}
+        <section className="px-6 mb-32 relative z-10">
+          <div className="max-w-3xl mx-auto">
+             <FadeIn delay={0.3}>
                 
-                {/* Input Section */}
-                <div className="p-6">
-                  <label className="block text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mb-3">
-                    Google Fonts URL
-                  </label>
-                  <input
-                    type="text"
-                    value={inputUrl}
-                    onChange={(e) => setInputUrl(e.target.value)}
-                    placeholder="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600"
-                    className="w-full h-12 px-4 rounded-lg bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-zinc-400 dark:focus:ring-zinc-600 font-mono text-sm"
-                  />
-                  {error && (
-                    <p className="mt-2 text-sm text-red-500 dark:text-red-400">{error}</p>
-                  )}
-                  
-                  <div className="mt-3 text-xs text-zinc-500 dark:text-zinc-500">
-                    Supports: fonts.googleapis.com/css2, fonts.googleapis.com/css
-                  </div>
-                </div>
-
-                {/* Arrow indicator */}
-                {outputUrl && (
-                  <div className="flex justify-center py-2 bg-zinc-50 dark:bg-zinc-900/50">
-                    <ArrowDown className="w-4 h-4 text-zinc-400" />
-                  </div>
-                )}
-
-                {/* Output Section */}
-                {outputUrl && (
-                  <div className="p-6 bg-zinc-900">
-                    <div className="flex items-center justify-between mb-3">
-                      <label className="text-xs font-medium text-zinc-400 uppercase tracking-wider">
-                        CDN URL
-                      </label>
-                      <div className="flex items-center gap-2">
-                        <a
-                          href={outputUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-300 hover:text-white transition-colors"
-                        >
-                          <ExternalLink className="w-3 h-3" />
-                          Open
-                        </a>
-                        <button
-                          onClick={copyToClipboard}
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md bg-zinc-100 dark:bg-zinc-700 hover:bg-zinc-200 dark:hover:bg-zinc-600 text-xs font-medium text-zinc-900 dark:text-white transition-colors"
-                        >
-                          {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}
-                          {copied ? 'Copied!' : 'Copy'}
-                        </button>
+                {/* Input Card */}
+                <div className="relative z-20 mb-6">
+                   <div className="relative group">
+                      <div className="absolute inset-0 bg-gradient-to-r from-amber-500/20 to-orange-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden p-2">
+                         <div className="flex items-center px-4 py-2">
+                            <Type className="w-5 h-5 text-zinc-400 mr-4" />
+                            <input 
+                               type="text" 
+                               value={inputUrl}
+                               onChange={(e) => setInputUrl(e.target.value)}
+                               placeholder="Paste Google Fonts URL (e.g. &family=Inter&family=Roboto...)"
+                               className="w-full bg-transparent border-none focus:ring-0 text-zinc-900 dark:text-white placeholder:text-zinc-400 font-mono text-sm h-10"
+                            />
+                         </div>
                       </div>
+                   </div>
+                   
+                   {/* Error Message */}
+                   <AnimatePresence>
+                     {error && (
+                       <motion.div 
+                         initial={{ opacity: 0, y: -10 }}
+                         animate={{ opacity: 1, y: 0 }}
+                         exit={{ opacity: 0, y: -10 }}
+                         className="flex items-center gap-2 text-rose-500 text-sm mt-3 px-4"
+                       >
+                         <AlertCircle className="w-4 h-4" /> {error}
+                       </motion.div>
+                     )}
+                   </AnimatePresence>
+                </div>
+
+                {/* Output Card */}
+                <AnimatePresence>
+                  {outputUrl && (
+                    <motion.div
+                       initial={{ opacity: 0, y: 20 }}
+                       animate={{ opacity: 1, y: 0 }}
+                       exit={{ opacity: 0, y: 20 }}
+                       className="relative rounded-2xl bg-zinc-950 border border-zinc-800 shadow-2xl overflow-hidden"
+                    >
+                       {/* Header / Tabs */}
+                       <div className="flex items-center justify-between px-4 py-3 border-b border-white/10 bg-white/5">
+                          <div className="flex items-center gap-1.5">
+                             <div className="w-2.5 h-2.5 rounded-full bg-red-500/50" />
+                             <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
+                             <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
+                          </div>
+                          <div className="flex gap-1 bg-zinc-900 p-1 rounded-lg border border-zinc-800">
+                             <button
+                                onClick={() => setActiveTab('html')}
+                                className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${
+                                   activeTab === 'html' ? 'bg-zinc-800 text-white' : 'text-zinc-500 hover:text-zinc-300'
+                                }`}
+                             >
+                                HTML
+                             </button>
+                             <button
+                                onClick={() => setActiveTab('css')}
+                                className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${
+                                   activeTab === 'css' ? 'bg-zinc-800 text-white' : 'text-zinc-500 hover:text-zinc-300'
+                                }`}
+                             >
+                                CSS
+                             </button>
+                          </div>
+                       </div>
+
+                       {/* Content */}
+                       <div className="p-6 font-mono text-sm break-all text-amber-400/90">
+                          {activeTab === 'html' ? (
+                             <span>
+                                <span className="text-blue-400">&lt;link</span> <span className="text-purple-400">href</span>=<span className="text-amber-400">"{outputUrl}"</span> <span className="text-purple-400">rel</span>=<span className="text-green-400">"stylesheet"</span><span className="text-blue-400">&gt;</span>
+                             </span>
+                          ) : (
+                             <span>
+                                <span className="text-purple-400">@import</span> url(<span className="text-amber-400">'{outputUrl}'</span>);
+                             </span>
+                          )}
+                       </div>
+
+                       {/* Actions */}
+                       <div className="px-4 py-3 border-t border-white/10 bg-white/5 flex justify-end gap-2">
+                          <a 
+                             href={outputUrl} 
+                             target="_blank" 
+                             rel="noopener noreferrer"
+                             className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/10 transition-colors"
+                          >
+                             <ExternalLink className="w-3 h-3" /> Open
+                          </a>
+                          <button 
+                             onClick={() => copyConverter(
+                                activeTab === 'html' 
+                                  ? `<link href="${outputUrl}" rel="stylesheet">` 
+                                  : `@import url('${outputUrl}');`
+                             )}
+                             className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-zinc-900 hover:bg-zinc-200 transition-colors min-w-[80px] justify-center"
+                          >
+                             {copiedConverter ? (
+                               <>
+                                 <Check className="w-3 h-3 text-emerald-600" /> Copied
+                               </>
+                             ) : (
+                               <>
+                                 <Copy className="w-3 h-3" /> Copy
+                               </>
+                             )}
+                          </button>
+                       </div>
+                    </motion.div>
+                  )}
+                </AnimatePresence>
+
+             </FadeIn>
+          </div>
+        </section>
+
+        {/* --- Popular Fonts Quick Copy --- */}
+        <section className="px-6 mb-32">
+          <div className="max-w-6xl mx-auto">
+            <FadeIn className="mb-10 text-center">
+              <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white">Popular Fonts</h2>
+              <p className="text-zinc-500 dark:text-zinc-400 mt-2">Click any card to copy the optimized CDN URL.</p>
+            </FadeIn>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+               {POPULAR_FONTS.map((font, idx) => {
+                  const isCopied = copiedFontName === font.name;
+                  return (
+                    <FadeIn key={font.name} delay={idx * 0.05}>
+                       <button
+                          onClick={() => {
+                             const url = generateFontUrl(font.name, font.weights);
+                             copyFont(url, font.name);
+                          }}
+                          className="w-full h-full p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-amber-400 dark:hover:border-amber-500/50 hover:shadow-lg transition-all text-left group relative overflow-hidden flex flex-col justify-between"
+                       >
+                          <div>
+                             <div className="flex justify-between items-start mb-2">
+                                <div className="text-4xl font-normal text-zinc-900 dark:text-white transition-colors group-hover:text-amber-600 dark:group-hover:text-amber-400" style={{ fontFamily: font.name }}>
+                                   {font.name}
+                                </div>
+                                <div className={`transition-all duration-300 ${isCopied ? 'opacity-100 scale-110' : 'opacity-0 group-hover:opacity-100'}`}>
+                                   {isCopied ? (
+                                      <Check className="w-5 h-5 text-emerald-500" />
+                                   ) : (
+                                      <MousePointerClick className="w-4 h-4 text-amber-500" />
+                                   )}
+                                </div>
+                             </div>
+                             <div className="text-sm text-zinc-900 dark:text-white" style={{ fontFamily: font.name }}>
+                                The quick brown fox jumps over the lazy dog.
+                             </div>
+                          </div>
+                          
+                          <div className="mt-6 pt-4 border-t border-zinc-100 dark:border-zinc-800 flex justify-between items-end">
+                             <div>
+                                <span className="text-[10px] font-mono text-zinc-400 uppercase tracking-wider block mb-1">
+                                   Weights Included
+                                </span>
+                                <span className="text-xs text-zinc-600 dark:text-zinc-300 font-medium">
+                                   {font.label}
+                                </span>
+                             </div>
+                             {isCopied && (
+                                <span className="text-xs font-bold text-emerald-600 dark:text-emerald-400 animate-pulse">
+                                   Copied!
+                                </span>
+                             )}
+                          </div>
+                       </button>
+                    </FadeIn>
+                  );
+               })}
+            </div>
+          </div>
+        </section>
+
+        {/* --- Feature: Multiple Fonts (SEO Optimised) --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-4xl mx-auto">
+              <FadeIn delay={0.1}>
+                 <div className="relative rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-8 md:p-10">
+                    <div className="grid md:grid-cols-2 gap-10 items-center">
+                       <div>
+                          <div className="inline-flex items-center gap-2 text-amber-600 dark:text-amber-500 font-medium mb-4">
+                             <Layers className="w-5 h-5" />
+                             <h3>Combined Requests</h3>
+                          </div>
+                          <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-4">
+                             Load multiple font families in a single request.
+                          </h2>
+                          <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                             Don't make your users wait for multiple connections. Combine all your font definitions into one URL to reduce latency and improve PageSpeed scores.
+                          </p>
+                          <div className="text-sm text-zinc-500">
+                             <strong>Pro Tip:</strong> Paste your multi-family Google URL into the converter above — it works automatically!
+                          </div>
+                       </div>
+                       
+                       <div className="bg-white dark:bg-black rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 shadow-sm font-mono text-xs overflow-x-auto">
+                          <div className="text-zinc-400 mb-2">// Example: Open Sans + Poppins</div>
+                          <div className="whitespace-pre-wrap break-all">
+                             <span className="text-blue-600 dark:text-blue-400">&lt;link</span>{' '}
+                             <span className="text-purple-600 dark:text-purple-400">href</span>=
+                             <span className="text-amber-600 dark:text-amber-400">
+                                "https://cdn.staticdelivr.com/gfonts/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;700&display=swap"
+                             </span>{' '}
+                             <span className="text-purple-600 dark:text-purple-400">rel</span>=
+                             <span className="text-green-600 dark:text-green-400">"stylesheet"</span>
+                             <span className="text-blue-600 dark:text-blue-400">&gt;</span>
+                          </div>
+                          <button 
+                             onClick={() => copyMulti('<link href="https://cdn.staticdelivr.com/gfonts/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">')}
+                             className={`mt-4 flex items-center gap-2 transition-colors ${
+                                copiedMulti ? 'text-emerald-600 dark:text-emerald-400 font-medium' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
+                             }`}
+                          >
+                             {copiedMulti ? (
+                               <>
+                                 <Check className="w-3 h-3" /> Copied!
+                               </>
+                             ) : (
+                               <>
+                                 <Copy className="w-3 h-3" /> Copy Example
+                               </>
+                             )}
+                          </button>
+                       </div>
                     </div>
-                    <div className="p-3 rounded-lg bg-zinc-800 border border-zinc-700">
-                      <code className="text-green-400 text-sm font-mono break-all">{outputUrl}</code>
+                 </div>
+              </FadeIn>
+           </div>
+        </section>
+
+        {/* --- Why Switch? Features --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-6">
+                 <FadeIn delay={0.1} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/10 flex items-center justify-center text-amber-600 dark:text-amber-500 mb-6">
+                       <Lock className="w-6 h-6" />
                     </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Privacy First</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                       We strip all user-identifying data and tracking cookies before upstreaming the request to Google. Your users remain anonymous.
+                    </p>
+                 </FadeIn>
+
+                 <FadeIn delay={0.2} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-500 mb-6">
+                       <Zap className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">HTTP/3 & Brotli</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                       Files are served over the latest HTTP/3 protocol and compressed with Brotli for faster font loading times.
+                    </p>
+                 </FadeIn>
+
+                 <FadeIn delay={0.3} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/10 flex items-center justify-center text-emerald-600 dark:text-emerald-500 mb-6">
+                       <ShieldCheck className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">GDPR Compliant</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                       Because we act as a privacy shield, you don't need to declare Google Fonts usage in your cookie banner.
+                    </p>
+                 </FadeIn>
+              </div>
+           </div>
+        </section>
+
+        {/* --- Final CTA --- */}
+        <section className="px-6 pb-24 relative z-10">
+          <FadeIn>
+            <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-zinc-900 dark:bg-zinc-900 border border-zinc-800 p-12 md:p-20 text-center shadow-2xl">
+               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_#27272a_0%,_transparent_70%)] opacity-50 pointer-events-none" />
+               <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 text-zinc-400 font-medium mb-6">
+                     <Terminal className="w-5 h-5" />
+                     <span>Developer Tools</span>
                   </div>
-                )}
-              </div>
-            </div>
-          </BlurFade>
-        </div>
-      </AuroraBackground>
-
-      {/* Why Use Section */}
-      <section className="py-20 px-4 bg-white dark:bg-zinc-950">
-        <div className="max-w-6xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4">
-                Why Use StaticDelivr for Google Fonts?
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Google Fonts can track your visitors. Our CDN serves the same fonts without any tracking or data collection.
-              </p>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.2} inView>
-            <BentoGrid className="lg:grid-cols-3">
-              {features.map((feature) => (
-                <BentoCard key={feature.name} {...feature} />
-              ))}
-            </BentoGrid>
-          </BlurFade>
-        </div>
-      </section>
-
-      {/* Popular Fonts Section */}
-      <section className="py-20 px-4 bg-zinc-50 dark:bg-zinc-900">
-        <div className="max-w-6xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4">
-                Popular Fonts
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Click any font to copy its CDN URL. All 1,500+ Google Fonts are available.
-              </p>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.2} inView>
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-              {popularFonts.map((font) => (
-                <button
-                  key={font.name}
-                  onClick={() => {
-                    navigator.clipboard.writeText(generateFontUrl(font));
-                  }}
-                  className="group p-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all text-left"
-                >
-                  <div className="flex items-center justify-between mb-3">
-                    <span className="text-lg font-semibold text-zinc-900 dark:text-white" style={{ fontFamily: font.name }}>
-                      {font.name}
-                    </span>
-                    <Copy className="w-4 h-4 text-zinc-400 group-hover:text-zinc-600 dark:group-hover:text-zinc-300 transition-colors" />
+                  <h2 className="text-3xl md:text-5xl font-semibold text-white mb-8 tracking-tight">
+                     Explore our NPM Registry.
+                  </h2>
+                  <p className="text-zinc-400 max-w-lg mx-auto mb-10">
+                     Need to serve React, Vue, or other libraries? Use our dedicated NPM endpoint.
+                  </p>
+                  <div className="flex justify-center gap-4">
+                     <Link href="/npm" className="h-12 px-8 rounded-full bg-white text-zinc-900 font-medium flex items-center hover:bg-zinc-200 transition-colors">
+                        Go to NPM CDN <ArrowRight className="w-4 h-4 ml-2" />
+                     </Link>
                   </div>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                    Weights: {font.weights.split(';').join(', ')}
-                  </p>
-                </button>
-              ))}
+               </div>
             </div>
-          </BlurFade>
-        </div>
-      </section>
+          </FadeIn>
+        </section>
 
-      {/* Usage Examples Section */}
-      <section className="py-20 px-4 bg-white dark:bg-black">
-        <div className="max-w-4xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4">
-                How to Use
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Just replace the Google Fonts domain with ours. Everything else stays the same.
-              </p>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.2} inView>
-            <div className="space-y-8">
-              {/* HTML Example */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-                <div className="p-6">
-                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-2 text-lg">HTML Link Tag</h3>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-                    Add this to your HTML head section.
-                  </p>
-                  <CodeBlock 
-                    code={`<link href="https://cdn.staticdelivr.com/gfonts/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">`}
-                    language="html"
-                  />
-                </div>
-              </div>
-
-              {/* CSS Import Example */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-                <div className="p-6">
-                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-2 text-lg">CSS @import</h3>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-                    Or import directly in your CSS file.
-                  </p>
-                  <CodeBlock 
-                    code={`@import url('https://cdn.staticdelivr.com/gfonts/css2?family=Roboto:wght@400;500;700&display=swap');`}
-                    language="css"
-                  />
-                </div>
-              </div>
-
-              {/* Multiple Fonts Example */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-                <div className="p-6">
-                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-2 text-lg">Multiple Fonts</h3>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-                    Load multiple font families in a single request.
-                  </p>
-                  <CodeBlock 
-                    code={`<link href="https://cdn.staticdelivr.com/gfonts/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">`}
-                    language="html"
-                  />
-                </div>
-              </div>
-            </div>
-          </BlurFade>
-        </div>
-      </section>
-
-      {/* CTA Section */}
-      <section className="py-20 px-4 bg-zinc-900">
-        <div className="max-w-4xl mx-auto text-center">
-          <BlurFade delay={0.1} inView>
-            <h2 className="text-3xl md:text-4xl font-bold text-white mb-6">
-              Ready to Switch?
-            </h2>
-            <p className="text-lg text-zinc-400 max-w-2xl mx-auto mb-8">
-              It takes less than a minute. Just find and replace the domain in your code.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/docs/getting-started"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white text-zinc-900 font-semibold rounded-lg hover:bg-zinc-100 transition-colors"
-              >
-                Get Started
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/migrate"
-                className="inline-flex items-center gap-2 px-6 py-3 border border-zinc-700 text-white font-semibold rounded-lg hover:bg-zinc-800 transition-colors"
-              >
-                Migration Tools
-              </Link>
-            </div>
-          </BlurFade>
-        </div>
-      </section>
-
+      </main>
       <Footer />
     </div>
   );
