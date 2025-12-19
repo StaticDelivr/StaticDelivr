@@ -229,20 +229,23 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                 </FadeIn>
               ))}
 
-              {/* "Your Logo Here" Card */}
-              <FadeIn delay={0.2}>
+              {/* "Your Company" Placeholder Card */}
+              <FadeIn delay={0.3}>
                 <Link 
                   href="/become-a-sponsor"
-                  className="group relative block h-full overflow-hidden rounded-3xl border border-dashed border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900/50 p-8 transition-all hover:bg-zinc-100 dark:hover:bg-zinc-800"
+                  className="group block h-full"
                 >
-                  <div className="relative z-10 flex flex-col h-full items-center text-center justify-center">
-                     <div className="w-16 h-16 rounded-2xl bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                        <Heart className="w-8 h-8 text-zinc-400 dark:text-zinc-500 group-hover:text-rose-500 transition-colors" />
-                     </div>
-                     <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-2">Your Company</h3>
-                     <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-[200px]">
-                        Support the mission and get your logo here.
-                     </p>
+                  <div className="relative overflow-hidden rounded-2xl border-2 border-dashed border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900/50 hover:border-zinc-400 dark:hover:border-zinc-600 transition-all h-full flex flex-col items-center justify-center p-12 text-center min-h-[280px]">
+                    <div className="w-16 h-16 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
+                      <Heart className="w-8 h-8 text-zinc-400 dark:text-zinc-600" />
+                    </div>
+                    <h3 className="font-semibold text-lg text-zinc-900 dark:text-white mb-2">Your Company Here</h3>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-4">
+                      Support the open web and get your brand in front of millions of developers
+                    </p>
+                    <span className="inline-flex items-center text-sm font-medium text-zinc-900 dark:text-white group-hover:gap-2 transition-all">
+                      Become a Sponsor <ArrowRight className="w-4 h-4 ml-1" />
+                    </span>
                   </div>
                 </Link>
               </FadeIn>
