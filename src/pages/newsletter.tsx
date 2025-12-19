@@ -1,228 +1,166 @@
-import React, { useState } from 'react';
+import React from 'react';
 import Head from 'next/head';
-import { Mail, Send, Star, Check } from 'lucide-react';
-import { useTheme } from 'next-themes';
+import { motion } from 'framer-motion';
+import { 
+  Mail, Send, Terminal, Zap, 
+  BookOpen, Users, Lock 
+} from 'lucide-react';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import { AuroraBackground } from '../components/ui/aurora-background';
-import { MagicCard } from '../components/ui/magic-card';
-import { BentoGrid } from '../components/ui/bento-grid';
-import { BlurFade } from '../components/ui/blur-fade';
-import { cn } from '@/lib/utils';
 
-interface CustomBentoCardProps {
-  name: string;
-  className?: string;
-  background: React.ReactNode;
-  Icon: React.ComponentType<{ className?: string }>;
-  children: React.ReactNode;
-}
-
-const StarBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-    <Star className="w-48 h-48 text-blue-500 animate-pulse" style={{ animationDuration: "3s" }} />
-  </div>
-);
-
-const SendBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-    <Send className="w-48 h-48 text-purple-500" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-purple-500/10 via-transparent to-transparent animate-pulse" />
-  </div>
-);
-
-const MailBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-    <Mail className="w-48 h-48 text-green-500" />
-  </div>
-);
-
-const CustomBentoCard = ({
-  name,
-  className,
-  background,
-  Icon,
-  children,
-  ...props
-}: CustomBentoCardProps & React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "group relative flex flex-col justify-between overflow-hidden rounded-xl",
-      "bg-white dark:bg-zinc-900 [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
-      "dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] dark:[border:1px_solid_rgba(255,255,255,.1)]",
-      className
-    )}
-    {...props}
+// --- Animation Wrapper ---
+const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.5, delay, ease: "easeOut" }}
+    className={className}
   >
-    <div>{background}</div>
-    <div className="p-6 relative z-10 h-full flex flex-col">
-      <div className="mb-4 p-2 w-fit rounded-lg bg-zinc-100 dark:bg-zinc-800">
-        <Icon className="h-6 w-6 text-zinc-900 dark:text-zinc-100" />
-      </div>
-      <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
-        {name}
-      </h3>
-      <div className="text-zinc-500 dark:text-zinc-400 flex-grow">
-        {children}
-      </div>
-    </div>
-  </div>
+    {children}
+  </motion.div>
 );
 
 const NewsletterPage = () => {
-  const { theme } = useTheme();
-  const [email, setEmail] = useState('');
-  const [subscribed, setSubscribed] = useState(false);
-
-  const handleSubscribe = (e: { preventDefault: () => void; }) => {
-    e.preventDefault();
-
-    if (email) {
-      setSubscribed(true);
-      // Reset email after a short delay
-      setTimeout(() => {
-        setEmail('');
-        setSubscribed(false);
-      }, 3000);
-    }
-  };
-
   return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
+    <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-blue-500/30 font-sans">
       <Head>
-        <title>Newsletter | CDN Updates & News - StaticDelivr</title>
-        <meta name="description" content="Subscribe to the StaticDelivr newsletter for the latest CDN updates, technical insights, performance tips, and open-source community highlights." />
-        <meta name="keywords" content="CDN newsletter, StaticDelivr updates, open source news, developer newsletter, CDN performance tips, tech updates" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-
-        <meta property="og:url" content="https://staticdelivr.com/newsletter" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Newsletter | CDN Updates & News - StaticDelivr" />
-        <meta property="og:description" content="Subscribe to the StaticDelivr newsletter for the latest CDN updates, technical insights, and open-source community highlights." />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="StaticDelivr" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="staticdelivr.com" />
-        <meta property="twitter:url" content="https://staticdelivr.com/newsletter" />
-        <meta name="twitter:title" content="Newsletter | CDN Updates & News - StaticDelivr" />
-        <meta name="twitter:description" content="Subscribe to the StaticDelivr newsletter for the latest CDN updates, technical insights, and open-source community highlights." />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+        <title>Newsletter | StaticDelivr</title>
+        <meta name="description" content="Stay updated with the latest in open source delivery and edge performance." />
       </Head>
 
       <Header />
-      <main>
-        {/* Hero Section */}
-        <AuroraBackground className="h-auto min-h-[50vh] py-24">
-          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white mb-8 tracking-tight">
-              StaticDelivr Newsletter
-            </h1>
-            <div className="prose prose-lg mx-auto">
-              <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-300 leading-relaxed mb-8">
-                Stay up to date with the latest updates, features, and insights from StaticDelivr. 
-                Our newsletter keeps you informed about open-source innovations, community highlights, 
-                and exciting developments in the world of static asset delivery.
-              </p>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400">
-                By subscribing, you&apos;ll receive curated content directly in your inbox, including 
-                project updates, technical tips, community spotlights, and exclusive insights from 
-                our development team.
-              </p>
-            </div>
-          </div>
-        </AuroraBackground>
 
-        {/* Newsletter Signup Section */}
-        <section className="py-20 px-4 bg-white dark:bg-zinc-950">
-          <div className="max-w-3xl mx-auto">
-            <BlurFade delay={0.1} inView>
-              <MagicCard
-                className="p-10 border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950"
-                gradientColor={theme === "dark" ? "#262626" : "#E4E4E7"}
-              >
-                <div className="text-center mb-8">
-                  <Mail className="w-12 h-12 mx-auto text-zinc-900 dark:text-white mb-4" />
-                  <h2 className="text-3xl font-bold mb-4 text-zinc-900 dark:text-white">Subscribe to Our Newsletter</h2>
-                  <p className="text-lg text-zinc-600 dark:text-zinc-300 mb-8">
-                    Join thousands of developers who stay ahead with StaticDelivr insights.
+      <main className="relative pt-32 pb-20 overflow-hidden">
+        
+        {/* Background Gradients */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-500/10 dark:bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+
+        {/* --- Hero Section --- */}
+        <section className="px-6 mb-24 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+                <Terminal className="w-3 h-3" />
+                <span>$ staticdelivr --newsletter</span>
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
+                Changelogs, insights,<br />
+                <span className="text-zinc-400 dark:text-zinc-600">and edge engineering.</span>
+              </h1>
+            </FadeIn>
+
+            <FadeIn delay={0.2}>
+              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+                Join our community of developers. We share monthly updates about CDN performance, new open source integrations, and infrastructure transparency reports.
+              </p>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* --- Disabled Form Section --- */}
+        <section className="px-6 mb-32 relative z-10">
+          <div className="max-w-2xl mx-auto">
+            <FadeIn delay={0.3}>
+              <div className="relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 md:p-12 shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
+                
+                {/* Diagonal Stripe Pattern (Subtle overlay for disabled feel) */}
+                <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
+                     style={{ backgroundImage: 'linear-gradient(45deg, #000 25%, transparent 25%, transparent 50%, #000 50%, #000 75%, transparent 75%, transparent)' , backgroundSize: '20px 20px' }} 
+                />
+
+                <div className="relative z-10 text-center">
+                  <div className="w-12 h-12 bg-zinc-100 dark:bg-zinc-800 rounded-2xl flex items-center justify-center mx-auto mb-6 text-zinc-400">
+                    <Lock className="w-6 h-6" />
+                  </div>
+                  
+                  <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">
+                    Subscriptions Paused
+                  </h3>
+                  <p className="text-zinc-500 dark:text-zinc-400 mb-8">
+                    We are currently upgrading our mailing infrastructure. Check back soon or follow us on GitHub for updates.
+                  </p>
+
+                  <form className="max-w-md mx-auto opacity-50 pointer-events-none select-none" aria-disabled="true">
+                    <div className="flex flex-col sm:flex-row gap-3">
+                      <input 
+                        type="email" 
+                        disabled
+                        placeholder="you@example.com" 
+                        className="flex-1 px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-400"
+                      />
+                      <button 
+                        disabled
+                        type="button"
+                        className="px-6 py-3 rounded-xl bg-zinc-200 dark:bg-zinc-800 text-zinc-500 font-medium flex items-center justify-center gap-2"
+                      >
+                        Subscribe <Send className="w-4 h-4" />
+                      </button>
+                    </div>
+                  </form>
+                </div>
+              </div>
+            </FadeIn>
+          </div>
+        </section>
+
+        {/* --- Content Preview Grid --- */}
+        <section className="px-6 pb-24 relative z-10">
+          <div className="max-w-6xl mx-auto">
+            <FadeIn className="text-center mb-12">
+               <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white mb-2">What we usually write about</h2>
+            </FadeIn>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              
+              {/* Card 1 */}
+              <FadeIn delay={0.1}>
+                <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50">
+                  <div className="w-10 h-10 rounded-xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6">
+                    <Zap className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Performance Deep Dives</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                    Technical breakdowns of how we optimize routing, compression algorithms, and edge caching strategies.
                   </p>
                 </div>
-                <form onSubmit={handleSubscribe} className="max-w-md mx-auto">
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <input
-                      type="email"
-                      placeholder="Enter your email address"
-                      value={email}
-                      onChange={(e) => setEmail(e.target.value)}
-                      required
-                      className="flex-grow px-4 py-3 rounded-lg border border-zinc-300 dark:border-zinc-700 bg-white dark:bg-zinc-900 text-zinc-900 dark:text-white focus:outline-none focus:ring-2 focus:ring-zinc-500"
-                    />
-                    <button
-                      type="submit"
-                      disabled={subscribed}
-                      className={`px-6 py-3 rounded-lg transition-colors font-medium flex items-center justify-center ${
-                        subscribed 
-                          ? 'bg-green-500 text-white cursor-not-allowed'
-                          : 'bg-zinc-900 dark:bg-white hover:bg-zinc-800 dark:hover:bg-zinc-200 text-white dark:text-zinc-900'
-                      }`}
-                    >
-                      {subscribed ? <Check className="w-5 h-5" /> : <Send className="w-5 h-5" />}
-                    </button>
+              </FadeIn>
+
+              {/* Card 2 */}
+              <FadeIn delay={0.2}>
+                <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50">
+                  <div className="w-10 h-10 rounded-xl bg-emerald-50 dark:bg-emerald-900/10 flex items-center justify-center text-emerald-600 dark:text-emerald-400 mb-6">
+                    <BookOpen className="w-5 h-5" />
                   </div>
-                  {subscribed && (
-                    <p className="text-green-600 dark:text-green-400 text-center mt-4">
-                      Thank you for subscribing!
-                    </p>
-                  )}
-                </form>
-              </MagicCard>
-            </BlurFade>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Project Updates</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                    Changelogs for our WordPress plugin, NPM registry mirror, and new points of presence (PoPs).
+                  </p>
+                </div>
+              </FadeIn>
+
+              {/* Card 3 */}
+              <FadeIn delay={0.3}>
+                <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50">
+                  <div className="w-10 h-10 rounded-xl bg-purple-50 dark:bg-purple-900/10 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6">
+                    <Users className="w-5 h-5" />
+                  </div>
+                  <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Community Stories</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                    Spotlights on open source projects using StaticDelivr and how they leverage the network.
+                  </p>
+                </div>
+              </FadeIn>
+
+            </div>
           </div>
         </section>
 
-        {/* Newsletter Highlights Section */}
-        <section className="py-20 px-4 bg-zinc-50 dark:bg-zinc-900">
-          <div className="max-w-7xl mx-auto">
-            <BlurFade delay={0.2} inView>
-              <h2 className="text-3xl font-bold text-center mb-16 text-zinc-900 dark:text-white">What You&apos;ll Receive</h2>
-            </BlurFade>
-            <BentoGrid className="max-w-7xl mx-auto">
-              <BlurFade delay={0.3} inView className="md:col-span-1">
-                <CustomBentoCard
-                  name="Project Updates"
-                  Icon={Star}
-                  background={<StarBackground />}
-                  className="h-full"
-                >
-                  Get the latest news about StaticDelivr&apos;s development, new features, and roadmap insights.
-                </CustomBentoCard>
-              </BlurFade>
-              <BlurFade delay={0.4} inView className="md:col-span-1">
-                <CustomBentoCard
-                  name="Technical Insights"
-                  Icon={Send}
-                  background={<SendBackground />}
-                  className="h-full"
-                >
-                  Receive in-depth articles, tutorials, and best practices for static asset delivery and open-source development.
-                </CustomBentoCard>
-              </BlurFade>
-              <BlurFade delay={0.5} inView className="md:col-span-1">
-                <CustomBentoCard
-                  name="Community Spotlight"
-                  Icon={Mail}
-                  background={<MailBackground />}
-                  className="h-full"
-                >
-                  Learn about interesting projects, community contributions, and developers making a difference in the open-source world.
-                </CustomBentoCard>
-              </BlurFade>
-            </BentoGrid>
-          </div>
-        </section>
       </main>
       <Footer />
     </div>
