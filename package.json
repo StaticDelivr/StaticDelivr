@@ -38,6 +38,7 @@
     "react-intersection-observer": "^9.13.1",
     "react-scroll-parallax": "^3.4.5",
     "rehype-highlight": "^7.0.2",
+    "remark-gfm": "^4.0.1",
     "sonner": "^2.0.7",
     "staticdelivr": "^1.0.0",
     "tailwind-merge": "^3.4.0",
