@@ -14,6 +14,36 @@ import { SiWordpress } from 'react-icons/si';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 
+// --- Data Fetching ---
+interface WordPressPageProps {
+  versions: {
+    wordpress: string;
+  };
+}
+
+export async function getStaticProps() {
+  const props = {
+    versions: { wordpress: 'v1.3.0' }
+  };
+
+  try {
+    // Fetch WordPress Version
+    const wpRes = await fetch('https://api.wordpress.org/plugins/info/1.0/staticdelivr.json');
+    const wpData = await wpRes.json();
+    if (wpData?.version) {
+      props.versions.wordpress = `v${wpData.version}`;
+    }
+
+  } catch (error) {
+    console.error("Error fetching data:", error);
+  }
+
+  return { 
+    props, 
+    revalidate: 3600 // Revalidate every hour
+  };
+}
+
 // --- Animation Wrapper ---
 const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
   <motion.div
@@ -109,7 +139,7 @@ const CompareSlider = () => {
   );
 };
 
-const WordPressPage = () => {
+const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
   const [activeDemoTab, setActiveDemoTab] = useState<'css' | 'img'>('img');
 
   return (
@@ -133,7 +163,7 @@ const WordPressPage = () => {
             <FadeIn>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
                 <SiWordpress className="w-3 h-3" />
-                <span>Plugin v1.3.0</span>
+                <span>Plugin {versions.wordpress}</span>
               </div>
             </FadeIn>
             
