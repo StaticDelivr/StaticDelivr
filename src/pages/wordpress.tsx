@@ -1,500 +1,408 @@
-"use client";
-
-import React from 'react';
+import React, { useState, useRef } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import { motion } from 'framer-motion';
 import { 
-  ArrowRight, 
-  Check, 
-  Zap, 
-  Image as ImageIcon, 
-  Shield, 
-  Settings,
-  Download,
-  Star,
-  RefreshCw,
-  Globe,
-  Gauge,
-  FileCode,
-  ChevronRight
+  ArrowRight, Download, Zap, 
+  Image as ImageIcon, Shield, 
+  Globe, Check, RefreshCw, 
+  MousePointerClick, Layers, 
+  MoveHorizontal, ArrowDown 
 } from 'lucide-react';
-import { AuroraBackground } from '@/components/ui/aurora-background';
-import { BentoCard, BentoGrid } from '@/components/ui/bento-grid';
-import { BlurFade } from '@/components/ui/blur-fade';
-import { Button } from '@/components/ui/button';
-import { ShineBorder } from '@/components/ui/shine-border';
+import { SiWordpress } from 'react-icons/si';
 
-const Header = dynamic(() => import('@/components/Header'), {
-  loading: () => <div className="h-16 bg-white dark:bg-zinc-900 border-b" />,
-});
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-const Footer = dynamic(() => import('@/components/Footer'), {
-  loading: () => <div className="h-64 bg-slate-900" />,
-});
-
-// Animated background components for bento cards
-const ZapBackground = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-20">
-    <svg className="absolute top-4 left-1/4 w-16 h-32 text-yellow-500 animate-pulse" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-    </svg>
-    <svg className="absolute top-12 right-1/4 w-12 h-24 text-yellow-400 animate-pulse" style={{ animationDelay: "0.3s" }} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-    </svg>
-  </div>
+// --- Animation Wrapper ---
+const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.5, delay, ease: "easeOut" }}
+    className={className}
+  >
+    {children}
+  </motion.div>
 );
 
-const ImageOptBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative">
-      <div className="absolute inset-0 rounded-lg bg-gradient-to-br from-purple-500/30 to-pink-500/30 blur-xl animate-pulse" />
-      <ImageIcon className="w-32 h-32 text-purple-500" />
-      <div className="absolute -right-2 -bottom-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">WebP</div>
-    </div>
-  </div>
-);
+// --- Comparison Slider Component ---
+const CompareSlider = () => {
+  const [position, setPosition] = useState(50);
+  const containerRef = useRef<HTMLDivElement>(null);
+  const [isDragging, setIsDragging] = useState(false);
 
-const ShieldBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative">
-      <div className="absolute inset-0 rounded-lg bg-green-500/20 blur-xl animate-pulse" />
-      <Shield className="w-32 h-32 text-green-500" />
-    </div>
-  </div>
-);
+  const handleMove = (clientX: number) => {
+    if (containerRef.current) {
+      const rect = containerRef.current.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const percentage = Math.max(0, Math.min(100, (x / rect.width) * 100));
+      setPosition(percentage);
+    }
+  };
 
-const GlobeBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative w-40 h-40">
-      <div className="absolute inset-0 rounded-full border-2 border-blue-500/30 animate-ping" style={{ animationDuration: "3s" }} />
-      <div className="absolute inset-4 rounded-full border-2 border-blue-500/40 animate-ping" style={{ animationDuration: "2.5s", animationDelay: "0.5s" }} />
-      <div className="absolute inset-8 rounded-full border-2 border-blue-500/50 animate-ping" style={{ animationDuration: "2s", animationDelay: "1s" }} />
-      <div className="absolute inset-12 rounded-full bg-gradient-to-br from-blue-400 to-blue-600" />
-    </div>
-  </div>
-);
+  const onMouseMove = (e: React.MouseEvent) => {
+    if (isDragging) handleMove(e.clientX);
+  };
 
-const GaugeBackground = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-15">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <Gauge className="w-32 h-32 text-orange-500" />
-      <div className="absolute inset-0 animate-spin" style={{ animationDuration: "3s" }}>
-        <div className="w-2 h-2 bg-orange-500 rounded-full absolute top-0 left-1/2" />
+  const onTouchMove = (e: React.TouchEvent) => {
+    handleMove(e.touches[0].clientX);
+  };
+
+  return (
+    <div className="w-full max-w-4xl mx-auto">
+      <div 
+        ref={containerRef}
+        className="relative w-full aspect-[16/9] md:aspect-[21/9] rounded-2xl overflow-hidden cursor-col-resize select-none shadow-2xl border border-zinc-200 dark:border-zinc-800"
+        onMouseDown={() => setIsDragging(true)}
+        onMouseUp={() => setIsDragging(false)}
+        onMouseLeave={() => setIsDragging(false)}
+        onMouseMove={onMouseMove}
+        onTouchMove={onTouchMove}
+        onClick={(e) => handleMove(e.clientX)}
+      >
+        {/* 'After' Image (Background) */}
+        <img 
+          src="https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?q=80&w=2070&auto=format&fit=crop" 
+          alt="Optimized" 
+          className="absolute inset-0 w-full h-full object-cover"
+          draggable={false}
+        />
+        
+        <div className="absolute top-4 right-4 bg-emerald-500/90 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full z-10">
+          Optimized (WebP) - 45KB
+        </div>
+
+        {/* 'Before' Image (Foreground with Clip Path) */}
+        <div 
+          className="absolute inset-0 w-full h-full"
+          style={{ clipPath: `inset(0 ${100 - position}% 0 0)` }}
+        >
+          <img 
+            src="https://images.unsplash.com/photo-1494500764479-0c8f2919a3d8?q=80&w=2070&auto=format&fit=crop" 
+            alt="Original" 
+            className="absolute inset-0 w-full h-full object-cover" 
+            draggable={false}
+          />
+          
+          <div className="absolute top-4 left-4 bg-zinc-900/60 backdrop-blur text-white text-xs font-bold px-3 py-1 rounded-full z-10">
+             Original (JPG) - 1.2MB
+          </div>
+        </div>
+
+        {/* Slider Handle */}
+        <div 
+          className="absolute top-0 bottom-0 w-1 bg-white cursor-col-resize z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+          style={{ left: `${position}%` }}
+        >
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
+             <MoveHorizontal className="w-4 h-4 text-zinc-600" />
+          </div>
+        </div>
+      </div>
+      <div className="mt-4 text-center text-sm text-zinc-500">
+         <span className="hidden md:inline">Drag the slider to compare. </span> 
+         Visually identical, 96% smaller file size.
       </div>
     </div>
-  </div>
-);
-
-const features = [
-  {
-    Icon: Zap,
-    name: "Zero Configuration",
-    description: "Just activate and go. No API keys, no DNS changes, no complex setup. StaticDelivr automatically rewrites your asset URLs.",
-    href: "/docs/wordpress-integration",
-    cta: "View Setup Guide",
-    background: <ZapBackground />,
-    className: "lg:row-start-1 lg:row-end-2 lg:col-start-1 lg:col-end-2",
-  },
-  {
-    Icon: ImageIcon,
-    name: "Automatic WebP/AVIF",
-    description: "Images are automatically converted to modern formats. Turn 2MB images into 20KB without quality loss—up to 95% smaller.",
-    href: "/docs/wordpress-integration",
-    cta: "Learn More",
-    background: <ImageOptBackground />,
-    className: "lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
-  },
-  {
-    Icon: Shield,
-    name: "Smart Fallback",
-    description: "If the CDN ever fails, assets automatically load from your origin server. Your site never breaks—guaranteed reliability.",
-    href: "/docs/wordpress-integration",
-    cta: "How It Works",
-    background: <ShieldBackground />,
-    className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
-  },
-  {
-    Icon: Globe,
-    name: "570+ Global PoPs",
-    description: "Your WordPress assets served from 570+ edge locations worldwide. Sub-50ms latency for visitors everywhere.",
-    href: "/network",
-    cta: "View Network",
-    background: <GlobeBackground />,
-    className: "lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-3",
-  },
-  {
-    Icon: Gauge,
-    name: "Core Web Vitals Boost",
-    description: "Improve LCP, CLS, and FID scores. Faster load times mean better SEO rankings and happier visitors.",
-    href: "/docs/caching-performance",
-    cta: "Performance Tips",
-    background: <GaugeBackground />,
-    className: "lg:col-start-2 lg:col-end-4 lg:row-start-2 lg:row-end-3",
-  },
-];
+  );
+};
 
 const WordPressPage = () => {
+  const [activeDemoTab, setActiveDemoTab] = useState<'css' | 'img'>('img');
+
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
+    <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-blue-500/30 font-sans">
       <Head>
-        <title>Free WordPress CDN Plugin | StaticDelivr - Accelerate WordPress in 1 Click</title>
-        <meta name="description" content="Speed up WordPress with our free CDN plugin. Automatic WebP/AVIF optimization, smart fallback, zero configuration. No API keys or DNS changes required." />
-        <meta name="keywords" content="free WordPress CDN plugin, WordPress CDN, WordPress speed optimization, WebP WordPress, AVIF WordPress, WordPress performance, free CDN for WordPress, WordPress image optimization" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <link rel="canonical" href="https://staticdelivr.com/wordpress" />
-        
-        {/* Open Graph */}
-        <meta property="og:url" content="https://staticdelivr.com/wordpress" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Free WordPress CDN Plugin | StaticDelivr" />
-        <meta property="og:description" content="Accelerate WordPress in 1 click. Automatic WebP/AVIF optimization, smart fallback, no configuration needed." />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-wordpress.png" />
-        <meta property="og:site_name" content="StaticDelivr" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="Free WordPress CDN Plugin | StaticDelivr" />
-        <meta name="twitter:description" content="Accelerate WordPress in 1 click. Automatic WebP/AVIF optimization, smart fallback, no configuration needed." />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-wordpress.png" />
-
-        {/* JSON-LD Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              "name": "StaticDelivr CDN WordPress Plugin",
-              "applicationCategory": "WebApplication",
-              "applicationSubCategory": "WordPress Plugin",
-              "operatingSystem": "WordPress 5.8+",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              },
-              "description": "Free WordPress CDN plugin that automatically rewrites asset URLs and optimizes images to WebP/AVIF format for faster page loads.",
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5",
-                "ratingCount": "1",
-                "bestRating": "5",
-                "worstRating": "1"
-              },
-              "softwareVersion": "1.3.0",
-              "downloadUrl": "https://wordpress.org/plugins/staticdelivr/",
-              "screenshot": "https://staticdelivr.com/assets/img/wp-plugin-screenshot.png",
-              "featureList": [
-                "Automatic URL rewriting",
-                "WebP/AVIF image optimization",
-                "Smart fallback to origin",
-                "Zero configuration",
-                "Multi-CDN support"
-              ],
-              "author": {
-                "@type": "Organization",
-                "name": "StaticDelivr",
-                "url": "https://staticdelivr.com"
-              }
-            })
-          }}
-        />
+        <title>WordPress CDN Plugin | StaticDelivr</title>
+        <meta name="description" content="Accelerate WordPress with our free, zero-config CDN plugin." />
       </Head>
 
       <Header />
 
-      {/* Hero Section */}
-      <AuroraBackground className="min-h-[90vh] flex items-center justify-center pt-16">
-        <div className="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
-          <BlurFade delay={0.1} inView>
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-sm font-medium mb-8">
-              <Star className="w-4 h-4 fill-current" />
-              5/5 Stars on WordPress.org
-            </div>
+      <main className="relative pt-32 pb-20 overflow-hidden">
+        
+        {/* Background Gradients */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-500/10 dark:bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
 
-            {/* Main Headline */}
-            <h1 className="text-5xl md:text-7xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight mb-6">
-              Accelerate WordPress<br />
-              <span className="bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-                in 1 Click
-              </span>
-            </h1>
+        {/* --- Hero Section --- */}
+        <section className="px-6 mb-24 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+                <SiWordpress className="w-3 h-3" />
+                <span>Plugin v1.3.0</span>
+              </div>
+            </FadeIn>
+            
+            <FadeIn delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
+                Make WordPress fast.<br />
+                <span className="text-zinc-400 dark:text-zinc-600">No complex config required.</span>
+              </h1>
+            </FadeIn>
 
-            {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-300 max-w-3xl mx-auto mb-4">
-              No API Keys. No DNS Changes. No Configuration.
-            </p>
-            <p className="text-lg text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto mb-10">
-              The StaticDelivr WordPress plugin automatically rewrites your assets to our global CDN 
-              and optimizes images on the fly. Set it and forget it.
-            </p>
-          </BlurFade>
+            <FadeIn delay={0.2}>
+              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+                A lightweight plugin that automatically rewrites your assets to serve them from our global edge network. 
+                <strong className="font-semibold text-zinc-900 dark:text-white"> No API keys, no DNS changes.</strong>
+              </p>
+            </FadeIn>
 
-          <BlurFade delay={0.2} inView>
-            {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 mb-16">
-              <a
+            <FadeIn delay={0.3} className="flex flex-wrap items-center justify-center gap-4">
+              <Link 
                 href="https://wordpress.org/plugins/staticdelivr/"
                 target="_blank"
-                rel="noopener noreferrer"
-                className="h-14 px-8 rounded-full bg-[#0073aa] hover:bg-[#005a87] text-white font-semibold flex items-center gap-3 shadow-lg hover:shadow-xl transition-all hover:scale-105"
+                className="h-12 px-8 rounded-full bg-blue-600 hover:bg-blue-700 text-white font-medium flex items-center shadow-lg shadow-blue-500/20 transition-all hover:scale-105"
               >
-                <Download className="w-5 h-5" />
-                Download Free Plugin
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <Link
-                href="/docs/wordpress-integration"
-                className="h-14 px-8 rounded-full bg-white/50 dark:bg-zinc-800/50 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white font-medium flex items-center gap-2 hover:bg-white/80 dark:hover:bg-zinc-800/80 transition-colors backdrop-blur-sm"
-              >
-                <FileCode className="w-5 h-5" />
-                View Documentation
+                 <Download className="w-4 h-4 mr-2" /> Download Plugin
               </Link>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.3} inView>
-            {/* Social Proof / Stats */}
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto border-t border-zinc-200 dark:border-zinc-800 pt-10">
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white">5/5</div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400 flex items-center justify-center gap-1 mt-1">
-                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  Rating
-                </div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white">v1.3.0</div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Latest Version</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white">95%</div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Image Savings</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white">570+</div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Global PoPs</div>
-              </div>
-            </div>
-          </BlurFade>
-        </div>
-      </AuroraBackground>
-
-      {/* How It Works Section */}
-      <section className="py-24 px-4 bg-gradient-to-b from-white to-slate-50 dark:from-zinc-950 dark:to-zinc-900">
-        <div className="max-w-6xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-green-50 dark:bg-green-900/20 text-green-600 dark:text-green-400 text-sm font-medium mb-4">
-                <Settings className="w-4 h-4" />
-                How It Works
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-4">
-                Set It and{" "}
-                <span className="bg-gradient-to-r from-green-600 to-emerald-600 bg-clip-text text-transparent">
-                  Forget It
-                </span>
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                StaticDelivr works silently in the background. No maintenance, no updates, no hassle.
-              </p>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.2} inView>
-            <div className="grid md:grid-cols-[1fr_auto_1fr_auto_1fr] gap-4 items-stretch">
-              {/* Step 1 */}
-              <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                <div className="w-16 h-16 rounded-2xl bg-blue-100 dark:bg-blue-900/30 flex items-center justify-center mb-6">
-                  <span className="text-2xl font-bold text-blue-600 dark:text-blue-400">1</span>
-                </div>
-                <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-3">Install Plugin</h3>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  Search for &quot;StaticDelivr&quot; in your WordPress plugins page and click Install. Takes 10 seconds.
-                </p>
-              </div>
-
-              {/* Arrow 1 */}
-              <div className="hidden md:flex items-center justify-center px-2">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
-                  <ArrowRight className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
-                </div>
-              </div>
-
-              {/* Step 2 */}
-              <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                <div className="w-16 h-16 rounded-2xl bg-purple-100 dark:bg-purple-900/30 flex items-center justify-center mb-6">
-                  <span className="text-2xl font-bold text-purple-600 dark:text-purple-400">2</span>
-                </div>
-                <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-3">Activate</h3>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  Click Activate. Both Assets CDN and Image Optimization are enabled by default.
-                </p>
-              </div>
-
-              {/* Arrow 2 */}
-              <div className="hidden md:flex items-center justify-center px-2">
-                <div className="flex items-center justify-center w-10 h-10 rounded-full bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700">
-                  <ArrowRight className="w-5 h-5 text-zinc-500 dark:text-zinc-400" />
-                </div>
-              </div>
-
-              {/* Step 3 */}
-              <div className="flex flex-col items-center text-center p-8 rounded-2xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 shadow-sm">
-                <div className="w-16 h-16 rounded-2xl bg-green-100 dark:bg-green-900/30 flex items-center justify-center mb-6">
-                  <span className="text-2xl font-bold text-green-600 dark:text-green-400">3</span>
-                </div>
-                <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-3">Done!</h3>
-                <p className="text-zinc-600 dark:text-zinc-400">
-                  Your site is now accelerated. Assets served from our global CDN, images optimized automatically.
-                </p>
-              </div>
-            </div>
-          </BlurFade>
-        </div>
-      </section>
-
-      {/* Features Bento Grid */}
-      <section className="py-24 px-4 bg-white dark:bg-black">
-        <div className="max-w-7xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 text-sm font-medium mb-4">
-                <Zap className="w-4 h-4" />
-                Features
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-4">
-                Everything You Need,{" "}
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Nothing You Don&apos;t
-                </span>
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                A lightweight plugin that does exactly what it promises—accelerate your WordPress site.
-              </p>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.2} inView>
-            <BentoGrid className="lg:grid-rows-2 auto-rows-[18rem] md:auto-rows-[20rem]">
-              {features.map((feature) => (
-                <BentoCard key={feature.name} {...feature} />
-              ))}
-            </BentoGrid>
-          </BlurFade>
-        </div>
-      </section>
-
-      {/* URL Transformation Example */}
-      <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white dark:from-zinc-900 dark:to-zinc-950">
-        <div className="max-w-5xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-12">
-              <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4">
-                See the Transformation
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400">
-                Your URLs are automatically rewritten to our global CDN
-              </p>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.2} inView>
-            <div className="space-y-6">
-              {/* Theme Example */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 overflow-hidden">
-                <div className="flex items-center gap-2 mb-4">
-                  <RefreshCw className="w-5 h-5 text-blue-500" />
-                  <span className="font-medium text-zinc-900 dark:text-white">Theme CSS</span>
-                </div>
-                <div className="space-y-3">
-                  <div className="p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-                    <code className="text-sm text-red-600 dark:text-red-400 break-all">
-                      https://example.com/wp-content/themes/theme-name/style.css
-                    </code>
-                  </div>
-                  <div className="flex justify-center">
-                    <ArrowRight className="w-5 h-5 text-zinc-400" />
-                  </div>
-                  <div className="p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
-                    <code className="text-sm text-green-600 dark:text-green-400 break-all">
-                      https://cdn.staticdelivr.com/wp/themes/theme-name/version/style.css
-                    </code>
-                  </div>
-                </div>
-              </div>
-
-              {/* Image Example */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-6 overflow-hidden">
-                <div className="flex items-center gap-2 mb-4">
-                  <ImageIcon className="w-5 h-5 text-purple-500" />
-                  <span className="font-medium text-zinc-900 dark:text-white">Image Optimization</span>
-                  <span className="ml-auto text-xs font-medium text-green-600 dark:text-green-400 bg-green-100 dark:bg-green-900/30 px-2 py-1 rounded-full">
-                    95% smaller
-                  </span>
-                </div>
-                <div className="space-y-3">
-                  <div className="p-3 rounded-lg bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-800">
-                    <code className="text-sm text-red-600 dark:text-red-400 break-all">
-                      https://example.com/wp-content/uploads/photo.jpg (2MB)
-                    </code>
-                  </div>
-                  <div className="flex justify-center">
-                    <ArrowRight className="w-5 h-5 text-zinc-400" />
-                  </div>
-                  <div className="p-3 rounded-lg bg-green-50 dark:bg-green-900/20 border border-green-200 dark:border-green-800">
-                    <code className="text-sm text-green-600 dark:text-green-400 break-all">
-                      https://cdn.staticdelivr.com/img/images?url=...&q=80&format=webp (~50KB)
-                    </code>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </BlurFade>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-24 px-4 bg-gradient-to-br from-blue-600 via-purple-600 to-pink-600 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/20" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <BlurFade delay={0.1} inView>
-            <div className="inline-flex items-center gap-1 mb-6">
-              {[...Array(5)].map((_, i) => (
-                <Star key={i} className="w-6 h-6 fill-yellow-400 text-yellow-400" />
-              ))}
-            </div>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Ready to Speed Up Your WordPress Site?
-            </h2>
-            <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-              Join thousands of WordPress sites already using StaticDelivr. 
-              Free forever, no credit card required.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <a
-                href="https://wordpress.org/plugins/staticdelivr/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="h-14 px-10 rounded-full bg-white text-zinc-900 font-semibold flex items-center gap-3 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
+              <Link 
+                href="/docs/wordpress-integration" 
+                className="h-12 px-8 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
               >
-                <Download className="w-5 h-5" />
-                Download Free Plugin
-                <ArrowRight className="w-4 h-4" />
-              </a>
-              <Link
-                href="/docs/wordpress-integration"
-                className="h-14 px-8 rounded-full bg-white/10 border border-white/30 text-white font-medium flex items-center gap-2 hover:bg-white/20 transition-colors backdrop-blur-sm"
-              >
-                Read the Docs
+                 Documentation
               </Link>
-            </div>
-          </BlurFade>
-        </div>
-      </section>
+            </FadeIn>
+          </div>
+        </section>
 
+        {/* --- "Set It and Forget It" Section --- */}
+        <section className="px-6 mb-32 relative z-10">
+           <div className="max-w-6xl mx-auto">
+              <FadeIn className="mb-16 text-center">
+                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Set It and Forget It</h2>
+                 <p className="text-zinc-500 dark:text-zinc-400 max-w-lg mx-auto">
+                    We built this to be boring. Install it once, and your site stays fast forever without maintenance.
+                 </p>
+              </FadeIn>
+              
+              <div className="grid md:grid-cols-3 gap-8 relative">
+                 {/* Connector Line (Desktop) */}
+                 <div className="hidden md:block absolute top-12 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-zinc-200 dark:via-zinc-800 to-transparent z-0" />
+                 
+                 {/* Step 1 */}
+                 <FadeIn delay={0.1} className="relative z-10 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shadow-sm mb-6">
+                       <Download className="w-8 h-8 text-blue-500" />
+                    </div>
+                    <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2">1. Install</h3>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed">
+                       Search for "StaticDelivr" in your WordPress admin panel plugins page.
+                    </p>
+                 </FadeIn>
+
+                 {/* Step 2 */}
+                 <FadeIn delay={0.2} className="relative z-10 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shadow-sm mb-6">
+                       <MousePointerClick className="w-8 h-8 text-purple-500" />
+                    </div>
+                    <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2">2. Activate</h3>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed">
+                       Click activate. The plugin automatically detects your theme and asset paths.
+                    </p>
+                 </FadeIn>
+
+                 {/* Step 3 */}
+                 <FadeIn delay={0.3} className="relative z-10 flex flex-col items-center text-center">
+                    <div className="w-24 h-24 rounded-3xl bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 flex items-center justify-center shadow-sm mb-6">
+                       <Zap className="w-8 h-8 text-emerald-500" />
+                    </div>
+                    <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2">3. Accelerated</h3>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed">
+                       Your assets are now serving from 570+ edge nodes globally.
+                    </p>
+                 </FadeIn>
+              </div>
+           </div>
+        </section>
+
+        {/* --- Image Comparison Slider --- */}
+        <section className="px-6 mb-32 bg-zinc-50 dark:bg-zinc-900/30 py-24 border-y border-zinc-200 dark:border-zinc-800">
+           <FadeIn>
+             <div className="max-w-4xl mx-auto mb-12 text-center">
+                
+                {/* Visual Emphasis on Savings */}
+                <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-emerald-100 dark:bg-emerald-900/30 text-emerald-700 dark:text-emerald-400 text-sm font-bold mb-6 border border-emerald-200 dark:border-emerald-800 shadow-sm">
+                   <ArrowDown className="w-4 h-4" />
+                   Up to 96% Smaller Files
+                </div>
+                
+                <h2 className="text-2xl md:text-3xl font-semibold text-zinc-900 dark:text-white mb-4">
+                   Lossless Compression
+                </h2>
+                <p className="text-zinc-500 dark:text-zinc-400 max-w-2xl mx-auto">
+                   We automatically convert your uploads to WebP or AVIF. 
+                   Can you spot the difference? Neither can your users.
+                </p>
+             </div>
+             
+             <CompareSlider />
+           </FadeIn>
+        </section>
+
+        {/* --- URL Rewrite Demo (Tabs) --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-4xl mx-auto">
+              <FadeIn className="text-center mb-10">
+                 <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white">How URLs are Transformed</h2>
+                 <p className="text-zinc-500 dark:text-zinc-400 mt-2">The plugin rewrites HTML before it leaves your server.</p>
+              </FadeIn>
+              
+              <FadeIn delay={0.2} className="relative rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl overflow-hidden">
+                 
+                 {/* Terminal Header / Tabs */}
+                 <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 bg-zinc-950/50">
+                    <div className="flex items-center gap-1.5">
+                       <div className="w-3 h-3 rounded-full bg-red-500/20" />
+                       <div className="w-3 h-3 rounded-full bg-yellow-500/20" />
+                       <div className="w-3 h-3 rounded-full bg-green-500/20" />
+                    </div>
+                    <div className="flex gap-1 bg-zinc-900 p-1 rounded-lg border border-zinc-800">
+                       <button
+                          onClick={() => setActiveDemoTab('img')}
+                          className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+                             activeDemoTab === 'img' ? 'bg-zinc-800 text-white' : 'text-zinc-500 hover:text-zinc-300'
+                          }`}
+                       >
+                          Media (Images)
+                       </button>
+                       <button
+                          onClick={() => setActiveDemoTab('css')}
+                          className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+                             activeDemoTab === 'css' ? 'bg-zinc-800 text-white' : 'text-zinc-500 hover:text-zinc-300'
+                          }`}
+                       >
+                          Theme Assets (CSS/JS)
+                       </button>
+                    </div>
+                 </div>
+
+                 {/* Content */}
+                 <div className="p-8 font-mono text-sm space-y-8">
+                    
+                    {/* Before Block */}
+                    <div>
+                       <div className="text-zinc-500 mb-2 text-xs uppercase tracking-wider flex items-center gap-2">
+                          <span className="w-2 h-2 bg-red-500 rounded-full" /> Before (Origin Server)
+                       </div>
+                       <div className="text-zinc-400 break-all bg-zinc-950/50 p-4 rounded-lg border border-white/5">
+                          {activeDemoTab === 'img' 
+                             ? 'https://mysite.com/wp-content/uploads/2025/01/hero.jpg' 
+                             : 'https://mysite.com/wp-content/themes/twentytwentyfive/style.css?ver=1.4'
+                          }
+                       </div>
+                    </div>
+
+                    {/* Transform Icon */}
+                    <div className="flex justify-center">
+                       <RefreshCw className="w-5 h-5 text-zinc-600 animate-[spin_3s_linear_infinite]" />
+                    </div>
+
+                    {/* After Block */}
+                    <div>
+                       <div className="text-zinc-500 mb-2 text-xs uppercase tracking-wider flex items-center gap-2">
+                          <span className="w-2 h-2 bg-emerald-500 rounded-full" /> After (StaticDelivr CDN)
+                       </div>
+                       <div className="text-emerald-400 break-all bg-emerald-900/10 p-4 rounded-lg border border-emerald-500/20 shadow-[0_0_15px_rgba(16,185,129,0.1)]">
+                          {activeDemoTab === 'img' 
+                             ? 'https://cdn.staticdelivr.com/img/images?url=https://mysite.com/uploads/hero.jpg&q=80&format=auto' 
+                             : 'https://cdn.staticdelivr.com/wp/themes/twentytwentyfive/1.4/style.css'
+                          }
+                       </div>
+                    </div>
+
+                 </div>
+              </FadeIn>
+           </div>
+        </section>
+
+        {/* --- Key Features Grid --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-6xl mx-auto">
+              <FadeIn className="mb-12">
+                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Plugin capabilities</h2>
+              </FadeIn>
+
+              <div className="grid md:grid-cols-2 gap-6">
+                 
+                 {/* Feature 1 */}
+                 <FadeIn delay={0.1} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/10 flex items-center justify-center text-emerald-600 dark:text-emerald-500 mb-6">
+                       <ImageIcon className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Image Optimization</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                       Automatically converts PNGs and JPGs to modern formats like WebP or AVIF on the fly, reducing file size by up to 90%.
+                    </p>
+                 </FadeIn>
+
+                 {/* Feature 2 */}
+                 <FadeIn delay={0.2} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-500 mb-6">
+                       <Globe className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Global Edge Network</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                       Offloads static assets (CSS, JS, Fonts) to our multi-CDN infrastructure, reducing load on your origin server.
+                    </p>
+                 </FadeIn>
+
+                 {/* Feature 3 */}
+                 <FadeIn delay={0.3} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/10 flex items-center justify-center text-purple-600 dark:text-purple-500 mb-6">
+                       <Shield className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Smart Fallback</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                       If the CDN encounters an issue, assets automatically revert to loading from your origin server. Zero downtime risk.
+                    </p>
+                 </FadeIn>
+
+                 {/* Feature 4 */}
+                 <FadeIn delay={0.4} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-2xl bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center text-orange-600 dark:text-orange-500 mb-6">
+                       <Layers className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Theme Compatible</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                       Works seamlessly with popular themes and builders like Elementor, Divi, and Gutenberg right out of the box.
+                    </p>
+                 </FadeIn>
+
+              </div>
+           </div>
+        </section>
+
+        {/* --- Final CTA --- */}
+        <section className="px-6 pb-24 relative z-10">
+          <FadeIn>
+            <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-zinc-900 dark:bg-zinc-900 border border-zinc-800 p-12 md:p-20 text-center shadow-2xl">
+               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_#27272a_0%,_transparent_70%)] opacity-50 pointer-events-none" />
+               <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 text-zinc-400 font-medium mb-6">
+                     <Check className="w-5 h-5 text-emerald-500" />
+                     <span>Free & Open Source</span>
+                  </div>
+                  <h2 className="text-3xl md:text-5xl font-semibold text-white mb-8 tracking-tight">
+                     Boost your Core Web Vitals.
+                  </h2>
+                  <div className="flex justify-center gap-4">
+                     <Link href="https://wordpress.org/plugins/staticdelivr/" target="_blank" className="h-12 px-8 rounded-full bg-white text-zinc-900 font-medium flex items-center hover:bg-zinc-200 transition-colors">
+                        Get the Plugin <ArrowRight className="w-4 h-4 ml-2" />
+                     </Link>
+                     <Link href="/docs/wordpress-integration" className="h-12 px-8 rounded-full border border-zinc-700 text-white font-medium flex items-center hover:bg-zinc-800 transition-colors">
+                        Setup Guide
+                     </Link>
+                  </div>
+               </div>
+            </div>
+          </FadeIn>
+        </section>
+
+      </main>
       <Footer />
     </div>
   );
