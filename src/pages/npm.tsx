@@ -339,16 +339,16 @@ const NpmPage = () => {
                   <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Packages</div>
                </FadeIn>
                <FadeIn delay={0.2} className="text-center">
-                  <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">~45ms</div>
+                  <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">&lt;50ms</div>
                   <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Global Latency</div>
                </FadeIn>
                <FadeIn delay={0.3} className="text-center">
                   <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">570+</div>
-                  <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Edge Nodes</div>
+                  <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Edge PoPs</div>
                </FadeIn>
                <FadeIn delay={0.4} className="text-center">
                   <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">100%</div>
-                  <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Uptime SLA</div>
+                  <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Free</div>
                </FadeIn>
             </div>
           </div>
