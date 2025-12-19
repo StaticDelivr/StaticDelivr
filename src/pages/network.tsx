@@ -339,7 +339,7 @@ const NetworkPage = () => {
                 </h2>
                 
                 <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
-                  We are actively looking for infrastructure partners in underserved regions to improve latency for local communities.
+                  We are actively looking for infrastructure partners in underserved regions to improve latency for local communities and reduce performance inequality.
                 </p>
                 
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
