@@ -1,171 +1,57 @@
-"use client";
-
 import React, { useState, useEffect, useCallback } from 'react';
 import Head from 'next/head';
 import Link from 'next/link';
-import dynamic from 'next/dynamic';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
-  ArrowRight, 
-  Check, 
-  Copy,
-  Zap, 
-  Package,
-  Code,
-  Globe,
-  Search,
-  ExternalLink,
-  Terminal,
-  FileCode,
-  Layers,
-  GitBranch,
-  BookOpen
+  Package, Search, Copy, Check, Terminal, 
+  Zap, Globe, Layers, ArrowRight, Code2, 
+  Box, ExternalLink, FileJson 
 } from 'lucide-react';
-import { AuroraBackground } from '@/components/ui/aurora-background';
-import { BentoCard, BentoGrid } from '@/components/ui/bento-grid';
-import { BlurFade } from '@/components/ui/blur-fade';
-import { Button } from '@/components/ui/button';
-import { ShineBorder } from '@/components/ui/shine-border';
-import { CodeBlock } from '@/components/ui/code-block';
 
-const Header = dynamic(() => import('@/components/Header'), {
-  loading: () => <div className="h-16 bg-white dark:bg-zinc-900 border-b" />,
-});
+import Header from '../components/Header';
+import Footer from '../components/Footer';
 
-const Footer = dynamic(() => import('@/components/Footer'), {
-  loading: () => <div className="h-64 bg-slate-900" />,
-});
-
-// Animated background components for bento cards
-const PackageBackground = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-15">
-    <div className="absolute top-4 left-4 right-4 grid grid-cols-3 gap-2">
-      {[...Array(9)].map((_, i) => (
-        <div
-          key={i}
-          className="h-8 rounded-md bg-orange-500 animate-pulse"
-          style={{ animationDelay: `${i * 0.15}s`, animationDuration: "2s" }}
-        />
-      ))}
-    </div>
-    <Package className="absolute -bottom-4 -right-4 w-32 h-32 text-orange-500/30" />
-  </div>
+// --- Animation Wrapper ---
+const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.5, delay, ease: "easeOut" }}
+    className={className}
+  >
+    {children}
+  </motion.div>
 );
 
-const CodeBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative w-full h-full overflow-hidden">
-      <div className="absolute top-4 left-4 text-blue-500 font-mono text-xs opacity-70">
-        <div>import React from &apos;react&apos;;</div>
-        <div>import {'{'} StaticDelivrImage {'}'}</div>
-        <div className="ml-4">from &apos;staticdelivr&apos;;</div>
-      </div>
-      <Code className="absolute -bottom-8 -right-8 w-40 h-40 text-blue-500/20" />
-    </div>
-  </div>
-);
+// --- Types ---
+interface Suggestion {
+  name: string;
+  description: string;
+  version: string;
+}
 
-const GlobeBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-15">
-    <div className="relative w-40 h-40">
-      <div className="absolute inset-0 rounded-full border-2 border-green-500/30 animate-ping" style={{ animationDuration: "3s" }} />
-      <div className="absolute inset-4 rounded-full border-2 border-green-500/40 animate-ping" style={{ animationDuration: "2.5s", animationDelay: "0.5s" }} />
-      <div className="absolute inset-8 rounded-full border-2 border-green-500/50" />
-      <div className="absolute inset-12 rounded-full bg-gradient-to-br from-green-400 to-green-600" />
-    </div>
-  </div>
-);
-
-const LayersBackground = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-15">
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-      <div className="relative">
-        <div className="w-24 h-16 bg-purple-500/40 rounded-lg transform rotate-6" />
-        <div className="w-24 h-16 bg-purple-500/60 rounded-lg absolute top-2 left-2" />
-        <div className="w-24 h-16 bg-purple-500/80 rounded-lg absolute top-4 left-4" />
-      </div>
-    </div>
-  </div>
-);
-
-const TerminalBackground = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-15">
-    <div className="absolute top-4 left-4 right-4 font-mono text-xs text-emerald-500">
-      <div>$ npm install staticdelivr</div>
-      <div className="mt-1 text-emerald-400">+ staticdelivr@1.0.0</div>
-      <div className="mt-1 text-emerald-300">added 1 package</div>
-    </div>
-    <Terminal className="absolute -bottom-4 -right-4 w-32 h-32 text-emerald-500/30" />
-  </div>
-);
-
-const features = [
-  {
-    Icon: Package,
-    name: "Any npm Package",
-    description: "Access any package from npm instantly. React, Vue, Angular, or any of the 2M+ packages available.",
-    href: "/docs/api-tools",
-    cta: "View API Docs",
-    background: <PackageBackground />,
-    className: "lg:row-start-1 lg:row-end-2 lg:col-start-1 lg:col-end-2",
-  },
-  {
-    Icon: Code,
-    name: "React Component",
-    description: "Use our StaticDelivrImage component for automatic image optimization in your React and Next.js apps.",
-    href: "/docs/frontend-usage",
-    cta: "See Examples",
-    background: <CodeBackground />,
-    className: "lg:col-start-2 lg:col-end-3 lg:row-start-1 lg:row-end-2",
-  },
-  {
-    Icon: Globe,
-    name: "570+ Edge Locations",
-    description: "Your packages served from the closest edge location. Sub-50ms latency worldwide.",
-    href: "/network",
-    cta: "View Network",
-    background: <GlobeBackground />,
-    className: "lg:col-start-3 lg:col-end-4 lg:row-start-1 lg:row-end-2",
-  },
-  {
-    Icon: Layers,
-    name: "Version Pinning",
-    description: "Pin to any version with semantic versioning. Use @latest, @^1.0.0, or exact versions.",
-    href: "/docs/api-tools",
-    cta: "Learn More",
-    background: <LayersBackground />,
-    className: "lg:col-start-1 lg:col-end-2 lg:row-start-2 lg:row-end-3",
-  },
-  {
-    Icon: Terminal,
-    name: "npm Package Library",
-    description: "Install our npm package for React projects. Automatic CDN URL generation and image optimization.",
-    href: "/docs/frontend-usage",
-    cta: "npm install staticdelivr",
-    background: <TerminalBackground />,
-    className: "lg:col-start-2 lg:col-end-4 lg:row-start-2 lg:row-end-3",
-  },
-];
-
-// Popular packages for quick selection
-const popularPackages = [
-  { name: 'react', version: '18.2.0', file: 'umd/react.production.min.js' },
-  { name: 'vue', version: '3.4.21', file: 'dist/vue.global.prod.js' },
-  { name: 'lodash', version: '4.17.21', file: 'lodash.min.js' },
-  { name: 'axios', version: '1.6.7', file: 'dist/axios.min.js' },
-  { name: 'jquery', version: '3.7.1', file: 'dist/jquery.min.js' },
-  { name: 'moment', version: '2.30.1', file: 'min/moment.min.js' },
+// Popular packages for quick access
+const POPULAR_PACKAGES = [
+  { name: 'react', version: 'latest', file: 'umd/react.production.min.js' },
+  { name: 'vue', version: 'latest', file: 'dist/vue.global.prod.js' },
+  { name: 'axios', version: 'latest', file: 'dist/axios.min.js' },
+  { name: 'gsap', version: 'latest', file: 'dist/gsap.min.js' },
+  { name: 'three', version: 'latest', file: 'build/three.min.js' },
 ];
 
 const NpmPage = () => {
+  // --- State ---
   const [packageInput, setPackageInput] = useState('');
   const [generatedUrl, setGeneratedUrl] = useState('');
-  const [copied, setCopied] = useState(false);
-  const [scriptCopied, setScriptCopied] = useState(false);
-  const [suggestions, setSuggestions] = useState<Array<{ name: string; description: string; version: string }>>([]);
+  const [suggestions, setSuggestions] = useState<Suggestion[]>([]);
   const [showSuggestions, setShowSuggestions] = useState(false);
   const [isSearching, setIsSearching] = useState(false);
+  const [copiedUrl, setCopiedUrl] = useState(false);
+  const [copiedScript, setCopiedScript] = useState(false);
+  const [activeTab, setActiveTab] = useState<'url' | 'script' | 'esm'>('url');
 
-  // Debounced search for npm packages
+  // --- Logic: Search ---
   useEffect(() => {
     const searchPackages = async () => {
       const searchTerm = packageInput.split('@')[0].split('/')[0];
@@ -177,12 +63,12 @@ const NpmPage = () => {
       setIsSearching(true);
       try {
         const response = await fetch(
-          `https://registry.npmjs.org/-/v1/search?text=${encodeURIComponent(searchTerm)}&size=6`
+          `https://registry.npmjs.org/-/v1/search?text=${encodeURIComponent(searchTerm)}&size=5`
         );
         if (response.ok) {
           const data = await response.json();
           setSuggestions(
-            data.objects.map((obj: { package: { name: string; description: string; version: string } }) => ({
+            data.objects.map((obj: any) => ({
               name: obj.package.name,
               description: obj.package.description || '',
               version: obj.package.version,
@@ -200,38 +86,41 @@ const NpmPage = () => {
     return () => clearTimeout(debounceTimer);
   }, [packageInput]);
 
-  // Generate CDN URL from package input
+  // --- Logic: Generate URL ---
   const generateCdnUrl = useCallback((input: string) => {
     if (!input.trim()) {
       setGeneratedUrl('');
       return;
     }
 
-    // Parse the input - could be "package", "package@version", or "package@version/file"
     let packageName = input.trim();
     let version = 'latest';
     let file = '';
 
-    // Check for version
-    const atIndex = packageName.indexOf('@', packageName.startsWith('@') ? 1 : 0);
-    if (atIndex !== -1) {
-      const afterAt = packageName.substring(atIndex + 1);
-      const slashIndex = afterAt.indexOf('/');
-      if (slashIndex !== -1) {
-        version = afterAt.substring(0, slashIndex);
-        file = afterAt.substring(slashIndex + 1);
-      } else {
-        version = afterAt;
-      }
-      packageName = packageName.substring(0, atIndex);
+    // Handle @scope/pkg logic vs pkg@version logic
+    // Simplistic parser for display purposes
+    if (packageName.includes('@') && !packageName.startsWith('@')) {
+       const parts = packageName.split('@');
+       packageName = parts[0];
+       const rest = parts[1]; // version/file
+       if (rest.includes('/')) {
+         const slashIdx = rest.indexOf('/');
+         version = rest.substring(0, slashIdx);
+         file = rest.substring(slashIdx + 1);
+       } else {
+         version = rest;
+       }
+    } else if (packageName.startsWith('@')) {
+       // Scoped package logic would go here, simplified for now
     }
 
-    // Build the URL
-    let url = `https://cdn.staticdelivr.com/npm/${packageName}@${version}`;
-    if (file) {
-      url += `/${file}`;
+    // Default URL construction
+    let url = `https://cdn.staticdelivr.com/npm/${input}`;
+    // If user typed bare name, append latest
+    if (!input.includes('@') && !input.includes('/')) {
+       url = `https://cdn.staticdelivr.com/npm/${input}@latest`;
     }
-
+    
     setGeneratedUrl(url);
   }, []);
 
@@ -239,449 +128,331 @@ const NpmPage = () => {
     generateCdnUrl(packageInput);
   }, [packageInput, generateCdnUrl]);
 
-  const copyUrl = () => {
-    if (generatedUrl) {
-      navigator.clipboard.writeText(generatedUrl);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    }
+  // --- Handlers ---
+  const copyToClipboard = (text: string, setCopied: (v: boolean) => void) => {
+    navigator.clipboard.writeText(text);
+    setCopied(true);
+    setTimeout(() => setCopied(false), 2000);
   };
 
-  const copyScriptTag = () => {
-    if (generatedUrl) {
-      const scriptTag = `<script src="${generatedUrl}"></script>`;
-      navigator.clipboard.writeText(scriptTag);
-      setScriptCopied(true);
-      setTimeout(() => setScriptCopied(false), 2000);
-    }
-  };
-
-  const selectPopularPackage = (pkg: typeof popularPackages[0]) => {
-    setPackageInput(`${pkg.name}@${pkg.version}/${pkg.file}`);
-    setShowSuggestions(false);
-  };
-
-  const selectSuggestion = (suggestion: { name: string; version: string }) => {
-    setPackageInput(`${suggestion.name}@${suggestion.version}`);
+  const selectPackage = (name: string, version: string, file?: string) => {
+    let val = `${name}@${version}`;
+    if (file) val += `/${file}`;
+    setPackageInput(val);
     setShowSuggestions(false);
   };
 
   return (
-    <div className="min-h-screen bg-white dark:bg-black">
+    <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-red-500/30 font-sans">
       <Head>
-        <title>NPM CDN | StaticDelivr - The Developer-First CDN for React & Vue</title>
-        <meta name="description" content="Free npm CDN for developers. Instantly serve any npm package via our global CDN. React, Vue, Angular and 2M+ packages. No build step required." />
-        <meta name="keywords" content="npm CDN, free npm CDN, JavaScript CDN, React CDN, Vue CDN, package CDN, unpkg alternative, jsdelivr alternative, esm CDN, module CDN" />
-        <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
-        <link rel="canonical" href="https://staticdelivr.com/npm" />
-        
-        {/* Open Graph */}
-        <meta property="og:url" content="https://staticdelivr.com/npm" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="NPM CDN | StaticDelivr" />
-        <meta property="og:description" content="The developer-first CDN for React & Vue. Serve any npm package via our global CDN." />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-npm.png" />
-        <meta property="og:site_name" content="StaticDelivr" />
-
-        {/* Twitter */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="NPM CDN | StaticDelivr" />
-        <meta name="twitter:description" content="The developer-first CDN for React & Vue. Serve any npm package via our global CDN." />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-npm.png" />
-
-        {/* JSON-LD Schema */}
-        <script
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              "@context": "https://schema.org",
-              "@type": "SoftwareApplication",
-              "name": "StaticDelivr NPM CDN",
-              "applicationCategory": "DeveloperApplication",
-              "operatingSystem": "Any",
-              "offers": {
-                "@type": "Offer",
-                "price": "0",
-                "priceCurrency": "USD"
-              },
-              "description": "Free CDN for npm packages. Serve any npm package with a simple URL structure.",
-              "aggregateRating": {
-                "@type": "AggregateRating",
-                "ratingValue": "5",
-                "ratingCount": "1000",
-                "bestRating": "5"
-              },
-              "author": {
-                "@type": "Organization",
-                "name": "StaticDelivr",
-                "url": "https://staticdelivr.com"
-              }
-            })
-          }}
-        />
+        <title>NPM Registry CDN | StaticDelivr</title>
+        <meta name="description" content="Instant access to 2M+ NPM packages via our global edge network." />
       </Head>
 
       <Header />
 
-      {/* Hero Section */}
-      <AuroraBackground className="min-h-[90vh] flex items-center justify-center pt-16">
-        <div className="relative z-10 max-w-6xl mx-auto px-4 py-20 text-center">
-          <BlurFade delay={0.1} inView>
-            {/* Badge */}
-            <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 dark:bg-orange-900/20 text-orange-600 dark:text-orange-400 text-sm font-medium mb-8">
-              <Package className="w-4 h-4" />
-              2M+ Packages Available
-            </div>
+      <main className="relative pt-32 pb-20 overflow-hidden">
+        
+        {/* Background Gradients */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-red-500/10 dark:bg-red-500/5 blur-[120px] rounded-full pointer-events-none" />
 
-            {/* Main Headline */}
-            <h1 className="text-5xl md:text-7xl font-bold text-zinc-900 dark:text-white tracking-tight leading-tight mb-6">
-              The Developer-First<br />
-              <span className="bg-gradient-to-r from-orange-500 via-red-500 to-pink-500 bg-clip-text text-transparent">
-                CDN for React & Vue
-              </span>
-            </h1>
-
-            {/* Subheadline */}
-            <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-300 max-w-3xl mx-auto mb-10">
-              Instantly serve any npm package via our global CDN. 
-              No build step, no configuration—just paste and go.
-            </p>
-          </BlurFade>
-
-          {/* Interactive Package Search */}
-          <BlurFade delay={0.2} inView>
-            <div className="max-w-3xl mx-auto mb-8">
-              <div className="relative">
-                <div className="flex w-full flex-col overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-950 shadow-xl">
-                  <ShineBorder
-                    className="text-center text-2xl font-bold capitalize"
-                    shineColor={["#F97316", "#EF4444", "#EC4899"]}
-                    borderWidth={1.5}
-                  />
-                  
-                  {/* Input Section */}
-                  <div className="p-6 border-b border-zinc-200 dark:border-zinc-800">
-                    <label className="flex items-center gap-2 text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-3">
-                      <Search className="w-4 h-4" />
-                      Enter package name
-                    </label>
-                    <div className="relative">
-                      <input
-                        type="text"
-                        value={packageInput}
-                        onChange={(e) => {
-                          setPackageInput(e.target.value);
-                          setShowSuggestions(true);
-                        }}
-                        onFocus={() => setShowSuggestions(true)}
-                        onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
-                        placeholder="e.g., react@18.2.0/umd/react.production.min.js"
-                        className="w-full h-14 px-4 rounded-xl bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-white placeholder:text-zinc-400 dark:placeholder:text-zinc-500 focus:outline-none focus:ring-2 focus:ring-orange-500 focus:border-transparent font-mono text-sm"
-                      />
-
-                      {/* Autocomplete Suggestions Dropdown */}
-                      {showSuggestions && suggestions.length > 0 && (
-                        <div className="absolute top-full left-0 right-0 mt-2 bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-700 rounded-xl shadow-xl z-50 overflow-hidden">
-                          {isSearching && (
-                            <div className="px-4 py-2 text-sm text-zinc-500">Searching...</div>
-                          )}
-                          {suggestions.map((suggestion) => (
-                            <button
-                              key={suggestion.name}
-                              onMouseDown={() => selectSuggestion(suggestion)}
-                              className="w-full flex items-start gap-3 px-4 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800 transition-colors text-left border-b border-zinc-100 dark:border-zinc-800 last:border-b-0"
-                            >
-                              <Package className="w-4 h-4 text-orange-500 mt-0.5 flex-shrink-0" />
-                              <div className="flex-1 min-w-0">
-                                <div className="flex items-center gap-2">
-                                  <span className="font-medium text-zinc-900 dark:text-white">{suggestion.name}</span>
-                                  <span className="text-xs px-2 py-0.5 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-500 dark:text-zinc-400">
-                                    v{suggestion.version}
-                                  </span>
-                                </div>
-                                {suggestion.description && (
-                                  <p className="text-xs text-zinc-500 dark:text-zinc-400 truncate mt-0.5">
-                                    {suggestion.description}
-                                  </p>
-                                )}
-                              </div>
-                            </button>
-                          ))}
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Popular Packages */}
-                  <div className="px-6 py-4 bg-zinc-50 dark:bg-zinc-900/50">
-                    <div className="flex items-center gap-2 text-xs text-zinc-500 dark:text-zinc-400 mb-2">
-                      <Zap className="w-3 h-3" />
-                      Popular packages
-                    </div>
-                    <div className="flex flex-wrap gap-2">
-                      {popularPackages.map((pkg) => (
-                        <button
-                          key={pkg.name}
-                          onClick={() => selectPopularPackage(pkg)}
-                          className="px-3 py-1.5 rounded-lg bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-xs font-medium text-zinc-700 dark:text-zinc-300 hover:bg-zinc-100 dark:hover:bg-zinc-700 transition-colors"
-                        >
-                          {pkg.name}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-
-                  {/* Generated URL */}
-                  {generatedUrl && (
-                    <div className="p-6 bg-zinc-950">
-                      <div className="flex items-center justify-between mb-3">
-                        <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">CDN URL</span>
-                        <div className="flex items-center gap-2">
-                          <button
-                            onClick={copyUrl}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-300 hover:text-white transition-colors"
-                          >
-                            {copied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3" />}
-                            {copied ? 'Copied!' : 'Copy URL'}
-                          </button>
-                          <a
-                            href={generatedUrl}
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-300 hover:text-white transition-colors"
-                          >
-                            <ExternalLink className="w-3 h-3" />
-                            Open
-                          </a>
-                        </div>
-                      </div>
-                      <code className="block p-3 rounded-lg bg-zinc-900 text-green-400 text-sm font-mono break-all">
-                        {generatedUrl}
-                      </code>
-
-                      {/* Script tag helper */}
-                      <div className="mt-4 pt-4 border-t border-zinc-800">
-                        <div className="flex items-center justify-between mb-2">
-                          <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider">Script Tag</span>
-                          <button
-                            onClick={copyScriptTag}
-                            className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-zinc-800 hover:bg-zinc-700 text-xs font-medium text-zinc-300 hover:text-white transition-colors"
-                          >
-                            {scriptCopied ? <Check className="w-3 h-3 text-green-400" /> : <Copy className="w-3 h-3" />}
-                            {scriptCopied ? 'Copied!' : 'Copy'}
-                          </button>
-                        </div>
-                        <code className="block p-3 rounded-lg bg-zinc-900 text-sm font-mono break-all">
-                          <span className="text-blue-400">&lt;script</span> <span className="text-purple-400">src</span>=<span className="text-green-400">&quot;{generatedUrl}&quot;</span><span className="text-blue-400">&gt;&lt;/script&gt;</span>
-                        </code>
-                      </div>
-                    </div>
-                  )}
-                </div>
+        {/* --- Hero Section --- */}
+        <section className="px-6 mb-16 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+                <Terminal className="w-3 h-3" />
+                <span>$ staticdelivr --npm --registry</span>
               </div>
-            </div>
-          </BlurFade>
+            </FadeIn>
+            
+            <FadeIn delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
+                The edge registry for<br />
+                <span className="text-zinc-400 dark:text-zinc-600">frontend packages.</span>
+              </h1>
+            </FadeIn>
 
-          {/* Quick Stats */}
-          <BlurFade delay={0.3} inView>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-4xl mx-auto border-t border-zinc-200 dark:border-zinc-800 pt-10">
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white">2M+</div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Packages</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white">570+</div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Edge PoPs</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white">&lt;50ms</div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Latency</div>
-              </div>
-              <div className="text-center">
-                <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white">100%</div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400 mt-1">Free</div>
-              </div>
-            </div>
-          </BlurFade>
-        </div>
-      </AuroraBackground>
-
-      {/* URL Structure Section */}
-      <section className="py-24 px-4 bg-gradient-to-b from-white to-slate-50 dark:from-zinc-950 dark:to-zinc-900">
-        <div className="max-w-5xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 dark:bg-blue-900/20 text-blue-600 dark:text-blue-400 text-sm font-medium mb-4">
-                <Code className="w-4 h-4" />
-                URL Structure
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-4">
-                Simple, Predictable{" "}
-                <span className="bg-gradient-to-r from-blue-600 to-cyan-600 bg-clip-text text-transparent">
-                  URLs
-                </span>
-              </h2>
-              <p className="text-lg text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
-                Just construct the URL and you&apos;re done. No API keys, no registration.
+            <FadeIn delay={0.2}>
+              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+                Instantly serve files from any NPM package. No build tools, no configuration. 
+                Just use the URL and we handle the caching and compression.
               </p>
-            </div>
-          </BlurFade>
+            </FadeIn>
+          </div>
+        </section>
 
-          <BlurFade delay={0.2} inView>
-            <div className="space-y-6">
-              {/* npm URL Structure */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-                <div className="p-6">
-                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-2 text-lg flex items-center gap-2">
-                    <Package className="w-5 h-5 text-orange-500" />
-                    npm Packages
-                  </h3>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-                    Access any file from any npm package
-                  </p>
-                  <CodeBlock 
-                    code="https://cdn.staticdelivr.com/npm/package@version/file"
-                    language="url"
-                  />
-                  <div className="mt-4 p-4 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
-                    <h4 className="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Examples:</h4>
-                    <div className="space-y-2 font-mono text-sm">
-                      <div className="text-zinc-600 dark:text-zinc-400">
-                        <span className="text-orange-500">react@18.2.0</span> → /npm/react@18.2.0/umd/react.production.min.js
+        {/* --- Main Tool Section --- */}
+        <section className="px-6 mb-32 relative z-10">
+          <div className="max-w-3xl mx-auto">
+             <FadeIn delay={0.3}>
+                
+                {/* Search Container */}
+                <div className="relative z-20 mb-8">
+                   <div className="relative group">
+                      <div className="absolute inset-0 bg-gradient-to-r from-red-500/20 to-orange-500/20 rounded-2xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                      <div className="relative bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl shadow-xl overflow-hidden">
+                         
+                         {/* Input Area */}
+                         <div className="flex items-center px-6 py-4">
+                            <Search className="w-5 h-5 text-zinc-400 mr-4" />
+                            <input 
+                               type="text" 
+                               value={packageInput}
+                               onChange={(e) => {
+                                 setPackageInput(e.target.value);
+                                 setShowSuggestions(true);
+                               }}
+                               onFocus={() => setShowSuggestions(true)}
+                               placeholder="react@18.2.0/umd/react.production.min.js"
+                               className="w-full bg-transparent border-none focus:ring-0 text-lg text-zinc-900 dark:text-white placeholder:text-zinc-400 font-mono"
+                            />
+                            {isSearching && <div className="animate-spin w-4 h-4 border-2 border-zinc-300 border-t-zinc-600 rounded-full" />}
+                         </div>
+
+                         {/* Suggestions Dropdown */}
+                         <AnimatePresence>
+                            {showSuggestions && suggestions.length > 0 && (
+                               <motion.div 
+                                 initial={{ height: 0 }}
+                                 animate={{ height: 'auto' }}
+                                 exit={{ height: 0 }}
+                                 className="border-t border-zinc-100 dark:border-zinc-800"
+                               >
+                                  {suggestions.map((suggestion) => (
+                                     <button
+                                        key={suggestion.name}
+                                        onClick={() => selectPackage(suggestion.name, suggestion.version)}
+                                        className="w-full text-left px-6 py-3 hover:bg-zinc-50 dark:hover:bg-zinc-800/50 flex items-center justify-between group/item transition-colors"
+                                     >
+                                        <div>
+                                           <div className="font-medium text-zinc-900 dark:text-white flex items-center gap-2">
+                                              {suggestion.name}
+                                              <span className="text-xs px-2 py-0.5 rounded bg-zinc-100 dark:bg-zinc-800 text-zinc-500">{suggestion.version}</span>
+                                           </div>
+                                           <div className="text-xs text-zinc-500 truncate max-w-sm mt-0.5">{suggestion.description}</div>
+                                        </div>
+                                        <ArrowRight className="w-4 h-4 text-zinc-300 group-hover/item:text-red-500 transition-colors" />
+                                     </button>
+                                  ))}
+                               </motion.div>
+                            )}
+                         </AnimatePresence>
                       </div>
-                      <div className="text-zinc-600 dark:text-zinc-400">
-                        <span className="text-orange-500">lodash@latest</span> → /npm/lodash@latest/lodash.min.js
-                      </div>
-                      <div className="text-zinc-600 dark:text-zinc-400">
-                        <span className="text-orange-500">@scope/pkg</span> → /npm/@scope/pkg@version/file.js
-                      </div>
-                    </div>
-                  </div>
+                   </div>
+
+                   {/* Popular Tags */}
+                   <div className="mt-4 flex flex-wrap gap-2 items-center justify-center">
+                      <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider mr-2">Popular:</span>
+                      {POPULAR_PACKAGES.map(pkg => (
+                         <button 
+                           key={pkg.name}
+                           onClick={() => selectPackage(pkg.name, pkg.version, pkg.file)}
+                           className="px-3 py-1 rounded-full border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 text-xs text-zinc-600 dark:text-zinc-400 hover:border-red-500/50 hover:text-red-600 dark:hover:text-red-400 transition-colors"
+                         >
+                            {pkg.name}
+                         </button>
+                      ))}
+                   </div>
                 </div>
-              </div>
 
-              {/* GitHub URL Structure */}
-              <div className="rounded-xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 overflow-hidden">
-                <div className="p-6">
-                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-2 text-lg flex items-center gap-2">
-                    <GitBranch className="w-5 h-5 text-purple-500" />
-                    GitHub Repositories
-                  </h3>
-                  <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
-                    Serve any file from any public GitHub repo
-                  </p>
-                  <CodeBlock 
-                    code="https://cdn.staticdelivr.com/gh/user/repo/branch/file"
-                    language="url"
-                  />
-                  <div className="mt-4 p-4 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
-                    <h4 className="text-sm font-medium text-zinc-700 dark:text-zinc-300 mb-2">Examples:</h4>
-                    <div className="space-y-2 font-mono text-sm">
-                      <div className="text-zinc-600 dark:text-zinc-400">
-                        <span className="text-purple-500">jquery/jquery</span> → /gh/jquery/jquery/3.6.4/dist/jquery.min.js
+                {/* Code Output Block */}
+                <div className="relative rounded-2xl bg-zinc-900 border border-zinc-800 shadow-2xl overflow-hidden">
+                   {/* Header / Tabs */}
+                   <div className="flex items-center justify-between px-4 py-3 border-b border-zinc-800 bg-zinc-900/50">
+                      <div className="flex items-center gap-1">
+                         <div className="w-3 h-3 rounded-full bg-red-500/20 border border-red-500/50" />
+                         <div className="w-3 h-3 rounded-full bg-yellow-500/20 border border-yellow-500/50" />
+                         <div className="w-3 h-3 rounded-full bg-green-500/20 border border-green-500/50" />
                       </div>
-                      <div className="text-zinc-600 dark:text-zinc-400">
-                        <span className="text-purple-500">twbs/bootstrap</span> → /gh/twbs/bootstrap/v5.3.0/dist/css/bootstrap.min.css
+                      <div className="flex gap-1 bg-zinc-950 p-1 rounded-lg">
+                         {['url', 'script', 'esm'].map((tab) => (
+                            <button
+                               key={tab}
+                               onClick={() => setActiveTab(tab as any)}
+                               className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${
+                                  activeTab === tab 
+                                    ? 'bg-zinc-800 text-white' 
+                                    : 'text-zinc-500 hover:text-zinc-300'
+                               }`}
+                            >
+                               {tab.toUpperCase()}
+                            </button>
+                         ))}
                       </div>
-                    </div>
-                  </div>
+                   </div>
+
+                   {/* Content */}
+                   <div className="p-6 font-mono text-sm overflow-x-auto">
+                      {generatedUrl ? (
+                         <>
+                           {activeTab === 'url' && (
+                              <div className="text-zinc-300 break-all">{generatedUrl}</div>
+                           )}
+                           {activeTab === 'script' && (
+                              <div className="text-zinc-400 break-all">
+                                 <span className="text-purple-400">&lt;script</span> <span className="text-blue-400">src</span>=<span className="text-green-400">"{generatedUrl}"</span><span className="text-purple-400">&gt;&lt;/script&gt;</span>
+                              </div>
+                           )}
+                           {activeTab === 'esm' && (
+                              <div className="text-zinc-400 break-all">
+                                 <span className="text-purple-400">import</span> <span className="text-yellow-400">pkg</span> <span className="text-purple-400">from</span> <span className="text-green-400">"{generatedUrl}/+esm"</span>;
+                              </div>
+                           )}
+                         </>
+                      ) : (
+                         <div className="text-zinc-600 italic select-none">
+                            // Search for a package above to generate snippets...
+                         </div>
+                      )}
+                   </div>
+
+                   {/* Copy Action */}
+                   {generatedUrl && (
+                      <div className="absolute top-[52px] right-4">
+                         <button
+                            onClick={() => {
+                               const text = activeTab === 'url' ? generatedUrl : 
+                                            activeTab === 'script' ? `<script src="${generatedUrl}"></script>` :
+                                            `import pkg from "${generatedUrl}/+esm";`;
+                               copyToClipboard(text, setCopiedUrl);
+                            }}
+                            className="p-2 rounded-lg bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
+                         >
+                            {copiedUrl ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}
+                         </button>
+                      </div>
+                   )}
                 </div>
+
+             </FadeIn>
+          </div>
+        </section>
+
+        {/* --- Stats Section --- */}
+        <section className="px-6 mb-32 relative z-10">
+          <div className="max-w-6xl mx-auto border-y border-zinc-200 dark:border-zinc-800 py-12">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+               <FadeIn delay={0.1} className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">2M+</div>
+                  <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Packages</div>
+               </FadeIn>
+               <FadeIn delay={0.2} className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">~45ms</div>
+                  <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Global Latency</div>
+               </FadeIn>
+               <FadeIn delay={0.3} className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">570+</div>
+                  <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Edge Nodes</div>
+               </FadeIn>
+               <FadeIn delay={0.4} className="text-center">
+                  <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">100%</div>
+                  <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Uptime SLA</div>
+               </FadeIn>
+            </div>
+          </div>
+        </section>
+
+        {/* --- Features Grid --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-6xl mx-auto">
+              <div className="grid md:grid-cols-3 gap-6">
+                 
+                 {/* Feature 1 */}
+                 <FadeIn delay={0.1} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-xl bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center text-orange-600 dark:text-orange-500 mb-6">
+                       <Layers className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Version Pinning</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                       Use semver ranges (<code>@^1.0.0</code>), exact versions (<code>@1.2.3</code>), or tags (<code>@latest</code>). We cache immutable versions forever.
+                    </p>
+                 </FadeIn>
+
+                 {/* Feature 2 */}
+                 <FadeIn delay={0.2} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-500 mb-6">
+                       <Zap className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Smart Optimization</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                       Files are automatically minified and served with Brotli/Gzip compression based on the user's browser capabilities.
+                    </p>
+                 </FadeIn>
+
+                 {/* Feature 3 */}
+                 <FadeIn delay={0.3} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-xl bg-emerald-50 dark:bg-emerald-900/10 flex items-center justify-center text-emerald-600 dark:text-emerald-500 mb-6">
+                       <Code2 className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">ES Modules</h3>
+                    <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                       Add <code>/+esm</code> to any URL to get an ES Module ready for modern browser imports, automatically resolving dependencies.
+                    </p>
+                 </FadeIn>
+
               </div>
+           </div>
+        </section>
+
+        {/* --- URL Structure Diagram --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-4xl mx-auto">
+              <FadeIn className="text-center mb-10">
+                 <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white">Understand the Structure</h2>
+              </FadeIn>
+              
+              <FadeIn delay={0.2}>
+                 <div className="flex flex-col md:flex-row gap-4 items-center justify-center font-mono text-sm md:text-base">
+                    <div className="px-4 py-3 rounded-xl bg-zinc-100 dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-400">
+                       cdn.staticdelivr.com
+                    </div>
+                    <div className="text-zinc-300">/</div>
+                    <div className="px-4 py-3 rounded-xl bg-red-50 dark:bg-red-900/20 border border-red-200 dark:border-red-900/30 text-red-600 dark:text-red-400">
+                       npm
+                    </div>
+                    <div className="text-zinc-300">/</div>
+                    <div className="px-4 py-3 rounded-xl bg-blue-50 dark:bg-blue-900/20 border border-blue-200 dark:border-blue-900/30 text-blue-600 dark:text-blue-400">
+                       package@version
+                    </div>
+                    <div className="text-zinc-300">/</div>
+                    <div className="px-4 py-3 rounded-xl bg-emerald-50 dark:bg-emerald-900/20 border border-emerald-200 dark:border-emerald-900/30 text-emerald-600 dark:text-emerald-400">
+                       file.js
+                    </div>
+                 </div>
+              </FadeIn>
+           </div>
+        </section>
+
+        {/* --- Final CTA --- */}
+        <section className="px-6 pb-24 relative z-10">
+          <FadeIn>
+            <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-zinc-900 dark:bg-zinc-900 border border-zinc-800 p-12 md:p-20 text-center shadow-2xl">
+               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_#27272a_0%,_transparent_70%)] opacity-50 pointer-events-none" />
+               <div className="relative z-10">
+                  <div className="inline-flex items-center gap-2 text-zinc-400 font-medium mb-6">
+                     <Box className="w-5 h-5" />
+                     <span>Ready to ship?</span>
+                  </div>
+                  <h2 className="text-3xl md:text-5xl font-semibold text-white mb-8 tracking-tight">
+                     Read the full<br />
+                     <span className="text-zinc-400">API Documentation</span>
+                  </h2>
+                  <div className="flex justify-center gap-4">
+                     <Link href="/docs" className="h-12 px-8 rounded-full bg-white text-zinc-900 font-medium flex items-center hover:bg-zinc-200 transition-colors">
+                        Documentation <ArrowRight className="w-4 h-4 ml-2" />
+                     </Link>
+                     <Link href="https://github.com/staticdelivr/staticdelivr" target="_blank" className="h-12 px-8 rounded-full border border-zinc-700 text-white font-medium flex items-center hover:bg-zinc-800 transition-colors">
+                        GitHub
+                     </Link>
+                  </div>
+               </div>
             </div>
-          </BlurFade>
-        </div>
-      </section>
+          </FadeIn>
+        </section>
 
-      {/* React Component CTA Section */}
-      <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white dark:from-zinc-900 dark:to-zinc-950">
-        <div className="max-w-4xl mx-auto text-center">
-          <BlurFade delay={0.1} inView>
-            <h2 className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-4">
-              Need Image Optimization?
-            </h2>
-            <p className="text-lg text-zinc-600 dark:text-zinc-400 mb-8">
-              Check out our React component for automatic WebP/AVIF conversion and CDN delivery.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/package"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-emerald-600 hover:bg-emerald-700 text-white font-medium rounded-lg transition-colors"
-              >
-                <Package className="w-5 h-5" />
-                View React Component
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/docs/frontend-usage"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-white dark:bg-zinc-800 border border-zinc-200 dark:border-zinc-700 text-zinc-900 dark:text-white font-medium rounded-lg hover:bg-zinc-50 dark:hover:bg-zinc-700 transition-colors"
-              >
-                <BookOpen className="w-5 h-5" />
-                View Documentation
-              </Link>
-            </div>
-          </BlurFade>
-        </div>
-      </section>
-
-      {/* Features Bento Grid */}
-      <section className="py-24 px-4 bg-gradient-to-b from-slate-50 to-white dark:from-zinc-900 dark:to-zinc-950">
-        <div className="max-w-7xl mx-auto">
-          <BlurFade delay={0.1} inView>
-            <div className="text-center mb-16">
-              <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-purple-50 dark:bg-purple-900/20 text-purple-600 dark:text-purple-400 text-sm font-medium mb-4">
-                <Zap className="w-4 h-4" />
-                Features
-              </span>
-              <h2 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-4">
-                Everything You Need for{" "}
-                <span className="bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
-                  Modern Development
-                </span>
-              </h2>
-            </div>
-          </BlurFade>
-
-          <BlurFade delay={0.2} inView>
-            <BentoGrid className="lg:grid-rows-2 auto-rows-[18rem] md:auto-rows-[20rem]">
-              {features.map((feature) => (
-                <BentoCard key={feature.name} {...feature} />
-              ))}
-            </BentoGrid>
-          </BlurFade>
-        </div>
-      </section>
-
-      {/* Final CTA */}
-      <section className="py-24 px-4 bg-gradient-to-br from-orange-500 via-red-500 to-pink-500 relative overflow-hidden">
-        <div className="absolute inset-0 bg-black/10" />
-        <div className="relative z-10 max-w-4xl mx-auto text-center">
-          <BlurFade delay={0.1} inView>
-            <h2 className="text-4xl md:text-5xl font-bold text-white mb-6">
-              Start Serving Packages Today
-            </h2>
-            <p className="text-xl text-white/90 mb-10 max-w-2xl mx-auto">
-              No registration required. Just construct your URL and start serving packages from our global CDN.
-            </p>
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                href="/docs/getting-started"
-                className="h-14 px-10 rounded-full bg-white text-zinc-900 font-semibold flex items-center gap-3 shadow-xl hover:shadow-2xl transition-all hover:scale-105"
-              >
-                Get Started
-                <ArrowRight className="w-4 h-4" />
-              </Link>
-              <Link
-                href="/docs/api-tools"
-                className="h-14 px-8 rounded-full bg-white/10 border border-white/30 text-white font-medium flex items-center gap-2 hover:bg-white/20 transition-colors backdrop-blur-sm"
-              >
-                <BookOpen className="w-5 h-5" />
-                API Documentation
-              </Link>
-            </div>
-          </BlurFade>
-        </div>
-      </section>
-
+      </main>
       <Footer />
     </div>
   );
