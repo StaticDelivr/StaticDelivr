@@ -3,14 +3,14 @@ import Head from 'next/head';
 import { motion } from 'framer-motion';
 import { 
   Terminal, ArrowRight, Heart, Code2, 
-  Globe, Zap, Leaf, Box, Type, 
-  Layout, Webhook, ExternalLink, GitBranch,
-  ShieldCheck, Share2
+  Globe, Zap, Leaf, ExternalLink, GitBranch,
+  ShieldCheck, Star
 } from 'lucide-react';
+import { SiNpm, SiWordpress, SiReact, SiGooglefonts } from 'react-icons/si'; 
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
-import { cn } from '@/lib/utils'; 
 
 // --- Animation Wrapper ---
 const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
@@ -32,7 +32,7 @@ const NumberTicker = ({ value }: { value: number }) => (
   </span>
 );
 
-// --- 1. Terminal Component ---
+// --- Terminal Visual ---
 const TerminalVisual = () => (
   <div className="rounded-xl overflow-hidden border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 shadow-xl font-mono text-sm">
     <div className="h-10 bg-zinc-100 dark:bg-zinc-800 border-b border-zinc-200 dark:border-zinc-700 flex items-center px-4 relative">
@@ -82,39 +82,54 @@ const TerminalVisual = () => (
   </div>
 );
 
-
-
 // --- Data Fetching ---
 interface AboutPageProps {
-  stats: {
-    requests: number;
+  stats: { requests: number };
+  versions: {
+    npm: string;
+    wordpress: string;
   };
 }
 
 export async function getStaticProps() {
-  try {
-    const response = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
-    const data = await response.json();
+  const props = {
+    stats: { requests: 800000000 },
+    versions: { npm: 'v1.0.0', wordpress: 'v1.3.0' }
+  };
 
-    return { 
-      props: { 
-        stats: {
-          requests: data.total.requests || 800000000 
-        } 
-      }, 
-      revalidate: 3600 
-    };
+  try {
+    // 1. Fetch Stats
+    const statsRes = await fetch('https://stats.staticdelivr.com/api/stats?month=previous');
+    const statsData = await statsRes.json();
+    if (statsData?.total?.requests) {
+      props.stats.requests = statsData.total.requests;
+    }
+
+    // 2. Fetch NPM Version
+    const npmRes = await fetch('https://registry.npmjs.org/staticdelivr');
+    const npmData = await npmRes.json();
+    if (npmData?.['dist-tags']?.latest) {
+      props.versions.npm = `v${npmData['dist-tags'].latest}`;
+    }
+
+    // 3. Fetch WordPress Version
+    const wpRes = await fetch('https://api.wordpress.org/plugins/info/1.0/staticdelivr.json');
+    const wpData = await wpRes.json();
+    if (wpData?.version) {
+      props.versions.wordpress = `v${wpData.version}`;
+    }
+
   } catch (error) {
-    return {
-      props: {
-        stats: { requests: 800000000 }
-      },
-      revalidate: 3600
-    };
+    console.error("Error fetching data:", error);
   }
+
+  return { 
+    props, 
+    revalidate: 3600 // Revalidate every hour
+  };
 }
 
-const AboutPage: React.FC<AboutPageProps> = ({ stats }) => {
+const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-emerald-500/30 font-sans">
       <Head>
@@ -203,7 +218,126 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats }) => {
           </div>
         </section>
 
-        {/* --- How It Works (Text + Terminal) --- */}
+        {/* --- Use Cases Grid --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-6xl mx-auto">
+              <FadeIn className="text-center mb-16">
+                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">One platform, many use cases</h2>
+                 <p className="text-zinc-500 dark:text-zinc-400">Everything we serve is optimized by default.</p>
+              </FadeIn>
+
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                 
+                 {/* 1. React Component (Cyan) */}
+                 <FadeIn delay={0.1}>
+                    <Link href="/package" className="group relative block h-full overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-all hover:shadow-lg">
+                       <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                       <div className="relative z-10 flex flex-col h-full">
+                          <div className="flex items-start justify-between mb-6">
+                             <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-cyan-50 dark:bg-cyan-900/10 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform duration-300">
+                                <SiReact className="w-6 h-6 animate-[spin_10s_linear_infinite]" />
+                             </div>
+                             <div className="flex flex-col items-end">
+                                <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-cyan-500 transition-colors mb-2" />
+                             </div>
+                          </div>
+                          
+                          <div className="flex items-center gap-2 mb-2">
+                             <h3 className="text-xl font-bold text-zinc-900 dark:text-white">React Component</h3>
+                             <span className="px-2 py-0.5 rounded-full bg-cyan-100 dark:bg-cyan-900/30 text-[10px] font-semibold text-cyan-700 dark:text-cyan-300 uppercase tracking-wide">
+                                {versions.npm}
+                             </span>
+                          </div>
+                          
+                          <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                             Drop-in image optimization component. Automatic WebP/AVIF conversion with over <strong className="text-zinc-900 dark:text-white font-medium">54k+ downloads</strong>.
+                          </p>
+
+                          <div className="mt-auto pt-2">
+                             <div className="rounded-md bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-2 font-mono text-[10px] text-zinc-500 group-hover:border-cyan-200 dark:group-hover:border-cyan-900/50 transition-colors">
+                                <span className="text-purple-500">import</span> <span className="text-zinc-900 dark:text-white">{`{ StaticDelivrImage }`}</span>
+                             </div>
+                          </div>
+                       </div>
+                    </Link>
+                 </FadeIn>
+
+                 {/* 2. WordPress (Blue) */}
+                 <FadeIn delay={0.2}>
+                    <Link href="/wordpress" className="group relative block h-full overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-all hover:shadow-lg">
+                       <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                       <div className="relative z-10 flex flex-col h-full">
+                          <div className="flex items-start justify-between mb-6">
+                            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/10 text-blue-600 dark:text-blue-500 group-hover:scale-110 transition-transform duration-300">
+                                <SiWordpress className="w-6 h-6" />
+                            </div>
+                            <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-full">
+                               <Star className="w-3 h-3 fill-emerald-600 dark:fill-emerald-500" />
+                               5/5 Stars
+                            </div>
+                          </div>
+                          
+                          <div className="flex items-center gap-2 mb-2">
+                             <h3 className="text-xl font-bold text-zinc-900 dark:text-white">WordPress Plugin</h3>
+                             <span className="px-2 py-0.5 rounded-full bg-blue-100 dark:bg-blue-900/30 text-[10px] font-semibold text-blue-700 dark:text-blue-300 uppercase tracking-wide">
+                                {versions.wordpress}
+                             </span>
+                          </div>
+
+                          <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                             Accelerate WordPress in 1 click. No API keys, no DNS changes. Automatically optimizes assets and images on the fly.
+                          </p>
+
+                          <div className="mt-auto text-xs font-medium text-blue-600 dark:text-blue-400 flex items-center gap-1">
+                             Download Free Plugin <ArrowRight className="w-3 h-3" />
+                          </div>
+                       </div>
+                    </Link>
+                 </FadeIn>
+
+                 {/* 3. NPM Registry (Red) */}
+                 <FadeIn delay={0.3}>
+                    <Link href="/npm" className="group relative block h-full overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-all hover:shadow-lg">
+                       <div className="absolute inset-0 bg-gradient-to-br from-red-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                       <div className="relative z-10 flex flex-col h-full">
+                          <div className="flex items-start justify-between mb-6">
+                            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-500 group-hover:scale-110 transition-transform duration-300">
+                                <SiNpm className="w-8 h-8" />
+                            </div>
+                            <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-red-500 transition-colors" />
+                          </div>
+                          <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">NPM Registry CDN</h3>
+                          <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                             Fast, global delivery for millions of files from the npm registry. Just replace the hostname to access raw files via our edge network.
+                          </p>
+                       </div>
+                    </Link>
+                 </FadeIn>
+
+                 {/* 4. Google Fonts (Amber) */}
+                 <FadeIn delay={0.4}>
+                    <Link href="/google-fonts" className="group relative block h-full overflow-hidden rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-all hover:shadow-lg">
+                       <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+                       <div className="relative z-10 flex flex-col h-full">
+                          <div className="flex items-start justify-between mb-6">
+                            <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/10 text-amber-600 dark:text-amber-500 group-hover:scale-110 transition-transform duration-300">
+                                <SiGooglefonts className="w-6 h-6" />
+                            </div>
+                            <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-amber-500 transition-colors" />
+                          </div>
+                          <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Google Fonts Proxy</h3>
+                          <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                             We act as a privacy shield between your users and Google. No tracking cookies, aggressive caching, and faster HTTP/3 delivery.
+                          </p>
+                       </div>
+                    </Link>
+                 </FadeIn>
+
+              </div>
+           </div>
+        </section>
+
+        {/* --- How It Works Section --- */}
         <section className="px-6 mb-32">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-16 items-center">
@@ -258,7 +392,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats }) => {
                          </Link>
                       </div>
                       
-                      {/* Abstract Visual - Updated values */}
+                      {/* Abstract Visual */}
                       <div className="relative h-full min-h-[200px] flex items-center justify-center">
                          <div className="absolute inset-0 bg-emerald-500/20 blur-3xl rounded-full" />
                          <div className="relative bg-white/10 backdrop-blur-md border border-white/20 p-6 rounded-2xl w-full max-w-sm">
@@ -290,7 +424,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats }) => {
            </div>
         </section>
 
-        {/* --- "Open Source" Design (Requested Style) --- */}
+        {/* --- "Open Source" Design --- */}
         <section className="px-6 mb-32">
           <div className="max-w-6xl mx-auto">
             <FadeIn>
@@ -305,7 +439,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats }) => {
 
                 <div className="relative z-10 grid lg:grid-cols-2 gap-16 items-center">
                   
-                  {/* Left: Copy (Adjusted for accuracy) */}
+                  {/* Left: Copy */}
                   <div>
                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-200 dark:bg-zinc-800 text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-6">
                       <ShieldCheck className="w-3 h-3" />
@@ -371,79 +505,6 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats }) => {
               </div>
             </FadeIn>
           </div>
-        </section>
-
-        {/* --- Use Cases Grid (Redesigned) --- */}
-        <section className="px-6 mb-32">
-           <div className="max-w-6xl mx-auto">
-              <FadeIn className="text-center mb-16">
-                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">One platform, many use cases</h2>
-                 <p className="text-zinc-500 dark:text-zinc-400">Everything we serve is optimized by default.</p>
-              </FadeIn>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                 
-                 {/* NPM */}
-                 <FadeIn delay={0.1}>
-                    <Link href="/npm" className="block h-full group">
-                       <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all hover:border-red-200 dark:hover:border-red-900/50 hover:shadow-sm">
-                          <div className="w-12 h-12 rounded-xl bg-red-50 dark:bg-red-900/20 flex items-center justify-center mb-6 text-red-500 group-hover:scale-110 transition-transform">
-                             <Box className="w-6 h-6" />
-                          </div>
-                          <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">NPM Packages</h3>
-                          <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                             Fast delivery for millions of files from the npm registry. Just replace the hostname and you're set.
-                          </p>
-                       </div>
-                    </Link>
-                 </FadeIn>
-
-                 {/* WordPress */}
-                 <FadeIn delay={0.2}>
-                    <Link href="/wordpress" className="block h-full group">
-                       <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all hover:border-blue-200 dark:hover:border-blue-900/50 hover:shadow-sm">
-                          <div className="w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center mb-6 text-blue-500 group-hover:scale-110 transition-transform">
-                             <Layout className="w-6 h-6" />
-                          </div>
-                          <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">WordPress</h3>
-                          <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                             Instant acceleration for themes, plugins, and core assets. Drop-in replacement for the ecosystem.
-                          </p>
-                       </div>
-                    </Link>
-                 </FadeIn>
-
-                 {/* Fonts */}
-                 <FadeIn delay={0.3}>
-                    <Link href="/google-fonts" className="block h-full group">
-                       <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all hover:border-amber-200 dark:hover:border-amber-900/50 hover:shadow-sm">
-                          <div className="w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/20 flex items-center justify-center mb-6 text-amber-500 group-hover:scale-110 transition-transform">
-                             <Type className="w-6 h-6" />
-                          </div>
-                          <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">Google Fonts</h3>
-                          <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                             Privacy-friendly, self-hostable font delivery that respects user privacy and speeds up rendering.
-                          </p>
-                       </div>
-                    </Link>
-                 </FadeIn>
-
-                 {/* Tools */}
-                 <FadeIn delay={0.4}>
-                    <Link href="/docs/api-tools" className="block h-full group">
-                       <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 transition-all hover:border-purple-200 dark:hover:border-purple-900/50 hover:shadow-sm">
-                          <div className="w-12 h-12 rounded-xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center mb-6 text-purple-500 group-hover:scale-110 transition-transform">
-                             <Webhook className="w-6 h-6" />
-                          </div>
-                          <h3 className="text-xl font-semibold text-zinc-900 dark:text-white mb-2">API & Tools</h3>
-                          <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                             Programmatic access for advanced integrations, cache purging, and file introspection.
-                          </p>
-                       </div>
-                    </Link>
-                 </FadeIn>
-              </div>
-           </div>
         </section>
 
         {/* --- Final CTA --- */}
