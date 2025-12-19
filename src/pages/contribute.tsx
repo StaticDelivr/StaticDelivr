@@ -126,7 +126,7 @@ const ContributePage = () => {
               {/* 2. Bug Reports */}
               <FadeIn delay={0.2}>
                 <Link 
-                  href="https://github.com/coozywana/StaticDelivr/issues" 
+                  href="https://github.com/StaticDelivr/StaticDelivr/issues" 
                   target="_blank"
                   className="group relative block h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 transition-all overflow-hidden"
                 >
