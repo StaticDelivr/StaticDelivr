@@ -1,239 +1,367 @@
-import React from 'react';
+import React, { useCallback, useEffect, useState, useRef } from 'react';
 import Head from 'next/head';
-import { Globe, Server, Zap, Info, Shield, Activity, Network } from 'lucide-react';
+import { motion } from 'framer-motion';
+import mapboxgl, { Map } from 'mapbox-gl';
+import 'mapbox-gl/dist/mapbox-gl.css';
+import { 
+  Server, Wifi, Activity, Terminal, 
+  ShieldCheck, Network, Layers,
+  Map as MapIcon, Box
+} from 'lucide-react';
+
 import Header from '../components/Header';
 import Footer from '../components/Footer';
-import dynamic from 'next/dynamic';
-const NetworkMap = dynamic(() => import('@/components/NetworkMap'), {
-  ssr: false,
-  loading: () => <div className="h-full w-full bg-zinc-50" />,
-});
-import { AuroraBackground } from '../components/ui/aurora-background';
-import { BentoGrid } from '../components/ui/bento-grid';
-import { BlurFade } from '../components/ui/blur-fade';
-import { cn } from '@/lib/utils';
+import Link from 'next/link';
 
-interface CustomBentoCardProps {
-  name: string;
-  className?: string;
-  background: React.ReactNode;
-  Icon: React.ComponentType<{ className?: string }>;
-  children: React.ReactNode;
+// Set Mapbox token
+mapboxgl.accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN || '';
+
+// --- Types ---
+interface PoPLocation {
+  city: string;
+  coordinates: [number, number];
+  provider: string;
 }
 
-// Background components
-const GlobeBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-    <Globe className="w-64 h-64 text-blue-500 animate-pulse" style={{ animationDuration: "3s" }} />
-  </div>
-);
+interface Provider {
+  name: string;
+  dotColor: string; // Tailwind classes
+}
 
-const ServerBackground = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-10">
-    <div className="absolute top-4 left-4 right-4 grid grid-cols-4 gap-2">
-      {[...Array(16)].map((_, i) => (
-        <div
-          key={i}
-          className="h-3 rounded-sm bg-zinc-500 animate-pulse"
-          style={{ animationDelay: `${i * 0.1}s`, animationDuration: "1.5s" }}
-        />
-      ))}
-    </div>
-  </div>
-);
-
-const ZapBackground = () => (
-  <div className="absolute inset-0 overflow-hidden opacity-15">
-    <svg className="absolute top-0 left-1/4 w-16 h-32 text-yellow-500 animate-pulse" viewBox="0 0 24 24" fill="currentColor">
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-    </svg>
-    <svg className="absolute top-8 right-1/4 w-12 h-24 text-yellow-400 animate-pulse" style={{ animationDelay: "0.3s" }} viewBox="0 0 24 24" fill="currentColor">
-      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-    </svg>
-  </div>
-);
-
-const SecurityBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-    <Shield className="w-48 h-48 text-green-500" />
-    <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-green-500/10 via-transparent to-transparent animate-pulse" />
-  </div>
-);
-
-const InfraBackground = () => (
-  <div className="absolute inset-0 flex items-center justify-center opacity-10">
-    <Network className="w-48 h-48 text-purple-500" />
-  </div>
-);
-
-const CustomBentoCard = ({
-  name,
-  className,
-  background,
-  Icon,
-  children,
-  ...props
-}: CustomBentoCardProps & React.HTMLAttributes<HTMLDivElement>) => (
-  <div
-    className={cn(
-      "group relative flex flex-col justify-between overflow-hidden rounded-xl",
-      "bg-white dark:bg-zinc-900 [box-shadow:0_0_0_1px_rgba(0,0,0,.03),0_2px_4px_rgba(0,0,0,.05),0_12px_24px_rgba(0,0,0,.05)]",
-      "dark:[box-shadow:0_-20px_80px_-20px_#ffffff1f_inset] dark:[border:1px_solid_rgba(255,255,255,.1)]",
-      className
-    )}
-    {...props}
+// --- Animation Wrapper ---
+const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode, delay?: number, className?: string }) => (
+  <motion.div
+    initial={{ opacity: 0, y: 15 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    viewport={{ once: true, margin: "-50px" }}
+    transition={{ duration: 0.5, delay, ease: "easeOut" }}
+    className={className}
   >
-    <div>{background}</div>
-    <div className="p-6 relative z-10 h-full flex flex-col">
-      <div className="mb-4 p-2 w-fit rounded-lg bg-zinc-100 dark:bg-zinc-800">
-        <Icon className="h-6 w-6 text-zinc-900 dark:text-zinc-100" />
-      </div>
-      <h3 className="text-xl font-semibold text-zinc-900 dark:text-zinc-100 mb-2">
-        {name}
-      </h3>
-      <div className="text-zinc-500 dark:text-zinc-400 flex-grow">
-        {children}
-      </div>
-    </div>
-  </div>
+    {children}
+  </motion.div>
 );
 
 const NetworkPage = () => {
-  return (
-    <div className="min-h-screen bg-white dark:bg-zinc-950">
-      <Head>
-        <title>Global CDN Network | 570+ PoPs Worldwide - StaticDelivr</title>
-        <meta name="description" content="Explore StaticDelivr's global network with 570+ Points of Presence across 6 continents, offering sub-50ms latency and high-speed content delivery with advanced security." />
-        <meta name="keywords" content="global network, CDN network, StaticDelivr, content delivery, 570 locations, network capacity, PoPs, points of presence, multi-CDN, edge network, global CDN infrastructure" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-        
-        <meta property="og:url" content="https://staticdelivr.com/network" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Global CDN Network | 570+ PoPs Worldwide - StaticDelivr" />
-        <meta property="og:description" content="Explore StaticDelivr's global network with 570+ Points of Presence across 6 continents, offering sub-50ms latency and high-speed content delivery." />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="StaticDelivr" />
+  // --- Map State ---
+  const mapContainer = useRef<HTMLDivElement>(null);
+  const [map, setMap] = useState<Map | null>(null);
+  const [is3D, setIs3D] = useState(true); // Default to 3D
+  const [popLocations, setPopLocations] = useState<PoPLocation[]>([]);
+  const [providers, setProviders] = useState<Record<string, Provider>>({});
+  const [nodeCount, setNodeCount] = useState(577); // Default fallback
 
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="staticdelivr.com" />
-        <meta property="twitter:url" content="https://staticdelivr.com/network" />
-        <meta name="twitter:title" content="Global CDN Network | 570+ PoPs Worldwide - StaticDelivr" />
-        <meta name="twitter:description" content="Explore StaticDelivr's global network with 570+ Points of Presence across 6 continents, offering sub-50ms latency and high-speed content delivery." />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
+  // --- Data Fetching ---
+  useEffect(() => {
+    const fetchPoPData = async () => {
+      try {
+        const response = await fetch('/data/pop_locations.json');
+        if(response.ok) {
+           const data: PoPLocation[] = await response.json();
+           setPopLocations(data);
+           setNodeCount(data.length);
+        }
+      } catch(e) { console.error("Failed to load PoPs", e); }
+    };
+
+    const fetchProviderData = async () => {
+      try {
+        const response = await fetch('/data/providers.json');
+        if(response.ok) {
+           const data: Record<string, Provider> = await response.json();
+           setProviders(data);
+        }
+      } catch(e) { console.error("Failed to load Providers", e); }
+    };
+
+    fetchPoPData();
+    fetchProviderData();
+  }, []);
+
+  // --- Map Initialization ---
+  useEffect(() => {
+    if (map || !mapContainer.current) return;
+
+    const newMap = new mapboxgl.Map({
+      container: mapContainer.current,
+      style: 'mapbox://styles/mapbox/light-v11',
+      center: [10, 20], 
+      zoom: 1.5,
+      pitch: 45, // Slight initial pitch
+      projection: 'globe', 
+      attributionControl: false, // Hides the bottom-right text
+      logoPosition: 'bottom-left'
+    });
+    
+    // Add atmosphere and fog
+    newMap.on('style.load', () => {
+        newMap.setFog({
+            color: 'rgb(255, 255, 255)', 
+            'high-color': 'rgb(200, 200, 225)', 
+            'horizon-blend': 0.1, 
+            'space-color': 'rgb(250, 250, 250)', 
+            'star-intensity': 0 
+        });
+    });
+
+    setMap(newMap);
+
+    return () => newMap.remove();
+  }, [mapContainer]);
+
+  // --- Markers Logic ---
+  const addMarkers = useCallback(() => {
+    if (!map || popLocations.length === 0 || Object.keys(providers).length === 0) return;
+
+    const existingMarkers = document.querySelectorAll('.mapboxgl-marker');
+    existingMarkers.forEach(marker => marker.remove());
+
+    popLocations.forEach((pop) => {
+      const provider = providers[pop.provider];
+      if (!provider) return;
+
+      const el = document.createElement('div');
+      el.className = `w-2.5 h-2.5 rounded-full border border-white/80 shadow-[0_0_8px_rgba(0,0,0,0.15)] cursor-pointer hover:scale-150 transition-transform duration-200 ${provider.dotColor}`;
+
+      const popup = new mapboxgl.Popup({ offset: 15, closeButton: false })
+        .setHTML(`
+          <div class="px-3 py-2 font-sans text-zinc-800">
+            <h3 class="font-bold text-sm leading-none mb-1">${pop.city}</h3>
+            <p class="text-[10px] text-zinc-500 uppercase tracking-wide">${provider.name}</p>
+          </div>
+        `);
+
+      new mapboxgl.Marker(el)
+        .setLngLat(pop.coordinates)
+        .setPopup(popup)
+        .addTo(map);
+    });
+  }, [map, popLocations, providers]);
+
+  useEffect(() => {
+    addMarkers();
+  }, [popLocations, map, providers, addMarkers]);
+
+  // --- Toggle View Logic ---
+  const toggleView = () => {
+    if (!map) return;
+    const newIs3D = !is3D;
+    setIs3D(newIs3D);
+
+    if (newIs3D) {
+       map.easeTo({ pitch: 45, bearing: 0, zoom: 1.5, duration: 1500 });
+       map.setProjection('globe');
+    } else {
+       map.easeTo({ pitch: 0, bearing: 0, zoom: 1.2, duration: 1500 });
+       map.setProjection('mercator');
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-teal-500/30 font-sans">
+      <Head>
+        <title>Network Map | StaticDelivr</title>
+        <meta name="description" content="View our global edge locations and network topology." />
+        <link href='https://api.mapbox.com/mapbox-gl-js/v2.8.1/mapbox-gl.css' rel='stylesheet' />
+        {/* CSS to hide Mapbox logo completely as requested */}
+        <style>{`
+          .mapboxgl-ctrl-logo {
+            display: none !important;
+          }
+        `}</style>
       </Head>
 
       <Header />
-      <main>
-        {/* Hero Section */}
-        <AuroraBackground className="h-auto min-h-[50vh] py-24">
-          <div className="relative z-10 max-w-4xl mx-auto px-4 text-center">
-            <h1 className="text-4xl md:text-6xl font-bold text-zinc-900 dark:text-white mb-8 tracking-tight">
-              Global Network
-            </h1>
-            <p className="text-xl md:text-2xl text-zinc-600 dark:text-zinc-300 leading-relaxed max-w-3xl mx-auto">
-              Our network spans the globe with 570+ Points of Presence, ensuring lightning-fast content delivery worldwide.
-            </p>
-          </div>
-        </AuroraBackground>
 
-        {/* Map Section */}
-        <section className="py-12 px-4 bg-white dark:bg-zinc-950">
-          <div className="max-w-7xl mx-auto">
-            <BlurFade delay={0.1} inView>
-              <div className="bg-white dark:bg-zinc-900 rounded-xl border border-zinc-200 dark:border-zinc-800 p-4 md:p-8 mb-12 shadow-sm">
-                <div className="h-96 rounded-lg overflow-hidden relative z-0">
-                  <NetworkMap />
-                </div>
+      <main className="relative pt-32 pb-20 overflow-hidden">
+        
+        {/* "Tealish" Background Gradient Blob */}
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1200px] h-[600px] bg-gradient-to-br from-teal-500/10 via-cyan-500/10 to-transparent blur-[100px] rounded-full pointer-events-none" />
+
+        {/* --- Hero Section --- */}
+        <section className="px-6 mb-16 relative z-10">
+          <div className="max-w-4xl mx-auto text-center">
+            
+            <FadeIn>
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+                <Terminal className="w-3 h-3" />
+                <span>$ staticdelivr --network --map</span>
               </div>
-            </BlurFade>
+            </FadeIn>
+            
+            <FadeIn delay={0.1}>
+              <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
+                Global presence.<br />
+                <span className="text-zinc-400 dark:text-zinc-600">Local performance.</span>
+              </h1>
+            </FadeIn>
 
-            {/* Network Stats */}
-            <BlurFade delay={0.2} inView>
-              <BentoGrid className="grid-cols-1 md:grid-cols-3 auto-rows-auto gap-6 mb-12">
-                <CustomBentoCard
-                  name="Global Coverage"
-                  Icon={Globe}
-                  background={<GlobeBackground />}
-                  className="col-span-1"
-                >
-                  <p className="text-3xl font-bold text-zinc-900 dark:text-white mt-2">570+</p>
-                  <p className="text-sm mt-1">Points of Presence</p>
-                </CustomBentoCard>
-
-                <CustomBentoCard
-                  name="Multi-CDN"
-                  Icon={Server}
-                  background={<ServerBackground />}
-                  className="col-span-1"
-                >
-                  <p className="text-3xl font-bold text-zinc-900 dark:text-white mt-2">2 CDN</p>
-                  <p className="text-sm mt-1">& 2 DNS Providers</p>
-                </CustomBentoCard>
-
-                <CustomBentoCard
-                  name="Avg Response Time"
-                  Icon={Zap}
-                  background={<ZapBackground />}
-                  className="col-span-1"
-                >
-                  <p className="text-3xl font-bold text-zinc-900 dark:text-white mt-2">&lt;50ms</p>
-                  <p className="text-sm mt-1">Worldwide</p>
-                </CustomBentoCard>
-              </BentoGrid>
-            </BlurFade>
-
-            {/* Network Features */}
-            <BlurFade delay={0.3} inView>
-              <BentoGrid className="grid-cols-1 md:grid-cols-2 auto-rows-auto gap-6">
-                <CustomBentoCard
-                  name="Infrastructure"
-                  Icon={Activity}
-                  background={<InfraBackground />}
-                  className="col-span-1"
-                >
-                  <ul className="space-y-4 mt-4">
-                    <li className="flex items-start gap-3">
-                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
-                      <span>Leveraging two leading CDN providers for global reach</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
-                      <span>Redundant DNS services for seamless operation</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
-                      <span>Intelligent load balancing for optimal performance</span>
-                    </li>
-                  </ul>
-                </CustomBentoCard>
-
-                <CustomBentoCard
-                  name="Security"
-                  Icon={Shield}
-                  background={<SecurityBackground />}
-                  className="col-span-1"
-                >
-                  <ul className="space-y-4 mt-4">
-                    <li className="flex items-start gap-3">
-                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
-                      <span>Resilient DDoS mitigation to protect against threats</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
-                      <span>End-to-end SSL/TLS encryption for data integrity</span>
-                    </li>
-                    <li className="flex items-start gap-3">
-                      <Info className="w-5 h-5 text-zinc-400 mt-0.5 shrink-0" />
-                      <span>Continuous 24/7 monitoring to ensure reliability</span>
-                    </li>
-                  </ul>
-                </CustomBentoCard>
-              </BentoGrid>
-            </BlurFade>
+            <FadeIn delay={0.2}>
+              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+                Our multi-CDN architecture routes traffic through extensive points of presence worldwide, ensuring your content is always served from the closest available node.
+              </p>
+            </FadeIn>
           </div>
         </section>
+
+        {/* --- Map Wrapper --- */}
+        <section className="px-6 mb-32 relative z-10">
+           <div className="max-w-7xl mx-auto">
+              
+              <FadeIn delay={0.1} className="relative w-full h-[700px] rounded-[2.5rem] overflow-hidden border border-zinc-200 dark:border-zinc-800 shadow-2xl bg-white dark:bg-zinc-900">
+                
+                {/* Subtle Gradient Overlay */}
+                <div className="absolute inset-0 bg-gradient-to-b from-zinc-50/50 to-white/50 dark:from-zinc-900/50 dark:to-zinc-950/50 pointer-events-none z-0" />
+                
+                {/* Actual Map Canvas */}
+                <div ref={mapContainer} className="w-full h-full relative z-0" />
+
+                {/* --- Stats HUD (Back inside the map, Top Right) --- */}
+                <div className="absolute top-6 right-6 z-10 hidden sm:block">
+                   <div className="bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-sm px-6 py-4 flex gap-8 items-center">
+                      <div>
+                         <div className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider mb-1">Nodes</div>
+                         <div className="text-3xl font-bold text-zinc-900 dark:text-white leading-none">{nodeCount}</div>
+                      </div>
+                      <div className="w-px h-10 bg-zinc-200 dark:bg-zinc-700" />
+                      <div>
+                         <div className="text-[10px] uppercase font-bold text-zinc-400 tracking-wider mb-1">Status</div>
+                         <div className="flex items-center gap-2 text-emerald-600 dark:text-emerald-500 font-bold text-sm">
+                            <span className="relative flex h-2 w-2">
+                              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+                              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+                            </span>
+                            Operational
+                         </div>
+                      </div>
+                   </div>
+                </div>
+
+                {/* --- Floating UI: View Toggle (Top Left) --- */}
+                <div className="absolute top-6 left-6 z-10">
+                   <button
+                     onClick={toggleView}
+                     className="flex items-center gap-2 px-4 py-2.5 rounded-full bg-white/80 dark:bg-zinc-900/80 backdrop-blur-md border border-zinc-200 dark:border-zinc-700 shadow-sm hover:bg-white dark:hover:bg-zinc-900 transition-all active:scale-95 group"
+                   >
+                     {is3D ? <MapIcon className="w-4 h-4 text-zinc-500 dark:text-zinc-400" /> : <Box className="w-4 h-4 text-zinc-500 dark:text-zinc-400" />}
+                     <span className="text-sm font-medium text-zinc-900 dark:text-zinc-100 group-hover:text-teal-600 dark:group-hover:text-teal-400 transition-colors">
+                       {is3D ? '2D Flat View' : '3D Globe View'}
+                     </span>
+                   </button>
+                </div>
+
+                {/* --- Floating UI: Legend (Bottom Left) --- */}
+                <div className="absolute bottom-8 left-6 z-10 w-48">
+                   <div className="bg-white/90 dark:bg-zinc-900/90 backdrop-blur-md rounded-2xl border border-zinc-200 dark:border-zinc-700 shadow-lg p-5">
+                      <div className="text-[10px] font-bold uppercase tracking-widest text-zinc-400 mb-4">Providers</div>
+                      <div className="space-y-3">
+                         {Object.entries(providers).map(([key, provider]) => (
+                            <div key={key} className="flex items-center gap-3">
+                               <div className={`w-2.5 h-2.5 rounded-full ring-2 ring-white dark:ring-zinc-800 shadow-sm ${provider.dotColor}`} />
+                               <span className="text-sm font-medium text-zinc-700 dark:text-zinc-300">{provider.name}</span>
+                            </div>
+                         ))}
+                         {Object.keys(providers).length === 0 && (
+                           <div className="flex items-center gap-2 text-xs text-zinc-400">
+                              <span className="w-2 h-2 rounded-full bg-zinc-300 animate-pulse"/> Loading...
+                           </div>
+                         )}
+                      </div>
+                   </div>
+                </div>
+
+              </FadeIn>
+           </div>
+        </section>
+
+        {/* --- Network Features Grid --- */}
+        <section className="px-6 mb-32">
+           <div className="max-w-6xl mx-auto">
+              <FadeIn className="text-center mb-16">
+                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Architecture Features</h2>
+                 <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto">
+                    How we maintain high availability and low latency across a fragmented internet.
+                 </p>
+              </FadeIn>
+
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                 {/* Card 1 */}
+                 <FadeIn delay={0.1} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-2xl bg-teal-50 dark:bg-teal-900/20 flex items-center justify-center text-teal-600 dark:text-teal-400 mb-6">
+                       <Network className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Smart Routing</h3>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                       Our DNS dynamically routes users to the fastest available provider based on real-time latency metrics from their region.
+                    </p>
+                 </FadeIn>
+
+                 {/* Card 2 */}
+                 <FadeIn delay={0.2} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/20 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6">
+                       <ShieldCheck className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Failover Redundancy</h3>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                       If a specific PoP or provider goes down, traffic is instantly rerouted to the next best node. No single point of failure.
+                    </p>
+                 </FadeIn>
+
+                 {/* Card 3 */}
+                 <FadeIn delay={0.3} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                    <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/20 flex items-center justify-center text-purple-600 dark:text-purple-400 mb-6">
+                       <Layers className="w-6 h-6" />
+                    </div>
+                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Tiered Caching</h3>
+                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                       Requests that miss the edge are checked against regional mid-tier caches before hitting the origin, reducing load times.
+                    </p>
+                 </FadeIn>
+              </div>
+           </div>
+        </section>
+
+        {/* --- Final CTA (Updated Style) --- */}
+        <section className="px-6 pb-24 relative z-10">
+          <FadeIn>
+            <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-zinc-900 dark:bg-zinc-950 border border-zinc-800 p-12 md:p-20 text-center shadow-2xl">
+              
+              {/* Background Glow inside CTA */}
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-teal-900/20 via-zinc-900 to-transparent opacity-50 pointer-events-none" />
+              
+              <div className="relative z-10">
+                <div className="inline-flex items-center gap-2 text-teal-400 font-medium mb-6">
+                   <Wifi className="w-5 h-5" />
+                   <span>Join the network</span>
+                </div>
+                
+                <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6 tracking-tight">
+                   Help us reach every<br />corner of the world.
+                </h2>
+                
+                <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
+                  We are actively looking for infrastructure partners in underserved regions to improve latency for local communities.
+                </p>
+                
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <Link
+                    href="/become-a-sponsor"
+                    className="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-zinc-950 transition-all duration-300 hover:bg-zinc-200 hover:scale-105"
+                  >
+                    <span className="mr-2">Sponsor a Node</span>
+                    <Server className="h-4 w-4 transition-transform group-hover:scale-110" />
+                  </Link>
+                  <Link
+                    href="/stats"
+                    className="inline-flex h-12 items-center justify-center rounded-full px-8 font-medium text-white transition-colors hover:text-zinc-300 border border-zinc-700 hover:bg-zinc-800"
+                  >
+                    View Traffic Stats <Activity className="ml-2 h-4 w-4" />
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </FadeIn>
+        </section>
+
       </main>
       <Footer />
     </div>
