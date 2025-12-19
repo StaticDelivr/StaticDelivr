@@ -68,9 +68,12 @@ interface NpmStats {
 
 interface PackagePageProps {
   npmStats?: NpmStats;
+  versions?: {
+    npm: string;
+  };
 }
 
-const PackagePage: React.FC<PackagePageProps> = ({ npmStats }) => {
+const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-emerald-500/30 font-sans">
       <Head>
@@ -159,7 +162,7 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats }) => {
                     <div className="mb-4 w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/10 flex items-center justify-center text-purple-600 dark:text-purple-500">
                        <Star className="w-6 h-6" />
                     </div>
-                    <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">v1.0.0</div>
+                    <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">{versions?.npm || 'v1.0.0'}</div>
                     <div className="text-sm text-zinc-500 dark:text-zinc-400">Stable Release</div>
                  </FadeIn>
 
@@ -309,16 +312,18 @@ export default PackagePage;
 // --- ISR Data Fetching ---
 export async function getStaticProps() {
   try {
-    const [weeklyRes, monthlyRes, yearlyRes] = await Promise.all([
+    const [weeklyRes, monthlyRes, yearlyRes, npmVersionRes] = await Promise.all([
       fetch('https://api.npmjs.org/downloads/point/last-week/staticdelivr'),
       fetch('https://api.npmjs.org/downloads/point/last-month/staticdelivr'),
-      fetch('https://api.npmjs.org/downloads/point/last-year/staticdelivr')
+      fetch('https://api.npmjs.org/downloads/point/last-year/staticdelivr'),
+      fetch('https://registry.npmjs.org/staticdelivr')
     ]);
 
-    const [weekly, monthly, yearly] = await Promise.all([
+    const [weekly, monthly, yearly, npmData] = await Promise.all([
       weeklyRes.json(),
       monthlyRes.json(),
-      yearlyRes.json()
+      yearlyRes.json(),
+      npmVersionRes.json()
     ]);
 
     return {
@@ -328,6 +333,9 @@ export async function getStaticProps() {
           monthly: monthly.downloads || 5000,
           yearly: yearly.downloads || 54000,
           lastUpdated: new Date().toISOString()
+        },
+        versions: {
+          npm: npmData?.['dist-tags']?.latest ? `v${npmData['dist-tags'].latest}` : 'v1.0.0'
         }
       },
       revalidate: 86400 // Revalidate once per day
@@ -342,6 +350,9 @@ export async function getStaticProps() {
           monthly: 5100,
           yearly: 54000,
           lastUpdated: new Date().toISOString()
+        },
+        versions: {
+          npm: 'v1.0.0'
         }
       },
       revalidate: 86400
