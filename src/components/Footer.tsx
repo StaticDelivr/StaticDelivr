@@ -105,7 +105,7 @@ const Footer = () => (
           <div className="col-span-2 md:col-span-8 grid grid-cols-2 sm:grid-cols-4 gap-8">
             {Object.entries(footerLinks).map(([key, section]) => (
               <div key={key}>
-                <h4 className="text-white font-semibold text-sm mb-4">{section.title}</h4>
+                <h3 className="text-white font-semibold text-sm mb-4">{section.title}</h3>
                 <ul className="space-y-3">
                   {section.links.map((link) => (
                     <li key={link.href}>
@@ -129,7 +129,7 @@ const Footer = () => (
         <div className="max-w-7xl mx-auto px-4 py-10">
           <div className="flex flex-col md:flex-row items-center justify-between gap-6 bg-zinc-900/50 p-6 rounded-2xl border border-zinc-800/50">
             <div className="text-center md:text-left">
-              <h5 className="text-white font-semibold mb-1">Stay Updated</h5>
+              <h4 className="text-white font-semibold mb-1">Stay Updated</h4>
               <p className="text-sm text-zinc-400">Get the latest news and feature updates delivered to your inbox.</p>
             </div>
             <Link
@@ -147,7 +147,7 @@ const Footer = () => (
       <div className="border-t border-zinc-900 bg-zinc-950">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-sm">
-            <div className="flex flex-col md:flex-row items-center gap-4 text-zinc-500">
+            <div className="flex flex-col md:flex-row items-center gap-4 text-zinc-400">
               <p>
                 &copy; {new Date().getFullYear()} StaticDelivr. All rights reserved.
               </p>
@@ -157,7 +157,7 @@ const Footer = () => (
                 <Link href="/legal/privacy-policy" className="hover:text-zinc-300 transition-colors">Privacy</Link>
               </div>
             </div>
-            <p className="flex items-center gap-1 text-zinc-500">
+            <p className="flex items-center gap-1 text-zinc-400">
               Made with <Heart className="w-4 h-4 text-red-500 fill-red-500" aria-hidden={true} /> for the open source community
             </p>
           </div>

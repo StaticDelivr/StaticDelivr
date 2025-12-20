@@ -26,23 +26,7 @@ class MyDocument extends Document {
           <link rel="dns-prefetch" href="https://images.ctfassets.net" />
           <link rel="dns-prefetch" href="https://registry.npmjs.org" />
 
-          {/* Microsoft Clarity Tracking Script - Deferred for better performance */}
-          <script
-            type="text/javascript"
-            defer
-            dangerouslySetInnerHTML={{
-              __html: `
-                (function(c,l,a,r,i,t,y){
-                  c['clarity'] = c['clarity'] || function() { (c['clarity'].q = c['clarity'].q || []).push(arguments) };
-                  i = l.createElement('script'); 
-                  i.async = 1; 
-                  i.src = 'https://www.clarity.ms/tag/' + '${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}';
-                  t = l.getElementsByTagName('script')[0]; 
-                  t.parentNode.insertBefore(i, t);
-                })(window, document, 'clarity', '${process.env.NEXT_PUBLIC_CLARITY_PROJECT_ID}');
-              `
-            }}
-          />
+
         </Head>
         <body>
           <Main />

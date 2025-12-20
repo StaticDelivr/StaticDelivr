@@ -125,7 +125,7 @@ const TerminalHero = () => {
                     <div className="w-3 h-3 rounded-full bg-amber-500/80"></div>
                     <div className="w-3 h-3 rounded-full bg-emerald-500/80"></div>
                 </div>
-                <div className="absolute left-1/2 -translate-x-1/2 text-zinc-500 text-xs hidden sm:block">
+                <div className="absolute left-1/2 -translate-x-1/2 text-zinc-400 text-xs hidden sm:block">
                     bash — 80x24
                 </div>
                 <button
@@ -217,6 +217,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                 .animate-aurora {
                     background-size: 200% auto;
                     animation: aurora 5s linear infinite;
+                    will-change: background-position;
                 }
             `}</style>
             <Header />
@@ -232,7 +233,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
 
                         {/* CLI Badge */}
                         <FadeIn>
-                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+                            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-800 dark:text-zinc-300 mb-8">
                                 <Terminal className="w-3 h-3" />
                                 <span>$ staticdelivr --home</span>
                             </div>
@@ -250,7 +251,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
 
                         {/* Subheadline with rotating words */}
                         <FadeIn delay={0.2}>
-                            <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+                            <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed font-light mb-10">
                                 Serve your <RotatingWords /> with enterprise-grade speed and reliability.
                                 Built by the community, for the community.
                             </p>
