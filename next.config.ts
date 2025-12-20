@@ -44,6 +44,14 @@ const nextConfig: NextConfig = {
           {
             key: 'Permissions-Policy',
             value: 'camera=(), microphone=(), geolocation=(), interest-cohort=()'
+          },
+          {
+            key: 'Cache-Control',
+            value: 'public, s-maxage=2592000, stale-while-revalidate=86400'
+          },
+          {
+            key: 'Surrogate-Control',
+            value: 'max-age=2592000'
           }
         ],
       },

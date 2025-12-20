@@ -126,7 +126,7 @@ export async function getStaticProps() {
     console.error("API Fetch failed, using fallback");
   }
 
-  return { props, revalidate: 3600 };
+  return { props, revalidate: 2592000 };
 }
 
 const StatsPage = ({ stats, generatedAt }) => {

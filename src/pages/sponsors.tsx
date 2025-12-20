@@ -76,7 +76,7 @@ export async function getStaticProps() {
     console.error("Error fetching stats:", error);
   }
 
-  return { props, revalidate: 3600 };
+  return { props, revalidate: 2592000 };
 }
 
 // --- Sponsors Data ---

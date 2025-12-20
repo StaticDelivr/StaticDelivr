@@ -125,7 +125,7 @@ export async function getStaticProps() {
 
   return {
     props,
-    revalidate: 3600 // Revalidate every hour
+    revalidate: 2592000 // Revalidate every month
   };
 }
 

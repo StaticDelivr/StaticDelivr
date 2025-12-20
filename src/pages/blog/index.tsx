@@ -273,6 +273,6 @@ export async function getStaticProps() {
         }
       })),
     },
-    revalidate: 60
+    revalidate: 2592000
   }
 }

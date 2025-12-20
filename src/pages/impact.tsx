@@ -92,14 +92,14 @@ export async function getStaticProps() {
       requests: data.total.requests || 800000000
     };
 
-    return { props: { stats }, revalidate: 86400 };
+    return { props: { stats }, revalidate: 2592000 };
   } catch (error) {
     // Fallback data if API fails
     return {
       props: {
         stats: { co2: 150, lightbulbs: 31579, bandwidthSavedGB: 2000, requests: 800000000 }
       },
-      revalidate: 3600
+      revalidate: 2592000
     };
   }
 }

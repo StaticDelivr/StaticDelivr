@@ -72,7 +72,7 @@ export async function getStaticProps() {
         console.error("Error fetching data:", error);
     }
 
-    return { props, revalidate: 3600 };
+    return { props, revalidate: 2592000 };
 }
 
 // --- Rotating Words Component ---
