@@ -209,6 +209,7 @@ const GitHubPage = () => {
                       </a>
                       <button
                         onClick={copyToClipboard}
+                        aria-label="Copy CDN URL"
                         className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-zinc-900 hover:bg-zinc-200 transition-colors"
                       >
                         {copied ? <Check className="w-3 h-3" /> : <Copy className="w-3 h-3" />}

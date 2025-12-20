@@ -278,8 +278,8 @@ const NpmPage = () => {
                                     key={tab}
                                     onClick={() => setActiveTab(tab as any)}
                                     className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${activeTab === tab
-                                          ? 'bg-zinc-800 text-white'
-                                          : 'text-zinc-500 hover:text-zinc-300'
+                                       ? 'bg-zinc-800 text-white'
+                                       : 'text-zinc-500 hover:text-zinc-300'
                                        }`}
                                  >
                                     {tab.toUpperCase()}
@@ -323,6 +323,7 @@ const NpmPage = () => {
                                           `import pkg from "${generatedUrl}/+esm";`;
                                     copyToClipboard(text, setCopiedUrl);
                                  }}
+                                 aria-label="Copy code snippet"
                                  className="p-2 rounded-lg bg-zinc-800 text-zinc-400 hover:text-white transition-colors"
                               >
                                  {copiedUrl ? <Check className="w-4 h-4 text-green-500" /> : <Copy className="w-4 h-4" />}

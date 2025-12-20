@@ -245,7 +245,7 @@ const Header = () => {
           <div className="md:hidden">
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" className="text-zinc-600 dark:text-zinc-400">
+                <Button variant="ghost" size="icon" aria-label="Open menu" className="text-zinc-600 dark:text-zinc-400">
                   <Menu className="w-5 h-5" />
                   <span className="sr-only">Open menu</span>
                 </Button>

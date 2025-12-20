@@ -129,6 +129,7 @@ const TerminalHero = () => {
                 </div>
                 <button
                     onClick={copyToClipboard}
+                    aria-label="Copy code snippet"
                     className="flex items-center gap-1.5 text-xs text-zinc-400 hover:text-white transition-colors"
                 >
                     {copied ? <Check className="w-3 h-3 text-emerald-400" /> : <Copy className="w-3 h-3" />}
