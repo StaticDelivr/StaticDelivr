@@ -13,7 +13,6 @@ import { SiNpm, SiWordpress, SiReact, SiGooglefonts, SiGithub } from 'react-icon
 
 import Header from '@/components/Header';
 import Footer from '@/components/Footer';
-import { FloatingContact } from '@/components/FloatingContact';
 
 // UI Components
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
@@ -272,6 +271,41 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                             <TerminalHero />
                         </FadeIn>
 
+                    </div>
+                </section>
+
+                {/* --- Sponsors Section --- */}
+                <section className="px-6 mb-32 relative z-10">
+                    <div className="max-w-4xl mx-auto">
+                        <FadeIn delay={0.5}>
+                            <div className="flex flex-col items-center">
+                                <p className="text-[10px] md:text-xs font-semibold text-zinc-400 dark:text-zinc-500 mb-8 uppercase tracking-[0.2em]">Infrastructure Sponsors</p>
+                                <div className="flex flex-wrap justify-center gap-10 md:gap-16 items-center">
+                                    <Link
+                                        href="https://www.cloudns.net/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                    >
+                                        <Image src="/assets/sponsors/cloudns.svg" alt="ClouDNS" width={140} height={35} className="h-7 md:h-8 w-auto" />
+                                    </Link>
+                                    <Link
+                                        href="https://www.netlify.com/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                    >
+                                        <Image src="/assets/sponsors/netlify.svg" alt="Netlify" width={140} height={35} className="h-7 md:h-8 w-auto" />
+                                    </Link>
+                                    <Link
+                                        href="/sponsors"
+                                        className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-dashed border-zinc-200 dark:border-zinc-800 text-[10px] md:text-xs text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 transition-all"
+                                    >
+                                        <Heart className="w-3 h-3" /> Your Logo Here
+                                    </Link>
+                                </div>
+                            </div>
+                        </FadeIn>
                     </div>
                 </section>
 
@@ -568,27 +602,6 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                     </div>
                 </section>
 
-                {/* --- Sponsors Section --- */}
-                <section className="px-6 py-20 pb-28">
-                    <div className="max-w-4xl mx-auto text-center">
-                        <FadeIn>
-                            <p className="text-sm font-medium text-zinc-500 dark:text-zinc-400 mb-8 uppercase tracking-wider">Infrastructure Sponsors</p>
-                            <div className="flex flex-wrap justify-center gap-12 items-center grayscale hover:grayscale-0 transition-all duration-500 opacity-70 hover:opacity-100">
-                                <Link href="https://www.cloudns.net/" target="_blank" rel="noopener noreferrer">
-                                    <Image src="/assets/sponsors/cloudns.svg" alt="ClouDNS" width={150} height={40} className="h-8 w-auto" />
-                                </Link>
-                                <Link href="https://www.netlify.com/" target="_blank" rel="noopener noreferrer">
-                                    <Image src="/assets/sponsors/netlify.svg" alt="Netlify" width={150} height={40} className="h-8 w-auto" />
-                                </Link>
-                                {/* Placeholder for more sponsors to make the section look fuller or just invite others */}
-                                <Link href="/sponsors" className="flex items-center gap-2 px-4 py-2 rounded-full border border-dashed border-zinc-300 dark:border-zinc-700 text-xs text-zinc-500 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                                    <Heart className="w-3 h-3" /> Your Logo Here
-                                </Link>
-                            </div>
-                        </FadeIn>
-                    </div>
-                </section>
-
                 {/* --- Final CTA --- */}
                 <section className="px-6 pb-24">
                     <FadeIn>
@@ -635,7 +648,6 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
 
             </main>
             <Footer />
-            <FloatingContact />
         </div>
     );
 };
