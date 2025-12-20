@@ -122,7 +122,7 @@ const GitHubPage = () => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Production-ready<br />
-                <span className="text-zinc-400 dark:text-zinc-600">GitHub assets.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">GitHub assets.</span>
               </h1>
             </FadeIn>
 
@@ -225,8 +225,9 @@ const GitHubPage = () => {
         </section>
 
         {/* --- Features Grid (with Links) --- */}
-        <section className="px-6 mb-32">
+        <section className="px-6 mb-32" aria-labelledby="features-heading">
           <div className="max-w-6xl mx-auto">
+            <h2 id="features-heading" className="sr-only">Infrastructure Features</h2>
             <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
 
               {/* Feature 1 */}

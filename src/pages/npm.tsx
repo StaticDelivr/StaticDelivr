@@ -176,7 +176,7 @@ const NpmPage = () => {
                   <FadeIn delay={0.1}>
                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                         The edge registry for<br />
-                        <span className="text-zinc-400 dark:text-zinc-600">frontend packages.</span>
+                        <span className="text-zinc-500 dark:text-zinc-400">frontend packages.</span>
                      </h1>
                   </FadeIn>
 
@@ -337,8 +337,9 @@ const NpmPage = () => {
             </section>
 
             {/* --- Stats Section --- */}
-            <section className="px-6 mb-32 relative z-10">
+            <section className="px-6 mb-32 relative z-10" aria-labelledby="stats-heading">
                <div className="max-w-6xl mx-auto border-y border-zinc-200 dark:border-zinc-800 py-12">
+                  <h2 id="stats-heading" className="sr-only">Network Statistics</h2>
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                      <FadeIn delay={0.1} className="text-center">
                         <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">2M+</div>
@@ -361,8 +362,9 @@ const NpmPage = () => {
             </section>
 
             {/* --- Features Grid --- */}
-            <section className="px-6 mb-32">
+            <section className="px-6 mb-32" aria-labelledby="features-heading">
                <div className="max-w-6xl mx-auto">
+                  <h2 id="features-heading" className="sr-only">Registry Features</h2>
                   <div className="grid md:grid-cols-3 gap-6">
 
                      {/* Feature 1 */}

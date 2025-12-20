@@ -123,7 +123,17 @@ const CompareSlider = () => {
 
             {/* Slider Handle */}
             <div
-               className="absolute top-0 bottom-0 w-1 bg-white cursor-col-resize z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)]"
+               role="slider"
+               tabIndex={0}
+               aria-valuenow={Math.round(position)}
+               aria-valuemin={0}
+               aria-valuemax={100}
+               aria-label="Image comparison slider"
+               onKeyDown={(e) => {
+                  if (e.key === 'ArrowLeft') setPosition(Math.max(0, position - 5));
+                  if (e.key === 'ArrowRight') setPosition(Math.min(100, position + 5));
+               }}
+               className="absolute top-0 bottom-0 w-1 bg-white cursor-col-resize z-20 shadow-[0_0_10px_rgba(0,0,0,0.5)] focus:ring-2 focus:ring-blue-500 focus:outline-none"
                style={{ left: `${position}%` }}
             >
                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-8 h-8 bg-white rounded-full shadow-lg flex items-center justify-center">
@@ -176,7 +186,7 @@ const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
                   <FadeIn delay={0.1}>
                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                         Make WordPress fast.<br />
-                        <span className="text-zinc-400 dark:text-zinc-600">No complex config required.</span>
+                        <span className="text-zinc-500 dark:text-zinc-400">No complex config required.</span>
                      </h1>
                   </FadeIn>
 

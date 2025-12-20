@@ -145,7 +145,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Powered by sponsors who<br />
-                <span className="text-zinc-400 dark:text-zinc-600">believe in the open web.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">believe in the open web.</span>
               </h1>
             </FadeIn>
 
@@ -243,7 +243,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                 >
                   <div className="relative overflow-hidden rounded-2xl border-2 border-dashed border-zinc-300 dark:border-zinc-700 bg-zinc-50 dark:bg-zinc-900/50 hover:border-zinc-400 dark:hover:border-zinc-600 transition-all h-full flex flex-col items-center justify-center p-12 text-center min-h-[280px]">
                     <div className="w-16 h-16 rounded-full bg-zinc-200 dark:bg-zinc-800 flex items-center justify-center mb-4 group-hover:scale-110 transition-transform">
-                      <Heart className="w-8 h-8 text-zinc-400 dark:text-zinc-600" />
+                      <Heart className="w-8 h-8 text-zinc-500 dark:text-zinc-400" />
                     </div>
                     <h3 className="font-semibold text-lg text-zinc-900 dark:text-white mb-2">Your Company Here</h3>
                     <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-4">

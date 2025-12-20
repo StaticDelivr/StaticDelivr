@@ -66,7 +66,7 @@ export function CodeBlock({
             <span>Open</span>
           </button>
         )}
-        
+
         <button
           onClick={handleCopy}
           className={cn(
@@ -141,7 +141,16 @@ export function InlineCode({ code, className }: InlineCodeProps) {
 
   return (
     <code
+      role="button"
+      tabIndex={0}
+      aria-label={`Copy code: ${code}`}
       onClick={handleCopy}
+      onKeyDown={(e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          handleCopy();
+        }
+      }}
       className={cn(
         "relative cursor-pointer rounded-md px-2 py-1 font-mono text-sm",
         "bg-slate-100 text-slate-800 hover:bg-slate-200",

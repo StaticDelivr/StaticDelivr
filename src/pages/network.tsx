@@ -66,7 +66,7 @@ const NetworkPage = () => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Global presence.<br />
-                <span className="text-zinc-400 dark:text-zinc-600">Local performance.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">Local performance.</span>
               </h1>
             </FadeIn>
 

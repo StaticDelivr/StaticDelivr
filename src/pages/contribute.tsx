@@ -59,7 +59,7 @@ const ContributePage = () => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Build the future of<br />
-                <span className="text-zinc-400 dark:text-zinc-600">open source delivery.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">open source delivery.</span>
               </h1>
             </FadeIn>
 

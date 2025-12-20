@@ -51,6 +51,7 @@ const CodeSnippet = ({ code, language = 'bash' }: { code: string, language?: str
       </div>
       <button
         onClick={handleCopy}
+        aria-label="Copy code"
         className="absolute top-2.5 right-3 p-1.5 rounded-md text-zinc-500 hover:text-white hover:bg-white/10 transition-colors opacity-0 group-hover:opacity-100"
       >
         {copied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
@@ -108,7 +109,7 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Image optimization<br />
-                <span className="text-zinc-400 dark:text-zinc-600">made simple.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">made simple.</span>
               </h1>
             </FadeIn>
 
@@ -190,7 +191,7 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
               <FadeIn delay={0.1}>
                 <div className="flex items-center gap-2 mb-4 text-zinc-900 dark:text-white font-medium">
                   <Terminal className="w-5 h-5 text-emerald-500" />
-                  <h3>1. Install Package</h3>
+                  <h2 className="text-xl font-semibold">1. Install Package</h2>
                 </div>
                 <CodeSnippet code="npm install staticdelivr" language="bash" />
                 <div className="mt-4 text-xs text-zinc-500">
@@ -202,7 +203,7 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
               <FadeIn delay={0.2}>
                 <div className="flex items-center gap-2 mb-4 text-zinc-900 dark:text-white font-medium">
                   <Code className="w-5 h-5 text-blue-500" />
-                  <h3>2. Drop in Component</h3>
+                  <h2 className="text-xl font-semibold">2. Drop in Component</h2>
                 </div>
                 <CodeSnippet
                   language="jsx"

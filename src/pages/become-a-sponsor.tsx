@@ -99,7 +99,7 @@ const BecomeSponsorPage = () => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Infrastructure for the<br />
-                <span className="text-zinc-400 dark:text-zinc-600">open web.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">open web.</span>
               </h1>
             </FadeIn>
 
@@ -139,7 +139,7 @@ const BecomeSponsorPage = () => {
                 </div>
                 <h2 className="text-3xl md:text-5xl font-semibold text-zinc-900 dark:text-white tracking-tight mb-6 leading-[1.1]">
                   CSR meets <br />
-                  <span className="text-zinc-400 dark:text-zinc-600">Engineering.</span>
+                  <span className="text-zinc-500 dark:text-zinc-400">Engineering.</span>
                 </h2>
                 <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
                   <p>

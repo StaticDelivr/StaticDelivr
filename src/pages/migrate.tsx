@@ -180,7 +180,7 @@ const MigratePage = () => {
                   <FadeIn delay={0.1}>
                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                         Upgrade your<br />
-                        <span className="text-zinc-400 dark:text-zinc-600">infrastructure.</span>
+                        <span className="text-zinc-500 dark:text-zinc-400">infrastructure.</span>
                      </h1>
                   </FadeIn>
 

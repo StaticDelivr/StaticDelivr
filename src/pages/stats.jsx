@@ -167,7 +167,7 @@ const StatsPage = ({ stats, generatedAt }) => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Open metrics.<br />
-                <span className="text-zinc-400 dark:text-zinc-600">Public infrastructure.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">Public infrastructure.</span>
               </h1>
             </FadeIn>
 
@@ -191,7 +191,7 @@ const StatsPage = ({ stats, generatedAt }) => {
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 mb-8 text-blue-600">
                     <Globe className="w-5 h-5" />
-                    <span className="font-medium tracking-tight">Monthly Requests</span>
+                    <h2 className="font-medium tracking-tight">Monthly Requests</h2>
                   </div>
                   <div className="text-6xl md:text-8xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-4">
                     <NumberTicker value={stats.requests} />
@@ -206,9 +206,9 @@ const StatsPage = ({ stats, generatedAt }) => {
               {/* Right Column Stack */}
               <div className="flex flex-col gap-6">
                 <FadeIn delay={0.1} className="flex-1 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 flex flex-col justify-center">
-                  <div className="flex items-center gap-2 text-zinc-500 mb-4 text-xs font-semibold uppercase tracking-wider">
+                  <h2 className="flex items-center gap-2 text-zinc-500 mb-4 text-xs font-semibold uppercase tracking-wider">
                     <Server className="w-4 h-4" /> Bandwidth Served
-                  </div>
+                  </h2>
                   <div className="text-5xl font-semibold text-zinc-900 dark:text-white tracking-tight">
                     <NumberTicker value={gbSaved} decimals={1} />
                     <span className="text-xl text-zinc-400 font-medium ml-1">GB</span>
@@ -218,9 +218,9 @@ const StatsPage = ({ stats, generatedAt }) => {
 
                 <FadeIn delay={0.2} className="flex-1 rounded-3xl bg-emerald-600 dark:bg-emerald-700 p-8 flex flex-col justify-center shadow-lg">
                   <div className="relative z-10 text-white">
-                    <div className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider opacity-80">
+                    <h2 className="flex items-center gap-2 mb-3 text-xs font-semibold uppercase tracking-wider opacity-80">
                       <Zap className="w-4 h-4" /> Cache Hit Rate
-                    </div>
+                    </h2>
                     <div className="text-5xl font-semibold tracking-tight">
                       {stats.cacheHitRate}<span className="text-xl opacity-60 ml-1">%</span>
                     </div>

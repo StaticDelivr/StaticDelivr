@@ -150,7 +150,7 @@ const GoogleFontsPage = () => {
                   <FadeIn delay={0.1}>
                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                         Google Fonts,<br />
-                        <span className="text-zinc-400 dark:text-zinc-600">minus the tracking.</span>
+                        <span className="text-zinc-500 dark:text-zinc-400">minus the tracking.</span>
                      </h1>
                   </FadeIn>
 
@@ -263,6 +263,7 @@ const GoogleFontsPage = () => {
                                           ? `<link href="${outputUrl}" rel="stylesheet">`
                                           : `@import url('${outputUrl}');`
                                     )}
+                                    aria-label="Copy generated code snippet"
                                     className="flex items-center gap-2 px-3 py-1.5 rounded-lg text-xs font-medium bg-white text-zinc-900 hover:bg-zinc-200 transition-colors min-w-[80px] justify-center"
                                  >
                                     {copiedConverter ? (
@@ -302,6 +303,7 @@ const GoogleFontsPage = () => {
                                     const url = generateFontUrl(font.name, font.weights);
                                     copyFont(url, font.name);
                                  }}
+                                 aria-label={`Copy ${font.name} font URL`}
                                  className="w-full h-full p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-amber-400 dark:hover:border-amber-500/50 hover:shadow-lg transition-all text-left group relative overflow-hidden flex flex-col justify-between"
                               >
                                  <div>
@@ -381,6 +383,7 @@ const GoogleFontsPage = () => {
                               </div>
                               <button
                                  onClick={() => copyMulti('<link href="https://cdn.staticdelivr.com/gfonts/css2?family=Open+Sans:wght@400;600&family=Poppins:wght@500;700&display=swap" rel="stylesheet">')}
+                                 aria-label="Copy multi-family font example"
                                  className={`mt-4 flex items-center gap-2 transition-colors ${copiedMulti ? 'text-emerald-600 dark:text-emerald-400 font-medium' : 'text-zinc-500 hover:text-zinc-900 dark:hover:text-white'
                                     }`}
                               >

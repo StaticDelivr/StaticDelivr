@@ -34,7 +34,7 @@ const NumberTicker = ({ value }: { value: number }) => (
 const MinimalGlobe = () => (
   <div className="relative w-64 h-64 flex items-center justify-center">
     {/* Static Lines */}
-    <svg viewBox="0 0 100 100" className="w-full h-full text-zinc-400 dark:text-zinc-600 stroke-current stroke-[1px] fill-none">
+    <svg viewBox="0 0 100 100" className="w-full h-full text-zinc-500 dark:text-zinc-400 stroke-current stroke-[1px] fill-none">
       <circle cx="50" cy="50" r="45" />
       <ellipse cx="50" cy="50" rx="20" ry="45" />
       <path d="M5 50h90" />
@@ -141,7 +141,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 The fastest byte is the one<br />
-                <span className="text-zinc-400 dark:text-zinc-600">you never send.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">you never send.</span>
               </h1>
             </FadeIn>
 
@@ -227,7 +227,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
 
             {/* Disclaimer */}
             <FadeIn delay={0.3} className="mt-8 text-center border-t border-dashed border-zinc-200 dark:border-zinc-800 pt-8">
-              <p className="text-xs text-zinc-400 dark:text-zinc-600 font-normal">
+              <p className="text-xs text-zinc-500 dark:text-zinc-400 font-normal">
                 Calculations based on {stats.requests.toLocaleString()} real-time requests from the previous 30 days.
               </p>
             </FadeIn>

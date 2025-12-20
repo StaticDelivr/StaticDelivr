@@ -93,7 +93,7 @@ const ContactPage = () => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Let's start a<br />
-                <span className="text-zinc-400 dark:text-zinc-600">conversation.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">conversation.</span>
               </h1>
             </FadeIn>
 
@@ -105,9 +105,9 @@ const ContactPage = () => {
           </div>
         </section>
 
-        {/* --- Contact Channels & Form Grid --- */}
-        <section className="px-6 mb-32 relative z-10">
+        <section className="px-6 mb-32 relative z-10" aria-labelledby="contact-channels-heading">
           <div className="max-w-6xl mx-auto">
+            <h2 id="contact-channels-heading" className="sr-only">Contact Channels</h2>
             <div className="grid lg:grid-cols-3 gap-8">
 
               {/* Left Column: Channels */}

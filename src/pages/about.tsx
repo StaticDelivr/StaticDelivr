@@ -164,7 +164,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Infrastructure for open source.<br />
-                <span className="text-zinc-400 dark:text-zinc-600">Built by one, for all.</span>
+                <span className="text-zinc-500 dark:text-zinc-400">Built by one, for all.</span>
               </h1>
             </FadeIn>
 
@@ -196,7 +196,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                 <div className="relative z-10">
                   <div className="flex items-center gap-2 mb-6 text-emerald-600 dark:text-emerald-500">
                     <Globe className="w-5 h-5" />
-                    <span className="font-medium tracking-tight">Proof of scale</span>
+                    <h2 className="font-medium tracking-tight">Proof of scale</h2>
                   </div>
 
                   <div className="text-6xl md:text-8xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-3">
@@ -210,9 +210,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
 
               {/* Philosophy Card */}
               <FadeIn delay={0.1} className="flex flex-col rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 p-8 justify-center">
-                <div className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
                   Default Stance
-                </div>
+                </h2>
                 <div className="text-2xl font-semibold text-zinc-900 dark:text-white tracking-tight mb-2">
                   No Paywalls.<br />No Tracking.
                 </div>
