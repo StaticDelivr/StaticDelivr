@@ -250,7 +250,7 @@ const NpmPage = () => {
 
                         {/* Popular Tags */}
                         <div className="mt-4 flex flex-wrap gap-2 items-center justify-center">
-                           <span className="text-xs font-medium text-zinc-400 uppercase tracking-wider mr-2">Popular:</span>
+                           <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mr-2">Popular:</span>
                            {POPULAR_PACKAGES.map(pkg => (
                               <button
                                  key={pkg.name}
@@ -279,7 +279,7 @@ const NpmPage = () => {
                                     onClick={() => setActiveTab(tab as any)}
                                     className={`px-3 py-1 rounded-md text-xs font-medium transition-colors ${activeTab === tab
                                        ? 'bg-zinc-800 text-white'
-                                       : 'text-zinc-500 hover:text-zinc-300'
+                                       : 'text-zinc-400 hover:text-zinc-300'
                                        }`}
                                  >
                                     {tab.toUpperCase()}
@@ -307,7 +307,7 @@ const NpmPage = () => {
                                  )}
                               </>
                            ) : (
-                              <div className="text-zinc-600 italic select-none">
+                              <div className="text-zinc-500 italic select-none">
                             // Search for a package above to generate snippets...
                               </div>
                            )}

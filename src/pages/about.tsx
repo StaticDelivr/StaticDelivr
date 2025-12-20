@@ -155,7 +155,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
           <div className="max-w-4xl mx-auto text-center">
 
             <FadeIn>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-400 mb-8">
                 <Terminal className="w-3 h-3" />
                 <span>$ staticdelivr --about</span>
               </div>
@@ -164,12 +164,12 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Infrastructure for open source.<br />
-                <span className="text-zinc-500 dark:text-zinc-400">Built by one, for all.</span>
+                <span className="text-zinc-600 dark:text-zinc-400">Built by one, for all.</span>
               </h1>
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+              <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
                 StaticDelivr is a <strong className="font-semibold text-zinc-900 dark:text-white">CDN for open source</strong> focused on the outcome that matters:
                 fewer wasted bytes, faster loads, and a modern web that works for everyone.
               </p>
@@ -202,7 +202,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                   <div className="text-6xl md:text-8xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-3">
                     <NumberTicker value={stats.requests} />
                   </div>
-                  <p className="text-zinc-500 dark:text-zinc-400 max-w-lg mt-2 text-base font-normal">
+                  <p className="text-zinc-600 dark:text-zinc-400 max-w-lg mt-2 text-base font-normal">
                     Requests served in the last 30 days. We might be small, but our infrastructure handles traffic at scale.
                   </p>
                 </div>
@@ -210,13 +210,13 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
 
               {/* Philosophy Card */}
               <FadeIn delay={0.1} className="flex flex-col rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50 p-8 justify-center">
-                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-500 dark:text-zinc-400">
+                <h2 className="mb-4 text-xs font-semibold uppercase tracking-wider text-zinc-600 dark:text-zinc-400">
                   Default Stance
                 </h2>
                 <div className="text-2xl font-semibold text-zinc-900 dark:text-white tracking-tight mb-2">
                   No Paywalls.<br />No Tracking.
                 </div>
-                <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
+                <p className="text-zinc-700 dark:text-zinc-400 text-sm leading-relaxed">
                   Public infrastructure should be boring, reliable, and transparent. We don't track your users or upsell features.
                 </p>
               </FadeIn>
@@ -229,7 +229,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
           <div className="max-w-6xl mx-auto">
             <FadeIn className="text-center mb-16">
               <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">One platform, many use cases</h2>
-              <p className="text-zinc-500 dark:text-zinc-400">Everything we serve is optimized by default.</p>
+              <p className="text-zinc-600 dark:text-zinc-400">Everything we serve is optimized by default.</p>
             </FadeIn>
 
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -255,7 +255,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                       </span>
                     </div>
 
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
                       Drop-in image optimization component. Automatic WebP/AVIF conversion with over <strong className="text-zinc-900 dark:text-white font-medium">54k+ downloads</strong>.
                     </p>
 

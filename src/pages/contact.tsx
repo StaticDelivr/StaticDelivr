@@ -84,7 +84,7 @@ const ContactPage = () => {
           <div className="max-w-4xl mx-auto text-center">
 
             <FadeIn>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-400 mb-8">
                 <Terminal className="w-3 h-3" />
                 <span>$ staticdelivr --contact</span>
               </div>
@@ -93,12 +93,12 @@ const ContactPage = () => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Let's start a<br />
-                <span className="text-zinc-500 dark:text-zinc-400">conversation.</span>
+                <span className="text-zinc-600 dark:text-zinc-400">conversation.</span>
               </h1>
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+              <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
                 Whether you have a technical question, a partnership proposal, or just want to report a bug, we're here to help.
               </p>
             </FadeIn>
@@ -120,7 +120,7 @@ const ContactPage = () => {
                       <Mail className="w-5 h-5" />
                     </div>
                     <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Email Support</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-4">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
                       For general inquiries and private matters.
                     </p>
                     <div className="flex items-center text-sm font-medium text-zinc-900 dark:text-white">
@@ -136,7 +136,7 @@ const ContactPage = () => {
                       <MessageSquare className="w-5 h-5" />
                     </div>
                     <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">GitHub Discussions</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 mb-4">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 mb-4">
                       For bugs, features, and public community chat.
                     </p>
                     <div className="flex items-center text-sm font-medium text-zinc-900 dark:text-white">
@@ -170,8 +170,8 @@ const ContactPage = () => {
                         <div className="w-12 h-12 rounded-full bg-rose-100 dark:bg-rose-900/20 text-rose-500 flex items-center justify-center mb-4">
                           <Terminal className="w-6 h-6" />
                         </div>
-                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Configuration Missing</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400">
+                        <h2 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Configuration Missing</h2>
+                        <p className="text-zinc-600 dark:text-zinc-400">
                           The Formspree ID is missing from environment variables.
                         </p>
                       </div>
@@ -261,7 +261,7 @@ const ContactPage = () => {
         <section className="px-6 pb-24">
           <div className="max-w-4xl mx-auto">
             <FadeIn className="text-center py-12 border-t border-zinc-200 dark:border-zinc-800">
-              <p className="text-zinc-500 dark:text-zinc-400 mb-6">
+              <p className="text-zinc-600 dark:text-zinc-400 mb-6">
                 Looking for technical documentation?
               </p>
               <div className="flex justify-center gap-4">

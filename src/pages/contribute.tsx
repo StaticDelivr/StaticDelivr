@@ -50,7 +50,7 @@ const ContributePage = () => {
           <div className="max-w-4xl mx-auto text-center">
 
             <FadeIn>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-400 mb-8">
                 <Terminal className="w-3 h-3" />
                 <span>$ staticdelivr --contribute</span>
               </div>
@@ -59,12 +59,12 @@ const ContributePage = () => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Build the future of<br />
-                <span className="text-zinc-500 dark:text-zinc-400">open source delivery.</span>
+                <span className="text-zinc-600 dark:text-zinc-400">open source delivery.</span>
               </h1>
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+              <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
                 StaticDelivr is community-driven. Whether you're fixing a bug, improving documentation, or sponsoring infrastructure, your contribution helps millions of developers.
               </p>
             </FadeIn>
@@ -92,7 +92,7 @@ const ContributePage = () => {
           <div className="max-w-6xl mx-auto">
             <FadeIn className="mb-12">
               <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">How you can help</h2>
-              <p className="text-zinc-500 dark:text-zinc-400">No contribution is too small.</p>
+              <p className="text-zinc-600 dark:text-zinc-400">No contribution is too small.</p>
             </FadeIn>
 
             <div className="grid md:grid-cols-2 gap-6">
@@ -114,7 +114,7 @@ const ContributePage = () => {
                       <h3 className="text-xl font-bold text-zinc-900 dark:text-white">Contribute Code</h3>
                       <ExternalLink className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" />
                     </div>
-                    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                       Pick up an issue labeled <code>good first issue</code>, optimize our edge logic, maintain our npm packages, or help maintain our WordPress plugin.
                     </p>
                     <div className="flex gap-2">
@@ -146,7 +146,7 @@ const ContributePage = () => {
                       <h3 className="text-xl font-bold text-zinc-900 dark:text-white">Report Bugs</h3>
                       <ExternalLink className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-orange-500 transition-colors" />
                     </div>
-                    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                       Found something broken? Detailed bug reports are improved contributions. Help us make the CDN more stable.
                     </p>
                     <div className="mt-auto text-sm font-medium text-orange-600 dark:text-orange-400 flex items-center">

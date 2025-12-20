@@ -189,7 +189,7 @@ const GitHubPage = () => {
                         <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/50" />
                         <div className="w-2.5 h-2.5 rounded-full bg-green-500/50" />
                       </div>
-                      <div className="text-[10px] font-medium text-zinc-500 uppercase tracking-wider">CDN Ready</div>
+                      <div className="text-[10px] font-medium text-zinc-400 uppercase tracking-wider">CDN Ready</div>
                     </div>
 
                     {/* Content */}

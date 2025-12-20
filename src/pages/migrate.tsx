@@ -254,8 +254,8 @@ const MigratePage = () => {
                                     key={tab}
                                     onClick={() => setActiveTab(tab)}
                                     className={`px-3 py-1 rounded-md text-[10px] font-medium transition-colors uppercase tracking-wider ${activeTab === tab
-                                          ? 'bg-zinc-800 text-white'
-                                          : 'text-zinc-500 hover:text-zinc-300'
+                                       ? 'bg-zinc-800 text-white'
+                                       : 'text-zinc-400 hover:text-zinc-300'
                                        }`}
                                  >
                                     {tab}
@@ -283,7 +283,7 @@ const MigratePage = () => {
                                  )}
                               </>
                            ) : (
-                              <span className="text-zinc-600 italic select-none">
+                              <span className="text-zinc-500 italic select-none">
                             // Waiting for valid input...
                               </span>
                            )}

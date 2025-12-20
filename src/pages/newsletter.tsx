@@ -48,7 +48,7 @@ const NewsletterPage = () => {
           <div className="max-w-4xl mx-auto text-center">
 
             <FadeIn>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-400 mb-8">
                 <Terminal className="w-3 h-3" />
                 <span>$ staticdelivr --newsletter</span>
               </div>
@@ -57,12 +57,12 @@ const NewsletterPage = () => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Changelogs, insights,<br />
-                <span className="text-zinc-500 dark:text-zinc-400">and edge engineering.</span>
+                <span className="text-zinc-600 dark:text-zinc-400">and edge engineering.</span>
               </h1>
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+              <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
                 Join our community of developers. We share monthly updates about CDN performance, new open source integrations, and infrastructure transparency reports.
               </p>
             </FadeIn>
@@ -88,7 +88,7 @@ const NewsletterPage = () => {
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">
                     Subscriptions Paused
                   </h3>
-                  <p className="text-zinc-500 dark:text-zinc-400 mb-8">
+                  <p className="text-zinc-600 dark:text-zinc-400 mb-8">
                     We are currently upgrading our mailing infrastructure. Check back soon or follow us on GitHub for updates.
                   </p>
 
@@ -131,7 +131,7 @@ const NewsletterPage = () => {
                     <Zap className="w-5 h-5" />
                   </div>
                   <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Performance Deep Dives</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     Technical breakdowns of how we optimize routing, compression algorithms, and edge caching strategies.
                   </p>
                 </div>
@@ -144,7 +144,7 @@ const NewsletterPage = () => {
                     <BookOpen className="w-5 h-5" />
                   </div>
                   <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Project Updates</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     Changelogs for our WordPress plugin, NPM registry mirror, and new points of presence (PoPs).
                   </p>
                 </div>
@@ -157,7 +157,7 @@ const NewsletterPage = () => {
                     <Users className="w-5 h-5" />
                   </div>
                   <h3 className="font-bold text-zinc-900 dark:text-white mb-2">Community Stories</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                     Spotlights on open source projects using StaticDelivr and how they leverage the network.
                   </p>
                 </div>

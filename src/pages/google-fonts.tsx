@@ -219,14 +219,14 @@ const GoogleFontsPage = () => {
                                  <div className="flex gap-1 bg-zinc-900 p-1 rounded-lg border border-zinc-800">
                                     <button
                                        onClick={() => setActiveTab('html')}
-                                       className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${activeTab === 'html' ? 'bg-zinc-800 text-white' : 'text-zinc-500 hover:text-zinc-300'
+                                       className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${activeTab === 'html' ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:text-zinc-300'
                                           }`}
                                     >
                                        HTML
                                     </button>
                                     <button
                                        onClick={() => setActiveTab('css')}
-                                       className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${activeTab === 'css' ? 'bg-zinc-800 text-white' : 'text-zinc-500 hover:text-zinc-300'
+                                       className={`px-2 py-0.5 rounded text-[10px] font-medium transition-colors ${activeTab === 'css' ? 'bg-zinc-800 text-white' : 'text-zinc-400 hover:text-zinc-300'
                                           }`}
                                     >
                                        CSS

@@ -136,7 +136,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
           <div className="max-w-4xl mx-auto text-center">
 
             <FadeIn>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-400 mb-8">
                 <Terminal className="w-3 h-3" />
                 <span>$ staticdelivr --sponsors</span>
               </div>
@@ -145,12 +145,12 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Powered by sponsors who<br />
-                <span className="text-zinc-500 dark:text-zinc-400">believe in the open web.</span>
+                <span className="text-zinc-600 dark:text-zinc-400">believe in the open web.</span>
               </h1>
             </FadeIn>
 
             <FadeIn delay={0.2}>
-              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
+              <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
                 StaticDelivr is <strong className="font-semibold text-zinc-900 dark:text-white">free and open source</strong>.
                 We rely on forward-thinking infrastructure partners to keep the network fast, free, and accessible for everyone.
               </p>
@@ -173,7 +173,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
             <FadeIn className="mb-8 flex flex-wrap items-end justify-between border-b border-zinc-200 dark:border-zinc-800 pb-4 gap-4">
               <div>
                 <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white">Infrastructure Partners</h2>
-                <p className="text-sm text-zinc-500 mt-1">Leading companies powering the network</p>
+                <p className="text-sm text-zinc-600 mt-1">Leading companies powering the network</p>
               </div>
               {/* Stats Badge */}
               <div className="inline-flex items-center gap-2 px-3 py-1 bg-rose-50 dark:bg-rose-900/20 text-rose-700 dark:text-rose-400 rounded-full text-xs font-medium border border-rose-200 dark:border-rose-900/30">
@@ -221,7 +221,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                         </span>
                       </div>
 
-                      <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                      <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                         {sponsor.description}
                       </p>
 
@@ -264,7 +264,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
           <div className="max-w-6xl mx-auto">
             <FadeIn className="text-center mb-16">
               <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Why support infrastructure?</h2>
-              <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto">Sponsoring StaticDelivr isn't just about logo placement. It's about funding digital equity and a cleaner web.</p>
+              <p className="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">Sponsoring StaticDelivr isn't just about logo placement. It's about funding digital equity and a cleaner web.</p>
             </FadeIn>
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 auto-rows-[minmax(250px,auto)]">
@@ -361,7 +361,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                       <Server className="w-5 h-5" />
                     </div>
                     <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-3">Edge Infrastructure</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                       Provide bandwidth, compute, or object storage. Help us cache content closer to users in underserved regions like SE Asia and LATAM.
                     </p>
                     <div className="mt-auto border-t border-zinc-100 dark:border-zinc-800 pt-4">
@@ -380,7 +380,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                       <Zap className="w-5 h-5" />
                     </div>
                     <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-3">SaaS & Observability</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                       We need visibility to keep the network stable. Sponsoring enterprise accounts for monitoring, logging, or security tools helps us stay online.
                     </p>
                   </div>
@@ -396,7 +396,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                       <Cpu className="w-5 h-5" />
                     </div>
                     <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-3">Engineering Time</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                       Dedicate team hours to help maintain our open source integrations, improve our documentation, or build new plugins.
                     </p>
                   </div>

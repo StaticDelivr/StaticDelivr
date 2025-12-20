@@ -165,7 +165,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                 <div className="relative z-10 flex flex-col h-full justify-between">
                   <div className="flex items-center gap-2 mb-6 text-emerald-600 dark:text-emerald-500">
                     <Activity className="w-5 h-5" />
-                    <span className="font-medium tracking-tight">Bandwidth Saved</span>
+                    <h2 className="font-medium tracking-tight">Bandwidth Saved</h2>
                   </div>
 
                   <div>
@@ -190,9 +190,9 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
 
                 {/* CO2 */}
                 <FadeIn delay={0.1} className="flex-1 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 flex flex-col justify-center shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
-                  <div className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-2 text-xs font-semibold uppercase tracking-wider">
+                  <h2 className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 mb-2 text-xs font-semibold uppercase tracking-wider">
                     <Leaf className="w-4 h-4" /> Carbon Avoided
-                  </div>
+                  </h2>
                   <div className="text-5xl font-semibold text-zinc-900 dark:text-white tracking-tight">
                     <NumberTicker value={stats.co2} /> <span className="text-2xl text-zinc-300 dark:text-zinc-600 font-medium">kg</span>
                   </div>
@@ -205,9 +205,9 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 dark:bg-black/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
                     <div className="relative z-10">
-                      <div className="flex items-center gap-2 text-zinc-400 dark:text-zinc-500 mb-3 text-xs font-semibold uppercase tracking-wider">
+                      <h2 className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-3 text-xs font-semibold uppercase tracking-wider">
                         <Zap className="w-4 h-4" /> Energy Equivalent
-                      </div>
+                      </h2>
                       <div className="text-5xl font-semibold text-white dark:text-zinc-900 tracking-tight">
                         <NumberTicker value={stats.lightbulbs} />
                       </div>
@@ -227,7 +227,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
 
             {/* Disclaimer */}
             <FadeIn delay={0.3} className="mt-8 text-center border-t border-dashed border-zinc-200 dark:border-zinc-800 pt-8">
-              <p className="text-xs text-zinc-500 dark:text-zinc-400 font-normal">
+              <p className="text-xs text-zinc-600 dark:text-zinc-400 font-normal">
                 Calculations based on {stats.requests.toLocaleString()} real-time requests from the previous 30 days.
               </p>
             </FadeIn>
@@ -312,7 +312,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                       <div className="w-3 h-3 rounded-full bg-amber-400/80"></div>
                       <div className="w-3 h-3 rounded-full bg-emerald-400/80"></div>
                     </div>
-                    <div className="ml-4 text-xs font-mono text-zinc-400">DevTools / Network</div>
+                    <div className="ml-4 text-xs font-mono text-zinc-600 dark:text-zinc-400">DevTools / Network</div>
                   </div>
 
                   <div className="p-6 space-y-8 font-mono text-sm">

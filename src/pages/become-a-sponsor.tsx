@@ -90,7 +90,7 @@ const BecomeSponsorPage = () => {
           <div className="max-w-4xl mx-auto text-center">
 
             <FadeIn>
-              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
+              <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-700 dark:text-zinc-400 mb-8">
                 <Terminal className="w-3 h-3" />
                 <span>$ staticdelivr --sponsor</span>
               </div>
@@ -166,7 +166,7 @@ const BecomeSponsorPage = () => {
           <div className="max-w-6xl mx-auto">
             <FadeIn className="text-center mb-16">
               <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">How you can contribute</h2>
-              <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto">
+              <p className="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
                 We prefer <strong className="text-zinc-900 dark:text-white">resources over cash</strong>.
                 If your company provides infrastructure, observability, or engineering talent, let's integrate.
               </p>
@@ -184,7 +184,7 @@ const BecomeSponsorPage = () => {
                   </div>
 
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Core Infrastructure</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                     We need Edge Nodes (VPS), Object Storage (S3-compatible), and Global DNS services.
                   </p>
 
@@ -205,7 +205,7 @@ const BecomeSponsorPage = () => {
                   </div>
 
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Enterprise Tooling</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                     Observability is key to uptime. We need enterprise accounts for log management, error tracking, and security scanning.
                   </p>
 
@@ -226,7 +226,7 @@ const BecomeSponsorPage = () => {
                   </div>
 
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Engineering Time</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                     Assign engineering hours to help maintain our open source integrations or sponsor specific plugin development.
                   </p>
 
@@ -255,7 +255,7 @@ const BecomeSponsorPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Brand Visibility</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400">
                     Top-tier logo placement on our homepage, documentation, and GitHub repository.
                   </p>
                 </div>
@@ -267,7 +267,7 @@ const BecomeSponsorPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Technical Credibility</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400">
                     Prove your infrastructure's reliability by powering a high-performance global CDN.
                   </p>
                 </div>
@@ -279,7 +279,7 @@ const BecomeSponsorPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Talent Acquisition</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400">
                     Appeal to engineers who value open source, performance, and digital equity.
                   </p>
                 </div>
@@ -291,7 +291,7 @@ const BecomeSponsorPage = () => {
                 </div>
                 <div>
                   <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Case Studies</h3>
-                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                  <p className="text-sm text-zinc-600 dark:text-zinc-400">
                     We write detailed technical blog posts about how our sponsors help solve our scale challenges.
                   </p>
                 </div>
