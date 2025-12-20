@@ -245,7 +245,7 @@ export default function BlogPost({ post }) {
          </Head>
          <Script
             src="https://cdn.staticdelivr.com/npm/@highlightjs/cdn-assets@11.9.0/highlight.min.js"
-            strategy="lazyOnload"
+            strategy="beforeInteractive"
          />
 
          <Header />
