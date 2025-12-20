@@ -180,7 +180,7 @@ const MigratePage = () => {
                   <FadeIn delay={0.1}>
                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                         Upgrade your<br />
-                        <span className="text-zinc-500 dark:text-zinc-400">infrastructure.</span>
+                        <span className="text-zinc-600 dark:text-zinc-400">infrastructure.</span>
                      </h1>
                   </FadeIn>
 
@@ -336,7 +336,7 @@ const MigratePage = () => {
                            <RefreshCw className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Auto-Redundancy</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                            We aggregate Cloudflare, Fastly, and Gcore. If one provider fails, we route traffic to another instantly.
                         </p>
                      </FadeIn>
@@ -346,7 +346,7 @@ const MigratePage = () => {
                            <Sparkles className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Smart Routing</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                            Our DNS steers users to the closest performant PoP, not just the closest datacenter, reducing latency.
                         </p>
                      </FadeIn>
@@ -356,7 +356,7 @@ const MigratePage = () => {
                            <Search className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Global Scale</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                            With 570+ PoPs worldwide, we deliver assets from the edge, ensuring consistent speed for global audiences.
                         </p>
                      </FadeIn>
@@ -370,7 +370,7 @@ const MigratePage = () => {
                <div className="max-w-4xl mx-auto">
                   <FadeIn className="text-center mb-10">
                      <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white">Batch Migration Patterns</h2>
-                     <p className="text-zinc-500 dark:text-zinc-400 mt-2">Use "Find & Replace" in your codebase with these patterns.</p>
+                     <p className="text-zinc-600 dark:text-zinc-400 mt-2">Use "Find & Replace" in your codebase with these patterns.</p>
                   </FadeIn>
 
                   <div className="space-y-6">
@@ -389,7 +389,7 @@ const MigratePage = () => {
                               cdn.staticdelivr.com
                            </code>
                         </div>
-                        <p className="text-center text-xs text-zinc-500 mt-3">
+                        <p className="text-center text-xs text-zinc-600 dark:text-zinc-400 mt-3">
                            Works for both <code>/npm/</code> and <code>/gh/</code> paths automatically.
                         </p>
                      </FadeIn>
@@ -408,7 +408,7 @@ const MigratePage = () => {
                               cdn.staticdelivr.com/npm/
                            </code>
                         </div>
-                        <p className="text-center text-xs text-zinc-500 mt-3">
+                        <p className="text-center text-xs text-zinc-600 dark:text-zinc-400 mt-3">
                            Note: You must append <code>/npm/</code> to the replacement URL.
                         </p>
                      </FadeIn>

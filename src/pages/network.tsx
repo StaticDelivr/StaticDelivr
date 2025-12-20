@@ -66,7 +66,7 @@ const NetworkPage = () => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Global presence.<br />
-                <span className="text-zinc-500 dark:text-zinc-400">Local performance.</span>
+                <span className="text-zinc-600 dark:text-zinc-400">Local performance.</span>
               </h1>
             </FadeIn>
 
@@ -90,7 +90,7 @@ const NetworkPage = () => {
           <div className="max-w-6xl mx-auto">
             <FadeIn className="text-center mb-16">
               <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Architecture Features</h2>
-              <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto">
+              <p className="text-zinc-600 dark:text-zinc-400 max-w-xl mx-auto">
                 How we maintain high availability and low latency across a fragmented internet.
               </p>
             </FadeIn>
@@ -102,7 +102,7 @@ const NetworkPage = () => {
                   <Network className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Smart Routing</h3>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Our DNS dynamically routes users to the fastest available provider based on real-time latency metrics from their region.
                 </p>
               </FadeIn>
@@ -113,7 +113,7 @@ const NetworkPage = () => {
                   <ShieldCheck className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Failover Redundancy</h3>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   If a specific PoP or provider goes down, traffic is instantly rerouted to the next best node. No single point of failure.
                 </p>
               </FadeIn>
@@ -124,7 +124,7 @@ const NetworkPage = () => {
                   <Layers className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Tiered Caching</h3>
-                <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Requests that miss the edge are checked against regional mid-tier caches before hitting the origin, reducing load times.
                 </p>
               </FadeIn>

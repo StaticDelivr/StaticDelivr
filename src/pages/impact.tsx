@@ -34,7 +34,7 @@ const NumberTicker = ({ value }: { value: number }) => (
 const MinimalGlobe = () => (
   <div className="relative w-64 h-64 flex items-center justify-center">
     {/* Static Lines */}
-    <svg viewBox="0 0 100 100" className="w-full h-full text-zinc-500 dark:text-zinc-400 stroke-current stroke-[1px] fill-none">
+    <svg viewBox="0 0 100 100" className="w-full h-full text-zinc-600 dark:text-zinc-500 stroke-current stroke-[1px] fill-none">
       <circle cx="50" cy="50" r="45" />
       <ellipse cx="50" cy="50" rx="20" ry="45" />
       <path d="M5 50h90" />
@@ -141,7 +141,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 The fastest byte is the one<br />
-                <span className="text-zinc-500 dark:text-zinc-400">you never send.</span>
+                <span className="text-zinc-600 dark:text-zinc-400">you never send.</span>
               </h1>
             </FadeIn>
 
@@ -173,7 +173,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                       <NumberTicker value={stats.bandwidthSavedGB} />
                       <span className="text-3xl md:text-4xl text-zinc-300 dark:text-zinc-700 ml-2 font-medium">GB</span>
                     </div>
-                    <p className="text-zinc-500 dark:text-zinc-400 max-w-lg mt-2 text-base font-normal leading-relaxed">
+                    <p className="text-zinc-600 dark:text-zinc-400 max-w-lg mt-2 text-base font-normal leading-relaxed">
                       Data we didn't send. By compressing images and code, we saved terabytes of unnecessary transmission this month alone.
                     </p>
                   </div>
@@ -205,18 +205,18 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 dark:bg-black/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
                     <div className="relative z-10">
-                      <h2 className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400 mb-3 text-xs font-semibold uppercase tracking-wider">
+                      <h2 className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 mb-3 text-xs font-semibold uppercase tracking-wider">
                         <Zap className="w-4 h-4" /> Energy Equivalent
                       </h2>
                       <div className="text-5xl font-semibold text-white dark:text-zinc-900 tracking-tight">
                         <NumberTicker value={stats.lightbulbs} />
                       </div>
-                      <div className="text-sm text-zinc-500 dark:text-zinc-500 mt-2 font-normal">Lightbulb-hours powered</div>
+                      <div className="text-sm text-zinc-600 dark:text-zinc-400 mt-2 font-normal">Lightbulb-hours powered</div>
                     </div>
                   </div>
 
                   {/* Stats BELOW the card */}
-                  <div className="mt-3 flex justify-between px-2 text-[10px] sm:text-xs text-zinc-400 dark:text-zinc-500 font-mono">
+                  <div className="mt-3 flex justify-between px-2 text-[10px] sm:text-xs text-zinc-600 dark:text-zinc-400 font-mono">
                     <span>0.15 kWh/GB Intensity</span>
                     <span>•</span>
                     <span>0.475 kg CO₂/kWh Grid Avg</span>
@@ -317,18 +317,18 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
 
                   <div className="p-6 space-y-8 font-mono text-sm">
                     <div>
-                      <div className="flex justify-between text-zinc-500 mb-2 text-xs uppercase tracking-wide font-medium">
+                      <div className="flex justify-between text-zinc-600 dark:text-zinc-400 mb-2 text-xs uppercase tracking-wide font-medium">
                         <span>Standard CDN Origin</span>
                         <span className="text-rose-500">3.2 MB / 12s on 3G</span>
                       </div>
                       <div className="relative h-10 bg-zinc-200 dark:bg-zinc-800 rounded-md overflow-hidden flex items-center px-4">
-                        <span className="relative z-10 text-zinc-500 dark:text-zinc-400 text-xs">hero-image.png</span>
+                        <span className="relative z-10 text-zinc-600 dark:text-zinc-400 text-xs">hero-image.png</span>
                         <div className="absolute top-0 left-0 h-full w-full bg-zinc-300 dark:bg-zinc-700"></div>
                       </div>
                     </div>
 
                     <div>
-                      <div className="flex justify-between text-zinc-500 mb-2 text-xs uppercase tracking-wide font-medium">
+                      <div className="flex justify-between text-zinc-600 dark:text-zinc-400 mb-2 text-xs uppercase tracking-wide font-medium">
                         <span>StaticDelivr Edge</span>
                         <span className="text-emerald-500">320 KB / 0.8s on 3G</span>
                       </div>
@@ -392,12 +392,12 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                   <div className="p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 w-full shadow-[0_2px_15px_rgba(0,0,0,0.02)]">
                     <TrendingDown className="w-5 h-5 text-emerald-500 mb-4" />
                     <div className="font-semibold text-2xl text-zinc-900 dark:text-white mb-1">~40%</div>
-                    <div className="text-sm text-zinc-500 font-normal">Avg. Size Reduction</div>
+                    <div className="text-sm text-zinc-600 dark:text-zinc-400 font-normal">Avg. Size Reduction</div>
                   </div>
                   <div className="p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 w-full shadow-[0_2px_15px_rgba(0,0,0,0.02)]">
                     <Check className="w-5 h-5 text-blue-500 mb-4" />
                     <div className="font-semibold text-2xl text-zinc-900 dark:text-white mb-1">Zero</div>
-                    <div className="text-sm text-zinc-500 font-normal">Redundant Fetches</div>
+                    <div className="text-sm text-zinc-600 dark:text-zinc-400 font-normal">Redundant Fetches</div>
                   </div>
                 </div>
               </FadeIn>

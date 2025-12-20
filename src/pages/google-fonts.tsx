@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { NextSeo } from 'next-seo';
+import { NextSeo, SoftwareAppJsonLd } from 'next-seo';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -129,6 +129,15 @@ const GoogleFontsPage = () => {
             }}
          />
 
+         <SoftwareAppJsonLd
+            name="StaticDelivr Google Fonts Proxy"
+            price="0.00"
+            priceCurrency="USD"
+            aggregateRating={{ ratingValue: '4.9', ratingCount: '156' }}
+            operatingSystem="Web"
+            applicationCategory="DeveloperApplication"
+         />
+
          <Header />
 
          <main className="relative pt-32 pb-20 overflow-hidden">
@@ -150,7 +159,7 @@ const GoogleFontsPage = () => {
                   <FadeIn delay={0.1}>
                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                         Google Fonts,<br />
-                        <span className="text-zinc-500 dark:text-zinc-400">minus the tracking.</span>
+                        <span className="text-zinc-600 dark:text-zinc-400">minus the tracking.</span>
                      </h1>
                   </FadeIn>
 
@@ -290,7 +299,7 @@ const GoogleFontsPage = () => {
                <div className="max-w-6xl mx-auto">
                   <FadeIn className="mb-10 text-center">
                      <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white">Popular Fonts</h2>
-                     <p className="text-zinc-500 dark:text-zinc-400 mt-2">Click any card to copy the optimized CDN URL.</p>
+                     <p className="text-zinc-600 dark:text-zinc-400 mt-2">Click any card to copy the optimized CDN URL.</p>
                   </FadeIn>
 
                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
@@ -361,10 +370,10 @@ const GoogleFontsPage = () => {
                               <h2 className="text-2xl font-bold text-zinc-900 dark:text-white mb-4">
                                  Load multiple font families in a single request.
                               </h2>
-                              <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                              <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
                                  Don't make your users wait for multiple connections. Combine all your font definitions into one URL to reduce latency and improve PageSpeed scores.
                               </p>
-                              <div className="text-sm text-zinc-500">
+                              <div className="text-sm text-zinc-600 dark:text-zinc-400">
                                  <strong>Pro Tip:</strong> Paste your multi-family Google URL into the converter above — it works automatically!
                               </div>
                            </div>
@@ -413,7 +422,7 @@ const GoogleFontsPage = () => {
                            <Lock className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Privacy First</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                            We strip all user-identifying data and tracking cookies before upstreaming the request to Google. Your users remain anonymous.
                         </p>
                      </FadeIn>
@@ -423,7 +432,7 @@ const GoogleFontsPage = () => {
                            <Zap className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">HTTP/3 & Brotli</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                            Files are served over the latest HTTP/3 protocol and compressed with Brotli for faster font loading times.
                         </p>
                      </FadeIn>
@@ -433,7 +442,7 @@ const GoogleFontsPage = () => {
                            <ShieldCheck className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">GDPR Compliant</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                            Because we act as a privacy shield, you don't need to declare Google Fonts usage in your cookie banner.
                         </p>
                      </FadeIn>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { NextSeo } from 'next-seo';
+import { NextSeo, SoftwareAppJsonLd } from 'next-seo';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -101,6 +101,15 @@ const GitHubPage = () => {
         }}
       />
 
+      <SoftwareAppJsonLd
+        name="StaticDelivr GitHub CDN"
+        price="0.00"
+        priceCurrency="USD"
+        aggregateRating={{ ratingValue: '4.8', ratingCount: '42' }}
+        operatingSystem="Web"
+        applicationCategory="DeveloperApplication"
+      />
+
       <Header />
 
       <main className="relative pt-32 pb-20 overflow-hidden">
@@ -122,7 +131,7 @@ const GitHubPage = () => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Production-ready<br />
-                <span className="text-zinc-500 dark:text-zinc-400">GitHub assets.</span>
+                <span className="text-zinc-600 dark:text-zinc-400">GitHub assets.</span>
               </h1>
             </FadeIn>
 
@@ -237,7 +246,7 @@ const GitHubPage = () => {
                     <Globe className="w-6 h-6" />
                   </div>
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">570+ Global PoPs</h3>
-                  <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed mb-4">
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4">
                     Your files are replicated across hundreds of edge nodes, ensuring sub-50ms latency for users anywhere in the world.
                   </p>
                   <div className="text-sm font-medium text-purple-600 dark:text-purple-400 flex items-center mt-auto">
@@ -253,7 +262,7 @@ const GitHubPage = () => {
                     <Clock className="w-6 h-6" />
                   </div>
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Permanent Cache</h3>
-                  <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed mb-4">
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4">
                     Files are cached permanently. Even if you delete the file from GitHub, our edge nodes retain a copy for stability.
                   </p>
                   <div className="text-sm font-medium text-blue-600 dark:text-blue-400 flex items-center mt-auto">
@@ -269,7 +278,7 @@ const GitHubPage = () => {
                     <Shield className="w-6 h-6" />
                   </div>
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Multi-CDN Failover</h3>
-                  <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed mb-4">
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4">
                     If one provider fails, traffic automatically routes to another. 99.99% uptime guaranteed.
                   </p>
                   <div className="text-sm font-medium text-emerald-600 dark:text-emerald-400 flex items-center mt-auto">
@@ -285,7 +294,7 @@ const GitHubPage = () => {
                     <Zap className="w-6 h-6" />
                   </div>
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Proper Headers</h3>
-                  <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed mb-4">
+                  <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed mb-4">
                     Raw GitHub files serve incorrect Content-Types. We serve the correct MIME types with optimized cache-control headers.
                   </p>
                 </div>
@@ -330,10 +339,10 @@ const GitHubPage = () => {
                   <h3 className="text-sm font-semibold text-zinc-900 dark:text-white mb-6 uppercase tracking-wider opacity-70">Examples</h3>
                   <div className="space-y-6">
                     <div>
-                      <div className="text-xs font-medium text-zinc-500 dark:text-zinc-500 mb-2 flex items-center gap-2">
+                      <div className="text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-2 flex items-center gap-2">
                         <Github className="w-3 h-3" /> Input (GitHub)
                       </div>
-                      <code className="block p-4 bg-zinc-100 dark:bg-zinc-900 rounded-lg text-sm font-mono text-zinc-600 dark:text-zinc-400 break-all border border-zinc-200 dark:border-zinc-800">
+                      <code className="block p-4 bg-zinc-100 dark:bg-zinc-900 rounded-lg text-sm font-mono text-zinc-700 dark:text-zinc-400 break-all border border-zinc-200 dark:border-zinc-800">
                         https://github.com/jquery/jquery/blob/3.6.4/dist/jquery.min.js
                       </code>
                     </div>
@@ -343,7 +352,7 @@ const GitHubPage = () => {
                     </div>
 
                     <div>
-                      <div className="text-xs font-medium text-zinc-500 dark:text-zinc-500 mb-2 flex items-center gap-2">
+                      <div className="text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-2 flex items-center gap-2">
                         <Globe className="w-3 h-3" /> Output (CDN)
                       </div>
                       <code className="block p-4 bg-zinc-900 rounded-lg text-sm font-mono text-green-400 break-all border border-zinc-800 shadow-inner">

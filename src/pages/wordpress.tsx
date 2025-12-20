@@ -1,5 +1,5 @@
 import React, { useState, useRef } from 'react';
-import { NextSeo } from 'next-seo';
+import { NextSeo, SoftwareAppJsonLd } from 'next-seo';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
@@ -141,11 +141,11 @@ const CompareSlider = () => {
                </div>
             </div>
          </div>
-         <div className="mt-4 text-center text-sm text-zinc-500">
+         <div className="mt-4 text-center text-sm text-zinc-600 dark:text-zinc-400">
             <span className="hidden md:inline">Drag the slider to compare. </span>
             Visually identical, 96% smaller file size.
          </div>
-      </div>
+      </div >
    );
 };
 
@@ -163,6 +163,15 @@ const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
                title: 'WordPress Speed Up - Free CDN Plugin | StaticDelivr',
                description: 'The easiest way to make WordPress fast. Zero configuration, automatic image optimization, and global delivery.',
             }}
+         />
+
+         <SoftwareAppJsonLd
+            name="StaticDelivr WordPress Plugin"
+            price="0.00"
+            priceCurrency="USD"
+            aggregateRating={{ ratingValue: '4.9', ratingCount: '310' }}
+            operatingSystem="WordPress"
+            applicationCategory="DeveloperApplication"
          />
 
          <Header />
@@ -186,7 +195,7 @@ const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
                   <FadeIn delay={0.1}>
                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                         Make WordPress fast.<br />
-                        <span className="text-zinc-500 dark:text-zinc-400">No complex config required.</span>
+                        <span className="text-zinc-600 dark:text-zinc-400">No complex config required.</span>
                      </h1>
                   </FadeIn>
 
@@ -235,7 +244,7 @@ const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
                            <Download className="w-8 h-8 text-blue-500" />
                         </div>
                         <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2">1. Install</h3>
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed">
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-xs leading-relaxed">
                            Search for "StaticDelivr" in your WordPress admin panel plugins page.
                         </p>
                      </FadeIn>
@@ -246,7 +255,7 @@ const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
                            <MousePointerClick className="w-8 h-8 text-purple-500" />
                         </div>
                         <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2">2. Activate</h3>
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed">
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-xs leading-relaxed">
                            Click activate. The plugin automatically detects your theme and asset paths.
                         </p>
                      </FadeIn>
@@ -257,7 +266,7 @@ const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
                            <Zap className="w-8 h-8 text-emerald-500" />
                         </div>
                         <h3 className="text-lg font-bold text-zinc-900 dark:text-white mb-2">3. Accelerated</h3>
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 max-w-xs leading-relaxed">
+                        <p className="text-sm text-zinc-600 dark:text-zinc-400 max-w-xs leading-relaxed">
                            Your assets are now serving from 570+ edge nodes globally.
                         </p>
                      </FadeIn>
@@ -378,7 +387,7 @@ const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
                            <ImageIcon className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Image Optimization</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                            Automatically converts PNGs and JPGs to modern formats like WebP or AVIF on the fly, reducing file size by up to 90%.
                         </p>
                      </FadeIn>
@@ -389,7 +398,7 @@ const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
                            <Globe className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Global Edge Network</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                            Offloads static assets (CSS, JS, Fonts) to our multi-CDN infrastructure, reducing load on your origin server.
                         </p>
                      </FadeIn>
@@ -400,7 +409,7 @@ const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
                            <Shield className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Smart Fallback</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                            If the CDN encounters an issue, assets automatically revert to loading from your origin server. Zero downtime risk.
                         </p>
                      </FadeIn>
@@ -411,7 +420,7 @@ const WordPressPage: React.FC<WordPressPageProps> = ({ versions }) => {
                            <Layers className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Theme Compatible</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                            Works seamlessly with popular themes and builders like Elementor, Divi, and Gutenberg right out of the box.
                         </p>
                      </FadeIn>

@@ -57,7 +57,7 @@ const TerminalVisual = () => (
           initial={{ opacity: 0, x: -5 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.3 }}
-          className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400"
+          className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400"
         >
           <span>✓</span> Fetched from edge node (2ms)
         </motion.div>
@@ -65,7 +65,7 @@ const TerminalVisual = () => (
           initial={{ opacity: 0, x: -5 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.5 }}
-          className="flex items-center gap-2 text-zinc-500 dark:text-zinc-400"
+          className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400"
         >
           <span>✓</span> Optimized & compressed
         </motion.div>
@@ -260,7 +260,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                     </p>
 
                     <div className="mt-auto pt-2">
-                      <div className="rounded-md bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-2 font-mono text-[10px] text-zinc-500 group-hover:border-cyan-200 dark:group-hover:border-cyan-900/50 transition-colors">
+                      <div className="rounded-md bg-zinc-100 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 p-2 font-mono text-[10px] text-zinc-600 dark:text-zinc-400 group-hover:border-cyan-200 dark:group-hover:border-cyan-900/50 transition-colors">
                         <span className="text-purple-500">import</span> <span className="text-zinc-900 dark:text-white">{`{ StaticDelivrImage }`}</span>
                       </div>
                     </div>
@@ -290,7 +290,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                       </span>
                     </div>
 
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-4">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-4">
                       Accelerate WordPress in 1 click. No API keys, no DNS changes. Automatically optimizes assets and images on the fly.
                     </p>
 
@@ -313,7 +313,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                       <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-red-500 transition-colors" />
                     </div>
                     <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">NPM Registry CDN</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       Fast, global delivery for millions of files from the npm registry. Just replace the hostname to access raw files via our edge network.
                     </p>
                   </div>
@@ -332,7 +332,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                       <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-amber-500 transition-colors" />
                     </div>
                     <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Google Fonts Proxy</h3>
-                    <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                    <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed">
                       We act as a privacy shield between your users and Google. No tracking cookies, aggressive caching, and faster HTTP/3 delivery.
                     </p>
                   </div>
@@ -488,21 +488,21 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                         </div>
                         <div>
                           <div className="font-semibold text-zinc-900 dark:text-white">staticdelivr/staticdelivr</div>
-                          <div className="text-sm text-zinc-500">Public repository</div>
+                          <div className="text-sm text-zinc-600 dark:text-zinc-400">Public repository</div>
                         </div>
                       </div>
                       <div className="grid grid-cols-3 gap-4 text-center">
                         <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
                           <div className="text-2xl font-bold text-zinc-900 dark:text-white">7</div>
-                          <div className="text-xs text-zinc-500">Stars</div>
+                          <div className="text-xs text-zinc-600 dark:text-zinc-400">Stars</div>
                         </div>
                         <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
                           <div className="text-2xl font-bold text-zinc-900 dark:text-white">0</div>
-                          <div className="text-xs text-zinc-500">Forks</div>
+                          <div className="text-xs text-zinc-600 dark:text-zinc-400">Forks</div>
                         </div>
                         <div className="p-3 rounded-lg bg-zinc-50 dark:bg-zinc-800/50">
                           <div className="text-2xl font-bold text-zinc-900 dark:text-white">1</div>
-                          <div className="text-xs text-zinc-500">Contributors</div>
+                          <div className="text-xs text-zinc-600 dark:text-zinc-400">Contributors</div>
                         </div>
                       </div>
                     </div>

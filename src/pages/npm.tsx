@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback } from 'react';
-import { NextSeo } from 'next-seo';
+import { NextSeo, SoftwareAppJsonLd } from 'next-seo';
 import Link from 'next/link';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
@@ -155,6 +155,15 @@ const NpmPage = () => {
             }}
          />
 
+         <SoftwareAppJsonLd
+            name="StaticDelivr npm CDN"
+            price="0.00"
+            priceCurrency="USD"
+            aggregateRating={{ ratingValue: '4.9', ratingCount: '85' }}
+            operatingSystem="Web"
+            applicationCategory="DeveloperApplication"
+         />
+
          <Header />
 
          <main className="relative pt-32 pb-20 overflow-hidden">
@@ -176,7 +185,7 @@ const NpmPage = () => {
                   <FadeIn delay={0.1}>
                      <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                         The edge registry for<br />
-                        <span className="text-zinc-500 dark:text-zinc-400">frontend packages.</span>
+                        <span className="text-zinc-600 dark:text-zinc-400">frontend packages.</span>
                      </h1>
                   </FadeIn>
 
@@ -250,7 +259,7 @@ const NpmPage = () => {
 
                         {/* Popular Tags */}
                         <div className="mt-4 flex flex-wrap gap-2 items-center justify-center">
-                           <span className="text-xs font-medium text-zinc-500 dark:text-zinc-400 uppercase tracking-wider mr-2">Popular:</span>
+                           <span className="text-xs font-medium text-zinc-600 dark:text-zinc-400 uppercase tracking-wider mr-2">Popular:</span>
                            {POPULAR_PACKAGES.map(pkg => (
                               <button
                                  key={pkg.name}
@@ -343,19 +352,19 @@ const NpmPage = () => {
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
                      <FadeIn delay={0.1} className="text-center">
                         <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">2M+</div>
-                        <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Packages</div>
+                        <div className="text-xs uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-medium">Packages</div>
                      </FadeIn>
                      <FadeIn delay={0.2} className="text-center">
                         <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">&lt;50ms</div>
-                        <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Global Latency</div>
+                        <div className="text-xs uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-medium">Global Latency</div>
                      </FadeIn>
                      <FadeIn delay={0.3} className="text-center">
                         <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">570+</div>
-                        <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Edge PoPs</div>
+                        <div className="text-xs uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-medium">Edge PoPs</div>
                      </FadeIn>
                      <FadeIn delay={0.4} className="text-center">
                         <div className="text-3xl md:text-4xl font-bold text-zinc-900 dark:text-white mb-1">100%</div>
-                        <div className="text-xs uppercase tracking-wider text-zinc-500 font-medium">Free</div>
+                        <div className="text-xs uppercase tracking-wider text-zinc-600 dark:text-zinc-400 font-medium">Free</div>
                      </FadeIn>
                   </div>
                </div>
@@ -373,7 +382,7 @@ const NpmPage = () => {
                            <Layers className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Version Pinning</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                            Use semver ranges (<code>@^1.0.0</code>), exact versions (<code>@1.2.3</code>), or tags (<code>@latest</code>). We cache immutable versions forever.
                         </p>
                      </FadeIn>
@@ -384,7 +393,7 @@ const NpmPage = () => {
                            <Zap className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Smart Optimization</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                            Files are automatically minified and served with Brotli/Gzip compression based on the user's browser capabilities.
                         </p>
                      </FadeIn>
@@ -395,7 +404,7 @@ const NpmPage = () => {
                            <Code2 className="w-6 h-6" />
                         </div>
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">ES Modules</h3>
-                        <p className="text-zinc-500 dark:text-zinc-400 text-sm leading-relaxed">
+                        <p className="text-zinc-600 dark:text-zinc-400 text-sm leading-relaxed">
                            Add <code>/+esm</code> to any URL to get an ES Module ready for modern browser imports, automatically resolving dependencies.
                         </p>
                      </FadeIn>

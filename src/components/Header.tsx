@@ -42,7 +42,7 @@ const ListItem = React.forwardRef<
           {...props}
         >
           <div className="text-sm font-medium leading-none text-zinc-900 dark:text-zinc-100">{title}</div>
-          <p className="line-clamp-2 text-sm leading-snug text-zinc-500 dark:text-zinc-400 mt-1.5">
+          <p className="line-clamp-2 text-sm leading-snug text-zinc-600 dark:text-zinc-400 mt-1.5">
             {children}
           </p>
         </a>
@@ -69,11 +69,11 @@ const MobileNavItem = ({
     className="flex items-center gap-3 px-4 py-3 text-zinc-600 dark:text-zinc-400 hover:bg-zinc-50 dark:hover:bg-zinc-900 hover:text-zinc-900 dark:hover:text-zinc-100 rounded-lg transition-colors"
     onClick={onClick}
   >
-    <span className="flex-shrink-0 flex items-center justify-center text-zinc-500 dark:text-zinc-400">
+    <span className="flex-shrink-0 flex items-center justify-center text-zinc-600 dark:text-zinc-400">
       {icon}
     </span>
     <span className="font-medium">{label}</span>
-    <ArrowRight className="w-4 h-4 ml-auto text-zinc-400 dark:text-zinc-600" />
+    <ArrowRight className="w-4 h-4 ml-auto text-zinc-500 dark:text-zinc-600" />
   </Link>
 );
 
@@ -223,7 +223,7 @@ const Header = () => {
                 href="https://github.com/StaticDelivr/StaticDelivr"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="p-2 text-zinc-500 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md transition-colors"
+                className="p-2 text-zinc-600 hover:text-zinc-900 dark:text-zinc-400 dark:hover:text-zinc-100 hover:bg-zinc-100 dark:hover:bg-zinc-800 rounded-md transition-colors"
                 aria-label="GitHub repository"
               >
                 <Github className="w-5 h-5" />
@@ -245,7 +245,7 @@ const Header = () => {
           <div className="md:hidden">
             <Sheet open={isSheetOpen} onOpenChange={setIsSheetOpen}>
               <SheetTrigger asChild>
-                <Button variant="ghost" size="icon" aria-label="Open menu" className="text-zinc-600 dark:text-zinc-400">
+                <Button variant="ghost" size="icon" aria-label="Open menu" className="text-zinc-700 dark:text-zinc-400">
                   <Menu className="w-5 h-5" />
                   <span className="sr-only">Open menu</span>
                 </Button>
@@ -262,7 +262,7 @@ const Header = () => {
                     />
                   </SheetTitle>
                   <SheetClose asChild>
-                    <Button variant="ghost" size="icon" className="text-zinc-500 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100">
+                    <Button variant="ghost" size="icon" className="text-zinc-600 hover:bg-zinc-100 hover:text-zinc-900 dark:text-zinc-400 dark:hover:bg-zinc-800 dark:hover:text-zinc-100">
                       <X className="w-5 h-5" />
                       <span className="sr-only">Close</span>
                     </Button>
@@ -273,7 +273,7 @@ const Header = () => {
 
                   {/* Products Section */}
                   <div className="px-4 mb-2">
-                    <h3 className="text-xs font-semibold text-zinc-400 dark:text-zinc-500 uppercase tracking-wider">Products</h3>
+                    <h3 className="text-xs font-semibold text-zinc-500 dark:text-zinc-500 uppercase tracking-wider">Products</h3>
                   </div>
                   <div className="px-2 space-y-1">
                     <MobileNavItem

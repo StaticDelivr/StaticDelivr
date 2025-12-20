@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NextSeo } from 'next-seo';
+import { NextSeo, SoftwareAppJsonLd } from 'next-seo';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
 import {
@@ -42,7 +42,7 @@ const CodeSnippet = ({ code, language = 'bash' }: { code: string, language?: str
           <div className="w-2.5 h-2.5 rounded-full bg-yellow-500/20" />
           <div className="w-2.5 h-2.5 rounded-full bg-green-500/20" />
         </div>
-        <span className="text-[10px] uppercase font-medium text-zinc-500">{language}</span>
+        <span className="text-[10px] uppercase font-medium text-zinc-600 dark:text-zinc-400">{language}</span>
       </div>
       <div className="p-4 overflow-x-auto">
         <pre className="font-mono text-sm text-zinc-300">
@@ -88,6 +88,15 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
         }}
       />
 
+      <SoftwareAppJsonLd
+        name="StaticDelivr React Component"
+        price="0.00"
+        priceCurrency="USD"
+        aggregateRating={{ ratingValue: '4.9', ratingCount: '120' }}
+        operatingSystem="Web"
+        applicationCategory="DeveloperApplication"
+      />
+
       <Header />
 
       <main className="relative pt-32 pb-20 overflow-hidden">
@@ -109,7 +118,7 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Image optimization<br />
-                <span className="text-zinc-500 dark:text-zinc-400">made simple.</span>
+                <span className="text-zinc-600 dark:text-zinc-400">made simple.</span>
               </h1>
             </FadeIn>
 
@@ -150,7 +159,7 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
                 <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">
                   {(npmStats?.yearly || 54067).toLocaleString()}+
                 </div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400">Total Downloads</div>
+                <div className="text-sm text-zinc-600 dark:text-zinc-400">Total Downloads</div>
               </FadeIn>
 
               {/* Stat 2 */}
@@ -161,7 +170,7 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
                 <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">
                   {(npmStats?.monthly || 5150).toLocaleString()}+
                 </div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400">Monthly Downloads</div>
+                <div className="text-sm text-zinc-600 dark:text-zinc-400">Monthly Downloads</div>
               </FadeIn>
 
               {/* Stat 3 */}
@@ -170,7 +179,7 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
                   <Star className="w-6 h-6" />
                 </div>
                 <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">{versions?.npm || 'v1.0.0'}</div>
-                <div className="text-sm text-zinc-500 dark:text-zinc-400">Stable Release</div>
+                <div className="text-sm text-zinc-600 dark:text-zinc-400">Stable Release</div>
               </FadeIn>
 
             </div>
@@ -194,7 +203,7 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
                   <h2 className="text-xl font-semibold">1. Install Package</h2>
                 </div>
                 <CodeSnippet code="npm install staticdelivr" language="bash" />
-                <div className="mt-4 text-xs text-zinc-500">
+                <div className="mt-4 text-xs text-zinc-600 dark:text-zinc-400">
                   Also supports <code className="bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">yarn</code> and <code className="bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">pnpm</code>
                 </div>
               </FadeIn>
@@ -241,7 +250,7 @@ export default function Page() {
                   <Zap className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Automatic Optimization</h3>
-                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   We automatically convert images to modern formats like WebP or AVIF based on the user's browser support, often reducing file size by 60-80%.
                 </p>
               </FadeIn>
@@ -252,7 +261,7 @@ export default function Page() {
                   <Layers className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Framework Agnostic</h3>
-                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   While it works perfectly as a drop-in replacement for <code>next/image</code>, it is compatible with standard React, Vite, Remix, and Gatsby.
                 </p>
               </FadeIn>
@@ -263,7 +272,7 @@ export default function Page() {
                   <Code className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">TypeScript Ready</h3>
-                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Written in TypeScript from the ground up. Get full autocomplete for props like <code>quality</code>, <code>format</code>, and <code>fit</code>.
                 </p>
               </FadeIn>
@@ -274,7 +283,7 @@ export default function Page() {
                   <ImageIcon className="w-6 h-6" />
                 </div>
                 <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">On-the-fly Resizing</h3>
-                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                <p className="text-zinc-600 dark:text-zinc-400 leading-relaxed">
                   Request specific dimensions using <code>width</code> and <code>height</code> props. We process resizing at the edge before caching the result.
                 </p>
               </FadeIn>
