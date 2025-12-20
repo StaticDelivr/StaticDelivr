@@ -354,7 +354,7 @@ export async function getStaticProps() {
           npm: npmData?.['dist-tags']?.latest ? `v${npmData['dist-tags'].latest}` : 'v1.0.0'
         }
       },
-      revalidate: 86400 // Revalidate once per day
+      revalidate: 2592000 // Revalidate once per month
     };
   } catch (error) {
     console.error('Failed to fetch npm stats:', error);
@@ -371,7 +371,7 @@ export async function getStaticProps() {
           npm: 'v1.0.0'
         }
       },
-      revalidate: 86400
+      revalidate: 2592000
     };
   }
 }
