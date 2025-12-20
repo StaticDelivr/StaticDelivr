@@ -3,7 +3,6 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
 import Link from 'next/link';
-import { AuroraBackground } from '../components/ui/aurora-background';
 import { Button } from '../components/ui/button';
 import { BlurFade } from '../components/ui/blur-fade';
 
@@ -18,23 +17,23 @@ const Custom404 = () => {
 
       <Header />
 
-      <main className="flex-grow relative flex flex-col items-center justify-center overflow-hidden">
-        <AuroraBackground className="absolute inset-0 pointer-events-none" />
-        
+      <main className="flex-grow relative flex flex-col items-center justify-center overflow-hidden py-32">
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-500/10 dark:bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
+
         <div className="relative z-10 text-center px-4">
-          <BlurFade delay={0.1} inView>
+          <BlurFade delay={0.1}>
             <h1 className="text-8xl font-bold text-zinc-900 dark:text-white mb-6 tracking-tighter">
               404
             </h1>
           </BlurFade>
-          
-          <BlurFade delay={0.2} inView>
+
+          <BlurFade delay={0.2}>
             <p className="text-2xl text-zinc-600 dark:text-zinc-400 mb-8 max-w-md mx-auto">
               Oops! The page you&apos;re looking for doesn&apos;t exist.
             </p>
           </BlurFade>
-          
-          <BlurFade delay={0.3} inView>
+
+          <BlurFade delay={0.3}>
             <Link href="/">
               <Button size="lg" className="bg-zinc-900 text-white hover:bg-zinc-800 dark:bg-white dark:text-zinc-900 dark:hover:bg-zinc-200">
                 Go Back Home
