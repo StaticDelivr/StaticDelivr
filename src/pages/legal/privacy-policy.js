@@ -11,17 +11,10 @@ import remarkGfm from 'remark-gfm';
 
 import LegalLayout from '../../components/LegalLayout';
 
+import { FadeIn } from '../../components/FadeIn';
+
 // --- Animation Wrapper ---
-const FadeIn = ({ children, delay = 0, className }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.4, delay, ease: "easeOut" }}
-    className={className}
-  >
-    {children}
-  </motion.div>
-);
+// Removed to use shared component
 
 const PrivacyPolicy = ({ frontmatter, mdxSource }) => {
   return (
@@ -32,7 +25,7 @@ const PrivacyPolicy = ({ frontmatter, mdxSource }) => {
         <meta name="description" content={frontmatter.description || 'StaticDelivr Privacy Policy - Learn how we collect, use, and protect your data when using our free CDN service.'} />
         <meta name="keywords" content="privacy policy, StaticDelivr privacy, data protection, GDPR, user privacy, CDN privacy" />
         <meta name="robots" content="index, follow, max-image-preview:large" />
-        
+
         {/* Open Graph Tags */}
         <meta property="og:url" content="https://staticdelivr.com/legal/privacy-policy" />
         <meta property="og:type" content="article" />
@@ -53,14 +46,14 @@ const PrivacyPolicy = ({ frontmatter, mdxSource }) => {
       </Head>
 
       <div className="max-w-4xl mx-auto px-4 md:px-0 py-8">
-        
+
         {/* Breadcrumb */}
         <FadeIn>
-           <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 mb-8 pb-4 border-b border-zinc-100 dark:border-zinc-800">
-              <span>legal</span>
-              <ChevronRight className="w-3 h-3" />
-              <span>privacy-policy</span>
-           </div>
+          <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 mb-8 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+            <span>legal</span>
+            <ChevronRight className="w-3 h-3" />
+            <span>privacy-policy</span>
+          </div>
         </FadeIn>
 
         {/* Header */}
@@ -70,7 +63,7 @@ const PrivacyPolicy = ({ frontmatter, mdxSource }) => {
               {frontmatter.title}
             </h1>
           </FadeIn>
-          
+
           {frontmatter.description && (
             <FadeIn delay={0.2}>
               <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
@@ -105,14 +98,14 @@ const PrivacyPolicy = ({ frontmatter, mdxSource }) => {
         {/* Footer Info */}
         <footer className="mt-20 pt-8 border-t border-zinc-200 dark:border-zinc-800">
           <FadeIn delay={0.4}>
-             <div className="flex items-center gap-2 text-xs text-zinc-400 font-mono">
-                <Calendar className="w-3 h-3" />
-                {frontmatter.lastUpdated ? (
-                  <span>Last updated: {frontmatter.lastUpdated}</span>
-                ) : (
-                  <span>Last updated: Recently</span>
-                )}
-             </div>
+            <div className="flex items-center gap-2 text-xs text-zinc-400 font-mono">
+              <Calendar className="w-3 h-3" />
+              {frontmatter.lastUpdated ? (
+                <span>Last updated: {frontmatter.lastUpdated}</span>
+              ) : (
+                <span>Last updated: Recently</span>
+              )}
+            </div>
           </FadeIn>
         </footer>
 
@@ -125,7 +118,7 @@ export async function getStaticProps() {
   const filePath = path.join(process.cwd(), 'legal', 'privacy-policy.md');
   const fileContent = fs.readFileSync(filePath, 'utf8');
   const { data: frontmatter, content } = matter(fileContent);
-  
+
   const mdxSource = await serialize(content, {
     mdxOptions: {
       remarkPlugins: [remarkGfm],

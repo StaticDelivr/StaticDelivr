@@ -8,7 +8,7 @@ import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
 import { ChevronRight, Calendar, Copy, Check } from 'lucide-react';
 import rehypeHighlight from 'rehype-highlight';
-import remarkGfm from 'remark-gfm'; 
+import remarkGfm from 'remark-gfm';
 
 import DocsLayout from '../../components/DocsLayout';
 
@@ -38,7 +38,7 @@ const Pre = ({ children, ...props }) => {
           <div className="w-2.5 h-2.5 rounded-full bg-zinc-600/50" />
           <div className="w-2.5 h-2.5 rounded-full bg-zinc-600/50" />
         </div>
-        
+
         {/* Copy Button */}
         <button
           onClick={handleCopy}
@@ -60,9 +60,9 @@ const Pre = ({ children, ...props }) => {
 
       {/* Code Area */}
       <div className="overflow-x-auto">
-        <pre 
+        <pre
           ref={preRef}
-          {...props} 
+          {...props}
           // FIXED 1: Use inline styles for padding (Specificity: 1000). 
           // This ensures padding exists without fighting JIT or specific classes.
           style={{ padding: '20px', margin: 0 }}
@@ -82,17 +82,10 @@ const components = {
   pre: Pre,
 };
 
+import { FadeIn } from '../../components/FadeIn';
+
 // --- Animation Wrapper ---
-const FadeIn = ({ children, delay = 0, className }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 10 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 0.4, delay, ease: "easeOut" }}
-    className={className}
-  >
-    {children}
-  </motion.div>
-);
+// Removed to use shared component
 
 const DocPage = ({ frontmatter, mdxSource, docsContent, slug }) => {
   return (
@@ -105,14 +98,14 @@ const DocPage = ({ frontmatter, mdxSource, docsContent, slug }) => {
       </Head>
 
       <div className="max-w-4xl mx-auto">
-        
+
         {/* Breadcrumb */}
         <FadeIn>
-           <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 mb-8 pb-4 border-b border-zinc-100 dark:border-zinc-800">
-              <span>docs</span>
-              <ChevronRight className="w-3 h-3" />
-              <span className="text-zinc-900 dark:text-white">{slug}</span>
-           </div>
+          <div className="flex items-center gap-2 text-xs font-mono text-zinc-500 mb-8 pb-4 border-b border-zinc-100 dark:border-zinc-800">
+            <span>docs</span>
+            <ChevronRight className="w-3 h-3" />
+            <span className="text-zinc-900 dark:text-white">{slug}</span>
+          </div>
         </FadeIn>
 
         {/* Header */}
@@ -122,7 +115,7 @@ const DocPage = ({ frontmatter, mdxSource, docsContent, slug }) => {
               {frontmatter.title}
             </h1>
           </FadeIn>
-          
+
           {frontmatter.description && (
             <FadeIn delay={0.2}>
               <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
@@ -183,14 +176,14 @@ const DocPage = ({ frontmatter, mdxSource, docsContent, slug }) => {
         {/* Footer Info */}
         <footer className="mt-20 pt-8 border-t border-zinc-200 dark:border-zinc-800">
           <FadeIn delay={0.4}>
-             <div className="flex items-center gap-2 text-xs text-zinc-400 font-mono">
-                <Calendar className="w-3 h-3" />
-                {frontmatter.lastUpdated ? (
-                  <span>Last updated: {frontmatter.lastUpdated}</span>
-                ) : (
-                  <span>Last updated: Recently</span>
-                )}
-             </div>
+            <div className="flex items-center gap-2 text-xs text-zinc-400 font-mono">
+              <Calendar className="w-3 h-3" />
+              {frontmatter.lastUpdated ? (
+                <span>Last updated: {frontmatter.lastUpdated}</span>
+              ) : (
+                <span>Last updated: Recently</span>
+              )}
+            </div>
           </FadeIn>
         </footer>
 

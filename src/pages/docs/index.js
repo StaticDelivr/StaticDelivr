@@ -5,25 +5,17 @@ import React from 'react';
 import Link from 'next/link';
 import Head from 'next/head';
 import { motion } from 'framer-motion';
-import { 
-  BookOpen, Lightbulb, Code, GitPullRequest, 
-  LifeBuoy, FileText, ArrowRight, Terminal 
+import {
+  BookOpen, Lightbulb, Code, GitPullRequest,
+  LifeBuoy, FileText, ArrowRight, Terminal
 } from 'lucide-react';
 
 import DocsLayout from '../../components/DocsLayout';
 
+import { FadeIn } from '../../components/FadeIn';
+
 // --- Animation Wrapper ---
-const FadeIn = ({ children, delay = 0, className }) => (
-  <motion.div
-    initial={{ opacity: 0, y: 15 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true, margin: "-50px" }}
-    transition={{ duration: 0.5, delay, ease: "easeOut" }}
-    className={className}
-  >
-    {children}
-  </motion.div>
-);
+// Removed to use shared component
 
 // --- Component: Doc Card ---
 const DocCard = ({ title, description, href, icon: Icon }) => (
@@ -35,7 +27,7 @@ const DocCard = ({ title, description, href, icon: Icon }) => (
         </div>
         <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors -rotate-45 group-hover:rotate-0 transform duration-300" />
       </div>
-      
+
       <h3 className="text-lg font-semibold text-zinc-900 dark:text-white mb-2 group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
         {title}
       </h3>
@@ -120,7 +112,7 @@ const DocsIndex = ({ docsContent }) => {
       </Head>
 
       <div className="relative py-12 md:py-20 max-w-5xl mx-auto px-6">
-        
+
         {/* Background Gradients */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-[400px] bg-blue-500/5 dark:bg-blue-500/5 blur-[100px] rounded-full pointer-events-none" />
 
@@ -132,13 +124,13 @@ const DocsIndex = ({ docsContent }) => {
               <span>$ cd /docs</span>
             </div>
           </FadeIn>
-          
+
           <FadeIn delay={0.1}>
             <h1 className="text-4xl md:text-5xl font-bold text-zinc-900 dark:text-white mb-6 tracking-tight">
               Documentation
             </h1>
           </FadeIn>
-          
+
           <FadeIn delay={0.2}>
             <p className="text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light">
               Everything you need to integrate, optimize, and deploy with StaticDelivr.
@@ -160,7 +152,7 @@ const DocsIndex = ({ docsContent }) => {
                   </h2>
                 </div>
               </FadeIn>
-              
+
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {category.items.map((doc, index) => (
                   <FadeIn key={index} delay={0.1 + (index * 0.05)}>
