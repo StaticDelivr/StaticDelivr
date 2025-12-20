@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 import { getBlogPostBySlug, getBlogPosts } from '../../lib/contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
@@ -79,33 +79,36 @@ export default function BlogPost({ post }) {
 
    return (
       <div className="min-h-screen bg-zinc-50 dark:bg-black font-sans selection:bg-emerald-500/30">
-         <Head>
-            <title>{seoTitle || title} | Blog - StaticDelivr</title>
-            <meta name="description" content={seoDescription || 'Read the latest insights from StaticDelivr'} />
-            <meta name="robots" content="index, follow, max-image-preview:large" />
-
-            {/* Open Graph Meta Tags */}
-            <meta property="og:title" content={`${seoTitle || title} | Blog - StaticDelivr`} />
-            <meta property="og:description" content={seoDescription || 'Read the latest insights from StaticDelivr'} />
-            <meta property="og:image" content={featuredImage ? `https:${featuredImage.fields.file.url}` : 'https://staticdelivr.com/assets/img/og-image.png'} />
-            <meta property="og:image:width" content="1200" />
-            <meta property="og:image:height" content="630" />
-            <meta property="og:type" content="article" />
-            <meta property="og:url" content={`https://staticdelivr.com/blog/${post.fields.slug}`} />
-            <meta property="og:site_name" content="StaticDelivr" />
-            <meta property="article:published_time" content={publishDate} />
-
-            {/* Twitter Card Meta Tags */}
-            <meta name="twitter:card" content="summary_large_image" />
-            <meta property="twitter:domain" content="staticdelivr.com" />
-            <meta property="twitter:url" content={`https://staticdelivr.com/blog/${post.fields.slug}`} />
-            <meta name="twitter:title" content={`${seoTitle || title} | Blog - StaticDelivr`} />
-            <meta name="twitter:description" content={seoDescription || 'Read the latest insights from StaticDelivr'} />
-            <meta name="twitter:image" content={featuredImage ? `https:${featuredImage.fields.file.url}` : 'https://staticdelivr.com/assets/img/og-image.png'} />
-
-            {/* Tags Meta Tag (for SEO) */}
-            <meta name="keywords" content={tags ? tags.join(', ') : 'StaticDelivr, Blog, Content Delivery, CDN'} />
-         </Head>
+         <NextSeo
+            title={`${seoTitle || title} | Blog - StaticDelivr`}
+            description={seoDescription || 'Read the latest insights from StaticDelivr'}
+            canonical={`https://staticdelivr.com/blog/${post.fields.slug}`}
+            openGraph={{
+               url: `https://staticdelivr.com/blog/${post.fields.slug}`,
+               title: `${seoTitle || title} | Blog - StaticDelivr`,
+               description: seoDescription || 'Read the latest insights from StaticDelivr',
+               type: 'article',
+               images: [
+                  {
+                     url: featuredImage ? `https:${featuredImage.fields.file.url}` : 'https://staticdelivr.com/assets/img/og-image.png',
+                     width: 1200,
+                     height: 630,
+                     alt: title,
+                  }
+               ],
+               site_name: 'StaticDelivr',
+               article: {
+                  publishedTime: publishDate,
+                  tags: tags || [],
+               },
+            }}
+            additionalMetaTags={[
+               {
+                  name: 'keywords',
+                  content: tags ? tags.join(', ') : 'StaticDelivr, Blog, Content Delivery, CDN'
+               }
+            ]}
+         />
 
          <Header />
 

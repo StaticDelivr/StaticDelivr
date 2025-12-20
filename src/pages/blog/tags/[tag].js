@@ -1,5 +1,5 @@
 import React from 'react'
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 import { getBlogPosts } from '../../../lib/contentful'
 import Header from '../../../components/Header'
@@ -14,28 +14,31 @@ export default function TagPage({ posts, tag }) {
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black font-sans selection:bg-emerald-500/30">
-      <Head>
-        <title>{tag} | Blog Tags - StaticDelivr</title>
-        <meta name="description" content={`Browse all StaticDelivr blog posts tagged with "${tag}". Find CDN insights, tutorials, and updates.`} />
-        <meta name="keywords" content={`StaticDelivr, Blog, ${tag}, CDN articles, tutorials`} />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-
-        <meta property="og:url" content={`https://staticdelivr.com/blog/tags/${tag}`} />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content={`${tag} | Blog Tags - StaticDelivr`} />
-        <meta property="og:description" content={`Browse all StaticDelivr blog posts tagged with "${tag}".`} />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="StaticDelivr" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="staticdelivr.com" />
-        <meta property="twitter:url" content={`https://staticdelivr.com/blog/tags/${tag}`} />
-        <meta name="twitter:title" content={`${tag} | Blog Tags - StaticDelivr`} />
-        <meta name="twitter:description" content={`Browse all StaticDelivr blog posts tagged with "${tag}".`} />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-      </Head>
+      <NextSeo
+        title={`${tag} | Blog Tags - StaticDelivr`}
+        description={`Browse all StaticDelivr blog posts tagged with "${tag}". Find CDN insights, tutorials, and updates.`}
+        canonical={`https://staticdelivr.com/blog/tags/${tag}`}
+        openGraph={{
+          url: `https://staticdelivr.com/blog/tags/${tag}`,
+          title: `${tag} | Blog Tags - StaticDelivr`,
+          description: `Browse all StaticDelivr blog posts tagged with "${tag}".`,
+          images: [
+            {
+              url: 'https://staticdelivr.com/assets/img/og-image.png',
+              width: 1200,
+              height: 630,
+              alt: 'StaticDelivr Blog',
+            },
+          ],
+          site_name: 'StaticDelivr',
+        }}
+        additionalMetaTags={[
+          {
+            name: 'keywords',
+            content: `StaticDelivr, Blog, ${tag}, CDN articles, tutorials`
+          }
+        ]}
+      />
 
       <Header />
 

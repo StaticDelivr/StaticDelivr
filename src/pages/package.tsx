@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import Link from 'next/link';
 import { motion } from 'framer-motion';
-import { 
-  Package, Download, Terminal, 
-  Code, Zap, Layers, Image as ImageIcon, 
-  Copy, Check, ArrowRight, Star, TrendingUp, Calendar 
+import {
+  Package, Download, Terminal,
+  Code, Zap, Layers, Image as ImageIcon,
+  Copy, Check, ArrowRight, Star, TrendingUp, Calendar
 } from 'lucide-react';
 
 import Header from '../components/Header';
@@ -49,7 +49,7 @@ const CodeSnippet = ({ code, language = 'bash' }: { code: string, language?: str
           <code>{code}</code>
         </pre>
       </div>
-      <button 
+      <button
         onClick={handleCopy}
         className="absolute top-2.5 right-3 p-1.5 rounded-md text-zinc-500 hover:text-white hover:bg-white/10 transition-colors opacity-0 group-hover:opacity-100"
       >
@@ -76,29 +76,35 @@ interface PackagePageProps {
 const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-emerald-500/30 font-sans">
-      <Head>
-        <title>React Image Component | StaticDelivr</title>
-        <meta name="description" content="Automatic image optimization component for React. Drop-in replacement for Next.js Image." />
-      </Head>
+      <NextSeo
+        title="React Image Component | StaticDelivr"
+        description="Automatic image optimization for React. Drop-in replacement for next/image with AVIF/WebP support and global edge delivery."
+        canonical="https://staticdelivr.com/package"
+        openGraph={{
+          url: 'https://staticdelivr.com/package',
+          title: 'React Image Component | StaticDelivr',
+          description: 'Automatic image optimization for React. Drop-in replacement for next/image with AVIF/WebP support and global edge delivery.',
+        }}
+      />
 
       <Header />
 
       <main className="relative pt-32 pb-20 overflow-hidden">
-        
+
         {/* Background Gradients */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-emerald-500/10 dark:bg-emerald-500/5 blur-[120px] rounded-full pointer-events-none" />
 
         {/* --- Hero Section --- */}
         <section className="px-6 mb-24 relative z-10">
           <div className="max-w-5xl mx-auto text-center">
-            
+
             <FadeIn>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
                 <Package className="w-3 h-3" />
                 <span>$ npm install staticdelivr</span>
               </div>
             </FadeIn>
-            
+
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Image optimization<br />
@@ -113,94 +119,94 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
             </FadeIn>
 
             <FadeIn delay={0.3} className="flex flex-wrap items-center justify-center gap-4">
-               <Link 
-                 href="https://www.npmjs.com/package/staticdelivr"
-                 target="_blank"
-                 className="h-12 px-8 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium flex items-center hover:opacity-90 transition-opacity"
-               >
-                  <Download className="w-4 h-4 mr-2" /> View on NPM
-               </Link>
-               <Link 
-                 href="/docs/frontend-usage" 
-                 className="h-12 px-8 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
-               >
-                  Read Documentation
-               </Link>
+              <Link
+                href="https://www.npmjs.com/package/staticdelivr"
+                target="_blank"
+                className="h-12 px-8 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium flex items-center hover:opacity-90 transition-opacity"
+              >
+                <Download className="w-4 h-4 mr-2" /> View on NPM
+              </Link>
+              <Link
+                href="/docs/frontend-usage"
+                className="h-12 px-8 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+              >
+                Read Documentation
+              </Link>
             </FadeIn>
           </div>
         </section>
 
         {/* --- Stats Grid --- */}
         <section className="px-6 mb-32 relative z-10">
-           <div className="max-w-6xl mx-auto">
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                 
-                 {/* Stat 1 */}
-                 <FadeIn delay={0.1} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col items-center justify-center text-center">
-                    <div className="mb-4 w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/10 flex items-center justify-center text-emerald-600 dark:text-emerald-500">
-                       <TrendingUp className="w-6 h-6" />
-                    </div>
-                    <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">
-                       {(npmStats?.yearly || 54067).toLocaleString()}+
-                    </div>
-                    <div className="text-sm text-zinc-500 dark:text-zinc-400">Total Downloads</div>
-                 </FadeIn>
+          <div className="max-w-6xl mx-auto">
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
 
-                 {/* Stat 2 */}
-                 <FadeIn delay={0.2} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col items-center justify-center text-center">
-                    <div className="mb-4 w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-500">
-                       <Calendar className="w-6 h-6" />
-                    </div>
-                    <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">
-                       {(npmStats?.monthly || 5150).toLocaleString()}+
-                    </div>
-                    <div className="text-sm text-zinc-500 dark:text-zinc-400">Monthly Downloads</div>
-                 </FadeIn>
+              {/* Stat 1 */}
+              <FadeIn delay={0.1} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col items-center justify-center text-center">
+                <div className="mb-4 w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/10 flex items-center justify-center text-emerald-600 dark:text-emerald-500">
+                  <TrendingUp className="w-6 h-6" />
+                </div>
+                <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">
+                  {(npmStats?.yearly || 54067).toLocaleString()}+
+                </div>
+                <div className="text-sm text-zinc-500 dark:text-zinc-400">Total Downloads</div>
+              </FadeIn>
 
-                 {/* Stat 3 */}
-                 <FadeIn delay={0.3} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col items-center justify-center text-center">
-                    <div className="mb-4 w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/10 flex items-center justify-center text-purple-600 dark:text-purple-500">
-                       <Star className="w-6 h-6" />
-                    </div>
-                    <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">{versions?.npm || 'v1.0.0'}</div>
-                    <div className="text-sm text-zinc-500 dark:text-zinc-400">Stable Release</div>
-                 </FadeIn>
+              {/* Stat 2 */}
+              <FadeIn delay={0.2} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col items-center justify-center text-center">
+                <div className="mb-4 w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-500">
+                  <Calendar className="w-6 h-6" />
+                </div>
+                <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">
+                  {(npmStats?.monthly || 5150).toLocaleString()}+
+                </div>
+                <div className="text-sm text-zinc-500 dark:text-zinc-400">Monthly Downloads</div>
+              </FadeIn>
 
-              </div>
-           </div>
+              {/* Stat 3 */}
+              <FadeIn delay={0.3} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 flex flex-col items-center justify-center text-center">
+                <div className="mb-4 w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/10 flex items-center justify-center text-purple-600 dark:text-purple-500">
+                  <Star className="w-6 h-6" />
+                </div>
+                <div className="text-4xl font-bold text-zinc-900 dark:text-white mb-1">{versions?.npm || 'v1.0.0'}</div>
+                <div className="text-sm text-zinc-500 dark:text-zinc-400">Stable Release</div>
+              </FadeIn>
+
+            </div>
+          </div>
         </section>
 
         {/* --- Installation & Usage --- */}
         <section className="px-6 mb-32">
-           <div className="max-w-5xl mx-auto">
-              <FadeIn className="text-center mb-16">
-                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Get Started in Seconds</h2>
-                 <p className="text-zinc-500 dark:text-zinc-400">No API keys. No build steps. Just install and import.</p>
+          <div className="max-w-5xl mx-auto">
+            <FadeIn className="text-center mb-16">
+              <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Get Started in Seconds</h2>
+              <p className="text-zinc-500 dark:text-zinc-400">No API keys. No build steps. Just install and import.</p>
+            </FadeIn>
+
+            <div className="grid md:grid-cols-2 gap-8 items-start">
+
+              {/* Installation */}
+              <FadeIn delay={0.1}>
+                <div className="flex items-center gap-2 mb-4 text-zinc-900 dark:text-white font-medium">
+                  <Terminal className="w-5 h-5 text-emerald-500" />
+                  <h3>1. Install Package</h3>
+                </div>
+                <CodeSnippet code="npm install staticdelivr" language="bash" />
+                <div className="mt-4 text-xs text-zinc-500">
+                  Also supports <code className="bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">yarn</code> and <code className="bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">pnpm</code>
+                </div>
               </FadeIn>
 
-              <div className="grid md:grid-cols-2 gap-8 items-start">
-                 
-                 {/* Installation */}
-                 <FadeIn delay={0.1}>
-                    <div className="flex items-center gap-2 mb-4 text-zinc-900 dark:text-white font-medium">
-                       <Terminal className="w-5 h-5 text-emerald-500" />
-                       <h3>1. Install Package</h3>
-                    </div>
-                    <CodeSnippet code="npm install staticdelivr" language="bash" />
-                    <div className="mt-4 text-xs text-zinc-500">
-                       Also supports <code className="bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">yarn</code> and <code className="bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">pnpm</code>
-                    </div>
-                 </FadeIn>
-
-                 {/* Usage */}
-                 <FadeIn delay={0.2}>
-                    <div className="flex items-center gap-2 mb-4 text-zinc-900 dark:text-white font-medium">
-                       <Code className="w-5 h-5 text-blue-500" />
-                       <h3>2. Drop in Component</h3>
-                    </div>
-                    <CodeSnippet 
-                       language="jsx" 
-                       code={`import { StaticDelivrImage } from 'staticdelivr';
+              {/* Usage */}
+              <FadeIn delay={0.2}>
+                <div className="flex items-center gap-2 mb-4 text-zinc-900 dark:text-white font-medium">
+                  <Code className="w-5 h-5 text-blue-500" />
+                  <h3>2. Drop in Component</h3>
+                </div>
+                <CodeSnippet
+                  language="jsx"
+                  code={`import { StaticDelivrImage } from 'staticdelivr';
 
 export default function Page() {
   return (
@@ -211,92 +217,92 @@ export default function Page() {
       alt="Optimized hero image"
     />
   );
-}`} 
-                    />
-                 </FadeIn>
+}`}
+                />
+              </FadeIn>
 
-              </div>
-           </div>
+            </div>
+          </div>
         </section>
 
         {/* --- Features Grid --- */}
         <section className="px-6 mb-32">
-           <div className="max-w-6xl mx-auto">
-              <FadeIn className="mb-12">
-                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Why use the component?</h2>
+          <div className="max-w-6xl mx-auto">
+            <FadeIn className="mb-12">
+              <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Why use the component?</h2>
+            </FadeIn>
+
+            <div className="grid md:grid-cols-2 gap-6">
+
+              {/* Feature 1 */}
+              <FadeIn delay={0.1} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/10 flex items-center justify-center text-emerald-600 dark:text-emerald-500 mb-6">
+                  <Zap className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Automatic Optimization</h3>
+                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  We automatically convert images to modern formats like WebP or AVIF based on the user's browser support, often reducing file size by 60-80%.
+                </p>
               </FadeIn>
 
-              <div className="grid md:grid-cols-2 gap-6">
-                 
-                 {/* Feature 1 */}
-                 <FadeIn delay={0.1} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-                    <div className="w-12 h-12 rounded-2xl bg-emerald-50 dark:bg-emerald-900/10 flex items-center justify-center text-emerald-600 dark:text-emerald-500 mb-6">
-                       <Zap className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Automatic Optimization</h3>
-                    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                       We automatically convert images to modern formats like WebP or AVIF based on the user's browser support, often reducing file size by 60-80%.
-                    </p>
-                 </FadeIn>
+              {/* Feature 2 */}
+              <FadeIn delay={0.2} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-500 mb-6">
+                  <Layers className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Framework Agnostic</h3>
+                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  While it works perfectly as a drop-in replacement for <code>next/image</code>, it is compatible with standard React, Vite, Remix, and Gatsby.
+                </p>
+              </FadeIn>
 
-                 {/* Feature 2 */}
-                 <FadeIn delay={0.2} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-                    <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-500 mb-6">
-                       <Layers className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Framework Agnostic</h3>
-                    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                       While it works perfectly as a drop-in replacement for <code>next/image</code>, it is compatible with standard React, Vite, Remix, and Gatsby.
-                    </p>
-                 </FadeIn>
+              {/* Feature 3 */}
+              <FadeIn delay={0.3} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/10 flex items-center justify-center text-purple-600 dark:text-purple-500 mb-6">
+                  <Code className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">TypeScript Ready</h3>
+                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  Written in TypeScript from the ground up. Get full autocomplete for props like <code>quality</code>, <code>format</code>, and <code>fit</code>.
+                </p>
+              </FadeIn>
 
-                 {/* Feature 3 */}
-                 <FadeIn delay={0.3} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-                    <div className="w-12 h-12 rounded-2xl bg-purple-50 dark:bg-purple-900/10 flex items-center justify-center text-purple-600 dark:text-purple-500 mb-6">
-                       <Code className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">TypeScript Ready</h3>
-                    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                       Written in TypeScript from the ground up. Get full autocomplete for props like <code>quality</code>, <code>format</code>, and <code>fit</code>.
-                    </p>
-                 </FadeIn>
+              {/* Feature 4 */}
+              <FadeIn delay={0.4} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
+                <div className="w-12 h-12 rounded-2xl bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center text-orange-600 dark:text-orange-500 mb-6">
+                  <ImageIcon className="w-6 h-6" />
+                </div>
+                <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">On-the-fly Resizing</h3>
+                <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
+                  Request specific dimensions using <code>width</code> and <code>height</code> props. We process resizing at the edge before caching the result.
+                </p>
+              </FadeIn>
 
-                 {/* Feature 4 */}
-                 <FadeIn delay={0.4} className="p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900">
-                    <div className="w-12 h-12 rounded-2xl bg-orange-50 dark:bg-orange-900/10 flex items-center justify-center text-orange-600 dark:text-orange-500 mb-6">
-                       <ImageIcon className="w-6 h-6" />
-                    </div>
-                    <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">On-the-fly Resizing</h3>
-                    <p className="text-zinc-500 dark:text-zinc-400 leading-relaxed">
-                       Request specific dimensions using <code>width</code> and <code>height</code> props. We process resizing at the edge before caching the result.
-                    </p>
-                 </FadeIn>
-
-              </div>
-           </div>
+            </div>
+          </div>
         </section>
 
         {/* --- Final CTA --- */}
         <section className="px-6 pb-24 relative z-10">
           <FadeIn>
             <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-zinc-900 dark:bg-zinc-900 border border-zinc-800 p-12 md:p-20 text-center shadow-2xl">
-               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_#27272a_0%,_transparent_70%)] opacity-50 pointer-events-none" />
-               <div className="relative z-10">
-                  <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6 tracking-tight">
-                     Ready to optimize?
-                  </h2>
-                  <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto font-light">
-                     Join thousands of developers using StaticDelivr to serve faster images.
-                  </p>
-                  <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-                     <Link href="https://www.npmjs.com/package/staticdelivr" target="_blank" className="h-12 px-8 rounded-full bg-white text-zinc-900 font-medium flex items-center hover:bg-zinc-200 transition-colors">
-                        Install Package <Download className="w-4 h-4 ml-2" />
-                     </Link>
-                     <Link href="/docs/frontend-usage" className="h-12 px-8 rounded-full border border-zinc-700 text-white font-medium flex items-center hover:bg-zinc-800 transition-colors">
-                        Read Docs <ArrowRight className="w-4 h-4 ml-2" />
-                     </Link>
-                  </div>
-               </div>
+              <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_#27272a_0%,_transparent_70%)] opacity-50 pointer-events-none" />
+              <div className="relative z-10">
+                <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6 tracking-tight">
+                  Ready to optimize?
+                </h2>
+                <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto font-light">
+                  Join thousands of developers using StaticDelivr to serve faster images.
+                </p>
+                <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
+                  <Link href="https://www.npmjs.com/package/staticdelivr" target="_blank" className="h-12 px-8 rounded-full bg-white text-zinc-900 font-medium flex items-center hover:bg-zinc-200 transition-colors">
+                    Install Package <Download className="w-4 h-4 ml-2" />
+                  </Link>
+                  <Link href="/docs/frontend-usage" className="h-12 px-8 rounded-full border border-zinc-700 text-white font-medium flex items-center hover:bg-zinc-800 transition-colors">
+                    Read Docs <ArrowRight className="w-4 h-4 ml-2" />
+                  </Link>
+                </div>
+              </div>
             </div>
           </FadeIn>
         </section>

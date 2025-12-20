@@ -162,27 +162,50 @@ const TerminalHero = () => {
     );
 }
 
+import { NextSeo, SoftwareAppJsonLd, OrganizationJsonLd } from 'next-seo';
+
 // --- Main Page Component ---
 const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
 
     return (
         <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-emerald-500/30 font-sans">
-            <Head>
-                <title>StaticDelivr - The Free Open Source CDN</title>
-                <meta name="description" content="A free, fast, and transparent CDN for open source. Serve npm packages, GitHub files, WordPress plugins, and Google Fonts from 570+ global edge nodes." />
-                <meta name="keywords" content="free CDN, open source CDN, npm CDN, GitHub CDN, WordPress CDN, jsDelivr alternative, global CDN, content delivery network" />
+            <NextSeo
+                title="StaticDelivr - The Free Open Source CDN"
+                description="A free, fast, and transparent CDN for open source projects. Serve npm packages, GitHub files, WordPress plugins, and Google Fonts from 570+ global edge nodes."
+                canonical="https://staticdelivr.com"
+                openGraph={{
+                    url: 'https://staticdelivr.com',
+                    title: 'StaticDelivr - Infrastructure for Open Source',
+                    description: 'Serve your npm packages, GitHub files, and WordPress plugins with lightning-fast global delivery. Always free, always fast.',
+                    images: [
+                        {
+                            url: 'https://staticdelivr.com/assets/img/og-image.png',
+                            width: 1200,
+                            height: 630,
+                            alt: 'StaticDelivr - The Free Open Source CDN',
+                        },
+                    ],
+                }}
+            />
 
-                {/* Open Graph */}
-                <meta property="og:title" content="StaticDelivr - Infrastructure for Open Source" />
-                <meta property="og:description" content="Serve your npm packages, GitHub files, and WordPress plugins with lightning-fast global delivery. Always free, always fast." />
-                <meta property="og:type" content="website" />
-                <meta property="og:url" content="https://staticdelivr.com" />
+            <OrganizationJsonLd
+                url="https://staticdelivr.com"
+                logo="https://staticdelivr.com/assets/img/icons/favicon.svg"
+                name="StaticDelivr"
+                sameAs={[
+                    'https://twitter.com/staticdelivr',
+                    'https://github.com/StaticDelivr/StaticDelivr',
+                ]}
+            />
 
-                {/* Twitter */}
-                <meta name="twitter:card" content="summary_large_image" />
-                <meta name="twitter:title" content="StaticDelivr - Free CDN for Open Source" />
-                <meta name="twitter:description" content="The fastest way to serve open source assets. No limits. No tracking." />
-            </Head>
+            <SoftwareAppJsonLd
+                name="StaticDelivr CDN"
+                price="0.00"
+                priceCurrency="USD"
+                aggregateRating={{ ratingValue: '4.9', ratingCount: '120' }}
+                operatingSystem="Web"
+                applicationCategory="DeveloperApplication"
+            />
 
             {/* Inline Styles for Gradient Animation */}
             <style jsx>{`

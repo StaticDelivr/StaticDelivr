@@ -1,7 +1,7 @@
 import React from 'react';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import fs from 'fs';
 import path from 'path';
 import matter from 'gray-matter';
@@ -20,30 +20,37 @@ const PrivacyPolicy = ({ frontmatter, mdxSource }) => {
   return (
     <LegalLayout title={frontmatter.title}>
       {/* Dynamic Metadata */}
-      <Head>
-        <title>{frontmatter.title} | Legal - StaticDelivr</title>
-        <meta name="description" content={frontmatter.description || 'StaticDelivr Privacy Policy - Learn how we collect, use, and protect your data when using our free CDN service.'} />
-        <meta name="keywords" content="privacy policy, StaticDelivr privacy, data protection, GDPR, user privacy, CDN privacy" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-
-        {/* Open Graph Tags */}
-        <meta property="og:url" content="https://staticdelivr.com/legal/privacy-policy" />
-        <meta property="og:type" content="article" />
-        <meta property="og:title" content={`${frontmatter.title} | Legal - StaticDelivr`} />
-        <meta property="og:description" content={frontmatter.description || 'StaticDelivr Privacy Policy - Learn how we collect, use, and protect your data.'} />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="StaticDelivr" />
-
-        {/* Twitter Card Tags */}
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="staticdelivr.com" />
-        <meta property="twitter:url" content="https://staticdelivr.com/legal/privacy-policy" />
-        <meta name="twitter:title" content={`${frontmatter.title} | Legal - StaticDelivr`} />
-        <meta name="twitter:description" content={frontmatter.description || 'StaticDelivr Privacy Policy - Learn how we collect, use, and protect your data.'} />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-      </Head>
+      <NextSeo
+        title={`${frontmatter.title} | Legal - StaticDelivr`}
+        description={frontmatter.description || 'StaticDelivr Privacy Policy - Learn how we collect, use, and protect your data when using our free CDN service.'}
+        canonical="https://staticdelivr.com/legal/privacy-policy"
+        openGraph={{
+          url: 'https://staticdelivr.com/legal/privacy-policy',
+          title: `${frontmatter.title} | Legal - StaticDelivr`,
+          description: frontmatter.description || 'StaticDelivr Privacy Policy - Learn how we collect, use, and protect your data.',
+          type: 'article',
+          images: [
+            {
+              url: 'https://staticdelivr.com/assets/img/og-image.png',
+              width: 1200,
+              height: 630,
+              alt: 'StaticDelivr Legal',
+            },
+          ],
+          site_name: 'StaticDelivr',
+        }}
+        twitter={{
+          handle: '@staticdelivr',
+          site: '@staticdelivr',
+          cardType: 'summary_large_image',
+        }}
+        additionalMetaTags={[
+          {
+            name: 'keywords',
+            content: 'privacy policy, StaticDelivr privacy, data protection, GDPR, user privacy, CDN privacy'
+          }
+        ]}
+      />
 
       <div className="max-w-4xl mx-auto px-4 md:px-0 py-8">
 

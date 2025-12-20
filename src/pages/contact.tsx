@@ -1,9 +1,9 @@
 import React from 'react';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import { motion } from 'framer-motion';
-import { 
-  Mail, MapPin, Send, MessageSquare, 
-  Terminal, ArrowRight, Github, Heart 
+import {
+  Mail, MapPin, Send, MessageSquare,
+  Terminal, ArrowRight, Github, Heart
 } from 'lucide-react';
 import { useForm, ValidationError } from '@formspree/react';
 
@@ -33,7 +33,10 @@ const ContactPage = () => {
   if (state.succeeded) {
     return (
       <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-purple-500/30 font-sans">
-        <Head><title>Message Sent | StaticDelivr</title></Head>
+        <NextSeo
+          title="Message Sent | StaticDelivr"
+          noindex={true}
+        />
         <Header />
         <main className="relative pt-32 pb-20 min-h-[80vh] flex items-center justify-center">
           <FadeIn>
@@ -58,29 +61,35 @@ const ContactPage = () => {
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-purple-500/30 font-sans">
-      <Head>
-        <title>Contact | StaticDelivr</title>
-        <meta name="description" content="Get in touch with the team for support, partnerships, or general inquiries." />
-      </Head>
+      <NextSeo
+        title="Contact Us | StaticDelivr"
+        description="Get in touch with the StaticDelivr team for support, partnerships, or general inquiries. We are here to help."
+        canonical="https://staticdelivr.com/contact"
+        openGraph={{
+          url: 'https://staticdelivr.com/contact',
+          title: 'Contact Us | StaticDelivr',
+          description: 'Get in touch with the StaticDelivr team for support, partnerships, or general inquiries. We are here to help.',
+        }}
+      />
 
       <Header />
 
       <main className="relative pt-32 pb-20 overflow-hidden">
-        
+
         {/* Background Gradients */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-purple-500/10 dark:bg-purple-500/5 blur-[120px] rounded-full pointer-events-none" />
 
         {/* --- Hero Section --- */}
         <section className="px-6 mb-24 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            
+
             <FadeIn>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
                 <Terminal className="w-3 h-3" />
                 <span>$ staticdelivr --contact</span>
               </div>
             </FadeIn>
-            
+
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Let's start a<br />
@@ -100,10 +109,10 @@ const ContactPage = () => {
         <section className="px-6 mb-32 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-3 gap-8">
-              
+
               {/* Left Column: Channels */}
               <div className="lg:col-span-1 space-y-4">
-                
+
                 {/* Email Card */}
                 <FadeIn delay={0.1}>
                   <a href="mailto:contact@staticdelivr.com" className="group block p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 hover:border-zinc-300 dark:hover:border-zinc-700 transition-colors">
@@ -140,8 +149,8 @@ const ContactPage = () => {
                 <FadeIn delay={0.3}>
                   <div className="p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900/50">
                     <div className="flex items-center gap-3 mb-2">
-                       <MapPin className="w-4 h-4 text-zinc-400" />
-                       <h3 className="font-semibold text-zinc-900 dark:text-white">Remote First</h3>
+                      <MapPin className="w-4 h-4 text-zinc-400" />
+                      <h3 className="font-semibold text-zinc-900 dark:text-white">Remote First</h3>
                     </div>
                     <p className="text-sm text-zinc-500 dark:text-zinc-400">
                       We are a distributed team contributing from around the world.
@@ -155,16 +164,16 @@ const ContactPage = () => {
               <div className="lg:col-span-2">
                 <FadeIn delay={0.2} className="h-full">
                   <div className="h-full rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 md:p-10 shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
-                    
+
                     {!formKey ? (
                       <div className="flex flex-col items-center justify-center h-full min-h-[400px] text-center p-8">
-                         <div className="w-12 h-12 rounded-full bg-rose-100 dark:bg-rose-900/20 text-rose-500 flex items-center justify-center mb-4">
-                            <Terminal className="w-6 h-6" />
-                         </div>
-                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Configuration Missing</h3>
-                         <p className="text-zinc-500 dark:text-zinc-400">
-                           The Formspree ID is missing from environment variables.
-                         </p>
+                        <div className="w-12 h-12 rounded-full bg-rose-100 dark:bg-rose-900/20 text-rose-500 flex items-center justify-center mb-4">
+                          <Terminal className="w-6 h-6" />
+                        </div>
+                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">Configuration Missing</h3>
+                        <p className="text-zinc-500 dark:text-zinc-400">
+                          The Formspree ID is missing from environment variables.
+                        </p>
                       </div>
                     ) : (
                       <form onSubmit={handleSubmit} className="space-y-6">
@@ -251,20 +260,20 @@ const ContactPage = () => {
         {/* --- FAQ / Bottom CTA --- */}
         <section className="px-6 pb-24">
           <div className="max-w-4xl mx-auto">
-             <FadeIn className="text-center py-12 border-t border-zinc-200 dark:border-zinc-800">
-                <p className="text-zinc-500 dark:text-zinc-400 mb-6">
-                   Looking for technical documentation?
-                </p>
-                <div className="flex justify-center gap-4">
-                   <Link href="/docs" className="inline-flex items-center text-sm font-medium text-zinc-900 dark:text-white hover:text-purple-600 transition-colors">
-                      Read the Docs <ArrowRight className="w-4 h-4 ml-1" />
-                   </Link>
-                   <span className="text-zinc-300 dark:text-zinc-700">|</span>
-                   <Link href="/sponsors" className="inline-flex items-center text-sm font-medium text-zinc-900 dark:text-white hover:text-rose-500 transition-colors">
-                      Become a Sponsor <Heart className="w-3 h-3 ml-1.5" />
-                   </Link>
-                </div>
-             </FadeIn>
+            <FadeIn className="text-center py-12 border-t border-zinc-200 dark:border-zinc-800">
+              <p className="text-zinc-500 dark:text-zinc-400 mb-6">
+                Looking for technical documentation?
+              </p>
+              <div className="flex justify-center gap-4">
+                <Link href="/docs" className="inline-flex items-center text-sm font-medium text-zinc-900 dark:text-white hover:text-purple-600 transition-colors">
+                  Read the Docs <ArrowRight className="w-4 h-4 ml-1" />
+                </Link>
+                <span className="text-zinc-300 dark:text-zinc-700">|</span>
+                <Link href="/sponsors" className="inline-flex items-center text-sm font-medium text-zinc-900 dark:text-white hover:text-rose-500 transition-colors">
+                  Become a Sponsor <Heart className="w-3 h-3 ml-1.5" />
+                </Link>
+              </div>
+            </FadeIn>
           </div>
         </section>
 

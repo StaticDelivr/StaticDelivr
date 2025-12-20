@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import { motion } from 'framer-motion';
 import Link from 'next/link';
-import { 
-  Globe, Server, Zap, TrendingUp, TrendingDown, 
-  Terminal, Activity, ShieldCheck, ExternalLink, 
+import {
+  Globe, Server, Zap, TrendingUp, TrendingDown,
+  Terminal, Activity, ShieldCheck, ExternalLink,
   Clock, ArrowRight, Layers, Network
 } from 'lucide-react';
 
@@ -33,9 +33,9 @@ const NumberTicker = ({ value, decimals = 0 }) => {
 
   return (
     <span className="tabular-nums tracking-tight">
-      {new Intl.NumberFormat('en-US', { 
+      {new Intl.NumberFormat('en-US', {
         maximumFractionDigits: decimals,
-        minimumFractionDigits: decimals 
+        minimumFractionDigits: decimals
       }).format(value)}
     </span>
   );
@@ -45,9 +45,9 @@ const NumberTicker = ({ value, decimals = 0 }) => {
 const TrendBadge = ({ change, className = '' }) => {
   const isPositive = change >= 0;
   const TrendIcon = isPositive ? TrendingUp : TrendingDown;
-  
+
   return (
-    <div className={cn("inline-flex items-center gap-1.5 text-sm font-medium", 
+    <div className={cn("inline-flex items-center gap-1.5 text-sm font-medium",
       isPositive ? 'text-emerald-600' : 'text-rose-600', className)}>
       <TrendIcon className="w-4 h-4" />
       <span>{Math.abs(change).toFixed(2)}% vs last month</span>
@@ -66,33 +66,33 @@ const AnimatedGlobe = () => (
       <path d="M5 50h90" />
       <path d="M50 5v90" />
     </svg>
-    
+
     {/* Animated edge nodes */}
-    <motion.div 
+    <motion.div
       className="absolute w-3 h-3 bg-blue-500 rounded-full shadow-lg shadow-blue-500/50"
       style={{ top: '18%', left: '28%' }}
       animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
       transition={{ duration: 2, repeat: Infinity }}
     />
-    <motion.div 
+    <motion.div
       className="absolute w-2.5 h-2.5 bg-emerald-500 rounded-full shadow-lg shadow-emerald-500/50"
       style={{ top: '35%', right: '20%' }}
       animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
       transition={{ duration: 2, repeat: Infinity, delay: 0.4 }}
     />
-    <motion.div 
+    <motion.div
       className="absolute w-2 h-2 bg-amber-500 rounded-full shadow-lg shadow-amber-500/50"
       style={{ bottom: '25%', left: '22%' }}
       animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
       transition={{ duration: 2, repeat: Infinity, delay: 0.8 }}
     />
-    <motion.div 
+    <motion.div
       className="absolute w-2.5 h-2.5 bg-purple-500 rounded-full shadow-lg shadow-purple-500/50"
       style={{ bottom: '40%', right: '28%' }}
       animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
       transition={{ duration: 2, repeat: Infinity, delay: 1.2 }}
     />
-    <motion.div 
+    <motion.div
       className="absolute w-2 h-2 bg-rose-500 rounded-full shadow-lg shadow-rose-500/50"
       style={{ top: '55%', left: '45%' }}
       animate={{ scale: [1, 1.3, 1], opacity: [0.7, 1, 0.7] }}
@@ -137,10 +137,16 @@ const StatsPage = ({ stats, generatedAt }) => {
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-emerald-500/30 font-sans">
-      <Head>
-        <title>Stats | StaticDelivr</title>
-        <meta name="description" content="Transparent network stats and infrastructure telemetry." />
-      </Head>
+      <NextSeo
+        title="Network Stats | StaticDelivr"
+        description="Real-time transparent metrics. View global bandwidth, request counts, and cache hit rates for the StaticDelivr edge network."
+        canonical="https://staticdelivr.com/stats"
+        openGraph={{
+          url: 'https://staticdelivr.com/stats',
+          title: 'Network Stats | StaticDelivr',
+          description: 'Real-time transparent metrics. View global bandwidth, request counts, and cache hit rates for the StaticDelivr edge network.',
+        }}
+      />
 
       <Header />
 
@@ -150,14 +156,14 @@ const StatsPage = ({ stats, generatedAt }) => {
         {/* --- Hero Section --- */}
         <section className="px-6 mb-24 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            
+
             <FadeIn>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
                 <Terminal className="w-3 h-3" />
                 <span>$ staticdelivr --stats --live</span>
               </div>
             </FadeIn>
-            
+
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Open metrics.<br />
@@ -167,7 +173,7 @@ const StatsPage = ({ stats, generatedAt }) => {
 
             <FadeIn delay={0.2}>
               <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
-                We believe public infrastructure should be measurable, not mysterious. 
+                We believe public infrastructure should be measurable, not mysterious.
                 These numbers reflect the <strong className="font-semibold text-zinc-900 dark:text-white">previous 30 days</strong> of traffic across our global edge.
               </p>
             </FadeIn>
@@ -179,7 +185,7 @@ const StatsPage = ({ stats, generatedAt }) => {
         <section className="px-6 mb-32 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-              
+
               {/* Requests Card */}
               <FadeIn className="md:col-span-2 relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 md:p-10 shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
                 <div className="relative z-10">
@@ -224,9 +230,9 @@ const StatsPage = ({ stats, generatedAt }) => {
             </div>
 
             <div className="mt-4 flex justify-between px-2 text-[10px] sm:text-xs text-zinc-400 font-mono uppercase tracking-wider">
-               <span>Data refreshed from previous 30-day period</span>
-               <span>•</span>
-               <span>Updated hourly</span>
+              <span>Data refreshed from previous 30-day period</span>
+              <span>•</span>
+              <span>Updated hourly</span>
             </div>
           </div>
         </section>
@@ -235,7 +241,7 @@ const StatsPage = ({ stats, generatedAt }) => {
         <section className="px-6 mb-32">
           <div className="max-w-6xl mx-auto">
             <div className="grid md:grid-cols-2 gap-16 items-center">
-              
+
               <FadeIn>
                 <div className="inline-flex items-center gap-2 text-purple-600 dark:text-purple-500 font-medium mb-6">
                   <Network className="w-5 h-5" />
@@ -247,7 +253,7 @@ const StatsPage = ({ stats, generatedAt }) => {
                 </h2>
                 <div className="space-y-6 text-lg text-zinc-600 dark:text-zinc-400 leading-relaxed font-light">
                   <p>
-                    Our network leverages the best of <strong className="font-medium text-zinc-900 dark:text-white">Cloudflare</strong>, 
+                    Our network leverages the best of <strong className="font-medium text-zinc-900 dark:text-white">Cloudflare</strong>,
                     <strong className="font-medium text-zinc-900 dark:text-white"> Fastly</strong>, <strong className="font-medium text-zinc-900 dark:text-white">Gcore</strong>, and other Tier-1 providers through intelligent routing.
                   </p>
                   <p>

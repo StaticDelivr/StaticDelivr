@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import Head from 'next/head'
+import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 import { getBlogPosts } from '../../lib/contentful'
 import Header from '../../components/Header'
@@ -49,28 +49,32 @@ export default function BlogPage({ posts }: BlogPageProps) {
 
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black font-sans selection:bg-emerald-500/30">
-      <Head>
-        <title>Blog | StaticDelivr</title>
-        <meta name="description" content="Read the latest insights, tutorials, and open-source stories from StaticDelivr. Learn CDN best practices, performance tips, and developer tutorials." />
-        <meta name="keywords" content="CDN blog, StaticDelivr tutorials, open source development, CDN best practices, web performance, developer guides" />
-        <meta name="robots" content="index, follow, max-image-preview:large" />
-
-        <meta property="og:url" content="https://staticdelivr.com/blog" />
-        <meta property="og:type" content="website" />
-        <meta property="og:title" content="Blog | StaticDelivr" />
-        <meta property="og:description" content="Read the latest insights, tutorials, and open-source stories from StaticDelivr." />
-        <meta property="og:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-        <meta property="og:image:width" content="1200" />
-        <meta property="og:image:height" content="630" />
-        <meta property="og:site_name" content="StaticDelivr" />
-
-        <meta name="twitter:card" content="summary_large_image" />
-        <meta property="twitter:domain" content="staticdelivr.com" />
-        <meta property="twitter:url" content="https://staticdelivr.com/blog" />
-        <meta name="twitter:title" content="Blog | StaticDelivr" />
-        <meta name="twitter:description" content="Read the latest insights, tutorials, and open-source stories from StaticDelivr." />
-        <meta name="twitter:image" content="https://staticdelivr.com/assets/img/og-image.png" />
-      </Head>
+      <NextSeo
+        title="Blog | StaticDelivr"
+        description="Read the latest insights, tutorials, and open-source stories from StaticDelivr. Learn CDN best practices, performance tips, and developer tutorials."
+        canonical="https://staticdelivr.com/blog"
+        openGraph={{
+          url: 'https://staticdelivr.com/blog',
+          title: 'Blog | StaticDelivr',
+          description: 'Read the latest insights, tutorials, and open-source stories from StaticDelivr.',
+          type: 'website',
+          images: [
+            {
+              url: 'https://staticdelivr.com/assets/img/og-image.png',
+              width: 1200,
+              height: 630,
+              alt: 'StaticDelivr Blog',
+            },
+          ],
+          site_name: 'StaticDelivr',
+        }}
+        additionalMetaTags={[
+          {
+            name: 'keywords',
+            content: 'CDN blog, StaticDelivr tutorials, open source development, CDN best practices, web performance, developer guides'
+          }
+        ]}
+      />
 
       <Header />
 

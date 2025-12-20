@@ -1,9 +1,9 @@
 import React from 'react';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import { motion } from 'framer-motion';
-import { 
-  Server, Zap, Code2, Heart, ArrowRight, 
-  Globe, ShieldCheck, Mail, Terminal, 
+import {
+  Server, Zap, Code2, Heart, ArrowRight,
+  Globe, ShieldCheck, Mail, Terminal,
   Handshake, BarChart3
 } from 'lucide-react';
 
@@ -67,29 +67,35 @@ const JsonVisual = () => (
 const BecomeSponsorPage = () => {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-rose-500/30 font-sans">
-      <Head>
-        <title>Become a Sponsor | StaticDelivr</title>
-        <meta name="description" content="Support the infrastructure that powers the open source web." />
-      </Head>
+      <NextSeo
+        title="Become a Sponsor | StaticDelivr"
+        description="Support the infrastructure that powers the open source web. Enhance your brand visibility and help us build a faster, fairer internet."
+        canonical="https://staticdelivr.com/become-a-sponsor"
+        openGraph={{
+          url: 'https://staticdelivr.com/become-a-sponsor',
+          title: 'Become a Sponsor | StaticDelivr',
+          description: 'Support the infrastructure that powers the open source web. Enhance your brand visibility and help us build a faster, fairer internet.',
+        }}
+      />
 
       <Header />
 
       <main className="relative pt-32 pb-20 overflow-hidden">
-        
+
         {/* Background Gradients */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-rose-500/10 dark:bg-rose-500/5 blur-[120px] rounded-full pointer-events-none" />
 
         {/* --- Hero Section --- */}
         <section className="px-6 mb-24 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            
+
             <FadeIn>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
                 <Terminal className="w-3 h-3" />
                 <span>$ staticdelivr --sponsor</span>
               </div>
             </FadeIn>
-            
+
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Infrastructure for the<br />
@@ -104,18 +110,18 @@ const BecomeSponsorPage = () => {
             </FadeIn>
 
             <FadeIn delay={0.3} className="flex flex-col sm:flex-row items-center justify-center gap-4">
-               <a 
-                 href="mailto:sponsors@staticdelivr.com?subject=Sponsorship%20Inquiry" 
-                 className="h-12 px-8 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium flex items-center hover:opacity-90 transition-opacity"
-               >
-                  <Mail className="w-4 h-4 mr-2" /> Contact Team
-               </a>
-               <Link 
-                 href="/impact" 
-                 className="h-12 px-8 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
-               >
-                  View Impact Report <ArrowRight className="w-4 h-4 ml-2" />
-               </Link>
+              <a
+                href="mailto:sponsors@staticdelivr.com?subject=Sponsorship%20Inquiry"
+                className="h-12 px-8 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium flex items-center hover:opacity-90 transition-opacity"
+              >
+                <Mail className="w-4 h-4 mr-2" /> Contact Team
+              </a>
+              <Link
+                href="/impact"
+                className="h-12 px-8 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+              >
+                View Impact Report <ArrowRight className="w-4 h-4 ml-2" />
+              </Link>
             </FadeIn>
           </div>
         </section>
@@ -124,7 +130,7 @@ const BecomeSponsorPage = () => {
         <section className="px-6 mb-32 relative z-10">
           <div className="max-w-6xl mx-auto">
             <div className="grid lg:grid-cols-2 gap-16 items-center">
-              
+
               {/* Left: Text Content */}
               <FadeIn>
                 <div className="inline-flex items-center gap-2 text-rose-600 dark:text-rose-500 font-medium mb-6">
@@ -157,140 +163,140 @@ const BecomeSponsorPage = () => {
 
         {/* --- What We Need (Sponsorship Areas) --- */}
         <section className="px-6 mb-32">
-           <div className="max-w-6xl mx-auto">
-              <FadeIn className="text-center mb-16">
-                 <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">How you can contribute</h2>
-                 <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto">
-                    We prefer <strong className="text-zinc-900 dark:text-white">resources over cash</strong>. 
-                    If your company provides infrastructure, observability, or engineering talent, let's integrate.
-                 </p>
+          <div className="max-w-6xl mx-auto">
+            <FadeIn className="text-center mb-16">
+              <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">How you can contribute</h2>
+              <p className="text-zinc-500 dark:text-zinc-400 max-w-xl mx-auto">
+                We prefer <strong className="text-zinc-900 dark:text-white">resources over cash</strong>.
+                If your company provides infrastructure, observability, or engineering talent, let's integrate.
+              </p>
+            </FadeIn>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+              {/* 1. Infrastructure */}
+              <FadeIn delay={0.1}>
+                <div className="group relative h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-shadow hover:shadow-xl">
+                  <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+                  <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform">
+                    <Server className="w-6 h-6" />
+                  </div>
+
+                  <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Core Infrastructure</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                    We need Edge Nodes (VPS), Object Storage (S3-compatible), and Global DNS services.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Compute</span>
+                    <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Bandwidth</span>
+                  </div>
+                </div>
               </FadeIn>
 
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                 
-                 {/* 1. Infrastructure */}
-                 <FadeIn delay={0.1}>
-                    <div className="group relative h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-shadow hover:shadow-xl">
-                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                        
-                        <div className="w-12 h-12 rounded-2xl bg-blue-50 dark:bg-blue-900/10 flex items-center justify-center text-blue-600 dark:text-blue-400 mb-6 group-hover:scale-110 transition-transform">
-                           <Server className="w-6 h-6" />
-                        </div>
-                        
-                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Core Infrastructure</h3>
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
-                           We need Edge Nodes (VPS), Object Storage (S3-compatible), and Global DNS services.
-                        </p>
-                        
-                        <div className="flex flex-wrap gap-2 mt-auto">
-                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Compute</span>
-                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Bandwidth</span>
-                        </div>
-                    </div>
-                 </FadeIn>
+              {/* 2. Tooling / SaaS */}
+              <FadeIn delay={0.2}>
+                <div className="group relative h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-shadow hover:shadow-xl">
+                  <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
 
-                 {/* 2. Tooling / SaaS */}
-                 <FadeIn delay={0.2}>
-                    <div className="group relative h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-shadow hover:shadow-xl">
-                        <div className="absolute inset-0 bg-gradient-to-br from-amber-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                        
-                        <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-900/10 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-6 group-hover:scale-110 transition-transform">
-                           <Zap className="w-6 h-6" />
-                        </div>
-                        
-                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Enterprise Tooling</h3>
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
-                           Observability is key to uptime. We need enterprise accounts for log management, error tracking, and security scanning.
-                        </p>
-                        
-                        <div className="flex flex-wrap gap-2 mt-auto">
-                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Logs</span>
-                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">APM</span>
-                        </div>
-                    </div>
-                 </FadeIn>
+                  <div className="w-12 h-12 rounded-2xl bg-amber-50 dark:bg-amber-900/10 flex items-center justify-center text-amber-600 dark:text-amber-400 mb-6 group-hover:scale-110 transition-transform">
+                    <Zap className="w-6 h-6" />
+                  </div>
 
-                 {/* 3. Engineering */}
-                 <FadeIn delay={0.3}>
-                    <div className="group relative h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-shadow hover:shadow-xl">
-                        <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
-                        
-                        <div className="w-12 h-12 rounded-2xl bg-rose-50 dark:bg-rose-900/10 flex items-center justify-center text-rose-600 dark:text-rose-400 mb-6 group-hover:scale-110 transition-transform">
-                           <Code2 className="w-6 h-6" />
-                        </div>
-                        
-                        <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Engineering Time</h3>
-                        <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
-                           Assign engineering hours to help maintain our open source integrations or sponsor specific plugin development.
-                        </p>
-                        
-                        <div className="flex flex-wrap gap-2 mt-auto">
-                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Audit</span>
-                           <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Dev</span>
-                        </div>
-                    </div>
-                 </FadeIn>
+                  <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Enterprise Tooling</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                    Observability is key to uptime. We need enterprise accounts for log management, error tracking, and security scanning.
+                  </p>
 
-              </div>
-           </div>
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Logs</span>
+                    <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">APM</span>
+                  </div>
+                </div>
+              </FadeIn>
+
+              {/* 3. Engineering */}
+              <FadeIn delay={0.3}>
+                <div className="group relative h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-shadow hover:shadow-xl">
+                  <div className="absolute inset-0 bg-gradient-to-br from-rose-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+                  <div className="w-12 h-12 rounded-2xl bg-rose-50 dark:bg-rose-900/10 flex items-center justify-center text-rose-600 dark:text-rose-400 mb-6 group-hover:scale-110 transition-transform">
+                    <Code2 className="w-6 h-6" />
+                  </div>
+
+                  <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">Engineering Time</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-6">
+                    Assign engineering hours to help maintain our open source integrations or sponsor specific plugin development.
+                  </p>
+
+                  <div className="flex flex-wrap gap-2 mt-auto">
+                    <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Audit</span>
+                    <span className="px-2 py-1 rounded bg-zinc-100 dark:bg-zinc-800 text-[10px] uppercase font-semibold text-zinc-500">Dev</span>
+                  </div>
+                </div>
+              </FadeIn>
+
+            </div>
+          </div>
         </section>
 
         {/* --- Benefits Grid --- */}
         <section className="px-6 mb-32">
           <div className="max-w-5xl mx-auto">
-             <FadeIn className="text-center mb-16">
-                <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Why Sponsor?</h2>
-             </FadeIn>
-             
-             <div className="grid md:grid-cols-2 gap-4">
-                <FadeIn delay={0.1} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
-                   <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
-                      <BarChart3 className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
-                   </div>
-                   <div>
-                      <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Brand Visibility</h3>
-                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                        Top-tier logo placement on our homepage, documentation, and GitHub repository.
-                      </p>
-                   </div>
-                </FadeIn>
+            <FadeIn className="text-center mb-16">
+              <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Why Sponsor?</h2>
+            </FadeIn>
 
-                <FadeIn delay={0.2} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
-                   <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
-                      <ShieldCheck className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
-                   </div>
-                   <div>
-                      <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Technical Credibility</h3>
-                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                        Prove your infrastructure's reliability by powering a high-performance global CDN.
-                      </p>
-                   </div>
-                </FadeIn>
-                
-                <FadeIn delay={0.3} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
-                   <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
-                      <Globe className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
-                   </div>
-                   <div>
-                      <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Talent Acquisition</h3>
-                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                        Appeal to engineers who value open source, performance, and digital equity.
-                      </p>
-                   </div>
-                </FadeIn>
+            <div className="grid md:grid-cols-2 gap-4">
+              <FadeIn delay={0.1} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                  <BarChart3 className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Brand Visibility</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                    Top-tier logo placement on our homepage, documentation, and GitHub repository.
+                  </p>
+                </div>
+              </FadeIn>
 
-                <FadeIn delay={0.4} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
-                   <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
-                      <Heart className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
-                   </div>
-                   <div>
-                      <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Case Studies</h3>
-                      <p className="text-sm text-zinc-500 dark:text-zinc-400">
-                        We write detailed technical blog posts about how our sponsors help solve our scale challenges.
-                      </p>
-                   </div>
-                </FadeIn>
-             </div>
+              <FadeIn delay={0.2} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                  <ShieldCheck className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Technical Credibility</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                    Prove your infrastructure's reliability by powering a high-performance global CDN.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.3} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                  <Globe className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Talent Acquisition</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                    Appeal to engineers who value open source, performance, and digital equity.
+                  </p>
+                </div>
+              </FadeIn>
+
+              <FadeIn delay={0.4} className="flex gap-5 p-6 rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50 hover:bg-zinc-50 dark:hover:bg-zinc-900 transition-colors">
+                <div className="shrink-0 w-12 h-12 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center">
+                  <Heart className="w-6 h-6 text-zinc-600 dark:text-zinc-400" />
+                </div>
+                <div>
+                  <h3 className="font-semibold text-zinc-900 dark:text-white mb-1">Case Studies</h3>
+                  <p className="text-sm text-zinc-500 dark:text-zinc-400">
+                    We write detailed technical blog posts about how our sponsors help solve our scale challenges.
+                  </p>
+                </div>
+              </FadeIn>
+            </div>
           </div>
         </section>
 
@@ -300,7 +306,7 @@ const BecomeSponsorPage = () => {
             <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-zinc-900 dark:bg-zinc-900 border border-zinc-800 p-12 md:p-20 text-center shadow-2xl">
               {/* Glow Effect */}
               <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-rose-900/40 via-zinc-900 to-transparent opacity-50 pointer-events-none" />
-              
+
               <div className="relative z-10">
                 <h2 className="text-3xl md:text-5xl font-semibold text-white mb-6 tracking-tight">
                   Build a lasting legacy.<br />
@@ -308,7 +314,7 @@ const BecomeSponsorPage = () => {
                 <p className="text-lg text-zinc-400 mb-10 max-w-2xl mx-auto font-light leading-relaxed">
                   Your infrastructure support directly translates to a faster, greener, and more accessible internet for the open source community.
                 </p>
-                
+
                 <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
                   <a
                     href="mailto:sponsors@staticdelivr.com?subject=Sponsorship%20Inquiry"

@@ -1,9 +1,9 @@
 import React from 'react';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import { motion } from 'framer-motion';
-import { 
-  Mail, Send, Terminal, Zap, 
-  BookOpen, Users, Lock 
+import {
+  Mail, Send, Terminal, Zap,
+  BookOpen, Users, Lock
 } from 'lucide-react';
 
 import Header from '../components/Header';
@@ -25,29 +25,35 @@ const FadeIn = ({ children, delay = 0, className }: { children: React.ReactNode,
 const NewsletterPage = () => {
   return (
     <div className="min-h-screen bg-zinc-50 dark:bg-black selection:bg-blue-500/30 font-sans">
-      <Head>
-        <title>Newsletter | StaticDelivr</title>
-        <meta name="description" content="Stay updated with the latest in open source delivery and edge performance." />
-      </Head>
+      <NextSeo
+        title="Newsletter | StaticDelivr"
+        description="Stay updated with global edge network performance, open source delivery insights, and StaticDelivr announcements."
+        canonical="https://staticdelivr.com/newsletter"
+        openGraph={{
+          url: 'https://staticdelivr.com/newsletter',
+          title: 'Newsletter | StaticDelivr',
+          description: 'Stay updated with global edge network performance, open source delivery insights, and StaticDelivr announcements.',
+        }}
+      />
 
       <Header />
 
       <main className="relative pt-32 pb-20 overflow-hidden">
-        
+
         {/* Background Gradients */}
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[1000px] h-[500px] bg-blue-500/10 dark:bg-blue-500/5 blur-[120px] rounded-full pointer-events-none" />
 
         {/* --- Hero Section --- */}
         <section className="px-6 mb-24 relative z-10">
           <div className="max-w-4xl mx-auto text-center">
-            
+
             <FadeIn>
               <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
                 <Terminal className="w-3 h-3" />
                 <span>$ staticdelivr --newsletter</span>
               </div>
             </FadeIn>
-            
+
             <FadeIn delay={0.1}>
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-6">
                 Changelogs, insights,<br />
@@ -68,17 +74,17 @@ const NewsletterPage = () => {
           <div className="max-w-2xl mx-auto">
             <FadeIn delay={0.3}>
               <div className="relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 md:p-12 shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
-                
+
                 {/* Diagonal Stripe Pattern (Subtle overlay for disabled feel) */}
-                <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none" 
-                     style={{ backgroundImage: 'linear-gradient(45deg, #000 25%, transparent 25%, transparent 50%, #000 50%, #000 75%, transparent 75%, transparent)' , backgroundSize: '20px 20px' }} 
+                <div className="absolute inset-0 opacity-[0.03] dark:opacity-[0.05] pointer-events-none"
+                  style={{ backgroundImage: 'linear-gradient(45deg, #000 25%, transparent 25%, transparent 50%, #000 50%, #000 75%, transparent 75%, transparent)', backgroundSize: '20px 20px' }}
                 />
 
                 <div className="relative z-10 text-center">
                   <div className="w-12 h-12 bg-zinc-100 dark:bg-zinc-800 rounded-2xl flex items-center justify-center mx-auto mb-6 text-zinc-400">
                     <Lock className="w-6 h-6" />
                   </div>
-                  
+
                   <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-2">
                     Subscriptions Paused
                   </h3>
@@ -88,13 +94,13 @@ const NewsletterPage = () => {
 
                   <form className="max-w-md mx-auto opacity-50 pointer-events-none select-none" aria-disabled="true">
                     <div className="flex flex-col sm:flex-row gap-3">
-                      <input 
-                        type="email" 
+                      <input
+                        type="email"
                         disabled
-                        placeholder="you@example.com" 
+                        placeholder="you@example.com"
                         className="flex-1 px-4 py-3 rounded-xl bg-zinc-50 dark:bg-zinc-950 border border-zinc-200 dark:border-zinc-800 text-zinc-400"
                       />
-                      <button 
+                      <button
                         disabled
                         type="button"
                         className="px-6 py-3 rounded-xl bg-zinc-200 dark:bg-zinc-800 text-zinc-500 font-medium flex items-center justify-center gap-2"
@@ -113,11 +119,11 @@ const NewsletterPage = () => {
         <section className="px-6 pb-24 relative z-10">
           <div className="max-w-6xl mx-auto">
             <FadeIn className="text-center mb-12">
-               <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white mb-2">What we usually write about</h2>
+              <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white mb-2">What we usually write about</h2>
             </FadeIn>
 
             <div className="grid md:grid-cols-3 gap-6">
-              
+
               {/* Card 1 */}
               <FadeIn delay={0.1}>
                 <div className="h-full p-8 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900/50">

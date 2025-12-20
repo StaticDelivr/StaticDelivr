@@ -3,6 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import { serialize } from 'next-mdx-remote/serialize';
 import { MDXRemote } from 'next-mdx-remote';
+import { NextSeo } from 'next-seo';
 import Head from 'next/head';
 import React, { useState, useRef } from 'react';
 import { motion } from 'framer-motion';
@@ -90,9 +91,17 @@ import { FadeIn } from '../../components/FadeIn';
 const DocPage = ({ frontmatter, mdxSource, docsContent, slug }) => {
   return (
     <DocsLayout docsContent={docsContent} currentSlug={`/docs/${slug}`}>
+      <NextSeo
+        title={`${frontmatter.title} | Documentation`}
+        description={frontmatter.description || 'StaticDelivr documentation.'}
+        canonical={`https://staticdelivr.com/docs/${slug}`}
+        openGraph={{
+          url: `https://staticdelivr.com/docs/${slug}`,
+          title: `${frontmatter.title} | Documentation`,
+          description: frontmatter.description || 'StaticDelivr documentation.',
+        }}
+      />
       <Head>
-        <title>{frontmatter.title} | Documentation - StaticDelivr</title>
-        <meta name="description" content={frontmatter.description || 'StaticDelivr documentation.'} />
         {/* Load Highlight.js CSS */}
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github-dark.min.css" />
       </Head>

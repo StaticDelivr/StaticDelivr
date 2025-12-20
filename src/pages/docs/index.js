@@ -3,7 +3,7 @@ import path from 'path';
 import matter from 'gray-matter';
 import React from 'react';
 import Link from 'next/link';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import { motion } from 'framer-motion';
 import {
   BookOpen, Lightbulb, Code, GitPullRequest,
@@ -106,10 +106,16 @@ export async function getStaticProps() {
 const DocsIndex = ({ docsContent }) => {
   return (
     <DocsLayout docsContent={docsContent} currentSlug="/docs">
-      <Head>
-        <title>Documentation | StaticDelivr</title>
-        <meta name="description" content="Comprehensive guides and API reference for StaticDelivr." />
-      </Head>
+      <NextSeo
+        title="Documentation | StaticDelivr"
+        description="Comprehensive guides, API reference, and integration tutorials for StaticDelivr."
+        canonical="https://staticdelivr.com/docs"
+        openGraph={{
+          url: 'https://staticdelivr.com/docs',
+          title: 'Documentation | StaticDelivr',
+          description: 'Comprehensive guides, API reference, and integration tutorials for StaticDelivr.',
+        }}
+      />
 
       <div className="relative py-12 md:py-20 max-w-5xl mx-auto px-6">
 
