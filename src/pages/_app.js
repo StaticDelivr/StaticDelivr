@@ -18,6 +18,7 @@ function MyApp({ Component, pageProps }) {
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
       <ParallaxProvider>
         <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
           <link rel="icon" type="image/svg+xml" href="/assets/img/icons/favicon.svg" />
           <link rel="icon" type="image/png" sizes="32x32" href="/assets/img/icons/favicon-32x32.png" />
           <link rel="icon" type="image/png" sizes="16x16" href="/assets/img/icons/favicon-16x16.png" />

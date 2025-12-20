@@ -6,27 +6,26 @@ class MyDocument extends Document {
       <Html lang="en">
         <Head>
           {/* Viewport and mobile optimization */}
-          <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
           <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
           <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
-          
+
           {/* Additional SEO meta tags */}
           <meta name="format-detection" content="telephone=no" />
           <meta name="mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-capable" content="yes" />
           <meta name="apple-mobile-web-app-status-bar-style" content="default" />
           <meta name="apple-mobile-web-app-title" content="StaticDelivr" />
-          
+
           {/* Preconnect to external domains for faster loading */}
           <link rel="preconnect" href="https://stats.staticdelivr.com" />
           <link rel="preconnect" href="https://cdn.staticdelivr.com" />
           <link rel="preconnect" href="https://www.clarity.ms" />
           <link rel="preconnect" href="https://scripts.clarity.ms" />
-          
+
           {/* DNS prefetch for additional external domains */}
           <link rel="dns-prefetch" href="https://images.ctfassets.net" />
           <link rel="dns-prefetch" href="https://registry.npmjs.org" />
-          
+
           {/* Microsoft Clarity Tracking Script - Deferred for better performance */}
           <script
             type="text/javascript"
