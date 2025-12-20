@@ -90,14 +90,14 @@ const RotatingWords = () => {
     }, []);
 
     return (
-        <span className="inline-block min-w-[200px] text-left">
+        <span className="inline-flex justify-center min-w-[140px]">
             <motion.span
                 key={words[index]}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -20 }}
                 transition={{ duration: 0.3 }}
-                className="inline-block font-semibold text-zinc-900 dark:text-white"
+                className="font-semibold text-zinc-900 dark:text-white truncate"
             >
                 {words[index]}
             </motion.span>
@@ -184,6 +184,18 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                 <meta name="twitter:description" content="The fastest way to serve open source assets. No limits. No tracking." />
             </Head>
 
+            {/* Inline Styles for Gradient Animation */}
+            <style jsx>{`
+                @keyframes aurora {
+                    0% { background-position: 0% 50%; }
+                    50% { background-position: 100% 50%; }
+                    100% { background-position: 0% 50%; }
+                }
+                .animate-aurora {
+                    background-size: 200% auto;
+                    animation: aurora 5s linear infinite;
+                }
+            `}</style>
             <Header />
 
             <main className="relative pt-32 pb-20 overflow-hidden">
@@ -207,7 +219,9 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                         <FadeIn delay={0.1}>
                             <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-8 leading-[1.1]">
                                 The free CDN for<br />
-                                <span className="text-zinc-400 dark:text-zinc-600">open source.</span>
+                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-600 animate-aurora pb-2">
+                                    open source.
+                                </span>
                             </h1>
                         </FadeIn>
 
