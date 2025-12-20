@@ -286,7 +286,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                                         href="https://www.cloudns.net/"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                        className="opacity-70 hover:opacity-100 hover:scale-105 transition-all duration-300"
                                     >
                                         <Image src="/assets/sponsors/cloudns.svg" alt="ClouDNS" width={140} height={35} className="h-7 md:h-8 w-auto" />
                                     </Link>
@@ -294,13 +294,13 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                                         href="https://www.netlify.com/"
                                         target="_blank"
                                         rel="noopener noreferrer"
-                                        className="grayscale opacity-50 hover:grayscale-0 hover:opacity-100 transition-all duration-300"
+                                        className="opacity-70 hover:opacity-100 hover:scale-105 transition-all duration-300"
                                     >
                                         <Image src="/assets/sponsors/netlify.svg" alt="Netlify" width={140} height={35} className="h-7 md:h-8 w-auto" />
                                     </Link>
                                     <Link
                                         href="/sponsors"
-                                        className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-dashed border-zinc-200 dark:border-zinc-800 text-[10px] md:text-xs text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 transition-all"
+                                        className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-dashed border-zinc-200 dark:border-zinc-800 text-[10px] md:text-xs text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 hover:scale-105 transition-all"
                                     >
                                         <Heart className="w-3 h-3" /> Your Logo Here
                                     </Link>
