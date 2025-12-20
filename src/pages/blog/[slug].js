@@ -1,14 +1,123 @@
 import React, { useState } from 'react'
+import Head from 'next/head'
+import Script from 'next/script'
 import { NextSeo } from 'next-seo'
 import Link from 'next/link'
 import { getBlogPostBySlug, getBlogPosts } from '../../lib/contentful'
 import { documentToReactComponents } from '@contentful/rich-text-react-renderer'
-import { BLOCKS, INLINES } from '@contentful/rich-text-types'
+import { BLOCKS, INLINES, MARKS } from '@contentful/rich-text-types'
 import Header from '../../components/Header'
 import Footer from '../../components/Footer'
 import { StaticDelivrImage } from 'staticdelivr'
-import { Calendar, Tag, ArrowLeft, Linkedin, Link as LinkIcon, ChevronRight, Check } from 'lucide-react'
+import { Calendar, Tag, ArrowLeft, Linkedin, Link as LinkIcon, ChevronRight, Check, Copy } from 'lucide-react'
 import { FadeIn } from '../../components/FadeIn'
+
+// --- Custom Code Block Component ---
+const CodeBlock = ({ children }) => {
+   const [isCopied, setIsCopied] = React.useState(false);
+   const codeRef = React.useRef(null);
+
+   // Apply syntax highlighting after render
+   React.useEffect(() => {
+      if (codeRef.current && typeof window !== 'undefined' && window.hljs) {
+         window.hljs.highlightElement(codeRef.current);
+      }
+   }, [children]);
+
+   const handleCopy = async () => {
+      const text = typeof children === 'string' ? children : codeRef.current?.innerText;
+      try {
+         await navigator.clipboard.writeText(text);
+         setIsCopied(true);
+         setTimeout(() => setIsCopied(false), 2000);
+      } catch (err) {
+         console.error('Failed to copy:', err);
+      }
+   };
+
+   return (
+      <div className="relative group my-6 rounded-xl border border-zinc-200 dark:border-zinc-800 bg-[#0d1117] overflow-hidden shadow-sm">
+         {/* Header Bar */}
+         <div className="flex items-center justify-between px-4 py-2.5 bg-white/5 border-b border-white/5">
+            <div className="flex gap-1.5">
+               <div className="w-2.5 h-2.5 rounded-full bg-zinc-600/50" />
+               <div className="w-2.5 h-2.5 rounded-full bg-zinc-600/50" />
+               <div className="w-2.5 h-2.5 rounded-full bg-zinc-600/50" />
+            </div>
+            <button
+               onClick={handleCopy}
+               className="flex items-center gap-1.5 px-2.5 py-1 rounded-md text-xs font-medium text-zinc-400 hover:text-white hover:bg-white/10 transition-all cursor-pointer"
+            >
+               {isCopied ? (
+                  <>
+                     <Check className="w-3.5 h-3.5 text-emerald-400" />
+                     <span className="text-emerald-400">Copied!</span>
+                  </>
+               ) : (
+                  <>
+                     <Copy className="w-3.5 h-3.5" />
+                     <span>Copy</span>
+                  </>
+               )}
+            </button>
+         </div>
+         {/* Code Area */}
+         <div className="overflow-x-auto">
+            <pre className="!bg-transparent !m-0 p-5">
+               <code ref={codeRef} className="!bg-transparent !text-zinc-50 text-[13px] md:text-sm font-mono leading-relaxed language-html">
+                  {children}
+               </code>
+            </pre>
+         </div>
+      </div>
+   );
+};
+
+// Helper to check if a paragraph is entirely code
+const isCodeOnlyParagraph = (node) => {
+   if (!node.content || node.content.length === 0) return false;
+   return node.content.every(child =>
+      child.nodeType === 'text' &&
+      child.marks?.some(mark => mark.type === 'code')
+   );
+};
+
+// Get the text content from a node
+const getTextContent = (node) => {
+   return node.content?.map(child => child.value).join('') || '';
+};
+
+// Pre-process rich text to merge consecutive code paragraphs
+const preprocessContent = (body) => {
+   if (!body?.content) return body;
+
+   const newContent = [];
+   let codeBuffer = [];
+
+   const flushCodeBuffer = () => {
+      if (codeBuffer.length > 0) {
+         // Create a merged code block
+         const mergedText = codeBuffer.map(getTextContent).join('\n');
+         newContent.push({
+            nodeType: 'merged-code-block',
+            value: mergedText
+         });
+         codeBuffer = [];
+      }
+   };
+
+   for (const node of body.content) {
+      if (node.nodeType === 'paragraph' && isCodeOnlyParagraph(node)) {
+         codeBuffer.push(node);
+      } else {
+         flushCodeBuffer();
+         newContent.push(node);
+      }
+   }
+   flushCodeBuffer();
+
+   return { ...body, content: newContent };
+};
 
 // --- Custom Rich Text Render Options ---
 const renderOptions = {
@@ -62,7 +171,28 @@ const renderOptions = {
          <li className="pl-2">{children}</li>
       ),
    },
+   renderMark: {
+      [MARKS.CODE]: (text) => (
+         <code className="px-1.5 py-0.5 rounded-md bg-zinc-100 dark:bg-zinc-800 text-zinc-800 dark:text-zinc-200 font-mono text-sm">
+            {text}
+         </code>
+      ),
+   },
 };
+
+// Custom renderer that handles merged code blocks
+const renderRichText = (body) => {
+   const processed = preprocessContent(body);
+
+   return processed.content.map((node, index) => {
+      if (node.nodeType === 'merged-code-block') {
+         return <CodeBlock key={index}>{node.value}</CodeBlock>;
+      }
+      // Use documentToReactComponents for regular nodes
+      return documentToReactComponents({ nodeType: 'document', content: [node] }, renderOptions);
+   });
+};
+
 
 export default function BlogPost({ post }) {
    const [copied, setCopied] = useState(false)
@@ -108,6 +238,14 @@ export default function BlogPost({ post }) {
                   content: tags ? tags.join(', ') : 'StaticDelivr, Blog, Content Delivery, CDN'
                }
             ]}
+         />
+
+         <Head>
+            <link rel="stylesheet" href="https://cdn.staticdelivr.com/npm/@highlightjs/cdn-assets@11.9.0/styles/github-dark.min.css" />
+         </Head>
+         <Script
+            src="https://cdn.staticdelivr.com/npm/@highlightjs/cdn-assets@11.9.0/highlight.min.js"
+            strategy="lazyOnload"
          />
 
          <Header />
@@ -170,7 +308,7 @@ export default function BlogPost({ post }) {
                   {/* Body */}
                   <FadeIn delay={0.4}>
                      <div className="prose prose-lg prose-zinc dark:prose-invert max-w-none">
-                        {documentToReactComponents(body, renderOptions)}
+                        {renderRichText(body)}
                      </div>
                   </FadeIn>
 
