@@ -604,7 +604,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                 </section>
 
                 {/* --- Final CTA --- */}
-                <section className="px-6 pb-24">
+                <section className="px-6 py-24">
                     <FadeIn>
                         <div className="max-w-4xl mx-auto relative overflow-hidden rounded-[2.5rem] bg-zinc-900 dark:bg-zinc-950 border border-zinc-800 p-12 md:p-20 text-center shadow-2xl">
                             {/* Background Glow */}
