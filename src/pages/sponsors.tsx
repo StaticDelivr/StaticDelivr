@@ -99,6 +99,15 @@ const sponsors = [
     website: "https://www.netlify.com/",
     color: "cyan",
   },
+  {
+    name: "Tuta",
+    tier: "Infrastructure",
+    role: "Privacy & Security",
+    description: "End-to-end encrypted email and collaboration tools protecting user privacy and data security.",
+    logo: "/assets/sponsors/tuta_logo.svg",
+    website: "https://tuta.com/",
+    color: "green",
+  },
 ];
 
 const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
@@ -194,7 +203,8 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                     <div className={cn(
                       "absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100 bg-gradient-to-br from-transparent to-transparent",
                       sponsor.color === 'blue' && "from-blue-500/5",
-                      sponsor.color === 'cyan' && "from-cyan-500/5"
+                      sponsor.color === 'cyan' && "from-cyan-500/5",
+                      sponsor.color === 'green' && "from-green-500/5"
                     )} />
 
                     <div className="relative z-10 flex flex-col h-full">
@@ -215,7 +225,10 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                         <h3 className="text-xl font-bold text-zinc-900 dark:text-white">{sponsor.name}</h3>
                         <span className={cn(
                           "px-2 py-0.5 rounded-full text-[10px] font-semibold uppercase tracking-wide",
-                          sponsor.color === 'blue' ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300" : "bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300"
+                          sponsor.color === 'blue' ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300" :
+                          sponsor.color === 'cyan' ? "bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300" :
+                          sponsor.color === 'green' ? "bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-300" :
+                          "bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300"
                         )}>
                           {sponsor.tier}
                         </span>
