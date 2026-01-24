@@ -20,6 +20,7 @@ const footerLinks = {
       { label: 'Network', href: '/network' },
       { label: 'Impact', href: '/impact' },
       { label: 'Statistics', href: '/stats' },
+      { label: 'Migrate', href: '/migrate' },
       { label: 'Status', href: 'https://status.staticdelivr.com' },
     ],
   },

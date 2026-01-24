@@ -168,6 +168,9 @@ const Header = () => {
                       <ListItem href="/stats" title="Real-time Stats">
                         Live metrics on requests, bandwidth, and cache hits.
                       </ListItem>
+                      <ListItem href="/migrate" title="Migrate">
+                        Convert URLs from unpkg, jsDelivr, and other CDNs instantly.
+                      </ListItem>
                     </ul>
                   </NavigationMenuContent>
                 </NavigationMenuItem>
@@ -332,6 +335,12 @@ const Header = () => {
                       href="/stats"
                       icon={<BarChart3 className="w-5 h-5" />}
                       label="Stats"
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem
+                      href="/migrate"
+                      icon={<RefreshCw className="w-5 h-5" />}
+                      label="Migrate"
                       onClick={handleMobileItemClick}
                     />
                   </div>
