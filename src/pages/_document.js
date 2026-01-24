@@ -26,7 +26,8 @@ class MyDocument extends Document {
           <link rel="dns-prefetch" href="https://images.ctfassets.net" />
           <link rel="dns-prefetch" href="https://registry.npmjs.org" />
 
-
+          {/* Cloudflare Web Analytics */}
+          <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "226815ba0ad4472ba2199d22f7fa29bd"}'></script>
         </Head>
         <body>
           <Main />
