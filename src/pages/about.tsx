@@ -194,7 +194,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
               {/* Primary Stat: Requests */}
               <FadeIn className="md:col-span-2 relative overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 md:p-10 shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
                 <div className="relative z-10">
-                  <div className="flex items-center gap-2 mb-6 text-emerald-600 dark:text-emerald-500">
+                  <div className="flex items-center gap-2 mb-6 text-emerald-700 dark:text-emerald-500">
                     <Globe className="w-5 h-5" />
                     <h2 className="font-medium tracking-tight">Proof of scale</h2>
                   </div>
@@ -241,7 +241,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="flex items-start justify-between mb-6">
                       <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-cyan-50 dark:bg-cyan-900/10 text-cyan-600 dark:text-cyan-400 group-hover:scale-110 transition-transform duration-300">
-                        <SiReact className="w-6 h-6 animate-[spin_10s_linear_infinite]" />
+                        <SiReact className="w-6 h-6 animate-[spin_10s_linear_infinite]" aria-label="React logo" />
                       </div>
                       <div className="flex flex-col items-end">
                         <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-cyan-500 transition-colors mb-2" />
@@ -275,9 +275,9 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="flex items-start justify-between mb-6">
                       <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/10 text-blue-600 dark:text-blue-500 group-hover:scale-110 transition-transform duration-300">
-                        <SiWordpress className="w-6 h-6" />
+                        <SiWordpress className="w-6 h-6" aria-label="WordPress logo" />
                       </div>
-                      <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-full">
+                      <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-700 dark:text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-full">
                         <Star className="w-3 h-3 fill-emerald-600 dark:fill-emerald-500" />
                         5/5 Stars
                       </div>
@@ -308,7 +308,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="flex items-start justify-between mb-6">
                       <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-500 group-hover:scale-110 transition-transform duration-300">
-                        <SiNpm className="w-8 h-8" />
+                        <SiNpm className="w-8 h-8" aria-label="NPM logo" />
                       </div>
                       <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-red-500 transition-colors" />
                     </div>
@@ -327,7 +327,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
                   <div className="relative z-10 flex flex-col h-full">
                     <div className="flex items-start justify-between mb-6">
                       <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/10 text-amber-600 dark:text-amber-500 group-hover:scale-110 transition-transform duration-300">
-                        <SiGooglefonts className="w-6 h-6" />
+                        <SiGooglefonts className="w-6 h-6" aria-label="Google Fonts logo" />
                       </div>
                       <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-amber-500 transition-colors" />
                     </div>

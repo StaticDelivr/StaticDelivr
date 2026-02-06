@@ -171,7 +171,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                   <div>
                     <div className="text-6xl md:text-8xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-3">
                       <NumberTicker value={stats.bandwidthSavedGB} />
-                      <span className="text-3xl md:text-4xl text-zinc-400 dark:text-zinc-700 ml-2 font-medium">GB</span>
+                      <span className="text-3xl md:text-4xl text-zinc-500 dark:text-zinc-700 ml-2 font-medium">GB</span>
                     </div>
                     <p className="text-zinc-600 dark:text-zinc-400 max-w-lg mt-2 text-base font-normal leading-relaxed">
                       Data we didn't send. By compressing images and code, we saved terabytes of unnecessary transmission this month alone.
@@ -194,7 +194,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                     <Leaf className="w-4 h-4" /> Carbon Avoided
                   </h2>
                   <div className="text-5xl font-semibold text-zinc-900 dark:text-white tracking-tight">
-                    <NumberTicker value={stats.co2} /> <span className="text-2xl text-zinc-400 dark:text-zinc-600 font-medium">kg</span>
+                    <NumberTicker value={stats.co2} /> <span className="text-2xl text-zinc-500 dark:text-zinc-600 font-medium">kg</span>
                   </div>
                 </FadeIn>
 
