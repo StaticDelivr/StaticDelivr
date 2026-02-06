@@ -225,7 +225,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                             src={sponsor.logo}
                             alt={`${sponsor.name} logo`}
                             fill
-                            className={`object-contain object-left ${sponsor.name === 'BrowserStack' ? '' : 'dark:invert'}`}
+                            className="object-contain object-left"
                           />
                         </div>
                         <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" />
