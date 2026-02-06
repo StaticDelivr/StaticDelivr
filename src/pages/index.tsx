@@ -138,7 +138,7 @@ const TerminalHero = () => {
             </div>
             <div className="p-6 space-y-4">
                 <div className="flex flex-wrap gap-2 text-zinc-300">
-                    <span className="text-emerald-400 font-bold">➜</span>
+                    <span className="text-emerald-400 font-bold" aria-label="Command prompt">➜</span>
                     <span className="text-blue-400">~</span>
                     <span>curl -I</span>
                     <span className="break-all">{codeSnippet}</span>
@@ -243,7 +243,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                         <FadeIn delay={0.1}>
                             <h1 className="text-5xl md:text-6xl lg:text-7xl font-semibold tracking-tight text-zinc-900 dark:text-white mb-8 leading-[1.1]">
                                 The free CDN for<br />
-                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-600 animate-aurora pb-2">
+                                <span className="bg-clip-text text-transparent bg-gradient-to-r from-emerald-400 via-cyan-500 to-blue-600 animate-aurora pb-2" style={{ textShadow: '0 0 1px rgba(16, 185, 129, 0.2)' }}>
                                     open source.
                                 </span>
                             </h1>
@@ -394,7 +394,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                                     <div className="relative z-10 flex flex-col h-full">
                                         <div className="flex items-start justify-between mb-6">
                                             <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-red-50 dark:bg-red-900/10 text-red-600 dark:text-red-500 group-hover:scale-110 transition-transform duration-300">
-                                                <SiNpm className="w-8 h-8" />
+                                                <SiNpm className="w-8 h-8" aria-label="NPM logo" />
                                             </div>
                                             <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-red-500 transition-colors" />
                                         </div>
@@ -418,7 +418,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                                     <div className="relative z-10 flex flex-col h-full">
                                         <div className="flex items-start justify-between mb-6">
                                             <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-white group-hover:scale-110 transition-transform duration-300">
-                                                <SiGithub className="w-6 h-6" />
+                                                <SiGithub className="w-6 h-6" aria-label="GitHub logo" />
                                             </div>
                                             <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" />
                                         </div>
@@ -442,7 +442,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                                     <div className="relative z-10 flex flex-col h-full">
                                         <div className="flex items-start justify-between mb-6">
                                             <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/10 text-blue-600 dark:text-blue-500 group-hover:scale-110 transition-transform duration-300">
-                                                <SiWordpress className="w-6 h-6" />
+                                                <SiWordpress className="w-6 h-6" aria-label="WordPress logo" />
                                             </div>
                                             <div className="flex items-center gap-1.5 text-xs font-medium text-emerald-600 dark:text-emerald-500 bg-emerald-50 dark:bg-emerald-900/20 px-2 py-1 rounded-full">
                                                 <Activity className="w-3 h-3" />
@@ -467,7 +467,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                                     <div className="relative z-10 flex flex-col h-full">
                                         <div className="flex items-start justify-between mb-6">
                                             <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-amber-50 dark:bg-amber-900/10 text-amber-600 dark:text-amber-500 group-hover:scale-110 transition-transform duration-300">
-                                                <SiGooglefonts className="w-6 h-6" />
+                                                <SiGooglefonts className="w-6 h-6" aria-label="Google Fonts logo" />
                                             </div>
                                             <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-amber-500 transition-colors" />
                                         </div>
@@ -511,7 +511,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                                         <Globe className="w-4 h-4 mr-2" /> WordPress
                                     </TabsTrigger>
                                     <TabsTrigger value="fonts" className="py-3 rounded-lg data-[state=active]:bg-white dark:data-[state=active]:bg-zinc-800 data-[state=active]:shadow-sm transition-all font-medium">
-                                        <SiGooglefonts className="w-4 h-4 mr-2" /> Fonts
+                                        <SiGooglefonts className="w-4 h-4 mr-2" aria-label="Google Fonts" /> Fonts
                                     </TabsTrigger>
                                 </TabsList>
 
