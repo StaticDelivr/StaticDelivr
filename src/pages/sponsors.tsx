@@ -108,6 +108,15 @@ const sponsors = [
     website: "https://tuta.com/",
     color: "red",
   },
+  {
+    name: "BrowserStack",
+    tier: "Infrastructure",
+    role: "Testing & QA",
+    description: "Real device cloud for testing across 3,000+ browsers and devices, ensuring flawless delivery worldwide.",
+    logo: "/assets/sponsors/browserstack.svg",
+    website: "https://www.browserstack.com/",
+    color: "orange",
+  },
 ];
 
 const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
@@ -204,7 +213,8 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                       "absolute inset-0 opacity-0 transition-opacity group-hover:opacity-100 bg-gradient-to-br from-transparent to-transparent",
                       sponsor.color === 'blue' && "from-blue-500/5",
                       sponsor.color === 'cyan' && "from-cyan-500/5",
-                      sponsor.color === 'red' && "from-red-500/5"
+                      sponsor.color === 'red' && "from-red-500/5",
+                      sponsor.color === 'orange' && "from-orange-500/5"
                     )} />
 
                     <div className="relative z-10 flex flex-col h-full">
@@ -215,7 +225,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                             src={sponsor.logo}
                             alt={`${sponsor.name} logo`}
                             fill
-                            className="object-contain object-left dark:invert"
+                            className={`object-contain object-left ${sponsor.name === 'BrowserStack' ? '' : 'dark:invert'}`}
                           />
                         </div>
                         <ArrowRight className="w-5 h-5 text-zinc-300 dark:text-zinc-700 group-hover:text-zinc-900 dark:group-hover:text-white transition-colors" />
@@ -228,6 +238,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                           sponsor.color === 'blue' ? "bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300" :
                           sponsor.color === 'cyan' ? "bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300" :
                           sponsor.color === 'red' ? "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300" :
+                          sponsor.color === 'orange' ? "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300" :
                           "bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300"
                         )}>
                           {sponsor.tier}
