@@ -138,7 +138,7 @@ const TerminalHero = () => {
             </div>
             <div className="p-6 space-y-4">
                 <div className="flex flex-wrap gap-2 text-zinc-300">
-                    <span className="text-emerald-400 font-bold" aria-label="Command prompt">➜</span>
+                    <span className="text-emerald-400 font-bold" role="img" aria-label="Command prompt">➜</span>
                     <span className="text-blue-400">~</span>
                     <span>curl -I</span>
                     <span className="break-all">{codeSnippet}</span>

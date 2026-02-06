@@ -163,7 +163,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
               {/* Primary Stat: Bandwidth */}
               <FadeIn className="md:col-span-2 relative group overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 md:p-10 shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
                 <div className="relative z-10 flex flex-col h-full justify-between">
-                  <div className="flex items-center gap-2 mb-6 text-emerald-600 dark:text-emerald-500">
+                  <div className="flex items-center gap-2 mb-6 text-emerald-700 dark:text-emerald-500">
                     <Activity className="w-5 h-5" />
                     <h2 className="font-medium tracking-tight">Bandwidth Saved</h2>
                   </div>
@@ -171,7 +171,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                   <div>
                     <div className="text-6xl md:text-8xl font-semibold tracking-tighter text-zinc-900 dark:text-white mb-3">
                       <NumberTicker value={stats.bandwidthSavedGB} />
-                      <span className="text-3xl md:text-4xl text-zinc-300 dark:text-zinc-700 ml-2 font-medium">GB</span>
+                      <span className="text-3xl md:text-4xl text-zinc-400 dark:text-zinc-700 ml-2 font-medium">GB</span>
                     </div>
                     <p className="text-zinc-600 dark:text-zinc-400 max-w-lg mt-2 text-base font-normal leading-relaxed">
                       Data we didn't send. By compressing images and code, we saved terabytes of unnecessary transmission this month alone.
@@ -190,11 +190,11 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
 
                 {/* CO2 */}
                 <FadeIn delay={0.1} className="flex-1 rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 flex flex-col justify-center shadow-[0_2px_20px_rgba(0,0,0,0.02)]">
-                  <h2 className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 mb-2 text-xs font-semibold uppercase tracking-wider">
+                  <h2 className="flex items-center gap-2 text-zinc-500 dark:text-zinc-300 mb-2 text-xs font-semibold uppercase tracking-wider">
                     <Leaf className="w-4 h-4" /> Carbon Avoided
                   </h2>
                   <div className="text-5xl font-semibold text-zinc-900 dark:text-white tracking-tight">
-                    <NumberTicker value={stats.co2} /> <span className="text-2xl text-zinc-300 dark:text-zinc-600 font-medium">kg</span>
+                    <NumberTicker value={stats.co2} /> <span className="text-2xl text-zinc-400 dark:text-zinc-600 font-medium">kg</span>
                   </div>
                 </FadeIn>
 
@@ -205,13 +205,13 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
                     <div className="absolute top-0 right-0 w-32 h-32 bg-white/5 dark:bg-black/5 rounded-full blur-3xl -mr-16 -mt-16 pointer-events-none" />
 
                     <div className="relative z-10">
-                      <h2 className="flex items-center gap-2 text-zinc-600 dark:text-zinc-400 mb-3 text-xs font-semibold uppercase tracking-wider">
+                      <h2 className="flex items-center gap-2 text-zinc-400 dark:text-zinc-600 mb-3 text-xs font-semibold uppercase tracking-wider">
                         <Zap className="w-4 h-4" /> Energy Equivalent
                       </h2>
                       <div className="text-5xl font-semibold text-white dark:text-zinc-900 tracking-tight">
                         <NumberTicker value={stats.lightbulbs} />
                       </div>
-                      <div className="text-sm text-zinc-600 dark:text-zinc-400 mt-2 font-normal">Lightbulb-hours powered</div>
+                      <div className="text-sm text-zinc-400 dark:text-zinc-600 mt-2 font-normal">Lightbulb-hours powered</div>
                     </div>
                   </div>
 

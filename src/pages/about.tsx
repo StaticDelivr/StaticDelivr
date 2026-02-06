@@ -73,7 +73,7 @@ const TerminalVisual = () => (
           initial={{ opacity: 0, x: -5 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{ delay: 0.7 }}
-          className="flex items-center gap-2 text-emerald-600 dark:text-emerald-500 font-medium"
+          className="flex items-center gap-2 text-emerald-700 dark:text-emerald-500 font-medium"
         >
           <span>✓</span> Delivered globally in 45ms
         </motion.div>
@@ -179,7 +179,7 @@ const AboutPage: React.FC<AboutPageProps> = ({ stats, versions }) => {
               <Link href="/docs" className="h-10 px-6 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium flex items-center hover:opacity-90 transition-opacity">
                 Read the Docs
               </Link>
-              <Link href="/sponsors" className="h-10 px-6 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
+              <Link href="/sponsors" className="h-10 px-6 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
                 <Heart className="w-4 h-4 mr-2 text-rose-500" /> Support the project
               </Link>
             </FadeIn>

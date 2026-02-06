@@ -33,7 +33,7 @@ const JsonVisual = () => (
         <div className="w-3 h-3 rounded-full bg-amber-400"></div>
         <div className="w-3 h-3 rounded-full bg-emerald-400"></div>
       </div>
-      <div className="text-xs text-zinc-400">sponsorship_config.json</div>
+      <div className="text-xs text-zinc-500">sponsorship_config.json</div>
     </div>
     <div className="p-6 overflow-x-auto">
       <div className="text-zinc-600 dark:text-zinc-400 space-y-1">
@@ -118,7 +118,7 @@ const BecomeSponsorPage = () => {
               </a>
               <Link
                 href="/impact"
-                className="h-12 px-8 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                className="h-12 px-8 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
               >
                 View Impact Report <ArrowRight className="w-4 h-4 ml-2" />
               </Link>

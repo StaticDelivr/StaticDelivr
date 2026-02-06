@@ -138,7 +138,7 @@ const PackagePage: React.FC<PackagePageProps> = ({ npmStats, versions }) => {
               </Link>
               <Link
                 href="/docs/frontend-usage"
-                className="h-12 px-8 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
+                className="h-12 px-8 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors"
               >
                 Read Documentation
               </Link>

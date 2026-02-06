@@ -178,7 +178,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
               <Link href="/become-a-sponsor" className="h-10 px-6 rounded-full bg-zinc-900 dark:bg-white text-white dark:text-zinc-900 font-medium flex items-center hover:opacity-90 transition-opacity">
                 <Heart className="w-4 h-4 mr-2 text-rose-500 fill-rose-500" /> Become a Sponsor
               </Link>
-              <Link href="/impact" className="h-10 px-6 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-600 dark:text-zinc-400 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
+              <Link href="/impact" className="h-10 px-6 rounded-full border border-zinc-200 dark:border-zinc-800 text-zinc-700 dark:text-zinc-300 font-medium flex items-center hover:bg-zinc-100 dark:hover:bg-zinc-900 transition-colors">
                 View Our Impact <ArrowRight className="w-3 h-3 ml-2" />
               </Link>
             </FadeIn>
@@ -245,12 +245,12 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                         </span>
                       </div>
 
-                      <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
+                      <p className="text-sm text-zinc-700 dark:text-zinc-300 leading-relaxed mb-6">
                         {sponsor.description}
                       </p>
 
                       <div className="mt-auto pt-2">
-                        <div className="inline-block text-xs font-mono text-zinc-400 border-b border-transparent group-hover:border-zinc-400 transition-colors">
+                        <div className="inline-block text-xs font-mono text-zinc-500 border-b border-transparent group-hover:border-zinc-500 transition-colors">
                           {sponsor.website.replace('https://', '').replace(/\/$/, '')}
                         </div>
                       </div>
