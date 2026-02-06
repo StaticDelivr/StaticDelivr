@@ -147,7 +147,7 @@ const ImpactPage: React.FC<ImpactPageProps> = ({ stats }) => {
 
             {/* Description */}
             <FadeIn delay={0.2}>
-              <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light">
+              <p className="text-lg md:text-xl text-zinc-700 dark:text-zinc-300 max-w-2xl mx-auto leading-relaxed font-light">
                 We optimize assets at the edge, effectively <strong className="font-semibold text-zinc-900 dark:text-white">"deleting" waste</strong> from the internet.
                 Less bandwidth means <strong className="font-semibold text-zinc-900 dark:text-white">faster loads</strong> for users and <strong className="font-semibold text-zinc-900 dark:text-white">less carbon</strong> for the planet.
               </p>
