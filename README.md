@@ -11,3 +11,6 @@ If you have any questions or concerns, feel free to open an issue or contact us.
 
 ## License
 StaticDelivr is released under the MIT License.
+
+---
+This project is tested with BrowserStack.
