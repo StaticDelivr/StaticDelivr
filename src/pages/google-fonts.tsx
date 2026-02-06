@@ -151,7 +151,7 @@ const GoogleFontsPage = () => {
 
                   <FadeIn>
                      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-md bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-mono text-zinc-600 dark:text-zinc-400 mb-8">
-                        <SiGooglefonts className="w-3 h-3" />
+                        <SiGooglefonts className="w-3 h-3" aria-label="Google Fonts" />
                         <span>$ staticdelivr --fonts --privacy</span>
                      </div>
                   </FadeIn>
