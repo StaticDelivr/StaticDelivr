@@ -71,6 +71,7 @@ const nextConfig: NextConfig = {
   },
   // Output optimization
   output: undefined,
+  serverExternalPackages: ["@appsignal/nodejs"],
   experimental: {
     optimizePackageImports: [
       '@radix-ui/react-navigation-menu',

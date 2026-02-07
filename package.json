@@ -3,13 +3,14 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "NODE_OPTIONS=--enable-source-maps next dev",
     "build": "next build",
     "postbuild": "next-sitemap",
-    "start": "next start",
+    "start": "NODE_OPTIONS=--enable-source-maps next start",
     "lint": "next lint"
   },
   "dependencies": {
+    "@appsignal/nodejs": "^3.7.4",
     "@contentful/rich-text-react-renderer": "^16.0.0",
     "@formspree/react": "^2.5.1",
     "@radix-ui/react-dialog": "^1.1.15",
@@ -41,6 +42,7 @@
     "rehype-highlight": "^7.0.2",
     "remark-gfm": "^4.0.1",
     "sonner": "^2.0.7",
+    "source-map-support": "^0.5.21",
     "staticdelivr": "^1.0.0",
     "tailwind-merge": "^3.4.0",
     "tailwindcss-animate": "^1.0.7"
