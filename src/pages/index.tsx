@@ -315,6 +315,14 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                                         <Image src="/assets/sponsors/browserstack.svg" alt="BrowserStack" width={140} height={35} className="h-7 md:h-8 w-auto" />
                                     </Link>
                                     <Link
+                                        href="https://www.appsignal.com/"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
+                                        className="opacity-70 hover:opacity-100 hover:scale-105 transition-all duration-300"
+                                    >
+                                        <Image src="/assets/sponsors/appsignal.svg" alt="AppSignal" width={140} height={35} className="h-7 md:h-8 w-auto" />
+                                    </Link>
+                                    <Link
                                         href="/sponsors"
                                         className="flex items-center gap-2 px-4 py-1.5 rounded-full border border-dashed border-zinc-200 dark:border-zinc-800 text-[10px] md:text-xs text-zinc-400 hover:text-zinc-900 dark:hover:text-white hover:border-zinc-300 dark:hover:border-zinc-700 hover:scale-105 transition-all"
                                     >

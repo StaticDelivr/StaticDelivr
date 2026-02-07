@@ -117,6 +117,15 @@ const sponsors = [
     website: "https://www.browserstack.com/",
     color: "orange",
   },
+  {
+    name: "AppSignal",
+    tier: "Infrastructure",
+    role: "Monitoring & Observability",
+    description: "Comprehensive application monitoring and error tracking to ensure optimal performance and reliability.",
+    logo: "/assets/sponsors/appsignal.svg",
+    website: "https://www.appsignal.com/",
+    color: "#1B44DA",
+  },
 ];
 
 const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
@@ -214,7 +223,8 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                       sponsor.color === 'blue' && "from-blue-500/5",
                       sponsor.color === 'cyan' && "from-cyan-500/5",
                       sponsor.color === 'red' && "from-red-500/5",
-                      sponsor.color === 'orange' && "from-orange-500/5"
+                      sponsor.color === 'orange' && "from-orange-500/5",
+                      sponsor.color === '#1B44DA' && "from-[#1B44DA]/5"
                     )} />
 
                     <div className="relative z-10 flex flex-col h-full">
@@ -239,6 +249,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                           sponsor.color === 'cyan' ? "bg-cyan-100 dark:bg-cyan-900/30 text-cyan-700 dark:text-cyan-300" :
                           sponsor.color === 'red' ? "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300" :
                           sponsor.color === 'orange' ? "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300" :
+                          sponsor.color === '#1B44DA' ? "bg-[#1B44DA] text-white" :
                           "bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300"
                         )}>
                           {sponsor.tier}
