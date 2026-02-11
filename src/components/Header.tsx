@@ -141,6 +141,9 @@ const Header = () => {
                       <ListItem href="/github" title="GitHub CDN">
                         Convert raw GitHub URLs to production-ready CDN links.
                       </ListItem>
+                      <ListItem href="/gitlab" title="GitLab CDN">
+                        Convert raw GitLab URLs to production-ready CDN links.
+                      </ListItem>
                       <ListItem href="/package" title="React Component">
                         StaticDelivrImage component for automatic optimization.
                       </ListItem>
@@ -289,6 +292,12 @@ const Header = () => {
                       href="/github"
                       icon={<GitBranch className="w-5 h-5" />}
                       label="GitHub CDN"
+                      onClick={handleMobileItemClick}
+                    />
+                    <MobileNavItem
+                      href="/gitlab"
+                      icon={<GitBranch className="w-5 h-5" />}
+                      label="GitLab CDN"
                       onClick={handleMobileItemClick}
                     />
                     <MobileNavItem

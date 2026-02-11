@@ -96,7 +96,27 @@ const MigratePage = () => {
             }
          }
 
-         // 5. NPM Registry / Website
+         // 5. GitLab Raw / Blob
+         else if (url.includes('gitlab.com')) {
+            // Raw format: https://gitlab.com/user/repo/-/raw/branch/file
+            const rawMatch = url.match(/gitlab\.com\/([^/]+)\/([^/]+)\/-\/raw\/([^/]+)\/(.+)/);
+            if (rawMatch) {
+               const [, user, repo, ref, file] = rawMatch;
+               result = `${cdn}/gl/${user}/${repo}/${ref}/${file}`;
+               type = 'GitLab Raw';
+            }
+            // Blob format: https://gitlab.com/user/repo/-/blob/branch/file
+            else {
+               const blobMatch = url.match(/gitlab\.com\/([^/]+)\/([^/]+)\/-\/blob\/([^/]+)\/(.+)/);
+               if (blobMatch) {
+                  const [, user, repo, ref, file] = blobMatch;
+                  result = `${cdn}/gl/${user}/${repo}/${ref}/${file}`;
+                  type = 'GitLab Blob';
+               }
+            }
+         }
+
+         // 6. NPM Registry / Website
          else if (url.includes('npmjs.com') || url.includes('registry.npmjs.org')) {
             const pageMatch = url.match(/(?:www\.)?npmjs\.com\/package\/([^/?#]+)/);
             const regMatch = url.match(/registry\.npmjs\.org\/([^/]+)/);
@@ -186,7 +206,7 @@ const MigratePage = () => {
 
                   <FadeIn delay={0.2}>
                      <p className="text-lg md:text-xl text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto leading-relaxed font-light mb-10">
-                        Moving from <strong>unpkg</strong>, <strong>jsDelivr</strong>, or <strong>cdnjs</strong>?
+                        Moving from <strong>unpkg</strong>, <strong>jsDelivr</strong>, <strong>GitHub</strong>, or <strong>GitLab</strong>?
                         Convert your links instantly. Same files, same structure, but delivered via our redundant multi-CDN edge.
                      </p>
                   </FadeIn>
@@ -211,7 +231,7 @@ const MigratePage = () => {
                                     type="text"
                                     value={inputUrl}
                                     onChange={(e) => setInputUrl(e.target.value)}
-                                    placeholder="Paste unpkg, jsDelivr, or GitHub URL..."
+                                    placeholder="Paste unpkg, jsDelivr, GitHub, or GitLab URL..."
                                     className="w-full bg-transparent border-none focus:ring-0 text-zinc-900 dark:text-white placeholder:text-zinc-400 font-mono text-sm h-10"
                                  />
                                  {detectedType && (

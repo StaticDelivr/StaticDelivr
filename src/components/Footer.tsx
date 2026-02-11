@@ -9,6 +9,7 @@ const footerLinks = {
     links: [
       { label: 'npm CDN', href: '/npm' },
       { label: 'GitHub CDN', href: '/github' },
+      { label: 'GitLab CDN', href: '/gitlab' },
       { label: 'React Component', href: '/package' },
       { label: 'WordPress Plugin', href: '/wordpress' },
       { label: 'Google Fonts', href: '/google-fonts' },

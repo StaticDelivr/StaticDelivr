@@ -508,12 +508,15 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
 
                         <FadeIn delay={0.1}>
                             <Tabs defaultValue="npm" className="w-full">
-                                <TabsList className="grid w-full grid-cols-2 md:grid-cols-4 h-auto p-1.5 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl mb-8">
+                                <TabsList className="grid w-full grid-cols-2 md:grid-cols-5 h-auto p-1.5 bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-xl mb-8">
                                     <TabsTrigger value="npm" className="py-3 rounded-lg data-[state=active]:bg-white dark:data-[state=active]:bg-zinc-800 data-[state=active]:shadow-sm transition-all font-medium">
                                         <Package className="w-4 h-4 mr-2" /> NPM
                                     </TabsTrigger>
                                     <TabsTrigger value="github" className="py-3 rounded-lg data-[state=active]:bg-white dark:data-[state=active]:bg-zinc-800 data-[state=active]:shadow-sm transition-all font-medium">
                                         <GitBranch className="w-4 h-4 mr-2" /> GitHub
+                                    </TabsTrigger>
+                                    <TabsTrigger value="gitlab" className="py-3 rounded-lg data-[state=active]:bg-white dark:data-[state=active]:bg-zinc-800 data-[state=active]:shadow-sm transition-all font-medium">
+                                        <GitBranch className="w-4 h-4 mr-2" /> GitLab
                                     </TabsTrigger>
                                     <TabsTrigger value="wordpress" className="py-3 rounded-lg data-[state=active]:bg-white dark:data-[state=active]:bg-zinc-800 data-[state=active]:shadow-sm transition-all font-medium">
                                         <Globe className="w-4 h-4 mr-2" /> WordPress
@@ -567,6 +570,31 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                                         </div>
                                         <div className="pt-2">
                                             <Link href="/github" className="inline-flex items-center text-sm font-medium text-emerald-600 dark:text-emerald-500 hover:underline">
+                                                Read full documentation <ArrowRight className="w-4 h-4 ml-1" />
+                                            </Link>
+                                        </div>
+                                    </div>
+                                </TabsContent>
+
+                                {/* GitLab Content */}
+                                <TabsContent value="gitlab">
+                                    <div className="rounded-2xl border border-zinc-200 dark:border-zinc-800 bg-zinc-50 dark:bg-zinc-900 p-6 md:p-8 space-y-8">
+                                        <div>
+                                            <div className="flex items-center justify-between mb-3">
+                                                <h3 className="font-semibold text-zinc-900 dark:text-white">Load from GitLab</h3>
+                                                <span className="text-xs px-2 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">Template</span>
+                                            </div>
+                                            <CodeBlock code="https://cdn.staticdelivr.com/gl/user/repo/branch/file" language="url" />
+                                        </div>
+                                        <div>
+                                            <div className="flex items-center justify-between mb-3">
+                                                <h3 className="font-semibold text-zinc-900 dark:text-white">Example: GitLab CE</h3>
+                                                <span className="text-xs px-2 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">Live</span>
+                                            </div>
+                                            <CodeBlock code="https://cdn.staticdelivr.com/gl/gitlab-org/gitlab/master/package.json" language="url" />
+                                        </div>
+                                        <div className="pt-2">
+                                            <Link href="/gitlab" className="inline-flex items-center text-sm font-medium text-emerald-600 dark:text-emerald-500 hover:underline">
                                                 Read full documentation <ArrowRight className="w-4 h-4 ml-1" />
                                             </Link>
                                         </div>
