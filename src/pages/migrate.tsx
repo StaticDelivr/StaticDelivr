@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
    RefreshCw, ArrowRight, Copy, Check,
    Terminal, AlertCircle, Sparkles,
-   Search, ExternalLink
+   Search, ExternalLink, FileSearch, Replace
 } from 'lucide-react';
 
 import Header from '../components/Header';
@@ -387,50 +387,100 @@ const MigratePage = () => {
 
             {/* --- Batch Migration Reference --- */}
             <section className="px-6 mb-32">
-               <div className="max-w-4xl mx-auto">
-                  <FadeIn className="text-center mb-10">
-                     <h2 className="text-2xl font-semibold text-zinc-900 dark:text-white">Batch Migration Patterns</h2>
-                     <p className="text-zinc-600 dark:text-zinc-400 mt-2">Use "Find & Replace" in your codebase with these patterns.</p>
+               <div className="max-w-6xl mx-auto">
+                  <FadeIn className="text-center mb-16">
+                     <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-zinc-100 dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 text-xs font-medium text-zinc-600 dark:text-zinc-400 mb-6">
+                        <FileSearch className="w-3 h-3" />
+                        Find & Replace
+                     </div>
+                     <h2 className="text-3xl font-semibold text-zinc-900 dark:text-white mb-4">Batch Migration Patterns</h2>
+                     <p className="text-zinc-600 dark:text-zinc-400 max-w-2xl mx-auto">
+                        Use these patterns in your IDE or codebase-wide search to migrate all CDN links at once.
+                     </p>
                   </FadeIn>
 
-                  <div className="space-y-6">
+                  <div className="grid md:grid-cols-2 gap-6">
 
                      {/* jsDelivr Pattern */}
-                     <FadeIn delay={0.1} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6">
-                        <div className="flex items-center gap-2 mb-4 font-semibold text-zinc-900 dark:text-white">
-                           <span className="w-2 h-2 rounded-full bg-orange-500" /> jsDelivr (NPM & GitHub)
+                     <FadeIn delay={0.1} className="group relative block h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-all hover:shadow-lg">
+                        <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+                        <div className="relative z-10 flex flex-col h-full">
+                           {/* Icon + Title */}
+                           <div className="flex items-start justify-between mb-6">
+                              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-orange-50 dark:bg-orange-900/10 text-orange-600 dark:text-orange-500 group-hover:scale-110 transition-transform duration-300">
+                                 <Replace className="w-6 h-6" />
+                              </div>
+                              <span className="px-2 py-0.5 rounded-full bg-orange-100 dark:bg-orange-900/30 text-[10px] font-semibold text-orange-700 dark:text-orange-300 uppercase tracking-wide">
+                                 Auto-detect
+                              </span>
+                           </div>
+
+                           <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">jsDelivr</h3>
+                           <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
+                              Works for both NPM packages and GitHub files. Paths are automatically preserved.
+                           </p>
+
+                           {/* Find/Replace Visual */}
+                           <div className="mt-auto space-y-3">
+                              <div>
+                                 <div className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400 mb-1.5 uppercase tracking-wider">Find</div>
+                                 <code className="block w-full bg-zinc-100 dark:bg-zinc-950 px-3 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs text-rose-600 dark:text-rose-400 font-mono">
+                                    cdn.jsdelivr.net
+                                 </code>
+                              </div>
+                              <div className="flex justify-center">
+                                 <ArrowRight className="w-4 h-4 text-zinc-300 dark:text-zinc-600" />
+                              </div>
+                              <div>
+                                 <div className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400 mb-1.5 uppercase tracking-wider">Replace</div>
+                                 <code className="block w-full bg-zinc-100 dark:bg-zinc-950 px-3 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs text-emerald-600 dark:text-emerald-400 font-mono">
+                                    cdn.staticdelivr.com
+                                 </code>
+                              </div>
+                           </div>
                         </div>
-                        <div className="flex flex-col sm:flex-row items-center gap-4">
-                           <code className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-red-500 dark:text-red-400 font-mono text-center">
-                              cdn.jsdelivr.net
-                           </code>
-                           <ArrowRight className="w-5 h-5 text-zinc-300" />
-                           <code className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-mono text-center">
-                              cdn.staticdelivr.com
-                           </code>
-                        </div>
-                        <p className="text-center text-xs text-zinc-600 dark:text-zinc-400 mt-3">
-                           Works for both <code>/npm/</code> and <code>/gh/</code> paths automatically.
-                        </p>
                      </FadeIn>
 
                      {/* unpkg Pattern */}
-                     <FadeIn delay={0.2} className="bg-white dark:bg-zinc-900 border border-zinc-200 dark:border-zinc-800 rounded-2xl p-6">
-                        <div className="flex items-center gap-2 mb-4 font-semibold text-zinc-900 dark:text-white">
-                           <span className="w-2 h-2 rounded-full bg-blue-500" /> unpkg
+                     <FadeIn delay={0.2} className="group relative block h-full overflow-hidden rounded-3xl border border-zinc-200 dark:border-zinc-800 bg-white dark:bg-zinc-900 p-8 transition-all hover:shadow-lg">
+                        <div className="absolute inset-0 bg-gradient-to-br from-blue-500/5 to-transparent opacity-0 transition-opacity group-hover:opacity-100" />
+
+                        <div className="relative z-10 flex flex-col h-full">
+                           {/* Icon + Title */}
+                           <div className="flex items-start justify-between mb-6">
+                              <div className="flex items-center justify-center w-12 h-12 rounded-xl bg-blue-50 dark:bg-blue-900/10 text-blue-600 dark:text-blue-500 group-hover:scale-110 transition-transform duration-300">
+                                 <Replace className="w-6 h-6" />
+                              </div>
+                              <span className="px-2 py-0.5 rounded-full bg-amber-100 dark:bg-amber-900/30 text-[10px] font-semibold text-amber-700 dark:text-amber-300 uppercase tracking-wide">
+                                 Add /npm/
+                              </span>
+                           </div>
+
+                           <h3 className="text-xl font-bold text-zinc-900 dark:text-white mb-3">unpkg</h3>
+                           <p className="text-sm text-zinc-600 dark:text-zinc-400 leading-relaxed mb-6">
+                              Remember to add <code className="text-xs bg-zinc-100 dark:bg-zinc-800 px-1 py-0.5 rounded">/npm/</code> after the domain to maintain compatibility.
+                           </p>
+
+                           {/* Find/Replace Visual */}
+                           <div className="mt-auto space-y-3">
+                              <div>
+                                 <div className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400 mb-1.5 uppercase tracking-wider">Find</div>
+                                 <code className="block w-full bg-zinc-100 dark:bg-zinc-950 px-3 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs text-rose-600 dark:text-rose-400 font-mono">
+                                    unpkg.com/
+                                 </code>
+                              </div>
+                              <div className="flex justify-center">
+                                 <ArrowRight className="w-4 h-4 text-zinc-300 dark:text-zinc-600" />
+                              </div>
+                              <div>
+                                 <div className="text-[10px] font-medium text-zinc-500 dark:text-zinc-400 mb-1.5 uppercase tracking-wider">Replace</div>
+                                 <code className="block w-full bg-zinc-100 dark:bg-zinc-950 px-3 py-2 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs text-emerald-600 dark:text-emerald-400 font-mono">
+                                    cdn.staticdelivr.com/npm/
+                                 </code>
+                              </div>
+                           </div>
                         </div>
-                        <div className="flex flex-col sm:flex-row items-center gap-4">
-                           <code className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-red-500 dark:text-red-400 font-mono text-center">
-                              unpkg.com/
-                           </code>
-                           <ArrowRight className="w-5 h-5 text-zinc-300" />
-                           <code className="flex-1 w-full bg-zinc-100 dark:bg-zinc-950 p-3 rounded-lg border border-zinc-200 dark:border-zinc-800 text-xs sm:text-sm text-emerald-600 dark:text-emerald-400 font-mono text-center">
-                              cdn.staticdelivr.com/npm/
-                           </code>
-                        </div>
-                        <p className="text-center text-xs text-zinc-600 dark:text-zinc-400 mt-3">
-                           Note: You must append <code>/npm/</code> to the replacement URL.
-                        </p>
                      </FadeIn>
 
                   </div>
