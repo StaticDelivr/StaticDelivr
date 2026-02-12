@@ -566,7 +566,7 @@ const HomePage: React.FC<HomePageProps> = ({ stats, versions }) => {
                                                 <h3 className="font-semibold text-zinc-900 dark:text-white">Example: jQuery</h3>
                                                 <span className="text-xs px-2 py-0.5 rounded bg-zinc-200 dark:bg-zinc-800 text-zinc-600 dark:text-zinc-400">Live</span>
                                             </div>
-                                            <CodeBlock code="https://cdn.staticdelivr.com/gh/jquery/jquery@3.7.1/dist/jquery.min.js" language="url" />
+                                            <CodeBlock code="https://cdn.staticdelivr.com/gh/jquery/jquery/3.7.1/dist/jquery.min.js" language="url" />
                                         </div>
                                         <div className="pt-2">
                                             <Link href="/github" className="inline-flex items-center text-sm font-medium text-emerald-600 dark:text-emerald-500 hover:underline">
