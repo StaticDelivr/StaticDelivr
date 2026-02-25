@@ -126,6 +126,15 @@ const sponsors = [
     website: "https://www.appsignal.com/",
     color: "#1B44DA",
   },
+  {
+    name: "Hetzner",
+    tier: "Infrastructure",
+    role: "Cloud & Servers",
+    description: "Reliable and affordable cloud infrastructure and dedicated servers powering our backend compute needs.",
+    logo: "/assets/sponsors/hetzner.svg",
+    website: "https://www.hetzner.com/",
+    color: "#D50C2D",
+  },
 ];
 
 const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
@@ -224,7 +233,8 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                       sponsor.color === 'cyan' && "from-cyan-500/5",
                       sponsor.color === 'red' && "from-red-500/5",
                       sponsor.color === 'orange' && "from-orange-500/5",
-                      sponsor.color === '#1B44DA' && "from-[#1B44DA]/5"
+                      sponsor.color === '#1B44DA' && "from-[#1B44DA]/5",
+                      sponsor.color === '#D50C2D' && "from-[#D50C2D]/5"
                     )} />
 
                     <div className="relative z-10 flex flex-col h-full">
@@ -250,6 +260,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                           sponsor.color === 'red' ? "bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300" :
                           sponsor.color === 'orange' ? "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300" :
                           sponsor.color === '#1B44DA' ? "bg-[#1B44DA] text-white" :
+                          sponsor.color === '#D50C2D' ? "bg-[#D50C2D] text-white" :
                           "bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300"
                         )}>
                           {sponsor.tier}
