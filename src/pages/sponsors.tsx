@@ -135,6 +135,15 @@ const sponsors = [
     website: "https://www.hetzner.com/",
     color: "#D50C2D",
   },
+  {
+    name: "Cloudflare",
+    tier: "Infrastructure",
+    role: "DDoS Protection & Security",
+    description: "Global network security, DDoS protection, and performance optimization keeping our service secure and fast.",
+    logo: "/assets/sponsors/cloudflare.svg",
+    website: "https://www.cloudflare.com/",
+    color: "#F48120",
+  },
 ];
 
 const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
@@ -234,7 +243,8 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                       sponsor.color === 'red' && "from-red-500/5",
                       sponsor.color === 'orange' && "from-orange-500/5",
                       sponsor.color === '#1B44DA' && "from-[#1B44DA]/5",
-                      sponsor.color === '#D50C2D' && "from-[#D50C2D]/5"
+                      sponsor.color === '#D50C2D' && "from-[#D50C2D]/5",
+                      sponsor.color === '#F48120' && "from-[#F48120]/5"
                     )} />
 
                     <div className="relative z-10 flex flex-col h-full">
@@ -261,6 +271,7 @@ const SponsorsPage: React.FC<SponsorsPageProps> = ({ stats }) => {
                           sponsor.color === 'orange' ? "bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300" :
                           sponsor.color === '#1B44DA' ? "bg-[#1B44DA] text-white" :
                           sponsor.color === '#D50C2D' ? "bg-[#D50C2D] text-white" :
+                          sponsor.color === '#F48120' ? "bg-[#F48120] text-white" :
                           "bg-gray-100 dark:bg-gray-900/30 text-gray-700 dark:text-gray-300"
                         )}>
                           {sponsor.tier}
